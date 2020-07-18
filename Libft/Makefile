@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/06/03 13:33:13 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/18 23:16:46 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,8 +74,12 @@ FLS_6    = $(addprefix $(FLSDIR_6), \
 			ft_lstmap \
 			ft_lstnew \
 			ft_lstsize)
+FLSDIR_7 = get_next_line/
+FLS_7    = $(addprefix $(FLSDIR_7), \
+			get_next_line \
+			get_next_line_utils)
 SRC      = $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4) \
-			$(FLS_5) $(FLS_6)
+			$(FLS_5) $(FLS_6) $(FLS_7)
 
 OBJ      = $(addprefix $(OBJDIR), $(SRC:=.o))
 DFLS     = $(SRC:=.d)
@@ -94,7 +98,7 @@ $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
 $(OBJDIR):
 	mkdir -p	$(OBJDIR)
 	mkdir -p	$(addprefix $(OBJDIR), $(FLSDIR_1) $(FLSDIR_2) $(FLSDIR_3) \
-				$(FLSDIR_4) $(FLSDIR_5) $(FLSDIR_6))
+				$(FLSDIR_4) $(FLSDIR_5) $(FLSDIR_6) $(FLSDIR_7))
 
 debug:
 	make FLAGS="$(CFLAGS) $(DBGFLAGS)" all
