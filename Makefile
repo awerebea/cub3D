@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/18 14:03:44 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/18 21:20:38 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ OBJDIR   = objs/
 
 FLSDIR_1 = ./
 FLS_1    = $(addprefix $(FLSDIR_1), \
-			cub3d)
+			cub3d \
+			utils)
 # FLSDIR_2 = strings/
 # FLS_2    = $(addprefix $(FLSDIR_2), \
 #             ft_strchr \
