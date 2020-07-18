@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 21:12:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/18 21:26:19 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/19 00:22:01 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,24 @@
 #include <string.h>
 #include <errno.h>
 
-static void		f_print_error_1_3(int errcode)
+void			f_print_error_1_4(int errcode)
 {
 	if (errcode == 1)
-		ft_putstr_fd("ERROR 1: wrong number of arguments.\n\
+		ft_putstr_fd("Error\ncode #1: wrong number of arguments.\n\
 DESCRIPTION: There can be only one or two arguments. The first argument MUST \
 be a '.cub' file wih map.\nThe second argument CAN be '--save', \
 in this case the 'cub3D' just takes screenshot of spawn scene and quits.\n", 2);
 	else if (errcode == 2)
-		ft_putstr_fd("ERROR 2: wrong name of map file.\n\
+		ft_putstr_fd("Error\ncode #2: wrong name of map file.\n\
 DESCRIPTION: the first argument is always the name of the map file, and it \
 must have a name with at least one character and an extension '.cub'.\n", 2);
 	else if (errcode == 3)
-		ft_putstr_fd("ERROR 3: wrong second argument.\n\
+		ft_putstr_fd("Error\ncode #3: wrong second argument.\n\
 DESCRIPTION: it can be only '--save', in this case the 'cub3D' just takes \
 screenshot of spawn scene and quits.\n", 2);
-}
-
-int				f_exit(int errcode)
-{
-	if (errcode > 0 && errcode <= 10)
-		f_print_error_1_3(errcode);
-	else
-		ft_putstr_fd(strerror(errno), 1);
-	return (errcode);
+	else if (errcode == 4)
+		ft_putstr_fd("Error\ncode #4: parsing the map file with get_next_line \
+function failed.\n", 2);
 }
 
 int				f_check_args(int argc, char **argv, t_sdf *opts)
