@@ -6,17 +6,17 @@
 /*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:59:14 by awerebea          #+#    #+#             */
-/*   Updated: 2020/05/19 23:48:02 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/19 13:48:53 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char		*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*result;
-	size_t	len;
-	size_t	start;
+	char		*result;
+	size_t		len;
+	size_t		start;
 
 	if (!s1 || !s2)
 		return (NULL);
@@ -41,11 +41,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (result);
 }
 
-char	*ft_strdup(const char *s)
+char		*ft_strdup(const char *s)
 {
-	char	*dest;
-	size_t	len;
-	size_t	start;
+	char		*dest;
+	size_t		len;
+	size_t		start;
 
 	start = (size_t)s;
 	while (*s)
@@ -61,7 +61,7 @@ char	*ft_strdup(const char *s)
 	return (dest);
 }
 
-char	*ft_strchr(const char *s, int c)
+char		*ft_strchr(const char *s, int c)
 {
 	while (*s != c)
 	{
@@ -72,11 +72,11 @@ char	*ft_strchr(const char *s, int c)
 	return ((char *)s);
 }
 
-t_list	*f_gnl_new(int fd)
+t_list_gnl	*f_gnl_new(int fd)
 {
-	t_list		*gnl;
+	t_list_gnl	*gnl;
 
-	if (!(gnl = (t_list*)malloc(sizeof(t_list))))
+	if (!(gnl = (t_list_gnl*)malloc(sizeof(t_list_gnl))))
 		return (NULL);
 	gnl->fd = fd;
 	gnl->rmndr = NULL;
@@ -85,9 +85,9 @@ t_list	*f_gnl_new(int fd)
 	return (gnl);
 }
 
-t_list	*f_search_gnl(int fd, t_list **g_head)
+t_list_gnl	*f_search_gnl(int fd, t_list_gnl **g_head)
 {
-	t_list			*g_tmp;
+	t_list_gnl	*g_tmp;
 
 	if (!*g_head)
 		return ((*g_head = f_gnl_new(fd)) ? *g_head : NULL);
