@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/19 19:38:26 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/19 23:06:35 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef	struct	s_sdf
 int				f_check_args(int argc, char **argv, t_sdf *opts);
 int				f_exit(int errcode);
 int				f_pars_desc_file(char *map_file, t_sdf *opts);
-int				f_pars_line(char *line, t_sdf *opts);
+int				f_pars_line(char **line, t_sdf *opts);
 void			f_print_error_1_4(int errcode);
 
 #endif

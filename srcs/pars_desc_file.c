@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/19 21:24:23 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/20 00:13:55 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,64 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-int				f_pars_line(char *line, t_sdf *opts)
+
+void			f_skip_spaces(char **line, int *i)
+{
+	while (ft_isspace(*(*line + *i)))
+		(*i)++;
+}
+
+int				f_cub3d_atoi(char *line, int *i)
+{
+	long long int	result;
+	int				sign;
+
+	sign = 1;
+	result = 0;
+	f_skip_spaces(&line, i);
+	if (line[*i] == '-')
+		sign = -1;
+	if (line[*i] == '-' || line[*i] == '+')
+		(*i)++;
+	while (line[*i] >= '0' && line[*i] <= '9')
+	{
+		if ((result * 10) < result)
+			return (sign < 0 ? 0 : -1);
+		result = result * 10 + line[*i] - '0';
+		(*i)++;
+	}
+	return ((int)result * (int)sign);
+}
+
+int				f_pars_resolution(char **line, int i, t_sdf *opts)
+{
+	i++;
+	opts->x_render_size = f_cub3d_atoi(*line, &i);
+	i++;
+	opts->y_render_size = f_cub3d_atoi(*line, &i);
+
+	ft_putstr_fd("Resolution\n", 1);
+	ft_putnbr_fd(opts->x_render_size, 1);
+	ft_putstr_fd("\n", 1);
+	ft_putnbr_fd(opts->y_render_size, 1);
+	ft_putstr_fd("\n", 1);
+	return (0);
+}
+
+int				f_pars_line(char **line, t_sdf *opts)
 {
 	int		i;
-	int		errcode;
 
-	(void)opts;
 	i = 0;
-	while (line[i] && ft_strchr(" \t\v\f", line[i]))
-		i++;
-	if (!(line[i]))
-		return (0);
-	if ((!(ft_strncmp(line + i, "NO", 2)) && ft_isspace(line[i + 2])))
+	f_skip_spaces(line, &i);
+	if (*(*line + i) == 'R' && ft_isspace(*(*line + i + 1)))
+		return (f_pars_resolution(line, i, opts));
+	else if (!(ft_strncmp(*line + i, "NO", 2)) && ft_isspace(*(*line + i + 2)))
 	{
-		errcode = 0;
 		ft_putstr_fd("NO\n", 1);
+		return (0);
 	}
-	else
-		errcode = 5;
-	return (errcode);
+	return (!(*(*line + i)) ? 0 : 5);
 }
 
 int				f_pars_desc_file(char *map_file, t_sdf *opts)
@@ -52,7 +91,7 @@ int				f_pars_desc_file(char *map_file, t_sdf *opts)
 	{
 		if ((gnl_ret = get_next_line(fd, &line)) < 0)
 			return (4);
-		errcode = f_pars_line(line, opts);
+		errcode = f_pars_line(&line, opts);
 		if (line)
 		{
 			free(line);
