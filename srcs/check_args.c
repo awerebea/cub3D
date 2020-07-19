@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 21:12:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/19 00:22:01 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/19 21:08:44 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ screenshot of spawn scene and quits.\n", 2);
 	else if (errcode == 4)
 		ft_putstr_fd("Error\ncode #4: parsing the map file with get_next_line \
 function failed.\n", 2);
+	else if (errcode == 5)
+		ft_putstr_fd("Error\ncode #5: while parsing the map file, the string \
+with invalid identifier was found.\nThe firsts information in each non-empty \
+string must be identifier: 'R', 'NO', 'SO', 'WE', 'EA', 'S', 'F' or 'C' \
+(splitted from other data by at least one 'space-symbol').\n", 2);
 }
 
 int				f_check_args(int argc, char **argv, t_sdf *opts)
@@ -49,7 +54,5 @@ int				f_check_args(int argc, char **argv, t_sdf *opts)
 		else
 			opts->screenshot = 1;
 	}
-	if (argc > 3)
-		return (5);
 	return (0);
 }

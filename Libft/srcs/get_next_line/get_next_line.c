@@ -6,10 +6,11 @@
 /*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:58:02 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/19 13:48:53 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/19 15:48:12 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "get_next_line.h"
 
 /*

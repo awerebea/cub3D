@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/13 12:42:55 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/19 13:54:01 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/19 15:51:33 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,5 @@ typedef struct	s_list_gnl
 int				get_next_line(int fd, char **line);
 t_list_gnl		*f_gnl_new(int fd);
 t_list_gnl		*f_search_gnl(int fd, t_list_gnl **g_head);
-char			*ft_strdup(const char *s);
-char			*ft_strchr(const char *s, int c);
-char			*ft_strjoin(char const *s1, char const *s2);
 
 #endif

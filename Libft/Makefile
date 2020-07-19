@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/18 23:16:46 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/19 21:01:04 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ FLS_4    = $(addprefix $(FLSDIR_4), \
 			ft_isascii \
 			ft_isdigit \
 			ft_isprint \
+			ft_isspace \
 			ft_tolower \
 			ft_toupper)
 FLSDIR_5 = numbers/

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/19 00:53:33 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/19 15:53:58 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void			f_opts_init(t_sdf *opts)
 
 int				f_exit(int errcode)
 {
-	if (errcode > 0 && errcode <= 4)
+	if (errcode > 0 && errcode <= 5)
 		f_print_error_1_4(errcode);
 	else
 	{
@@ -52,7 +52,7 @@ int				main(int argc, char **argv)
 	f_opts_init(&opts);
 	if ((errcode = f_check_args(argc, argv, &opts)))
 		return (f_exit(errcode));
-	if ((errcode = f_parsing_desc_file(argv[1], &opts)))
+	if ((errcode = f_pars_desc_file(argv[1], &opts)))
 		return (f_exit(errcode));
 	ft_putstr_fd("All is OK!\n", 1);
 	ft_putnbr_fd(opts.screenshot, 1);
