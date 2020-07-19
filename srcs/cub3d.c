@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/19 15:53:58 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/20 00:35:02 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int				main(int argc, char **argv)
 		return (f_exit(errcode));
 	if ((errcode = f_pars_desc_file(argv[1], &opts)))
 		return (f_exit(errcode));
-	ft_putstr_fd("All is OK!\n", 1);
-	ft_putnbr_fd(opts.screenshot, 1);
-	ft_putchar_fd('\n', 1);
+	/* ft_putstr_fd("All is OK!\n", 1);  */
+	/* ft_putnbr_fd(opts.screenshot, 1); */
+	/* ft_putchar_fd('\n', 1);           */
 	return (0);
 }
