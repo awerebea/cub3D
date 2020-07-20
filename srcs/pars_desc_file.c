@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/20 11:23:56 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/20 15:55:54 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,32 @@ int				f_cub3d_atoi(char *line, int *i)
 	return ((int)result * (int)sign);
 }
 
+int				f_pars_no_texture(char *line, int i, t_sdf *opts)
+{
+	int				errcode;
+	int				i_bckp;
+	int				fd;
+
+	errcode = 0;
+	i += 3;
+	f_skip_spaces(line, &i);
+	i_bckp = i;
+	while (line[i] && !ft_isspace(line[i]))
+		i++;
+	if (!(i - i_bckp))
+		return (9);
+	if (!(opts->north_texture_path = malloc(i - i_bckp + 1)))
+		return(8);
+	ft_strlcpy(opts->north_texture_path, line + i_bckp, i - i_bckp + 1);
+	(fd = open(opts->north_texture_path, O_RDONLY)) < 0 ? f_print_err(9) : 0;
+	fd < 0 ? ft_putstr_fd(opts->north_texture_path, 2) : 0;
+	if (fd < 0)
+		return (fd);
+	else
+		close (fd);
+	return (errcode);
+}
+
 int				f_pars_resolution(char *line, int i, t_sdf *opts)
 {
 	int errcode;
@@ -78,10 +104,7 @@ int				f_pars_line(char *line, t_sdf *opts)
 	if (line[i] == 'R' && ft_isspace(line[i + 1]))
 		return (f_pars_resolution(line, i, opts));
 	else if (!(ft_strncmp(line + i, "NO", 2)) && ft_isspace(line[i + 2]))
-	{
-		ft_putstr_fd("NO\n", 1);
-		return (0);
-	}
+		return (f_pars_no_texture(line, i, opts));
 	return (!(line[i])) ? 0 : 5;
 }
 
@@ -93,7 +116,12 @@ int				f_pars_desc_file(char *map_file, t_sdf *opts)
 	int		errcode;
 
 	if ((fd = open(map_file, O_RDONLY)) < 0)
+	{
+		ft_putstr_fd(map_file, 2);
+		ft_putstr_fd("\n", 2);
+		f_print_err(2);
 		return (fd);
+	}
 	gnl_ret = 1;
 	errcode = 0;
 	while (gnl_ret > 0 && !errcode)
