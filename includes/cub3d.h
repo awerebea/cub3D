@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/20 15:41:31 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/20 16:27:58 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # define MIN_Y_RENDER_SIZE 128
 # define MAX_X_RENDER_SIZE 7680
 # define MAX_Y_RENDER_SIZE 4320
-
 
 typedef	struct	s_sdf
 {

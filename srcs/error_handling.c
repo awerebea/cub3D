@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awerebea <awerebea@student.21-school.      +#+  +:+       +#+        */
+/*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/20 15:46:46 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/20 16:33:56 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <string.h>
 #include <errno.h>
 
-static void		f_errors_range_1(int errcode)
+static void	f_errors_range_1(int errcode)
 {
 	if (errcode == 1)
 		ft_putstr_fd("Error\ncode #1: wrong number of arguments.\n\
@@ -41,7 +41,7 @@ identifier: 'R', 'NO', 'SO', 'WE', 'EA', 'S', 'F' or 'C' \
 (splitted from other data by at least one 'space-symbol').\n", 2);
 }
 
-static void		f_errors_range_2(int errcode)
+static void	f_errors_range_2(int errcode)
 {
 	if (errcode == 6)
 		ft_putstr_fd("Error\ncode #6: invalid resolution string format.\n\

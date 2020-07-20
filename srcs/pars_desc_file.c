@@ -6,16 +6,16 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/20 15:55:54 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/20 16:27:41 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft.h"
 #include "get_next_line.h"
+#include "ft_printf.h"
 #include <stdlib.h>
 #include <fcntl.h>
-
 
 void			f_skip_spaces(char *line, int *i)
 {
@@ -60,14 +60,15 @@ int				f_pars_no_texture(char *line, int i, t_sdf *opts)
 	if (!(i - i_bckp))
 		return (9);
 	if (!(opts->north_texture_path = malloc(i - i_bckp + 1)))
-		return(8);
+		return (8);
 	ft_strlcpy(opts->north_texture_path, line + i_bckp, i - i_bckp + 1);
-	(fd = open(opts->north_texture_path, O_RDONLY)) < 0 ? f_print_err(9) : 0;
-	fd < 0 ? ft_putstr_fd(opts->north_texture_path, 2) : 0;
+	(fd = open(opts->north_texture_path, O_RDONLY)) < 0 ? \
+						ft_printf("%s\n", opts->north_texture_path) : 0;
+	fd < 0 ? f_print_err(9) : 0;
 	if (fd < 0)
 		return (fd);
 	else
-		close (fd);
+		close(fd);
 	return (errcode);
 }
 
@@ -86,7 +87,7 @@ int				f_pars_resolution(char *line, int i, t_sdf *opts)
 			!ft_isspace(line[i++]) ? errcode = 6 : 0;
 	}
 	if (opts->x_render_size <= 0 || opts->y_render_size <= 0)
-		errcode	= 6;
+		errcode = 6;
 	else if ((opts->x_render_size < MIN_X_RENDER_SIZE || \
 			opts->x_render_size > MAX_X_RENDER_SIZE || \
 			opts->y_render_size < MIN_Y_RENDER_SIZE || \
@@ -117,8 +118,7 @@ int				f_pars_desc_file(char *map_file, t_sdf *opts)
 
 	if ((fd = open(map_file, O_RDONLY)) < 0)
 	{
-		ft_putstr_fd(map_file, 2);
-		ft_putstr_fd("\n", 2);
+		ft_printf("%s\n", map_file);
 		f_print_err(2);
 		return (fd);
 	}

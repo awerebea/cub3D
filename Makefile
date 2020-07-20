@@ -6,28 +6,29 @@
 #    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/20 11:30:56 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/20 16:10:27 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME     = cub3D
-LIBFT    = Libft/libft.a
-CC       = gcc
-CFLAGS   = -Wall -Wextra -Werror
-OFLAGS   = -O2
-DBGFLAGS = -g
-INCLUDES = -I includes/ -I Libft/includes/
-SRCDIR   = srcs/
-OBJDIR   = objs/
+NAME        = cub3D
+LIBFT       = Libft/libft.a
+LIBFTPRINTF = ft_printf/libftprintf.a
+CC          = gcc
+CFLAGS      = -Wall -Wextra -Werror
+OFLAGS      = -O2
+DBGFLAGS    = -g
+INCLUDES    = -I includes/ -I Libft/includes/ -I ft_printf/includes/
+SRCDIR      = srcs/
+OBJDIR      = objs/
 
-FLSDIR_1 = ./
-FLS_1    = $(addprefix $(FLSDIR_1), \
-			cub3d \
-			check_args \
-			error_handling \
-			pars_desc_file)
-# FLSDIR_2 = strings/
-# FLS_2    = $(addprefix $(FLSDIR_2), \
+FLSDIR_1    = ./
+FLS_1       = $(addprefix $(FLSDIR_1), \
+				cub3d \
+				check_args \
+				error_handling \
+				pars_desc_file)
+# FLSDIR_2  = strings/
+# FLS_2     = $(addprefix $(FLSDIR_2), \
 #             ft_strchr \
 #             ft_strdup \
 #             ft_strlcat \
@@ -41,8 +42,8 @@ FLS_1    = $(addprefix $(FLSDIR_1), \
 #             ft_strmapi \
 #             ft_strtrim \
 #             ft_substr)
-# FLSDIR_3 = memory/
-# FLS_3    = $(addprefix $(FLSDIR_3), \
+# FLSDIR_3  = memory/
+# FLS_3     = $(addprefix $(FLSDIR_3), \
 #             ft_bzero \
 #             ft_calloc \
 #             ft_memccpy \
@@ -51,8 +52,8 @@ FLS_1    = $(addprefix $(FLSDIR_1), \
 #             ft_memcpy \
 #             ft_memmove \
 #             ft_memset)
-# FLSDIR_4 = symbols/
-# FLS_4    = $(addprefix $(FLSDIR_4), \
+# FLSDIR_4  = symbols/
+# FLS_4     = $(addprefix $(FLSDIR_4), \
 #             ft_isalnum \
 #             ft_isalpha \
 #             ft_isascii \
@@ -60,12 +61,12 @@ FLS_1    = $(addprefix $(FLSDIR_1), \
 #             ft_isprint \
 #             ft_tolower \
 #             ft_toupper)
-# FLSDIR_5 = numbers/
-# FLS_5    = $(addprefix $(FLSDIR_5), \
+# FLSDIR_5  = numbers/
+# FLS_5     = $(addprefix $(FLSDIR_5), \
 #             ft_atoi \
 #             ft_itoa)
-# FLSDIR_6 = lists/
-# FLS_6    = $(addprefix $(FLSDIR_6), \
+# FLSDIR_6  = lists/
+# FLS_6     = $(addprefix $(FLSDIR_6), \
 #             ft_lstadd_back \
 #             ft_lstadd_front \
 #             ft_lstclear \
@@ -75,19 +76,20 @@ FLS_1    = $(addprefix $(FLSDIR_1), \
 #             ft_lstmap \
 #             ft_lstnew \
 #             ft_lstsize)
-# SRC      = $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4) \
+# SRC       = $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4) \
 #             $(FLS_5) $(FLS_6)
-SRC      = $(FLS_1)
+SRC         = $(FLS_1)
 
-OBJ      = $(addprefix $(OBJDIR), $(SRC:=.o))
-DFLS     = $(SRC:=.d)
+OBJ         = $(addprefix $(OBJDIR), $(SRC:=.o))
+DFLS        = $(SRC:=.d)
 
 override FLAGS ?= $(CFLAGS)
 
 all:			$(NAME)
 
-$(NAME):		$(LIBFT) $(OBJDIR) $(OBJ)
-	$(CC)		$(FLAGS) $(OBJ) $(INCLUDES) -L Libft -lft -o $(NAME)
+$(NAME):		$(LIBFT) $(LIBFTPRINTF) $(OBJDIR) $(OBJ)
+	$(CC)		$(FLAGS) $(OBJ) $(INCLUDES) -L Libft -lft \
+											-L ft_printf -lftprintf -o $(NAME)
 	@echo		"all done!"
 
 $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
@@ -103,7 +105,7 @@ include $(wildcard $(addprefix $(OBJDIR), $(DFLS)))
 clean:
 	rm -rf		$(OBJDIR)
 
-cclean: fclean libft_fclean
+cclean: fclean libft_fclean libftprintf_fclean
 
 debug:
 	make FLAGS="$(CFLAGS) $(DBGFLAGS)" all
@@ -123,6 +125,18 @@ libft_fclean:
 libft_re:
 	make re		-C Libft/
 
+$(LIBFTPRINTF): libftprintf_force_make
+	@make		-C ft_printf/ --no-print-directory
+
+libftprintf_clean:
+	make clean	-C ft_printf/
+
+libftprintf_fclean:
+	make fclean	-C ft_printf/
+
+libftprintf_re:
+	make re		-C ft_printf/
+
 re:				fclean all
 
 rre:			cclean all
@@ -136,5 +150,9 @@ rre:			cclean all
 		libft_fclean \
 		libft_force_make \
 		libft_re \
+		libftprintf_clean \
+		libftprintf_fclean \
+		libftprintf_force_make \
+		libftprintf_re \
 		re \
 		rre
