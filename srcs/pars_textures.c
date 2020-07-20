@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 16:40:04 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/20 16:50:03 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/20 17:13:07 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int				f_pars_no_texture(char *line, int i, t_sdf *opts)
 	fd < 0 ? f_print_err(9) : 0;
 	if (fd < 0)
 		return (fd);
-	else
-		close(fd);
-	return (errcode);
+	/* errcode = f_texture_check(opts, fd); */
+	return (close(fd) < 0) ? 10 : errcode;
 }
