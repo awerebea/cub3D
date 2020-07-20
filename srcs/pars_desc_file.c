@@ -6,11 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/07/20 00:35:22 by awerebea         ###   ########.fr       */
-=======
-/*   Updated: 2020/07/20 00:33:14 by awerebea         ###   ########.fr       */
->>>>>>> test
+/*   Updated: 2020/07/20 09:56:38 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +52,11 @@ int				f_pars_resolution(char *line, int i, t_sdf *opts)
 	i++;
 	opts->y_render_size = f_cub3d_atoi(line, &i);
 
-	/* ft_putstr_fd("Resolution\n", 1);      */
-	/* ft_putnbr_fd(opts->x_render_size, 1); */
-	/* ft_putstr_fd("\n", 1);                */
-	/* ft_putnbr_fd(opts->y_render_size, 1); */
-	/* ft_putstr_fd("\n", 1);                */
+	ft_putstr_fd("Resolution\n", 1);
+	ft_putnbr_fd(opts->x_render_size, 1);
+	ft_putstr_fd("\n", 1);
+	ft_putnbr_fd(opts->y_render_size, 1);
+	ft_putstr_fd("\n", 1);
 	return (0);
 }
 
@@ -74,7 +70,7 @@ int				f_pars_line(char *line, t_sdf *opts)
 		return (f_pars_resolution(line, i, opts));
 	else if (!(ft_strncmp(line + i, "NO", 2)) && ft_isspace(line[i + 2]))
 	{
-		/* ft_putstr_fd("NO\n", 1); */
+		ft_putstr_fd("NO\n", 1);
 		return (0);
 	}
 	return (!(line[i])) ? 0 : 5;
