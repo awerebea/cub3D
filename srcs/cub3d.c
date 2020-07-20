@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/20 09:56:13 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/20 11:29:01 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void			f_opts_init(t_sdf *opts)
 
 int				f_exit(int errcode)
 {
-	if (errcode > 0 && errcode <= 5)
-		f_print_error_1_4(errcode);
+	if (errcode > 0 && errcode <= 6)
+		f_print_error_1_6(errcode);
+	else if (errcode >= 7 && errcode <= 8)
+		f_print_error_7_8(errcode);
 	else
 	{
 		ft_putstr_fd(strerror(errno), 2);

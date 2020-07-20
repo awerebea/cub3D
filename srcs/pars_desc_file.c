@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/20 09:56:38 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/20 11:23:56 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,26 @@ int				f_cub3d_atoi(char *line, int *i)
 
 int				f_pars_resolution(char *line, int i, t_sdf *opts)
 {
+	int errcode;
+
+	errcode = 0;
 	i++;
 	opts->x_render_size = f_cub3d_atoi(line, &i);
-	i++;
-	opts->y_render_size = f_cub3d_atoi(line, &i);
-
-	ft_putstr_fd("Resolution\n", 1);
-	ft_putnbr_fd(opts->x_render_size, 1);
-	ft_putstr_fd("\n", 1);
-	ft_putnbr_fd(opts->y_render_size, 1);
-	ft_putstr_fd("\n", 1);
-	return (0);
+	if (ft_isspace(line[i]))
+		opts->y_render_size = f_cub3d_atoi(line, &i);
+	if (opts->x_render_size > 0 && opts->y_render_size > 0)
+	{
+		while (line[i] && !errcode)
+			!ft_isspace(line[i++]) ? errcode = 6 : 0;
+	}
+	if (opts->x_render_size <= 0 || opts->y_render_size <= 0)
+		errcode	= 6;
+	else if ((opts->x_render_size < MIN_X_RENDER_SIZE || \
+			opts->x_render_size > MAX_X_RENDER_SIZE || \
+			opts->y_render_size < MIN_Y_RENDER_SIZE || \
+			opts->y_render_size > MAX_Y_RENDER_SIZE) && !errcode)
+		errcode = 7;
+	return (errcode);
 }
 
 int				f_pars_line(char *line, t_sdf *opts)

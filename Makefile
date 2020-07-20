@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/19 13:31:14 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/20 11:30:56 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ FLSDIR_1 = ./
 FLS_1    = $(addprefix $(FLSDIR_1), \
 			cub3d \
 			check_args \
+			error_handling \
 			pars_desc_file)
 # FLSDIR_2 = strings/
 # FLS_2    = $(addprefix $(FLSDIR_2), \
