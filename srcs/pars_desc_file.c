@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/20 16:50:22 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/21 00:14:42 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int				f_pars_desc_file(char *map_file, t_sdf *opts)
 	char	*line;
 	int		fd;
 	int		gnl_ret;
-	int		errcode;
 
 	if ((fd = open(map_file, O_RDONLY)) < 0)
 	{
@@ -67,17 +66,16 @@ int				f_pars_desc_file(char *map_file, t_sdf *opts)
 		return (fd);
 	}
 	gnl_ret = 1;
-	errcode = 0;
-	while (gnl_ret > 0 && !errcode)
+	while (gnl_ret > 0)
 	{
 		if ((gnl_ret = get_next_line(fd, &line)) < 0)
 			return (4);
-		errcode = f_pars_line(line, opts);
+		!opts->errcode ? (opts->errcode = f_pars_line(line, opts)) : 0;
 		if (line)
 		{
 			free(line);
 			line = NULL;
 		}
 	}
-	return (errcode);
+	return (opts->errcode);
 }

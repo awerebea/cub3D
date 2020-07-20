@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/20 17:11:58 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/21 00:11:19 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 typedef	struct	s_sdf
 {
-	int			screenshot;
 	int			x_render_size;
 	int			y_render_size;
 	char		*north_texture_path;
@@ -35,9 +34,11 @@ typedef	struct	s_sdf
 	char		*sprite_texture_path;
 	int			floor_colour;
 	int			ceiling_colour;
+	int			screenshot;
 	int			spawn_point;
 	int			line_count;
 	int			max_length;
+	int			errcode;
 }				t_sdf;
 
 int				f_check_args(int argc, char **argv, t_sdf *opts);
