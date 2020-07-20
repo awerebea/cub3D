@@ -1,3 +1,6 @@
 	R 1920 	1080  	
 
   NO	 	./maps/test.cub  	
+		SO	 	./maps/test.cub  	
+			WE	 	./maps/test.cub  	
+	EA	 	./maps/test.cub  	

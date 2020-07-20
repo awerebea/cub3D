@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/20 17:14:00 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/21 01:56:21 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,43 @@ in a range from '160x120' (QQVGA) to '7680x4320' (8K).\n", 2);
 		ft_putstr_fd("Error\ncode #8: memory allocation failed \
 ('malloc' function returned 'NULL').\n", 2);
 	else if (errcode == 9)
-		ft_putstr_fd("Error\ncode #9: invalid north wall texture file name or \
+		ft_putstr_fd("Error\ncode #9: empty wall texture file name or \
 path.\n", 2);
+	else if (errcode == 10)
+		ft_putstr_fd("Error\ncode #10: invalid wall texture file name or \
+path.\n", 2);
+	else if (errcode == 11)
+		ft_putstr_fd("Error\ncode #11: string with identifier 'R' occurs more \
+than once in the file.\nDESCRIPTION: each options string must be occured only \
+once.\n", 2);
+}
+
+static void	f_errors_range_3(int errcode)
+{
+	if (errcode == 12)
+		ft_putstr_fd("Error\ncode #12: string with identifier 'NO' occurs more \
+than once in the file.\nDESCRIPTION: each options string must be occured only \
+once.\n", 2);
+	else if (errcode == 13)
+		ft_putstr_fd("Error\ncode #13: string with identifier 'SO' occurs more \
+than once in the file.\nDESCRIPTION: each options string must be occured only \
+once.\n", 2);
+	else if (errcode == 14)
+		ft_putstr_fd("Error\ncode #14: string with identifier 'WE' occurs more \
+than once in the file.\nDESCRIPTION: each options string must be occured only \
+once.\n", 2);
+	else if (errcode == 15)
+		ft_putstr_fd("Error\ncode #15: string with identifier 'EA' occurs more \
+than once in the file.\nDESCRIPTION: each options string must be occured only \
+once.\n", 2);
 }
 
 void		f_print_err(int errcode)
 {
 	if (errcode <= 5)
 		f_errors_range_1(errcode);
-	else if (errcode <= 9)
+	else if (errcode <= 11)
 		f_errors_range_2(errcode);
+	else if (errcode <= 15)
+		f_errors_range_3(errcode);
 }

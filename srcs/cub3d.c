@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/21 00:11:48 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/21 01:32:52 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,26 @@ void			f_clean_mem(t_sdf *opts)
 		free(opts->north_texture_path);
 		opts->north_texture_path = NULL;
 	}
-	opts->south_texture_path = NULL;
-	opts->west_texture_path = NULL;
-	opts->east_texture_path = NULL;
-	opts->sprite_texture_path = NULL;
+	if (opts->south_texture_path)
+	{
+		free(opts->south_texture_path);
+		opts->south_texture_path = NULL;
+	}
+	if (opts->west_texture_path)
+	{
+		free(opts->west_texture_path);
+		opts->west_texture_path = NULL;
+	}
+	if (opts->east_texture_path)
+	{
+		free(opts->east_texture_path);
+		opts->east_texture_path = NULL;
+	}
+	if (opts->sprite_texture_path)
+	{
+		free(opts->sprite_texture_path);
+		opts->sprite_texture_path = NULL;
+	}
 }
 
 void			f_opts_init(t_sdf *opts)
