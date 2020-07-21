@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/21 23:32:13 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/22 00:08:19 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ once.\n", opts->err_string);
 		ft_printf("Error\ncode #310: invalid resolution string format.\n\
 DESCRIPTION: it must start by 'R' identifier and have only positive integer \
 values of X and Y resolution, separated from each other by space-symbol(s).\n\
-Example of valid string: 'R 1920 1080'.\n");
+Examples of valid string:\n'R 1920 1080'\n'R    1024    768'\n");
 	else if (errcode == 311)
 		ft_printf("Error\ncode #311: '%dx%d'- invalid resolution, it must be \
 in a range from '160x120' (QQVGA) to '7680x4320' (8K).\n", \
@@ -75,8 +75,8 @@ static void	f_error_opts_2(int errcode, t_sdf *opts)
 {
 	if (errcode == 330)
 		ft_printf("Error\ncode #330: invalid format of string with '%s' \
-identifier.\nExample of valid string: '%s 128, 0, 255'\n", opts->err_string, \
-opts->err_string);
+identifier.\nExamples of valid string:\n'%s 128, 0, 255'\n'%s   25,196,64'\n", \
+opts->err_string, opts->err_string, opts->err_string);
 }
 
 void		f_print_err(int errcode, t_sdf *opts)

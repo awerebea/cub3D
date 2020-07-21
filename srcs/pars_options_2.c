@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 15:05:01 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/21 23:45:51 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/21 23:57:30 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-static int	f_check_color_string(char *line, int i, t_sdf *opts)
+static int	f_check_color_string(char *line, int i, t_sdf *opts, int *rgb)
 {
 	int				errcode;
 	int				number;
@@ -31,8 +31,7 @@ static int	f_check_color_string(char *line, int i, t_sdf *opts)
 		if (ft_isdigit(line[i]) && number < 3)
 		{
 			number++;
-			while (ft_isdigit(line[i]))
-				i++;
+			rgb[number - 1] = f_cub3d_atoi(line, &i);
 			f_skip_spaces(line, &i);
 			if (line[i])
 				(line[i++] == ',' && comma < 2) ? comma++ : errcode++;
@@ -49,18 +48,13 @@ static int	f_check_color_string(char *line, int i, t_sdf *opts)
 int			f_pars_floor_color(char *line, int i, t_sdf *opts)
 {
 	int				errcode;
-	int				r;
-	int				g;
-	int				b;
+	int				rgb[3];
 
-	(void)r;
-	(void)g;
-	(void)b;
 	errcode = 0;
 	if (opts->floor_color != -1)
 		return (opts->err_string = ft_strdup("F")) ? 301 : 200;
 	i++;
-	if ((errcode = f_check_color_string(line, i, opts)))
+	if ((errcode = f_check_color_string(line, i, opts, rgb)))
 		return (errcode);
 	return (0);
 }

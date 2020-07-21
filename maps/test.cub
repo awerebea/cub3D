@@ -5,6 +5,6 @@
 			WE	 	./maps/test.cub  	
 	EA	 	./maps/test.cub  	
 
-	F  0,	128,	2	255
+	F  0,	128 ,s	255
 
 		S    ./maps/test.cub	
