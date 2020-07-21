@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/22 00:08:19 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/22 00:19:07 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ static void	f_error_opts_2(int errcode, t_sdf *opts)
 		ft_printf("Error\ncode #330: invalid format of string with '%s' \
 identifier.\nExamples of valid string:\n'%s 128, 0, 255'\n'%s   25,196,64'\n", \
 opts->err_string, opts->err_string, opts->err_string);
+	else if (errcode == 331)
+		ft_printf("Error\ncode #331: invalid RGB color code in string with \
+'%s' identifier.\nR,G,B colors must be in range [0,255]: 0, 255, 255\n", \
+ opts->err_string);
 }
 
 void		f_print_err(int errcode, t_sdf *opts)
