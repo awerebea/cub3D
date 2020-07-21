@@ -6,92 +6,77 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/21 01:56:21 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/21 14:41:13 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "cub3d.h"
-#include <string.h>
-#include <errno.h>
+#include "ft_printf.h"
 
-static void	f_errors_range_1(int errcode)
+static void	f_error_arguments(int errcode, t_sdf *opts)
 {
-	if (errcode == 1)
-		ft_putstr_fd("Error\ncode #1: wrong number of arguments.\n\
+	if (errcode == 100)
+		ft_printf("Error\ncode #100: wrong number of arguments.\n\
 DESCRIPTION: There can be only one or two arguments. The first argument MUST \
-be a '.cub' file wih map.\nThe second argument CAN be '--save', \
-in this case the 'cub3D' just takes screenshot of spawn scene and quits.\n", 2);
-	else if (errcode == 2)
-		ft_putstr_fd("Error\ncode #2: invalid map file name or path.\n\
+be a '.cub' map-file.\nThe second argument CAN be '--save', \
+in this case the 'cub3D' just takes screenshot of spawn scene and quits.\n");
+	else if (errcode == 101)
+		ft_printf("Error\ncode #101: '%s' - invalid map file or it's \
+path (open/close failed).\n", opts->err_string);
+	else if (errcode == 102)
+		ft_printf("Error\ncode #102: '%s' - invalid map file name or path.\n\
 DESCRIPTION: the first argument is always the path to the map file, and it \
-must have a name with at least one character and an extension '.cub'.\n", 2);
-	else if (errcode == 3)
-		ft_putstr_fd("Error\ncode #3: wrong second argument.\n\
+must have a name with at least one character and an extension '.cub'.\n", \
+opts->map_file);
+	else if (errcode == 103)
+		ft_printf("Error\ncode #103: '%s' - wrong second argument.\n\
 DESCRIPTION: it can be only '--save', in this case the 'cub3D' just takes \
-screenshot of spawn scene and quits.\n", 2);
-	else if (errcode == 4)
-		ft_putstr_fd("Error\ncode #4: parsing the map file with \
-'get_next_line' function failed.\n", 2);
-	else if (errcode == 5)
-		ft_putstr_fd("Error\ncode #5: while parsing the map file, the string \
+screenshot of spawn scene and quits.\n", opts->screenshot_arg);
+	else if (errcode == 104)
+		ft_printf("Error\ncode #104: parsing the map file with \
+'get_next_line' function failed.\n");
+}
+
+static void	f_error_systemlibs(int errcode, t_sdf *opts)
+{
+	(void)opts;
+	if (errcode == 200)
+		ft_printf("Error\ncode #200: memory allocation failed \
+('malloc' function returned 'NULL').\n");
+}
+
+static void	f_error_opts(int errcode, t_sdf *opts)
+{
+	if (errcode == 300)
+		ft_printf("Error\ncode #300: while parsing the map file, the string \
 with invalid identifier was found.\n\
 DESCRIPTION: the firsts information in each non-empty string must be \
 identifier: 'R', 'NO', 'SO', 'WE', 'EA', 'S', 'F' or 'C' \
-(splitted from other data by at least one 'space-symbol').\n", 2);
+(splitted from other data by at least one 'space-symbol').\n");
+	else if (errcode == 301)
+		ft_printf("Error\ncode #301: string with '%s' identifier occurs more \
+than once in the file.\nDESCRIPTION: each options string must be occured only \
+once.\n", opts->err_string);
+	else if (errcode == 310)
+		ft_printf("Error\ncode #310: invalid resolution string format.\n\
+DESCRIPTION: it must start by 'R' identifier and have only positive integer \
+values of X and Y resolution, separated from each other by space-symbol(s).\n\
+Example of valid string: 'R 1920 1080'.\n");
+	else if (errcode == 311)
+		ft_printf("Error\ncode #311: '%dx%d'- invalid resolution, it must be \
+in a range from '160x120' (QQVGA) to '7680x4320' (8K).\n", \
+opts->x_render_size, opts->y_render_size);
+	else if (errcode == 320)
+		ft_printf("Error\ncode #320: '%s' - invalid texture file or it's \
+path (open/close failed).\n", opts->err_string);
 }
 
-static void	f_errors_range_2(int errcode)
+void		f_print_err(int errcode, t_sdf *opts)
 {
-	if (errcode == 6)
-		ft_putstr_fd("Error\ncode #6: invalid resolution string format.\n\
-DESCRIPTION: there must be 'R' identifier and positive integer values of \
-X and Y resolution, separated from each other by space-symbol(s).\n\
-Example of valid string: 'R 1920 1080'.\n", 2);
-	else if (errcode == 7)
-		ft_putstr_fd("Error\ncode #7: invalid resolution, it must be \
-in a range from '160x120' (QQVGA) to '7680x4320' (8K).\n", 2);
-	else if (errcode == 8)
-		ft_putstr_fd("Error\ncode #8: memory allocation failed \
-('malloc' function returned 'NULL').\n", 2);
-	else if (errcode == 9)
-		ft_putstr_fd("Error\ncode #9: empty wall texture file name or \
-path.\n", 2);
-	else if (errcode == 10)
-		ft_putstr_fd("Error\ncode #10: invalid wall texture file name or \
-path.\n", 2);
-	else if (errcode == 11)
-		ft_putstr_fd("Error\ncode #11: string with identifier 'R' occurs more \
-than once in the file.\nDESCRIPTION: each options string must be occured only \
-once.\n", 2);
-}
-
-static void	f_errors_range_3(int errcode)
-{
-	if (errcode == 12)
-		ft_putstr_fd("Error\ncode #12: string with identifier 'NO' occurs more \
-than once in the file.\nDESCRIPTION: each options string must be occured only \
-once.\n", 2);
-	else if (errcode == 13)
-		ft_putstr_fd("Error\ncode #13: string with identifier 'SO' occurs more \
-than once in the file.\nDESCRIPTION: each options string must be occured only \
-once.\n", 2);
-	else if (errcode == 14)
-		ft_putstr_fd("Error\ncode #14: string with identifier 'WE' occurs more \
-than once in the file.\nDESCRIPTION: each options string must be occured only \
-once.\n", 2);
-	else if (errcode == 15)
-		ft_putstr_fd("Error\ncode #15: string with identifier 'EA' occurs more \
-than once in the file.\nDESCRIPTION: each options string must be occured only \
-once.\n", 2);
-}
-
-void		f_print_err(int errcode)
-{
-	if (errcode <= 5)
-		f_errors_range_1(errcode);
-	else if (errcode <= 11)
-		f_errors_range_2(errcode);
-	else if (errcode <= 15)
-		f_errors_range_3(errcode);
+	if (errcode <= 200)
+		f_error_arguments(errcode, opts);
+	else if (errcode <= 300)
+		f_error_systemlibs(errcode, opts);
+	else if (errcode <= 400)
+		f_error_opts(errcode, opts);
 }

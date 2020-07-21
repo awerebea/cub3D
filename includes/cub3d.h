@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/21 00:45:39 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/21 14:42:42 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,16 @@ typedef	struct	s_sdf
 	int			line_count;
 	int			max_length;
 	int			errcode;
+	char		*err_string;
+	char		*map_file;
+	char		*screenshot_arg;
 }				t_sdf;
 
 int				f_check_args(int argc, char **argv, t_sdf *opts);
 int				f_cub3d_atoi(char *line, int *i);
 int				f_pars_desc_file(char *map_file, t_sdf *opts);
 int				f_pars_wall_textures(char *line, int i, t_sdf *opts);
-void			f_print_err(int errcode);
+void			f_print_err(int errcode, t_sdf *opts);
 void			f_skip_spaces(char *line, int *i);
 
 #endif
