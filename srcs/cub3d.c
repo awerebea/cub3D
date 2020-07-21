@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/21 14:42:24 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/21 19:11:23 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void			f_opts_init(t_sdf *opts)
 	opts->west_texture_path = NULL;
 	opts->east_texture_path = NULL;
 	opts->sprite_texture_path = NULL;
-	opts->floor_colour = -1;
-	opts->ceiling_colour = -1;
+	opts->floor_color = -1;
+	opts->ceiling_color = -1;
 	opts->screenshot = 0;
 	opts->spawn_point = -1;
 	opts->line_count = -1;

@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/21 15:07:46 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/21 19:07:41 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ FLS_1       = $(addprefix $(FLSDIR_1), \
 				error_handling \
 				pars_args \
 				pars_desc_file \
-				pars_textures_1 \
-				pars_textures_2 \
+				pars_options_1 \
+				pars_options_2 \
 				utils )
 # FLSDIR_2  = strings/
 # FLS_2     = $(addprefix $(FLSDIR_2), \

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/21 14:41:13 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/21 23:32:13 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	f_error_systemlibs(int errcode, t_sdf *opts)
 ('malloc' function returned 'NULL').\n");
 }
 
-static void	f_error_opts(int errcode, t_sdf *opts)
+static void	f_error_opts_1(int errcode, t_sdf *opts)
 {
 	if (errcode == 300)
 		ft_printf("Error\ncode #300: while parsing the map file, the string \
@@ -71,12 +71,22 @@ opts->x_render_size, opts->y_render_size);
 path (open/close failed).\n", opts->err_string);
 }
 
+static void	f_error_opts_2(int errcode, t_sdf *opts)
+{
+	if (errcode == 330)
+		ft_printf("Error\ncode #330: invalid format of string with '%s' \
+identifier.\nExample of valid string: '%s 128, 0, 255'\n", opts->err_string, \
+opts->err_string);
+}
+
 void		f_print_err(int errcode, t_sdf *opts)
 {
-	if (errcode <= 200)
+	if (errcode < 200)
 		f_error_arguments(errcode, opts);
-	else if (errcode <= 300)
+	else if (errcode < 300)
 		f_error_systemlibs(errcode, opts);
-	else if (errcode <= 400)
-		f_error_opts(errcode, opts);
+	else if (errcode < 330)
+		f_error_opts_1(errcode, opts);
+	else if (errcode < 400)
+		f_error_opts_2(errcode, opts);
 }

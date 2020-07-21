@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/21 15:10:18 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/21 19:10:56 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef	struct	s_sdf
 	char		*west_texture_path;
 	char		*east_texture_path;
 	char		*sprite_texture_path;
-	int			floor_colour;
-	int			ceiling_colour;
+	int			floor_color;
+	int			ceiling_color;
 	int			screenshot;
 	int			spawn_point;
 	int			line_count;
@@ -46,6 +46,7 @@ typedef	struct	s_sdf
 
 int				f_check_args(int argc, char **argv, t_sdf *opts);
 int				f_cub3d_atoi(char *line, int *i);
+int				f_pars_floor_color(char *line, int i, t_sdf *opts);
 int				f_pars_desc_file(char *map_file, t_sdf *opts);
 int				f_pars_wall_textures(char *line, int i, t_sdf *opts);
 int				f_pars_sprite_texture(char *line, int i, t_sdf *opts);

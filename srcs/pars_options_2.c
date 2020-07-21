@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pars_textures_2.c                                  :+:      :+:    :+:   */
+/*   pars_options_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 15:05:01 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/21 15:14:22 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/21 23:45:51 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,55 @@
 #include "ft_printf.h"
 #include <fcntl.h>
 #include <unistd.h>
+
+static int	f_check_color_string(char *line, int i, t_sdf *opts)
+{
+	int				errcode;
+	int				number;
+	int				comma;
+
+	errcode = 0;
+	number = 0;
+	comma = 0;
+	f_skip_spaces(line, &i);
+	while (line[i] && !errcode)
+	{
+		if (ft_isdigit(line[i]) && number < 3)
+		{
+			number++;
+			while (ft_isdigit(line[i]))
+				i++;
+			f_skip_spaces(line, &i);
+			if (line[i])
+				(line[i++] == ',' && comma < 2) ? comma++ : errcode++;
+			f_skip_spaces(line, &i);
+		}
+		else
+			errcode++;
+	}
+	if (errcode || !(number == 3 && comma == 2))
+		return (opts->err_string = ft_strdup("F")) ? 330 : 200;
+	return (0);
+}
+
+int			f_pars_floor_color(char *line, int i, t_sdf *opts)
+{
+	int				errcode;
+	int				r;
+	int				g;
+	int				b;
+
+	(void)r;
+	(void)g;
+	(void)b;
+	errcode = 0;
+	if (opts->floor_color != -1)
+		return (opts->err_string = ft_strdup("F")) ? 301 : 200;
+	i++;
+	if ((errcode = f_check_color_string(line, i, opts)))
+		return (errcode);
+	return (0);
+}
 
 int			f_pars_sprite_texture(char *line, int i, t_sdf *opts)
 {
