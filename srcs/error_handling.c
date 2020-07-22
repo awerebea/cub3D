@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/22 00:19:07 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/22 10:14:16 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ opts->err_string, opts->err_string, opts->err_string);
 	else if (errcode == 331)
 		ft_printf("Error\ncode #331: invalid RGB color code in string with \
 '%s' identifier.\nR,G,B colors must be in range [0,255]: 0, 255, 255\n", \
- opts->err_string);
+opts->err_string);
 }
 
 void		f_print_err(int errcode, t_sdf *opts)

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/21 19:05:44 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/22 10:05:35 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int				f_pars_line(char *line, t_sdf *opts)
 		return (f_pars_sprite_texture(line, i, opts));
 	else if (line[i] == 'F' && ft_isspace(line[i + 1]))
 		return (f_pars_floor_color(line, i, opts));
-	/* else if (line[i] == 'C' && ft_isspace(line[i + 1])) */
-	/*     return (f_pars_ceiling_color(line, i, opts));   */
+	else if (line[i] == 'C' && ft_isspace(line[i + 1]))
+		return (f_pars_ceiling_color(line, i, opts));
 	return (!(line[i])) ? 0 : 300;
 }
 

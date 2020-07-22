@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/21 19:11:23 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/22 10:13:07 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ int				main(int argc, char **argv)
 {
 	int		errcode;
 	t_sdf	opts;
+	int		r;
+	int		g;
+	int		b;
 
 	errcode = 0;
 	f_opts_init(&opts);
@@ -78,5 +81,13 @@ int				main(int argc, char **argv)
 	if ((errcode = f_pars_desc_file(argv[1], &opts)))
 		return (f_exit(errcode, &opts));
 	ft_printf("All is OK!\nScreenshot: %d\n", opts.screenshot);
+	r = (opts.floor_color & 0xFF0000) >> 16;
+	g = (opts.floor_color & 0x00FF00) >> 8;
+	b = (opts.floor_color & 0x0000FF);
+	ft_printf("Floor RGB:   %3d, %3d, %3d\n", r, g, b);
+	r = (opts.ceiling_color & 0xFF0000) >> 16;
+	g = (opts.ceiling_color & 0x00FF00) >> 8;
+	b = (opts.ceiling_color & 0x0000FF);
+	ft_printf("Ceiling RGB: %3d, %3d, %3d\n", r, g, b);
 	return (f_exit(errcode, &opts));
 }
