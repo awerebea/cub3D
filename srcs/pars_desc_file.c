@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/24 22:38:46 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 00:26:55 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,26 @@ int				f_pars_line(char *line, t_sdf *opts)
 	f_skip_spaces(line, &i);
 	if (line[i] == 'R' && ft_isspace(line[i + 1]))
 		return (f_pars_resolution(line, i, opts));
-	else if ((!(ft_strncmp(line + i, "NO", 2)) || \
+	if ((!(ft_strncmp(line + i, "NO", 2)) || \
 		!(ft_strncmp(line + i, "SO", 2)) || !(ft_strncmp(line + i, "WE", 2)) \
 		|| !(ft_strncmp(line + i, "EA", 2))) && ft_isspace(line[i + 2]))
 		return (f_pars_wall_textures(line, i, opts));
-	else if (line[i] == 'S' && ft_isspace(line[i + 1]))
+	if (line[i] == 'S' && ft_isspace(line[i + 1]))
 		return (f_pars_sprite_texture(line, i, opts));
-	else if (line[i] == 'F' && ft_isspace(line[i + 1]))
+	if (line[i] == 'F' && ft_isspace(line[i + 1]))
 		return (f_pars_floor_color(line, i, opts));
-	else if (line[i] == 'C' && ft_isspace(line[i + 1]))
+	if (line[i] == 'C' && ft_isspace(line[i + 1]))
 		return (f_pars_ceiling_color(line, i, opts));
-	else if (line[i] == '1')
+	if (line[i] == '1')
 		return (f_pars_map(line, opts));
-	else if (line[i] && opts->pars_map_started && opts->gnl_ret)
+	if (line[i] && opts->pars_map_started && opts->gnl_ret)
 		return (opts->err_string = ft_strdup(line)) ? 302 : 200;
-	else if (!line[i] && opts->pars_map_started && opts->gnl_ret)
+	if (!line[i] && opts->pars_map_started && opts->gnl_ret)
 		return (303);
+	if (!opts->gnl_ret && !opts->spawn_orientation && opts->pars_map_started)
+		return (343);
+	if (!opts->gnl_ret && !opts->spawn_orientation)
+		return (344);
 	return (!line[i]) ? 0 : 300;
 }
 

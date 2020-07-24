@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/24 22:37:57 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 00:28:28 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,7 @@ screenshot of spawn scene and quits.\n", opts->err_string);
 	else if (errcode == 104)
 		ft_printf("Error\ncode #104: parsing the map file with \
 'get_next_line' function failed.\n");
-}
-
-static void	f_error_systemlibs(int errcode, t_sdf *opts)
-{
-	(void)opts;
-	if (errcode == 200)
+	else if (errcode == 200)
 		ft_printf("Error\ncode #200: memory allocation failed \
 ('malloc' function returned 'NULL').\n");
 }
@@ -94,21 +89,37 @@ opts->err_string);
 starting the map.\nDESCRIPTION: all strings with identifiers: 'R', 'NO', 'SO', \
 'WE', 'EA', 'S', 'F' or 'C' must be placed before map.\n");
 	else if (errcode == 341)
-		ft_printf("Error\ncode #341: invalid character in map-string '%s' \
-detected.\nDESCRIPTION: 'map-strings' of description file must contain only \
-these characters: 1 for a wall, 2 for an item and N,S,E or W for the player's \
-start position and spawning orientation, and it can be the space symbol ' ' \
-for outside of the walls area.\n", opts->err_string);
+		ft_printf("Error\ncode #341: invalid map-string '%s' with index=%d \
+detected.\nDESCRIPTION: The map must be composed of only 4 possible \
+characters: 0 for an empty space, 1 for a wall, 2 for an \
+item and N,S,E or W for the player's start position and spawning orientation. \
+Also it CAN be the space symbol (' '), BUT ONLY for free space outside of the \
+walls area. And finally: the map must be closed/surrounded by walls.\n", \
+opts->err_string, opts->map_row_index);
+}
+
+static void	f_error_opts_3(int errcode, t_sdf *opts)
+{
+	(void)opts;
+	if (errcode == 342)
+		ft_printf("Error\ncode #342: the spawn point is found on the map more \
+than once.\n");
+	else if (errcode == 343)
+		ft_printf("Error\ncode #343: the spawn point was not found on the \
+map.\n");
+	else if (errcode == 344)
+		ft_printf("Error\ncode #344: the map was not found in the scene \
+description file.\n");
 }
 
 void		f_print_err(int errcode, t_sdf *opts)
 {
-	if (errcode < 200)
+	if (errcode < 300)
 		f_error_arguments(errcode, opts);
-	else if (errcode < 300)
-		f_error_systemlibs(errcode, opts);
 	else if (errcode < 320)
 		f_error_opts_1(errcode, opts);
-	else if (errcode < 400)
+	else if (errcode < 342)
 		f_error_opts_2(errcode, opts);
+	else if (errcode < 400)
+		f_error_opts_3(errcode, opts);
 }

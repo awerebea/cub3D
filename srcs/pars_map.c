@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 12:38:55 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/24 22:41:57 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 00:22:12 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,33 @@ static int		f_check_opts_completeness(t_sdf *opts)
 
 int				f_pars_map(char *line, t_sdf *opts)
 {
-	/* int		i; */
+	int		i;
 
-	(void)line;
-	/* i = 0; */
+	i = -1;
 	if (!opts->pars_map_started && f_check_opts_completeness(opts))
 		return (340);
-	/* while (line[i])                                                  */
-	/* {                                                                */
-	/*     if (!ft_strchr(" 012NSWE", line[i]))                         */
-	/*     {                                                            */
-	/*         return (opts->err_string = ft_strdup(line)) ? 341 : 200; */
-	/*     }                                                            */
-	/*     while (tmp_line[i] != '1')                                   */
-	/*     {                                                            */
-	/*         if (!ft_strchr(" 012NSWE",tmp_line[i]))                  */
-
-	/*     }                                                            */
-	/* }                                                                */
-
-
+	opts->map_row_index++;
+	while (line[++i] != '1')
+	{
+		if (line[i] != ' ')
+			return (opts->err_string = ft_strdup(line)) ? 341 : 200;
+	}
+	while (line[++i])
+	{
+		if (!ft_strchr(" 012NSWE", line[i]))
+			return (opts->err_string = ft_strdup(line)) ? 341 : 200;
+		if (line[i] == ' ' && !(line[i - 1] == '1' || line[i - 1] == ' '))
+			return (opts->err_string = ft_strdup(line)) ? 341 : 200;
+		if (ft_strchr("02NSWE", line[i]) && line[i + 1] == '\0')
+			return (opts->err_string = ft_strdup(line)) ? 341 : 200;
+		if (ft_strchr("NSWE", line[i]) && !opts->spawn_orientation)
+		{
+			opts->spawn_orientation = line[i];
+			opts->spawn_point_x = i;
+			opts->spawn_point_y = opts->map_row_index;
+		}
+		else if (ft_strchr("NSWE", line[i]) && opts->spawn_orientation)
+			return (342);
+	}
 	return (0);
 }
