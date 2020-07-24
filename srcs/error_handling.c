@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/24 13:21:25 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/24 14:24:01 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,12 @@ identifier: 'R', 'NO', 'SO', 'WE', 'EA', 'S', 'F' or 'C' \
 		ft_printf("Error\ncode #301: string with '%s' identifier occurs more \
 than once in the file.\nDESCRIPTION: each options string must be occured only \
 once.\n", opts->err_string);
+	else if (errcode == 302)
+		ft_printf("Error\ncode #302: invalid string while map parsing \
+detected:\n'%s'\n", opts->err_string);
+	else if (errcode == 303)
+		ft_printf("Error\ncode #303: empty string after the map detected.\n\
+The map must be at the end of file (remove everything after the map).\n");
 	else if (errcode == 310)
 		ft_printf("Error\ncode #310: invalid resolution string format.\n\
 DESCRIPTION: it must start by 'R' identifier and have only positive integer \
@@ -66,14 +72,14 @@ Examples of valid string:\n'R 1920 1080'\n'R    1024    768'\n");
 		ft_printf("Error\ncode #311: '%dx%d'- invalid resolution, it must be \
 in a range from '160x120' (QQVGA) to '7680x4320' (8K).\n", \
 opts->x_render_size, opts->y_render_size);
-	else if (errcode == 320)
-		ft_printf("Error\ncode #320: '%s' - invalid texture file or it's \
-path (open/close failed).\n", opts->err_string);
 }
 
 static void	f_error_opts_2(int errcode, t_sdf *opts)
 {
-	if (errcode == 330)
+	if (errcode == 320)
+		ft_printf("Error\ncode #320: '%s' - invalid texture file or it's \
+path (open/close failed).\n", opts->err_string);
+	else if (errcode == 330)
 		ft_printf("Error\ncode #330: invalid format of string with '%s' \
 identifier.\nExamples of valid string:\n'%s 128, 0, 255'\n'%s   25,196,64'\n", \
 opts->err_string, opts->err_string, opts->err_string);
@@ -93,7 +99,7 @@ void		f_print_err(int errcode, t_sdf *opts)
 		f_error_arguments(errcode, opts);
 	else if (errcode < 300)
 		f_error_systemlibs(errcode, opts);
-	else if (errcode < 330)
+	else if (errcode < 320)
 		f_error_opts_1(errcode, opts);
 	else if (errcode < 400)
 		f_error_opts_2(errcode, opts);

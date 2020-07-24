@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/24 13:17:32 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/24 13:52:31 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ typedef	struct	s_sdf
 	char		*sprite_texture_path;
 	int			floor_color;
 	int			ceiling_color;
+	int			gnl_ret;
 	int			screenshot;
-	int			spawn_point;
+	int			pars_map_started;
+	int			spawn_point_x;
+	int			spawn_point_y;
 	int			line_count;
 	int			max_length;
 	int			errcode;

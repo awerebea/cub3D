@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/24 13:21:15 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/24 14:07:13 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,17 @@ int				f_pars_line(char *line, t_sdf *opts)
 		return (f_pars_ceiling_color(line, i, opts));
 	else if (line[i] == '1')
 		return (f_pars_map(line, i, opts));
-	return (!(line[i])) ? 0 : 300;
+	else if (line[i] && opts->pars_map_started && opts->gnl_ret)
+		return (opts->err_string = ft_strdup(line)) ? 302 : 200;
+	else if (!line[i] && opts->pars_map_started && opts->gnl_ret)
+		return (303);
+	return (!line[i]) ? 0 : 300;
 }
 
 int				f_pars_desc_file(char *map_file, t_sdf *opts)
 {
 	char	*line;
 	int		fd;
-	int		gnl_ret;
 
 	if ((fd = open(map_file, O_RDONLY)) < 0)
 	{
@@ -78,10 +81,9 @@ int				f_pars_desc_file(char *map_file, t_sdf *opts)
 		f_print_err(101, opts);
 		return (fd);
 	}
-	gnl_ret = 1;
-	while (gnl_ret > 0)
+	while (opts->gnl_ret > 0)
 	{
-		if ((gnl_ret = get_next_line(fd, &line)) < 0)
+		if ((opts->gnl_ret = get_next_line(fd, &line)) < 0)
 			return (104);
 		!opts->errcode ? (opts->errcode = f_pars_line(line, opts)) : 0;
 		if (line)
