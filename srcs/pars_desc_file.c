@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 00:26:55 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 01:52:27 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "ft_printf.h"
 #include <fcntl.h>
 
-int				f_pars_resolution(char *line, int i, t_sdf *opts)
+static int		f_pars_resolution(char *line, int i, t_sdf *opts)
 {
 	int errcode;
 
@@ -42,7 +42,7 @@ int				f_pars_resolution(char *line, int i, t_sdf *opts)
 	return (errcode);
 }
 
-int				f_pars_line(char *line, t_sdf *opts)
+static int		f_pars_line(char *line, t_sdf *opts)
 {
 	int		i;
 
@@ -66,10 +66,8 @@ int				f_pars_line(char *line, t_sdf *opts)
 		return (opts->err_string = ft_strdup(line)) ? 302 : 200;
 	if (!line[i] && opts->pars_map_started && opts->gnl_ret)
 		return (303);
-	if (!opts->gnl_ret && !opts->spawn_orientation && opts->pars_map_started)
-		return (343);
 	if (!opts->gnl_ret && !opts->spawn_orientation)
-		return (344);
+		return (opts->pars_map_started) ? 343 : 344;
 	return (!line[i]) ? 0 : 300;
 }
 

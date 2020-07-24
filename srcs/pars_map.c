@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 12:38:55 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 01:20:52 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 01:46:22 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,8 @@ static int		f_check_opts_completeness(t_sdf *opts)
 	return (0);
 }
 
-int				f_pars_map(char *line, t_sdf *opts)
+static int		f_check_line(char *line, int i, t_sdf *opts)
 {
-	int		i;
-	char	*tmp_ptr;
-
-	i = -1;
-	if (!opts->pars_map_started && f_check_opts_completeness(opts))
-		return (340);
-	opts->map_row_index++;
-	while (line[++i] != '1')
-	{
-		if (line[i] != ' ')
-			return (opts->err_string = ft_strdup(line)) ? 341 : 200;
-	}
-	if (opts->prior_spaces_mapline < 0)
-		opts->prior_spaces_mapline = i;
-	else if (opts->prior_spaces_mapline > i)
-		opts->prior_spaces_mapline = i;
 	while (line[++i])
 	{
 		if (!ft_strchr(" 012NSWE", line[i]))
@@ -60,11 +44,46 @@ int				f_pars_map(char *line, t_sdf *opts)
 		else if (ft_strchr("NSWE", line[i]) && opts->spawn_orientation)
 			return (342);
 	}
-	opts->max_mapline_len = ((i = ft_strlen(line)) > opts->max_mapline_len) ? \
-							i : opts->max_mapline_len;
-	tmp_ptr = opts->map_line;
-	if (!(opts->map_line = ft_strjoin(opts->map_line, line)))
+	return (0);
+}
+
+static int		f_map_line_join(char *line, t_sdf *opts)
+{
+	char	*tmp_map_line;
+	char	*tmp_line;
+
+	tmp_map_line = opts->map_line;
+	if (!(tmp_line = ft_strjoin(line, "\n")))
 		return (200);
-	free(tmp_ptr);
+	if (!(opts->map_line = ft_strjoin(opts->map_line, tmp_line)))
+		return (200);
+	free(tmp_map_line);
+	free(tmp_line);
+	return (0);
+}
+
+int				f_pars_map(char *line, t_sdf *opts)
+{
+	int		i;
+
+	i = -1;
+	if (!opts->pars_map_started && f_check_opts_completeness(opts))
+		return (340);
+	opts->map_row_index++;
+	while (line[++i] != '1')
+	{
+		if (line[i] != ' ')
+			return (opts->err_string = ft_strdup(line)) ? 341 : 200;
+	}
+	if (opts->prior_spaces_mapline < 0)
+		opts->prior_spaces_mapline = i;
+	else if (opts->prior_spaces_mapline > i)
+		opts->prior_spaces_mapline = i;
+	if ((i = f_check_line(line, i, opts)))
+		return (i);
+	if ((i = ft_strlen(line)) > opts->max_mapline_len)
+		opts->max_mapline_len = i;
+	if ((i = f_map_line_join(line, opts)))
+		return (i);
 	return (0);
 }

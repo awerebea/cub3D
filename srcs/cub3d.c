@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 01:21:09 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 01:50:17 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <string.h>
 #include <errno.h>
 
-void			f_clean_mem(t_sdf *opts)
+static void		f_clean_mem(t_sdf *opts)
 {
 	free((opts->north_texture_path) ? opts->north_texture_path : NULL);
 	opts->north_texture_path = NULL;
@@ -86,18 +86,14 @@ int				main(int argc, char **argv)
 		return (f_exit(errcode, &opts));
 	if ((errcode = f_pars_desc_file(argv[1], &opts)))
 		return (f_exit(errcode, &opts));
-	ft_printf("All is OK!\nScreenshot: %d\n", opts.screenshot);
-	r = (opts.floor_color & 0xFF0000) >> 16;
-	g = (opts.floor_color & 0xFF00) >> 8;
-	b = opts.floor_color & 0xFF;
-	ft_printf("Floor RGB:   %3d, %3d, %3d\n", r, g, b);
+	ft_printf("Screenshot: %d\n", opts.screenshot);
 	r = (opts.ceiling_color & 0xFF0000) >> 16;
 	g = (opts.ceiling_color & 0xFF00) >> 8;
 	b = opts.ceiling_color & 0xFF;
 	ft_printf("Ceiling RGB: %3d, %3d, %3d\n", r, g, b);
 	ft_printf("Spawn X: %d, Y: %d orientation: %c\n", \
 			opts.spawn_point_x, opts.spawn_point_y, opts.spawn_orientation);
-	ft_printf("Map line: '%s'\n", opts.map_line);
+	ft_printf("Map line:\n%s", opts.map_line);
 	ft_printf("Max mapline length: %d\n", opts.max_mapline_len);
 	ft_printf("Min prior spaces: %d\n", opts.prior_spaces_mapline);
 	return (f_exit(errcode, &opts));
