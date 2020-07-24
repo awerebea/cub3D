@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 00:45:20 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 01:08:18 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef	struct	s_sdf
 	char		spawn_orientation;
 	int			line_count;
 	int			max_mapline_len;
+	int			prior_spaces_mapline;
 	int			errcode;
 	char		*err_string;
 	char		*map_line;

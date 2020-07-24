@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 01:00:02 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 01:21:09 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int		f_opts_init(t_sdf *opts)
 	opts->spawn_orientation = '\0';
 	opts->line_count = -1;
 	opts->max_mapline_len = -1;
+	opts->prior_spaces_mapline = -1;
 	opts->errcode = 0;
 	opts->err_string = NULL;
 	if (!(opts->map_line = ft_strdup("")))
@@ -97,6 +98,7 @@ int				main(int argc, char **argv)
 	ft_printf("Spawn X: %d, Y: %d orientation: %c\n", \
 			opts.spawn_point_x, opts.spawn_point_y, opts.spawn_orientation);
 	ft_printf("Map line: '%s'\n", opts.map_line);
-	ft_printf("%d\n", opts.max_mapline_len);
+	ft_printf("Max mapline length: %d\n", opts.max_mapline_len);
+	ft_printf("Min prior spaces: %d\n", opts.prior_spaces_mapline);
 	return (f_exit(errcode, &opts));
 }

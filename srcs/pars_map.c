@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 12:38:55 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 01:00:21 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 01:20:52 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ int				f_pars_map(char *line, t_sdf *opts)
 		if (line[i] != ' ')
 			return (opts->err_string = ft_strdup(line)) ? 341 : 200;
 	}
+	if (opts->prior_spaces_mapline < 0)
+		opts->prior_spaces_mapline = i;
+	else if (opts->prior_spaces_mapline > i)
+		opts->prior_spaces_mapline = i;
 	while (line[++i])
 	{
 		if (!ft_strchr(" 012NSWE", line[i]))
