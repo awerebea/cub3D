@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 12:38:55 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 00:49:44 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 01:00:21 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,6 @@ int				f_pars_map(char *line, t_sdf *opts)
 	}
 	opts->max_mapline_len = ((i = ft_strlen(line)) > opts->max_mapline_len) ? \
 							i : opts->max_mapline_len;
-	if (!opts->map_line)
-	{
-		if (!(opts->map_line = ft_strdup("")))
-			return (200);
-	}
 	tmp_ptr = opts->map_line;
 	if (!(opts->map_line = ft_strjoin(opts->map_line, line)))
 		return (200);

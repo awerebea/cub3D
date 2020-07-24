@@ -6,11 +6,12 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 00:50:29 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 01:00:02 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "libft.h"
 #include "ft_printf.h"
 #include <string.h>
 #include <errno.h>
@@ -33,7 +34,7 @@ void			f_clean_mem(t_sdf *opts)
 	opts->map_line = NULL;
 }
 
-void			f_opts_init(t_sdf *opts)
+static int		f_opts_init(t_sdf *opts)
 {
 	opts->x_render_size = -1;
 	opts->y_render_size = -1;
@@ -54,11 +55,13 @@ void			f_opts_init(t_sdf *opts)
 	opts->max_mapline_len = -1;
 	opts->errcode = 0;
 	opts->err_string = NULL;
-	opts->map_line = NULL;
+	if (!(opts->map_line = ft_strdup("")))
+		return (200);
 	opts->map_row_index = -1;
+	return (0);
 }
 
-int				f_exit(int errcode, t_sdf *opts)
+static int		f_exit(int errcode, t_sdf *opts)
 {
 	if (errcode > 0)
 		f_print_err(errcode, opts);
@@ -76,8 +79,8 @@ int				main(int argc, char **argv)
 	int		g;
 	int		b;
 
-	errcode = 0;
-	f_opts_init(&opts);
+	if ((errcode = f_opts_init(&opts)))
+		return (errcode);
 	if ((errcode = f_check_args(argc, argv, &opts)))
 		return (f_exit(errcode, &opts));
 	if ((errcode = f_pars_desc_file(argv[1], &opts)))
