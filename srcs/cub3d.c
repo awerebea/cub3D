@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/22 10:13:07 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/24 13:16:58 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@ void			f_clean_mem(t_sdf *opts)
 	opts->sprite_texture_path = NULL;
 	free((opts->err_string) ? opts->err_string : NULL);
 	opts->err_string = NULL;
-	free((opts->map_file) ? opts->map_file : NULL);
-	opts->map_file = NULL;
-	free((opts->screenshot_arg) ? opts->screenshot_arg : NULL);
-	opts->screenshot_arg = NULL;
 }
 
 void			f_opts_init(t_sdf *opts)
@@ -52,8 +48,6 @@ void			f_opts_init(t_sdf *opts)
 	opts->max_length = -1;
 	opts->errcode = 0;
 	opts->err_string = NULL;
-	opts->map_file = NULL;
-	opts->screenshot_arg = NULL;
 }
 
 int				f_exit(int errcode, t_sdf *opts)

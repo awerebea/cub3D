@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/22 10:14:16 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/24 13:21:25 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ path (open/close failed).\n", opts->err_string);
 		ft_printf("Error\ncode #102: '%s' - invalid map file name or path.\n\
 DESCRIPTION: the first argument is always the path to the map file, and it \
 must have a name with at least one character and an extension '.cub'.\n", \
-opts->map_file);
+opts->err_string);
 	else if (errcode == 103)
 		ft_printf("Error\ncode #103: '%s' - wrong second argument.\n\
 DESCRIPTION: it can be only '--save', in this case the 'cub3D' just takes \
-screenshot of spawn scene and quits.\n", opts->screenshot_arg);
+screenshot of spawn scene and quits.\n", opts->err_string);
 	else if (errcode == 104)
 		ft_printf("Error\ncode #104: parsing the map file with \
 'get_next_line' function failed.\n");
@@ -81,6 +81,10 @@ opts->err_string, opts->err_string, opts->err_string);
 		ft_printf("Error\ncode #331: invalid RGB color code in string with \
 '%s' identifier.\nR,G,B colors must be in range [0,255]: 0, 255, 255\n", \
 opts->err_string);
+	else if (errcode == 340)
+		ft_printf("Error\ncode #340: not all parameters were found before \
+starting the map.\nDESCRIPTION: all strings with identifiers: 'R', 'NO', 'SO', \
+'WE', 'EA', 'S', 'F' or 'C' must be placed before map.\n");
 }
 
 void		f_print_err(int errcode, t_sdf *opts)

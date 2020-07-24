@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/21 19:07:41 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/24 13:09:51 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ FLS_1       = $(addprefix $(FLSDIR_1), \
 				error_handling \
 				pars_args \
 				pars_desc_file \
+				pars_map \
 				pars_options_1 \
 				pars_options_2 \
 				utils )
