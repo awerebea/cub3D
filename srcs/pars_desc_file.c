@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/24 14:07:13 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/24 22:38:46 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int				f_pars_line(char *line, t_sdf *opts)
 	else if (line[i] == 'C' && ft_isspace(line[i + 1]))
 		return (f_pars_ceiling_color(line, i, opts));
 	else if (line[i] == '1')
-		return (f_pars_map(line, i, opts));
+		return (f_pars_map(line, opts));
 	else if (line[i] && opts->pars_map_started && opts->gnl_ret)
 		return (opts->err_string = ft_strdup(line)) ? 302 : 200;
 	else if (!line[i] && opts->pars_map_started && opts->gnl_ret)

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/24 13:53:09 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/24 22:04:54 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void			f_clean_mem(t_sdf *opts)
 	opts->sprite_texture_path = NULL;
 	free((opts->err_string) ? opts->err_string : NULL);
 	opts->err_string = NULL;
+	free((opts->map_line) ? opts->map_line : NULL);
+	opts->map_line = NULL;
 }
 
 void			f_opts_init(t_sdf *opts)
@@ -51,6 +53,8 @@ void			f_opts_init(t_sdf *opts)
 	opts->max_length = -1;
 	opts->errcode = 0;
 	opts->err_string = NULL;
+	opts->map_line = NULL;
+	opts->map_row_index = -1;
 }
 
 int				f_exit(int errcode, t_sdf *opts)
@@ -79,12 +83,12 @@ int				main(int argc, char **argv)
 		return (f_exit(errcode, &opts));
 	ft_printf("All is OK!\nScreenshot: %d\n", opts.screenshot);
 	r = (opts.floor_color & 0xFF0000) >> 16;
-	g = (opts.floor_color & 0x00FF00) >> 8;
-	b = (opts.floor_color & 0x0000FF);
+	g = (opts.floor_color & 0xFF00) >> 8;
+	b = opts.floor_color & 0xFF;
 	ft_printf("Floor RGB:   %3d, %3d, %3d\n", r, g, b);
 	r = (opts.ceiling_color & 0xFF0000) >> 16;
-	g = (opts.ceiling_color & 0x00FF00) >> 8;
-	b = (opts.ceiling_color & 0x0000FF);
+	g = (opts.ceiling_color & 0xFF00) >> 8;
+	b = opts.ceiling_color & 0xFF;
 	ft_printf("Ceiling RGB: %3d, %3d, %3d\n", r, g, b);
 	return (f_exit(errcode, &opts));
 }

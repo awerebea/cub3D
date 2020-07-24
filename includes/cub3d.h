@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/24 13:52:31 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/24 22:37:09 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef	struct	s_sdf
 	int			max_length;
 	int			errcode;
 	char		*err_string;
+	char		*map_line;
+	int			map_row_index;
 }				t_sdf;
 
 int				f_check_args(int argc, char **argv, t_sdf *opts);
@@ -50,7 +52,7 @@ int				f_cub3d_atoi(char *line, int *i);
 int				f_pars_ceiling_color(char *line, int i, t_sdf *opts);
 int				f_pars_desc_file(char *map_file, t_sdf *opts);
 int				f_pars_floor_color(char *line, int i, t_sdf *opts);
-int				f_pars_map(char *line, int i, t_sdf *opts);
+int				f_pars_map(char *line, t_sdf *opts);
 int				f_pars_sprite_texture(char *line, int i, t_sdf *opts);
 int				f_pars_wall_textures(char *line, int i, t_sdf *opts);
 void			f_print_err(int errcode, t_sdf *opts);

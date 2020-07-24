@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/24 14:50:45 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/24 22:37:57 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,12 @@ opts->err_string);
 		ft_printf("Error\ncode #340: not all parameters were found before \
 starting the map.\nDESCRIPTION: all strings with identifiers: 'R', 'NO', 'SO', \
 'WE', 'EA', 'S', 'F' or 'C' must be placed before map.\n");
+	else if (errcode == 341)
+		ft_printf("Error\ncode #341: invalid character in map-string '%s' \
+detected.\nDESCRIPTION: 'map-strings' of description file must contain only \
+these characters: 1 for a wall, 2 for an item and N,S,E or W for the player's \
+start position and spawning orientation, and it can be the space symbol ' ' \
+for outside of the walls area.\n", opts->err_string);
 }
 
 void		f_print_err(int errcode, t_sdf *opts)

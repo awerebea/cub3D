@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 15:05:01 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/24 14:53:45 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/24 20:52:46 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int			f_pars_floor_color(char *line, int i, t_sdf *opts)
 		return (errcode);
 	if (rgb[0] > 255 || rgb[1] > 255 || rgb[2] > 255)
 		return (opts->err_string = ft_strdup("F")) ? 331 : 200;
-	opts->floor_color = (rgb[0] << 16) + (rgb[1] << 8) + rgb[2];
+	opts->floor_color = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
 	return (0);
 }
 
@@ -75,7 +75,7 @@ int			f_pars_ceiling_color(char *line, int i, t_sdf *opts)
 		return (errcode);
 	if (rgb[0] > 255 || rgb[1] > 255 || rgb[2] > 255)
 		return (opts->err_string = ft_strdup("C")) ? 331 : 200;
-	opts->ceiling_color = (rgb[0] << 16) + (rgb[1] << 8) + rgb[2];
+	opts->ceiling_color = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
 	return (0);
 }
 
