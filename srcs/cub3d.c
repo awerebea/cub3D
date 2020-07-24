@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 00:04:58 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 00:50:29 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void			f_opts_init(t_sdf *opts)
 	opts->spawn_point_y = -1;
 	opts->spawn_orientation = '\0';
 	opts->line_count = -1;
-	opts->max_length = -1;
+	opts->max_mapline_len = -1;
 	opts->errcode = 0;
 	opts->err_string = NULL;
 	opts->map_line = NULL;
@@ -93,5 +93,7 @@ int				main(int argc, char **argv)
 	ft_printf("Ceiling RGB: %3d, %3d, %3d\n", r, g, b);
 	ft_printf("Spawn X: %d, Y: %d orientation: %c\n", \
 			opts.spawn_point_x, opts.spawn_point_y, opts.spawn_orientation);
+	ft_printf("Map line: '%s'\n", opts.map_line);
+	ft_printf("%d\n", opts.max_mapline_len);
 	return (f_exit(errcode, &opts));
 }
