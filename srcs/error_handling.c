@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/24 14:24:01 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/24 14:50:45 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,9 @@ static void	f_error_opts_2(int errcode, t_sdf *opts)
 {
 	if (errcode == 320)
 		ft_printf("Error\ncode #320: '%s' - invalid texture file or it's \
-path (open/close failed).\n", opts->err_string);
+path (open/close failed).\nCheck that the path to the texture does not start \
+with a space symbol and there are no space symbols in the string after \
+the texture name.\n", opts->err_string);
 	else if (errcode == 330)
 		ft_printf("Error\ncode #330: invalid format of string with '%s' \
 identifier.\nExamples of valid string:\n'%s 128, 0, 255'\n'%s   25,196,64'\n", \

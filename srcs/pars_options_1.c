@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 16:40:04 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/21 15:07:13 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/24 14:52:44 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,13 @@
 static int	f_pars_north_texture(char *line, int i, t_sdf *opts)
 {
 	int				errcode;
-	int				i_bckp;
 	int				fd;
 
 	errcode = 0;
 	i += 3;
 	f_skip_spaces(line, &i);
-	i_bckp = i;
-	while (line[i] && !ft_isspace(line[i]))
-		i++;
-	if (!(opts->north_texture_path = malloc(i - i_bckp + 1)))
+	if (!(opts->north_texture_path = ft_strdup(line + i)))
 		return (200);
-	ft_strlcpy(opts->north_texture_path, line + i_bckp, i - i_bckp + 1);
 	if ((fd = open(opts->north_texture_path, O_RDONLY)) < 0)
 	{
 		if (!(opts->err_string = ft_strdup(opts->north_texture_path)))
@@ -45,18 +40,13 @@ static int	f_pars_north_texture(char *line, int i, t_sdf *opts)
 static int	f_pars_south_texture(char *line, int i, t_sdf *opts)
 {
 	int				errcode;
-	int				i_bckp;
 	int				fd;
 
 	errcode = 0;
 	i += 3;
 	f_skip_spaces(line, &i);
-	i_bckp = i;
-	while (line[i] && !ft_isspace(line[i]))
-		i++;
-	if (!(opts->south_texture_path = malloc(i - i_bckp + 1)))
+	if (!(opts->south_texture_path = ft_strdup(line + i)))
 		return (200);
-	ft_strlcpy(opts->south_texture_path, line + i_bckp, i - i_bckp + 1);
 	if ((fd = open(opts->south_texture_path, O_RDONLY)) < 0)
 	{
 		if (!(opts->err_string = ft_strdup(opts->south_texture_path)))
@@ -71,18 +61,13 @@ static int	f_pars_south_texture(char *line, int i, t_sdf *opts)
 static int	f_pars_west_texture(char *line, int i, t_sdf *opts)
 {
 	int				errcode;
-	int				i_bckp;
 	int				fd;
 
 	errcode = 0;
 	i += 3;
 	f_skip_spaces(line, &i);
-	i_bckp = i;
-	while (line[i] && !ft_isspace(line[i]))
-		i++;
-	if (!(opts->west_texture_path = malloc(i - i_bckp + 1)))
+	if (!(opts->west_texture_path = ft_strdup(line + i)))
 		return (200);
-	ft_strlcpy(opts->west_texture_path, line + i_bckp, i - i_bckp + 1);
 	if ((fd = open(opts->west_texture_path, O_RDONLY)) < 0)
 	{
 		if (!(opts->err_string = ft_strdup(opts->west_texture_path)))
@@ -97,18 +82,13 @@ static int	f_pars_west_texture(char *line, int i, t_sdf *opts)
 static int	f_pars_east_texture(char *line, int i, t_sdf *opts)
 {
 	int				errcode;
-	int				i_bckp;
 	int				fd;
 
 	errcode = 0;
 	i += 3;
 	f_skip_spaces(line, &i);
-	i_bckp = i;
-	while (line[i] && !ft_isspace(line[i]))
-		i++;
-	if (!(opts->east_texture_path = malloc(i - i_bckp + 1)))
+	if (!(opts->east_texture_path = ft_strdup(line + i)))
 		return (200);
-	ft_strlcpy(opts->east_texture_path, line + i_bckp, i - i_bckp + 1);
 	if ((fd = open(opts->east_texture_path, O_RDONLY)) < 0)
 	{
 		if (!(opts->err_string = ft_strdup(opts->east_texture_path)))

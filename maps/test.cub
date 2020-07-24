@@ -1,16 +1,16 @@
 	R 1920 	1080  
 
-  NO	 	./maps/test.cub  	
-		SO	 	./maps/test.cub  	
-			WE	 	./maps/test.cub  	
-	EA	 	./maps/test.cub  	
+  NO	 	./maps/test.cub
+		SO	 	./maps/test.cub
+			WE	 	./maps/test.cub
+	EA	 	./maps/test.cub
 
 	F  105,	128 , 255
 
 	C 0, 188 , 25
       
 
-		S    ./maps/test.cub	
+		S    ./maps/test.cub
      11
      11
      11

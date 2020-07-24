@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 15:05:01 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/22 10:10:29 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/24 14:53:45 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int			f_pars_ceiling_color(char *line, int i, t_sdf *opts)
 int			f_pars_sprite_texture(char *line, int i, t_sdf *opts)
 {
 	int				errcode;
-	int				i_bckp;
 	int				fd;
 
 	if (opts->sprite_texture_path)
@@ -90,12 +89,8 @@ int			f_pars_sprite_texture(char *line, int i, t_sdf *opts)
 	errcode = 0;
 	i += 3;
 	f_skip_spaces(line, &i);
-	i_bckp = i;
-	while (line[i] && !ft_isspace(line[i]))
-		i++;
-	if (!(opts->sprite_texture_path = malloc(i - i_bckp + 1)))
+	if (!(opts->sprite_texture_path = ft_strdup(line + i)))
 		return (200);
-	ft_strlcpy(opts->sprite_texture_path, line + i_bckp, i - i_bckp + 1);
 	if ((fd = open(opts->sprite_texture_path, O_RDONLY)) < 0)
 	{
 		if (!(opts->err_string = ft_strdup(opts->sprite_texture_path)))
