@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 11:24:07 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 12:58:58 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 14:02:31 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,11 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-int		f_map_array_preparing(t_sdf *opts)
+static int	f_del_prior_spaces(t_sdf *opts)
 {
 	int		i;
-	int		j;
-	int		line_len;
-	int		max_len;
 	char	*tmp_ptr;
 
-	if (!(opts->map_array = ft_split(opts->map_line, '\n')))
-		return (200);
-	ft_printf("Splitted line:\n");
 	i = 0;
 	while (opts->map_array[i])
 	{
@@ -37,15 +31,24 @@ int		f_map_array_preparing(t_sdf *opts)
 			opts->map_array[i++] = tmp_ptr;
 		}
 	}
+	return (0);
+}
+
+static int	f_del_trail_spaces(t_sdf *opts)
+{
+	int		i;
+	char	*tmp_ptr;
+	int		max_len;
+	int		line_len;
+
 	i = 0;
 	max_len = 0;
 	while (opts->map_array[i])
 	{
-		j = 0;
 		line_len = ft_strlen(opts->map_array[i]);
-		while (opts->map_array[i][line_len--] == ' ')
-			j++;
-		max_len = (max_len < (line_len - j)) ? line_len - j : max_len;
+		while (line_len > 0 && opts->map_array[i][line_len - 1] == ' ')
+			line_len--;
+		max_len = (max_len < line_len) ? line_len : max_len;
 		i++;
 	}
 	i = 0;
@@ -76,6 +79,20 @@ int		f_map_array_preparing(t_sdf *opts)
 		}
 		i++;
 	}
+	return (0);
+}
+
+int			f_map_array_preparing(t_sdf *opts)
+{
+	int		i;
+
+	if (!(opts->map_array = ft_split(opts->map_line, '\n')))
+		return (200);
+	ft_printf("Splitted line:\n");
+	if ((opts->errcode = f_del_prior_spaces(opts)))
+		return (opts->errcode);
+	if ((opts->errcode = f_del_trail_spaces(opts)))
+		return (opts->errcode);
 	i = 0;
 	while (opts->map_array[i])
 	{
@@ -83,5 +100,5 @@ int		f_map_array_preparing(t_sdf *opts)
 		ft_printf(opts->map_array[i++]);
 		ft_printf("|\n");
 	}
-	return (0);
+	return (opts->errcode);
 }
