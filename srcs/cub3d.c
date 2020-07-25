@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 14:45:38 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 15:04:38 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ static int		f_opts_init(t_sdf *opts)
 	opts->spawn_point_x = -1;
 	opts->spawn_point_y = -1;
 	opts->spawn_orientation = '\0';
-	opts->line_count = -1;
-	opts->max_mapline_len = -1;
+	opts->max_mapline_len = 0;
 	opts->prior_spaces_mapline = -1;
 	opts->errcode = 0;
 	opts->err_string = NULL;

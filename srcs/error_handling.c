@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 00:28:28 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 16:16:57 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,13 @@ opts->err_string);
 starting the map.\nDESCRIPTION: all strings with identifiers: 'R', 'NO', 'SO', \
 'WE', 'EA', 'S', 'F' or 'C' must be placed before map.\n");
 	else if (errcode == 341)
-		ft_printf("Error\ncode #341: invalid map-string '%s' with index=%d \
-detected.\nDESCRIPTION: The map must be composed of only 4 possible \
-characters: 0 for an empty space, 1 for a wall, 2 for an \
-item and N,S,E or W for the player's start position and spawning orientation. \
-Also it CAN be the space symbol (' '), BUT ONLY for free space outside of the \
-walls area. And finally: the map must be closed/surrounded by walls.\n", \
-opts->err_string, opts->map_row_index);
+		ft_printf("Error\ncode #341: map line #%d: '%s' is invalid.\n\
+DESCRIPTION: The map must be composed of only 4 possible characters: \
+0 for an empty space, 1 for a wall, 2 for an item and N,S,E or W for the \
+player's start position and spawning orientation. Also it CAN be the space \
+symbol (' '), BUT ONLY for free space outside of the walls area.\nAnd finally: \
+the map must be closed/surrounded by walls.\n", opts->map_row_index + 1, \
+opts->err_string);
 }
 
 static void	f_error_opts_3(int errcode, t_sdf *opts)
@@ -110,6 +110,15 @@ map.\n");
 	else if (errcode == 344)
 		ft_printf("Error\ncode #344: the map was not found in the scene \
 description file.\n");
+	else if (errcode == 345)
+		ft_printf("Error\ncode #345: invalid first map line: '%s'.\n\
+DESCRIPTION: in the first line of the map there can be no characters other \
+than 1 and a space (' ') (the map must be closed/surrounded by walls).\n", \
+opts->err_string);
+	else if (errcode == 346)
+		ft_printf("Error\ncode #346: map column #%s is invalid.\nDESCRIPTION: \
+the map must be closed/surrounded by walls.\n", \
+opts->err_string);
 }
 
 void		f_print_err(int errcode, t_sdf *opts)

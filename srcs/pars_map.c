@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 12:38:55 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 01:46:22 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 15:31:33 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ static int		f_check_line(char *line, int i, t_sdf *opts)
 {
 	while (line[++i])
 	{
-		if (!ft_strchr(" 012NSWE", line[i]))
+		if (!opts->map_row_index && !ft_strchr(" 1", line[i]))
+			return (opts->err_string = ft_strdup(line)) ? 345 : 200;
+		if (opts->map_row_index && !ft_strchr(" 012NSWE", line[i]))
 			return (opts->err_string = ft_strdup(line)) ? 341 : 200;
 		if (line[i] == ' ' && !(line[i - 1] == '1' || line[i - 1] == ' '))
 			return (opts->err_string = ft_strdup(line)) ? 341 : 200;
@@ -81,8 +83,6 @@ int				f_pars_map(char *line, t_sdf *opts)
 		opts->prior_spaces_mapline = i;
 	if ((i = f_check_line(line, i, opts)))
 		return (i);
-	if ((i = ft_strlen(line)) > opts->max_mapline_len)
-		opts->max_mapline_len = i;
 	if ((i = f_map_line_join(line, opts)))
 		return (i);
 	return (0);

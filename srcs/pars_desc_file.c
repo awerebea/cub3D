@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 11:28:08 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 16:47:56 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,34 @@ static int		f_pars_line(char *line, t_sdf *opts)
 	return (!line[i]) ? 0 : 300;
 }
 
+static int		f_map_array_check_columns(t_sdf *opts)
+{
+	int		col;
+	int		row;
+
+	col = 0;
+	while (col < opts->max_mapline_len)
+	{
+		row = 1;
+		while (row <= opts->map_row_index)
+		{
+			if ((opts->map_array[row][col] == ' ' && \
+				!(opts->map_array[row - 1][col] == '1' || \
+				opts->map_array[row - 1][col] == ' ')) || \
+				((ft_strchr("02NSWE", opts->map_array[row][col])) && \
+				(row + 1 > opts->map_row_index || \
+				opts->map_array[row - 1][col] == ' ')))
+			{
+				return ((opts->err_string = \
+					ft_itoa(col + opts->prior_spaces_mapline + 1)) ? 346 : 200);
+			}
+			row++;
+		}
+		col++;
+	}
+	return (0);
+}
+
 int				f_pars_desc_file(char *map_file, t_sdf *opts)
 {
 	char	*line;
@@ -96,5 +124,6 @@ int				f_pars_desc_file(char *map_file, t_sdf *opts)
 	}
 	if (opts->errcode)
 		return (opts->errcode);
-	return (opts->errcode = f_map_array_preparing(opts)) ? opts->errcode : 0;
+	return ((opts->errcode = f_map_array_preparing(opts)) ? \
+			opts->errcode : f_map_array_check_columns(opts));
 }
