@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/30 22:00:13 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/19 21:03:58 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 14:25:49 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef	struct	s_list
 
 char			*ft_strchr(const char *s, int c);
 char			*ft_strdup(const char *s);
+char			*ft_strncpy(char *dest, char *src, unsigned int n);
 char			*ft_strnstr(const char *big, const char *little, size_t len);
 char			*ft_strrchr(const char *s, int c);
 int				ft_atoi(char *str);

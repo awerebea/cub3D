@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 11:01:24 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 14:45:38 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,13 @@ int				main(int argc, char **argv)
 	ft_printf("Map line:\n%s", opts.map_line);
 	ft_printf("Max mapline length: %d\n", opts.max_mapline_len);
 	ft_printf("Min prior spaces: %d\n", opts.prior_spaces_mapline);
+	int i = 0;
+	ft_printf("Map array:\n");
+	while (opts.map_array[i])
+	{
+		ft_printf("|");
+		ft_printf(opts.map_array[i++]);
+		ft_printf("|\n");
+	}
 	return (f_exit(errcode, &opts));
 }
