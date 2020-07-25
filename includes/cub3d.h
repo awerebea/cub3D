@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 01:08:18 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 10:45:13 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ typedef	struct	s_sdf
 	int			prior_spaces_mapline;
 	int			errcode;
 	char		*err_string;
-	char		*map_line;
 	int			map_row_index;
+	char		**map_array;
+	char		*map_line;
 }				t_sdf;
 
 int				f_check_args(int argc, char **argv, t_sdf *opts);

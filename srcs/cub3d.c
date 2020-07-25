@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 01:50:17 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 11:01:24 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,20 @@
 #include "ft_printf.h"
 #include <string.h>
 #include <errno.h>
+
+static void		f_clean_map_array(t_sdf *opts)
+{
+	int		i;
+
+	i = 0;
+	while (opts->map_array[i])
+	{
+		free(opts->map_array[i]);
+		opts->map_array[i++] = NULL;
+	}
+	free(opts->map_array);
+	opts->map_array = NULL;
+}
 
 static void		f_clean_mem(t_sdf *opts)
 {
@@ -32,6 +46,8 @@ static void		f_clean_mem(t_sdf *opts)
 	opts->err_string = NULL;
 	free((opts->map_line) ? opts->map_line : NULL);
 	opts->map_line = NULL;
+	if (opts->map_array)
+		f_clean_map_array(opts);
 }
 
 static int		f_opts_init(t_sdf *opts)
@@ -56,9 +72,10 @@ static int		f_opts_init(t_sdf *opts)
 	opts->prior_spaces_mapline = -1;
 	opts->errcode = 0;
 	opts->err_string = NULL;
+	opts->map_row_index = -1;
+	opts->map_array = NULL;
 	if (!(opts->map_line = ft_strdup("")))
 		return (200);
-	opts->map_row_index = -1;
 	return (0);
 }
 
