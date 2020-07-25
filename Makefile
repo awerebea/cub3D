@@ -6,18 +6,17 @@
 #    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/24 13:09:51 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/25 10:07:45 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = cub3D
 LIBFT       = Libft/libft.a
-LIBFTPRINTF = ft_printf/libftprintf.a
 CC          = gcc
 CFLAGS      = -Wall -Wextra -Werror
 OFLAGS      = -O2
 DBGFLAGS    = -g
-INCLUDES    = -I includes/ -I Libft/includes/ -I ft_printf/includes/
+INCLUDES    = -I includes/ -I Libft/includes/
 SRCDIR      = srcs/
 OBJDIR      = objs/
 
@@ -91,9 +90,8 @@ override FLAGS ?= $(CFLAGS)
 
 all:			$(NAME)
 
-$(NAME):		$(LIBFT) $(LIBFTPRINTF) $(OBJDIR) $(OBJ)
-	$(CC)		$(FLAGS) $(OBJ) $(INCLUDES) -L Libft -lft \
-											-L ft_printf -lftprintf -o $(NAME)
+$(NAME):		$(LIBFT) $(OBJDIR) $(OBJ)
+	$(CC)		$(FLAGS) $(OBJ) $(INCLUDES) -L Libft -lft -o $(NAME)
 	@echo		"all done!"
 
 $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
@@ -109,7 +107,7 @@ include $(wildcard $(addprefix $(OBJDIR), $(DFLS)))
 clean:
 	rm -rf		$(OBJDIR)
 
-cclean: fclean libft_fclean libftprintf_fclean
+cclean: fclean libft_fclean
 
 debug:
 	make FLAGS="$(CFLAGS) $(DBGFLAGS)" all
@@ -128,18 +126,6 @@ libft_fclean:
 
 libft_re:
 	make re		-C Libft/
-
-$(LIBFTPRINTF): libftprintf_force_make
-	@make		-C ft_printf/ --no-print-directory
-
-libftprintf_clean:
-	make clean	-C ft_printf/
-
-libftprintf_fclean:
-	make fclean	-C ft_printf/
-
-libftprintf_re:
-	make re		-C ft_printf/
 
 re:				fclean all
 
