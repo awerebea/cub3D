@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 11:24:07 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 14:02:31 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 14:09:30 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,30 @@ static int	f_del_prior_spaces(t_sdf *opts)
 			free(opts->map_array[i]);
 			opts->map_array[i++] = tmp_ptr;
 		}
+	}
+	return (0);
+}
+
+static int	f_add_trail_spaces(t_sdf *opts, int max_len)
+{
+	int		i;
+	char	*tmp_ptr;
+	int		line_len;
+
+	i = 0;
+	while (opts->map_array[i])
+	{
+		if ((line_len = ft_strlen(opts->map_array[i])) < max_len)
+		{
+			while (line_len++ < max_len)
+			{
+				if (!(tmp_ptr = ft_strjoin(opts->map_array[i], " ")))
+					return (200);
+				free(opts->map_array[i]);
+				opts->map_array[i] = tmp_ptr;
+			}
+		}
+		i++;
 	}
 	return (0);
 }
@@ -64,22 +88,8 @@ static int	f_del_trail_spaces(t_sdf *opts)
 		}
 		i++;
 	}
-	i = 0;
-	while (opts->map_array[i])
-	{
-		if ((line_len = ft_strlen(opts->map_array[i])) < max_len)
-		{
-			while (line_len++ < max_len)
-			{
-				if (!(tmp_ptr = ft_strjoin(opts->map_array[i], " ")))
-					return (200);
-				free(opts->map_array[i]);
-				opts->map_array[i] = tmp_ptr;
-			}
-		}
-		i++;
-	}
-	return (0);
+	return ((opts->errcode = f_add_trail_spaces(opts, max_len))) ? \
+							opts->errcode : 0;
 }
 
 int			f_map_array_preparing(t_sdf *opts)
