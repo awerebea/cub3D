@@ -6,13 +6,12 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 15:05:01 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/24 20:52:46 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 16:54:27 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft.h"
-#include "ft_printf.h"
 #include <fcntl.h>
 #include <unistd.h>
 

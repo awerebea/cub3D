@@ -6,13 +6,12 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 11:24:07 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 15:03:52 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/25 16:55:12 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft.h"
-#include "ft_printf.h"
 
 static int	f_del_prior_spaces(t_sdf *opts)
 {
@@ -106,6 +105,8 @@ int			f_map_array_preparing(t_sdf *opts)
 {
 	if (!(opts->map_array = ft_split(opts->map_line, '\n')))
 		return (200);
+	free(opts->map_line);
+	opts->map_line = NULL;
 	if ((opts->errcode = f_del_prior_spaces(opts)))
 		return (opts->errcode);
 	if ((opts->errcode = f_del_trail_spaces(opts)))
