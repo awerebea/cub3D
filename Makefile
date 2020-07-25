@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/25 10:07:45 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/25 11:29:29 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ FLSDIR_1    = ./
 FLS_1       = $(addprefix $(FLSDIR_1), \
 				cub3d \
 				error_handling \
+				map_array_preparing \
 				pars_args \
 				pars_desc_file \
 				pars_map \
