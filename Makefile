@@ -6,17 +6,20 @@
 #    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/26 22:01:39 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/27 00:23:48 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = cub3D
 LIBFT       = Libft/libft.a
+MLX_PATH    = minilibx/linux/
+MLX_NAME    = libmlx.a
+MLX         = $(addprefix $(MLX_PATH),$(MLX_NAME))
 CC          = gcc
 CFLAGS      = -Wall -Wextra -Werror
 OFLAGS      = -O2
 DBGFLAGS    = -g
-INCLUDES    = -I includes/ -I Libft/includes/
+INCLUDES    = -I includes/ -I Libft/includes/ -I $(MLX_PATH)
 SRCDIR      = srcs/
 OBJDIR      = objs/
 
@@ -44,8 +47,9 @@ override FLAGS ?= $(CFLAGS)
 
 all:			$(NAME)
 
-$(NAME):		$(LIBFT) $(OBJDIR) $(OBJ)
-	$(CC)		$(FLAGS) $(OBJ) $(INCLUDES) -L Libft -lft -o $(NAME)
+$(NAME):		$(LIBFT) $(MLX) $(OBJDIR) $(OBJ)
+	$(CC)		$(FLAGS) $(OBJ) $(INCLUDES) \
+				-L Libft -lft -L $(MLX_PATH) -lmlx -o $(NAME)
 	@echo		"all done!"
 
 $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
@@ -60,13 +64,15 @@ include $(wildcard $(addprefix $(OBJDIR), $(DFLS)))
 clean:
 	rm -rf		$(OBJDIR)
 
-cclean: fclean libft_fclean
-
-debug:
-	make FLAGS="$(CFLAGS) $(DBGFLAGS)" all
+clean_all: clean libft_clean mlx_clean
 
 fclean:			clean
 	rm -f		$(NAME)
+
+fclean_all: fclean libft_fclean mlx_fclean
+
+debug:
+	make FLAGS="$(CFLAGS) $(DBGFLAGS)" all
 
 $(LIBFT): libft_force_make
 	@make		-C Libft/ --no-print-directory
@@ -80,22 +86,42 @@ libft_fclean:
 libft_re:
 	make re		-C Libft/
 
-re:				fclean all
+$(MLX): mlx_force_make
+	@make		-C $(MLX_PATH) --no-print-directory
 
-rre:			cclean all
+mlx_clean:
+	make clean	-C $(MLX_PATH)
+
+mlx_fclean:
+	make fclean	-C $(MLX_PATH)
+
+mlx_re:
+	make re		-C $(MLX_PATH)
+
+mac:
+	sed -i '15 s/minilibx\/linux\//minilibx\/mac\//' Makefile
+	sed -i '16 s/libmlx.a/libmlx.dylib/' Makefile
+
+linux:
+	sed -i '15 s/minilibx\/mac\//minilibx\/linux\//' Makefile
+	sed -i '16 s/libmlx.dylib/libmlx.a/' Makefile
+
+re:				fclean_all all
 
 .PHONY:	all \
 		clean \
-		cclean \
-		debug \
+		clean_all \
 		fclean \
+		fclean_all \
+		debug \
+		libft_force_make \
 		libft_clean \
 		libft_fclean \
-		libft_force_make \
 		libft_re \
-		libftprintf_clean \
-		libftprintf_fclean \
-		libftprintf_force_make \
-		libftprintf_re \
-		re \
-		rre
+		mlx_force_make \
+		mlx_clean \
+		mlx_fclean \
+		mlx_re \
+		mac \
+		linux \
+		re
