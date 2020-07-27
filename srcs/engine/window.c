@@ -6,10 +6,37 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/27 16:28:49 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/27 17:47:23 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "mlx.h"
 
+int			f_window(t_sdf *opts)
+{
+	(void)opts;
+	void	*mlx_ptr;
+	void	*window;
+	int x, y;
 
+	x = 500;
+	y = 500;
+	mlx_ptr = mlx_init();
+	window = mlx_new_window(mlx_ptr, 1000, 1000, "cub3D");
+	while(x < 700)
+	{
+		mlx_pixel_put(mlx_ptr, window, x, y, 0xFFFFFF);
+		x++;
+		y++;
+	}
+	y = 500;
+	while(x > 500)
+	{
+		mlx_pixel_put(mlx_ptr, window, x, y, 0xFFFFFF);
+		x--;
+		y++;
+	}
+	mlx_loop(mlx_ptr);
+	return (0);
+}

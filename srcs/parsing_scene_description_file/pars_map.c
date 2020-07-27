@@ -15,7 +15,7 @@
 
 static int		f_check_opts_completeness(t_sdf *opts)
 {
-	if (opts->x_render_size == -1 || opts->y_render_size == -1 || \
+	if (opts->x_win_size == -1 || opts->y_win_size == -1 || \
 		!opts->north_texture_path || !opts->south_texture_path || \
 		!opts->west_texture_path || !opts->east_texture_path || \
 		!opts->sprite_texture_path || opts->floor_color == -1 || \

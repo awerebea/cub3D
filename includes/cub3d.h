@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 15:04:28 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/27 17:28:55 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 typedef	struct	s_sdf
 {
-	int			x_render_size;
-	int			y_render_size;
+	int			x_win_size;
+	int			y_win_size;
 	char		*north_texture_path;
 	char		*south_texture_path;
 	char		*west_texture_path;
@@ -58,6 +58,7 @@ int				f_pars_floor_color(char *line, int i, t_sdf *opts);
 int				f_pars_map(char *line, t_sdf *opts);
 int				f_pars_sprite_texture(char *line, int i, t_sdf *opts);
 int				f_pars_wall_textures(char *line, int i, t_sdf *opts);
+int				f_window(t_sdf *opts);
 void			f_print_err(int errcode, t_sdf *opts);
 void			f_skip_spaces(char *line, int *i);
 

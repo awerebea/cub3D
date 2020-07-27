@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 15:04:38 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/27 17:47:34 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static void		f_clean_mem(t_sdf *opts)
 
 static int		f_opts_init(t_sdf *opts)
 {
-	opts->x_render_size = -1;
-	opts->y_render_size = -1;
+	opts->x_win_size = -1;
+	opts->y_win_size = -1;
 	opts->north_texture_path = NULL;
 	opts->south_texture_path = NULL;
 	opts->west_texture_path = NULL;
@@ -101,6 +101,8 @@ int				main(int argc, char **argv)
 	if ((errcode = f_check_args(argc, argv, &opts)))
 		return (f_exit(errcode, &opts));
 	if ((errcode = f_pars_desc_file(argv[1], &opts)))
+		return (f_exit(errcode, &opts));
+	if ((errcode = f_window(&opts)))
 		return (f_exit(errcode, &opts));
 	ft_printf("Screenshot: %d\n", opts.screenshot);
 	r = (opts.ceiling_color & 0xFF0000) >> 16;

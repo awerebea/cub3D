@@ -66,7 +66,7 @@ Examples of valid string:\n'R 1920 1080'\n'R    1024    768'\n");
 	else if (errcode == 311)
 		ft_printf("Error\ncode #311: '%dx%d'- invalid resolution, it must be \
 in a range from '160x120' (QQVGA) to '7680x4320' (8K).\n", \
-opts->x_render_size, opts->y_render_size);
+opts->x_win_size, opts->y_win_size);
 }
 
 static void	f_error_opts_2(int errcode, t_sdf *opts)

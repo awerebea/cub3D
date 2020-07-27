@@ -21,23 +21,23 @@ static int		f_pars_resolution(char *line, int i, t_sdf *opts)
 	int errcode;
 
 	errcode = 0;
-	if (opts->x_render_size != -1)
+	if (opts->x_win_size != -1)
 		return (opts->err_string = ft_strdup("R")) ? 301 : 200;
 	i++;
-	opts->x_render_size = f_cub3d_atoi(line, &i);
+	opts->x_win_size = f_cub3d_atoi(line, &i);
 	if (ft_isspace(line[i]))
-		opts->y_render_size = f_cub3d_atoi(line, &i);
-	if (opts->x_render_size > 0 && opts->y_render_size > 0)
+		opts->y_win_size = f_cub3d_atoi(line, &i);
+	if (opts->x_win_size > 0 && opts->y_win_size > 0)
 	{
 		while (!errcode && line[i])
 			!ft_isspace(line[i++]) ? errcode = 310 : 0;
 	}
-	if (opts->x_render_size <= 0 || opts->y_render_size <= 0)
+	if (opts->x_win_size <= 0 || opts->y_win_size <= 0)
 		errcode = 310;
-	else if (!errcode && (opts->x_render_size < MIN_X_RENDER_SIZE || \
-			opts->x_render_size > MAX_X_RENDER_SIZE || \
-			opts->y_render_size < MIN_Y_RENDER_SIZE || \
-			opts->y_render_size > MAX_Y_RENDER_SIZE))
+	else if (!errcode && (opts->x_win_size < MIN_X_RENDER_SIZE || \
+			opts->x_win_size > MAX_X_RENDER_SIZE || \
+			opts->y_win_size < MIN_Y_RENDER_SIZE || \
+			opts->y_win_size > MAX_Y_RENDER_SIZE))
 		errcode = 311;
 	return (errcode);
 }
