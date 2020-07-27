@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/25 14:18:43 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/27 11:06:45 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,19 +100,17 @@ DFLS     = $(SRC:=.d)
 
 override FLAGS ?= $(CFLAGS)
 
-all:			$(OBJDIR) $(NAME)
+all:			$(NAME)
 
 $(NAME):		$(OBJ)
 	ar rc		$(NAME) $?
 	ranlib		$(NAME)
 
 $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
+	mkdir -p	$(OBJDIR) $(addprefix $(OBJDIR), $(FLSDIR_1) $(FLSDIR_2) \
+				$(FLSDIR_3) $(FLSDIR_4) $(FLSDIR_5) $(FLSDIR_6) $(FLSDIR_7) \
+				$(FLSDIR_8))
 	$(CC)		$(FLAGS) $(INCLUDES) -c $< -o $@ -MMD
-
-$(OBJDIR):
-	mkdir -p	$(OBJDIR)
-	mkdir -p	$(addprefix $(OBJDIR), $(FLSDIR_1) $(FLSDIR_2) $(FLSDIR_3) \
-				$(FLSDIR_4) $(FLSDIR_5) $(FLSDIR_6) $(FLSDIR_7) $(FLSDIR_8))
 
 debug:
 	make FLAGS="$(CFLAGS) $(DBGFLAGS)" all

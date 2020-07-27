@@ -6,14 +6,14 @@
 #    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/27 00:23:48 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/27 10:59:03 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = cub3D
 LIBFT       = Libft/libft.a
-MLX_PATH    = minilibx/linux/
-MLX_NAME    = libmlx.a
+MLX_PATH    = minilibx/mac/
+MLX_NAME    = libmlx.dylib
 MLX         = $(addprefix $(MLX_PATH),$(MLX_NAME))
 CC          = gcc
 CFLAGS      = -Wall -Wextra -Werror
@@ -38,6 +38,9 @@ FLS_3       = $(addprefix $(FLSDIR_3), \
 				pars_map \
 				pars_options_1 \
 				pars_options_2)
+# FLSDIR_4    = engine/
+# FLS_4       = $(addprefix $(FLSDIR_4), \
+#                 map_array_preparing)
 SRC         = $(FLS_1) $(FLS_2) $(FLS_3)
 
 OBJ         = $(addprefix $(OBJDIR), $(SRC:=.o))
@@ -47,17 +50,15 @@ override FLAGS ?= $(CFLAGS)
 
 all:			$(NAME)
 
-$(NAME):		$(LIBFT) $(MLX) $(OBJDIR) $(OBJ)
+$(NAME):		$(LIBFT) $(MLX) $(OBJ)
 	$(CC)		$(FLAGS) $(OBJ) $(INCLUDES) \
 				-L Libft -lft -L $(MLX_PATH) -lmlx -o $(NAME)
 	@echo		"all done!"
 
 $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
+	mkdir -p	$(OBJDIR) $(addprefix $(OBJDIR), $(FLSDIR_1) $(FLSDIR_2) \
+				$(FLSDIR_3) $(FLSDIR_4))
 	$(CC)		$(FLAGS) $(INCLUDES) -c $< -o $@ -MMD
-
-$(OBJDIR):
-	mkdir -p	$(OBJDIR)
-	mkdir -p	$(addprefix $(OBJDIR), $(FLSDIR_1) $(FLSDIR_2) $(FLSDIR_3))
 
 include $(wildcard $(addprefix $(OBJDIR), $(DFLS)))
 
@@ -99,8 +100,8 @@ mlx_re:
 	make re		-C $(MLX_PATH)
 
 mac:
-	sed -i '15 s/minilibx\/linux\//minilibx\/mac\//' Makefile
-	sed -i '16 s/libmlx.a/libmlx.dylib/' Makefile
+	sed -i '' '15 s/minilibx\/linux\//minilibx\/mac\//' Makefile
+	sed -i '' '16 s/libmlx.a/libmlx.dylib/' Makefile
 
 linux:
 	sed -i '15 s/minilibx\/mac\//minilibx\/linux\//' Makefile
