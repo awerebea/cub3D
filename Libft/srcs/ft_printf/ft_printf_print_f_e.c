@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_print_f_e.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:13:02 by awerebea          #+#    #+#             */
 /*   Updated: 2020/06/16 15:31:51 by awerebea         ###   ########.fr       */

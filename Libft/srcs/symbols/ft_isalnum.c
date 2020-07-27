@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 01:16:54 by awerebea          #+#    #+#             */
 /*   Updated: 2020/05/06 14:18:12 by awerebea         ###   ########.fr       */

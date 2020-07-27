@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/30 19:42:26 by awerebea          #+#    #+#             */
 /*   Updated: 2020/06/02 21:08:23 by awerebea         ###   ########.fr       */

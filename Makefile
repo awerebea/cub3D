@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
+#    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/27 14:41:45 by awerebea         ###   ########.fr        #
+#    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
+#    Updated: 2020/07/27 15:42:53 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = cub3D
 LIBFT       = Libft/libft.a
-MLX_PATH    = minilibx/mac/
-MLX_NAME    = libmlx.dylib
+MLX_PATH    = minilibx/linux/
+MLX_NAME    = libmlx.a
 MLX         = $(addprefix $(MLX_PATH),$(MLX_NAME))
 CC          = gcc
 CFLAGS      = -Wall -Wextra -Werror
@@ -25,7 +25,7 @@ OBJDIR      = objs/
 
 FLSDIR_1    = ./
 FLS_1       = $(addprefix $(FLSDIR_1), \
-				cub3d \
+				main \
 				utils )
 FLSDIR_2    = error_handling/
 FLS_2       = $(addprefix $(FLSDIR_2), \
@@ -38,7 +38,10 @@ FLS_3       = $(addprefix $(FLSDIR_3), \
 				pars_map \
 				pars_options_1 \
 				pars_options_2)
-SRC         = $(FLS_1) $(FLS_2) $(FLS_3)
+FLSDIR_4    = engine/
+FLS_4       = $(addprefix $(FLSDIR_4), \
+				window)
+SRC         = $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4)
 
 OBJ         = $(addprefix $(OBJDIR), $(SRC:=.o))
 DFLS        = $(SRC:=.d)
@@ -54,7 +57,7 @@ $(NAME):		$(LIBFT) $(MLX) $(OBJ)
 
 $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
 	mkdir -p	$(OBJDIR) $(addprefix $(OBJDIR), $(FLSDIR_1) $(FLSDIR_2) \
-				$(FLSDIR_3))
+				$(FLSDIR_3) $(FLSDIR_4))
 	$(CC)		$(FLAGS) $(INCLUDES) -c $< -o $@ -MMD
 
 include $(wildcard $(addprefix $(OBJDIR), $(DFLS)))
