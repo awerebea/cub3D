@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/27 10:59:03 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/27 14:41:45 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,9 +38,6 @@ FLS_3       = $(addprefix $(FLSDIR_3), \
 				pars_map \
 				pars_options_1 \
 				pars_options_2)
-# FLSDIR_4    = engine/
-# FLS_4       = $(addprefix $(FLSDIR_4), \
-#                 map_array_preparing)
 SRC         = $(FLS_1) $(FLS_2) $(FLS_3)
 
 OBJ         = $(addprefix $(OBJDIR), $(SRC:=.o))
@@ -57,7 +54,7 @@ $(NAME):		$(LIBFT) $(MLX) $(OBJ)
 
 $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
 	mkdir -p	$(OBJDIR) $(addprefix $(OBJDIR), $(FLSDIR_1) $(FLSDIR_2) \
-				$(FLSDIR_3) $(FLSDIR_4))
+				$(FLSDIR_3))
 	$(CC)		$(FLAGS) $(INCLUDES) -c $< -o $@ -MMD
 
 include $(wildcard $(addprefix $(OBJDIR), $(DFLS)))
@@ -76,7 +73,7 @@ debug:
 	make FLAGS="$(CFLAGS) $(DBGFLAGS)" all
 
 $(LIBFT): libft_force_make
-	@make		-C Libft/ --no-print-directory
+	make		-C Libft/
 
 libft_clean:
 	make clean	-C Libft/
@@ -88,7 +85,7 @@ libft_re:
 	make re		-C Libft/
 
 $(MLX): mlx_force_make
-	@make		-C $(MLX_PATH) --no-print-directory
+	make		-C $(MLX_PATH)
 
 mlx_clean:
 	make clean	-C $(MLX_PATH)
