@@ -1,17 +1,15 @@
-	R 1920 	1080  
+R 1920 	1080  
 
-  NO	 	./maps/test.cub
-		SO	 	./maps/test.cub
-			WE	 	./maps/test.cub
-	EA	 	./maps/test.cub
+NO ./maps/test.cub
+SO ./maps/test.cub
+WE ./maps/test.cub
+EA ./maps/test.cub
+S  ./maps/test.cub
 
-	F  105,	128 , 255
+F 105,	128 , 255
+C 0, 188 , 25
 
-	C 0, 188 , 25
-      
-
-		S    ./maps/test.cub
-         1111
-     1111W01  
-     10020111   
-      1111 
+  111111
+ 1111W01  
+ 100201111  
+  1111

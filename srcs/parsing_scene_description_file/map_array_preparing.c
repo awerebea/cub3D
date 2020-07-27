@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 11:24:07 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 16:55:12 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/27 17:17:48 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,18 @@ static int	f_del_prior_spaces(t_sdf *opts)
 	char	*tmp_ptr;
 
 	i = 0;
-	while (opts->map_array[i])
+	if (opts->prior_spaces_mapline)
 	{
-		if (opts->prior_spaces_mapline)
+		while (opts->map_array[i])
 		{
 			if (!(tmp_ptr = ft_strdup(opts->map_array[i] + \
 							opts->prior_spaces_mapline)))
 				return (200);
 			free(opts->map_array[i]);
-			opts->map_array[i++] = tmp_ptr;
+			opts->map_array[i] = tmp_ptr;
+			i++;
 		}
+		opts->spawn_point_x -= opts->prior_spaces_mapline;
 	}
 	return (0);
 }

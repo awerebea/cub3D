@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 12:38:55 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 15:31:33 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/27 17:01:14 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,24 +66,26 @@ static int		f_map_line_join(char *line, t_sdf *opts)
 
 int				f_pars_map(char *line, t_sdf *opts)
 {
+	int		errcode;
 	int		i;
 
-	i = -1;
+	i = 0;
 	if (!opts->pars_map_started && f_check_opts_completeness(opts))
 		return (340);
 	opts->map_row_index++;
-	while (line[++i] != '1')
+	while (line[i] != '1')
 	{
 		if (line[i] != ' ')
 			return (opts->err_string = ft_strdup(line)) ? 341 : 200;
+		i++;
 	}
 	if (opts->prior_spaces_mapline < 0)
 		opts->prior_spaces_mapline = i;
 	else if (opts->prior_spaces_mapline > i)
 		opts->prior_spaces_mapline = i;
-	if ((i = f_check_line(line, i, opts)))
-		return (i);
-	if ((i = f_map_line_join(line, opts)))
-		return (i);
+	if ((errcode = f_check_line(line, i, opts)))
+		return (errcode);
+	if ((errcode = f_map_line_join(line, opts)))
+		return (errcode);
 	return (0);
 }
