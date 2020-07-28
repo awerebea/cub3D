@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/28 13:17:02 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/28 13:30:19 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,9 +102,9 @@ mlx_re:
 	make re		-C $(MLX_DIR)
 
 mac:
-	sed -i '15 s/minilibx\/linux\//minilibx\/mac\//' Makefile
-	sed -i '16 s/libmlx.a/libmlx.dylib/' Makefile
-	sed -i '20 s/-lmlx -L\ \/usr\/lib\ -lXext\ -lX11\ -lm\ -lz/-lmlx/' \
+	sed -i '' '15 s/minilibx\/linux\//minilibx\/mac\//' Makefile
+	sed -i '' '16 s/libmlx.a/libmlx.dylib/' Makefile
+	sed -i '' '20 s/-lmlx -L\ \/usr\/lib\ -lXext\ -lX11\ -lm\ -lz/-lmlx/' \
 			Makefile
 
 linux:
