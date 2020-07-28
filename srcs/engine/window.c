@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/27 17:47:23 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/28 12:15:28 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ int			f_window(t_sdf *opts)
 	void	*window;
 	int x, y;
 
-	x = 500;
-	y = 500;
+	x = 200;
+	y = 200;
 	mlx_ptr = mlx_init();
-	window = mlx_new_window(mlx_ptr, 1000, 1000, "cub3D");
-	while(x < 700)
+	window = mlx_new_window(mlx_ptr, 750, 750, "test");
+	while(x < 400)
 	{
 		mlx_pixel_put(mlx_ptr, window, x, y, 0xFFFFFF);
 		x++;
 		y++;
 	}
-	y = 500;
-	while(x > 500)
+	y = 200;
+	while(x > 200)
 	{
 		mlx_pixel_put(mlx_ptr, window, x, y, 0xFFFFFF);
 		x--;

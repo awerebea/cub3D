@@ -15,7 +15,6 @@ for inc in \
     /usr/X11R5/include        \
     /usr/X11R4/include        \
                               \
-    /usr/include              \
     /usr/include/X11          \
     /usr/include/X11R6        \
     /usr/include/X11R5        \
@@ -71,7 +70,6 @@ else
     echo "lib_$conf_ht generation"
 fi
 
-
 /bin/echo "INC=$conf_inc" > Makefile.gen
 /bin/echo "HT=$conf_ht" >> Makefile.gen
 /bin/echo "DOCP=$conf_docp" >> Makefile.gen
@@ -84,8 +82,9 @@ if [ -n "$1" -a "$1" = "clean" ] ; then
 fi
 
 if [ -n "$1" -a "$1" = "fclean" ] ; then
-    echo "Now make it clean."
+    echo "Now make it fclean."
     make -f Makefile.gen fclean
+    rm -f Makefile.gen
     exit
 fi
 

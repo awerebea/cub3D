@@ -6,21 +6,21 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/28 01:45:29 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/28 13:17:02 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME       = cub3D
 LIBFT      = Libft/libft.a
-MLX_PATH   = minilibx/linux
+MLX_DIR    = minilibx/linux/
 MLX_NAME   = libmlx.a
-MLX        = $(addprefix $(MLX_PATH),$(MLX_NAME))
+MLX        = $(addprefix $(MLX_DIR),$(MLX_NAME))
 CC         = gcc
 CFLAGS     = -Wall -Wextra -Werror
-LIBFLAGS   = -L Libft -lft -L $(MLX_PATH) -lmlx -L /usr/lib -lXext -lX11 -lm -lz
+LIBFLAGS   = -L Libft -lft -L $(MLX_DIR) -lmlx -L /usr/lib -lXext -lX11 -lm -lz
 OFLAGS     = -O2
 DBGFLAGS   = -g
-INCLUDES   = -I includes/ -I Libft/includes/ -I $(MLX_PATH)
+INCLUDES   = -I includes/ -I Libft/includes/ -I $(MLX_DIR)
 SRCDIR     = srcs/
 OBJDIR     = objs/
 
@@ -53,7 +53,7 @@ all:			$(NAME)
 
 $(NAME):		$(LIBFT) $(MLX) $(OBJ)
 	$(CC)		$(FLAGS) $(OBJ) $(INCLUDES) $(LIBFLAGS) -o $(NAME)
-	@echo		"all done!"
+	@echo '******* All done! *******'
 
 $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
 	mkdir -p	$(OBJDIR) $(addprefix $(OBJDIR), $(FLSDIR_1) $(FLSDIR_2) \
@@ -76,7 +76,8 @@ debug:
 	make FLAGS="$(CFLAGS) $(DBGFLAGS)" all
 
 $(LIBFT): libft_force_make
-	make		-C Libft/
+	@echo '******* Making libft *******'
+	@make		-C Libft/ --no-print-directory
 
 libft_clean:
 	make clean	-C Libft/
@@ -88,20 +89,21 @@ libft_re:
 	make re		-C Libft/
 
 $(MLX): mlx_force_make
-	make		-C $(MLX_PATH)
+	@echo '******* Making minilibx *******'
+	@make		-C $(MLX_DIR) --no-print-directory
 
 mlx_clean:
-	make clean	-C $(MLX_PATH)
+	make clean	-C $(MLX_DIR)
 
 mlx_fclean:
-	make fclean	-C $(MLX_PATH)
+	make fclean	-C $(MLX_DIR)
 
 mlx_re:
-	make re		-C $(MLX_PATH)
+	make re		-C $(MLX_DIR)
 
 mac:
-	# sed -i '' '15 s/minilibx\/linux\//minilibx\/mac\//' Makefile
-	# sed -i '' '16 s/libmlx.a/libmlx.dylib/' Makefile
+	sed -i '15 s/minilibx\/linux\//minilibx\/mac\//' Makefile
+	sed -i '16 s/libmlx.a/libmlx.dylib/' Makefile
 	sed -i '20 s/-lmlx -L\ \/usr\/lib\ -lXext\ -lX11\ -lm\ -lz/-lmlx/' \
 			Makefile
 
