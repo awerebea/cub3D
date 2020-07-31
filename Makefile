@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/30 18:36:15 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/31 13:21:50 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,12 +107,26 @@ mac:
 	sed -i '' '16 s/libmlx.a/libmlx.dylib/' Makefile
 	sed -i '' '20 s/-lmlx -L\ \/usr\/lib\ -lXext\ -lX11\ -lm\ -lz/-lmlx/' \
 			Makefile
+	sed -i '' 's/KEY_ESC\ 65307/KEY_ESC\ 53/' includes/cub3d.h
+	sed -i '' 's/KEY_W\ 119/KEY_W\ 13/' includes/cub3d.h
+	sed -i '' 's/KEY_A\ 97/KEY_A\ 0/' includes/cub3d.h
+	sed -i '' 's/KEY_S\ 115/KEY_S\ 1/' includes/cub3d.h
+	sed -i '' 's/KEY_D\ 100/KEY_D\ 2/' includes/cub3d.h
+	sed -i '' 's/KEY_LEFT\ 65361/KEY_LEFT\ 123/' includes/cub3d.h
+	sed -i '' 's/KEY_RIGHT\ 65363/KEY_RIGHT\ 124/' includes/cub3d.h
 
 linux:
 	sed -i '15 s/minilibx\/mac\//minilibx\/linux\//' Makefile
 	sed -i '16 s/libmlx.dylib/libmlx.a/' Makefile
 	sed -i '20 s/-lmlx/-lmlx -L\ \/usr\/lib\ -lXext\ -lX11\ -lm\ -lz/' \
 			Makefile
+	sed -i 's/KEY_ESC\ 53/KEY_ESC\ 65307/' includes/cub3d.h
+	sed -i 's/KEY_W\ 13/KEY_W\ 119/' includes/cub3d.h
+	sed -i 's/KEY_A\ 0/KEY_A\ 97/' includes/cub3d.h
+	sed -i 's/KEY_S\ 1/KEY_S\ 115/' includes/cub3d.h
+	sed -i 's/KEY_D\ 2/KEY_D\ 100/' includes/cub3d.h
+	sed -i 's/KEY_LEFT\ 123/KEY_LEFT\ 65361/' includes/cub3d.h
+	sed -i 's/KEY_RIGHT\ 124/KEY_RIGHT\ 65363/' includes/cub3d.h
 
 re:				fclean_all all
 

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/31 10:52:21 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/31 20:42:33 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 # define KEY_D 100
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
+
+# define BITS_PER_PIXEL 32
+# define FOV 66
 
 typedef	struct	s_sdf
 {
@@ -57,13 +60,23 @@ typedef	struct	s_sdf
 	char		*map_line;
 }				t_sdf;
 
+typedef struct	s_img
+{
+	void		*img_ptr;
+	char		*addr;
+	int			bits_per_pix;
+	int			line_len;
+	int			endian;
+}				t_img;
+
 typedef struct	s_mlx
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	t_sdf		*opts;
 	int			x_win_size;
 	int			y_win_size;
+	t_sdf		*opts;
+	t_img		img;
 }				t_mlx;
 
 int				f_check_args(int argc, char **argv, t_sdf *opts);

@@ -6,8 +6,8 @@ WE ./maps/test.cub
 EA ./maps/test.cub
 S  ./maps/test.cub
 
-F 105,	128 , 255
-C 0, 188 , 25
+F	23,		64,		68
+C	100,	200,	240
 
   111111
  1111W01  
