@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/28 10:59:50 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/31 10:51:50 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int		f_opts_init(t_sdf *opts)
 	return (0);
 }
 
-static int		f_exit(int errcode, t_sdf *opts)
+int				f_exit(int errcode, t_sdf *opts)
 {
 	if (errcode > 0)
 		f_print_err(errcode, opts);

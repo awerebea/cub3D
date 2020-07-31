@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   error_args_opts.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 16:16:57 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/30 18:39:18 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,4 +131,6 @@ void		f_print_err(int errcode, t_sdf *opts)
 		f_error_opts_2(errcode, opts);
 	else if (errcode < 400)
 		f_error_opts_3(errcode, opts);
+	else
+		f_error_mlx(errcode);
 }

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 16:47:56 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/30 16:27:03 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ static int		f_pars_resolution(char *line, int i, t_sdf *opts)
 	}
 	if (opts->x_win_size <= 0 || opts->y_win_size <= 0)
 		errcode = 310;
-	else if (!errcode && (opts->x_win_size < MIN_X_RENDER_SIZE || \
-			opts->x_win_size > MAX_X_RENDER_SIZE || \
-			opts->y_win_size < MIN_Y_RENDER_SIZE || \
-			opts->y_win_size > MAX_Y_RENDER_SIZE))
+	else if (!errcode && (opts->x_win_size < MIN_X_WIN_SIZE || \
+			opts->x_win_size > MAX_X_WIN_SIZE || \
+			opts->y_win_size < MIN_Y_WIN_SIZE || \
+			opts->y_win_size > MAX_Y_WIN_SIZE))
 		errcode = 311;
 	return (errcode);
 }

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/28 10:59:55 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/07/31 10:52:21 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,18 @@
 # include <stdlib.h>
 # include <string.h>
 
-# define MIN_X_RENDER_SIZE 128
-# define MIN_Y_RENDER_SIZE 128
-# define MAX_X_RENDER_SIZE 7680
-# define MAX_Y_RENDER_SIZE 4320
+# define MIN_X_WIN_SIZE 160
+# define MIN_Y_WIN_SIZE 120
+# define MAX_X_WIN_SIZE 7680
+# define MAX_Y_WIN_SIZE 4320
+
+# define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
 
 typedef	struct	s_sdf
 {
@@ -49,8 +57,18 @@ typedef	struct	s_sdf
 	char		*map_line;
 }				t_sdf;
 
+typedef struct	s_mlx
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_sdf		*opts;
+	int			x_win_size;
+	int			y_win_size;
+}				t_mlx;
+
 int				f_check_args(int argc, char **argv, t_sdf *opts);
 int				f_cub3d_atoi(char *line, int *i);
+int				f_exit(int errcode, t_sdf *opts);
 int				f_map_array_preparing(t_sdf *opts);
 int				f_pars_ceiling_color(char *line, int i, t_sdf *opts);
 int				f_pars_desc_file(char *map_file, t_sdf *opts);
@@ -60,6 +78,7 @@ int				f_pars_sprite_texture(char *line, int i, t_sdf *opts);
 int				f_pars_wall_textures(char *line, int i, t_sdf *opts);
 int				f_window(t_sdf *opts);
 void			f_print_err(int errcode, t_sdf *opts);
+void			f_error_mlx(int errcode);
 void			f_skip_spaces(char *line, int *i);
 
 #endif

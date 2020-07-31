@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/28 13:30:19 by awerebea         ###   ########.fr        #
+#    Updated: 2020/07/30 18:36:15 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ FLS_1      = $(addprefix $(FLSDIR_1), \
 				utils )
 FLSDIR_2   = error_handling/
 FLS_2      = $(addprefix $(FLSDIR_2), \
-				error_handling)
+				error_args_opts \
+				error_mlx)
 FLSDIR_3   = parsing_scene_description_file/
 FLS_3      = $(addprefix $(FLSDIR_3), \
 				map_array_preparing \
