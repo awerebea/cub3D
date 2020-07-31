@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/31 20:42:33 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/01 00:51:58 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,17 @@ typedef struct	s_img
 	int			endian;
 }				t_img;
 
+typedef struct	s_minimap
+{
+	int			x;
+	int			y;
+	int			sq_x;
+	int			sq_y;
+	int			map_width;
+	int			map_height;
+	int			square_side;
+}				t_minimap;
+
 typedef struct	s_mlx
 {
 	void		*mlx_ptr;
@@ -77,6 +88,7 @@ typedef struct	s_mlx
 	int			y_win_size;
 	t_sdf		*opts;
 	t_img		img;
+	t_minimap	map;
 }				t_mlx;
 
 int				f_check_args(int argc, char **argv, t_sdf *opts);
