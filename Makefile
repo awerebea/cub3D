@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/31 13:21:50 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/01 13:45:06 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ FLS_3      = $(addprefix $(FLSDIR_3), \
 				pars_options_2)
 FLSDIR_4   = engine/
 FLS_4      = $(addprefix $(FLSDIR_4), \
+				draw_minimap_n_background \
 				window)
 SRC        = $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4)
 
