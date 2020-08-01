@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/01 12:13:05 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/01 12:41:45 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define MAX_Y_WIN_SIZE 4320
 
 # define MINIMAP_SIZE mlx->x_win_size / 3
-# define BLOCK_SIZE "mlx->map.square_side"
+/* # define BLOCK_SIZE mlx->map.square_side */
 
 # define KEY_ESC 65307
 # define KEY_W 119
