@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/01 01:21:58 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/01 11:01:02 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int			f_close_n_exit(t_mlx *mlx, int window)
 	if (window == 1)
 		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
 	free(mlx->mlx_ptr);
-	ft_putstr_fd("Bye!", 1);
 	exit(f_exit(0, mlx->opts));
 }
 
@@ -34,8 +33,6 @@ static int	f_window_init(t_mlx *mlx, t_sdf *opts)
 	if (mlx->y_win_size > opts->y_win_size)
 		mlx->y_win_size = opts->y_win_size;
 	mlx->opts = opts;
-	mlx->img.bits_per_pix = BITS_PER_PIXEL;
-	mlx->img.line_len = mlx->x_win_size;
 	mlx->img.img_ptr = mlx_new_image(mlx->mlx_ptr, mlx->x_win_size, \
 			mlx->y_win_size);
 	mlx->img.addr = mlx_get_data_addr(mlx->img.img_ptr, \
@@ -95,8 +92,6 @@ void		f_draw_minimap(t_mlx *mlx)
 
 	minimap.img_ptr = mlx_new_image(mlx->mlx_ptr, mlx->x_win_size / 2, \
 			mlx->y_win_size);
-	minimap.bits_per_pix = 32;
-	minimap.line_len = mlx->x_win_size / 2;
 	minimap.addr = mlx_get_data_addr(minimap.img_ptr, \
 			&minimap.bits_per_pix, &minimap.line_len, &minimap.endian);
 	f_minimap_init(mlx);
@@ -111,24 +106,21 @@ void		f_draw_minimap(t_mlx *mlx)
 				mlx->map.sq_x = 0;
 				while (mlx->map.sq_x < mlx->map.square_side)
 				{
-					if (mlx->map.sq_x == 0 || mlx->map.sq_y == 0 || \
-						mlx->map.sq_x == mlx->map.square_side - 1 || \
+					if (mlx->map.sq_x == mlx->map.square_side - 1|| \
 						mlx->map.sq_y == mlx->map.square_side - 1 || \
-						(mlx->map.x == 0 && (mlx->map.sq_x == 1 || \
-						mlx->map.sq_x == mlx->map.square_side - 2)) || \
-						(mlx->map.y == 0 && (mlx->map.sq_y == 1 || \
-						mlx->map.sq_y == mlx->map.square_side - 2)))
+						(mlx->map.x == 0 && mlx->map.sq_x == 0) || \
+						(mlx->map.y == 0 && mlx->map.sq_y == 0))
 					{
-						my_mlx_pixel_put(&minimap, (mlx->map.x * mlx->map.\
-							square_side + mlx->map.sq_x), \
+						my_mlx_pixel_put(&minimap, (mlx->map.x * \
+							mlx->map.square_side + mlx->map.sq_x), \
 							(mlx->map.y * mlx->map.square_side + \
 							mlx->map.sq_y), 0xFFFFFFFF);
 					}
 					else if (mlx->opts->map_array[mlx->map.y][mlx->map.x] == \
 							'1')
 					{
-						my_mlx_pixel_put(&minimap, (mlx->map.x * mlx->map.\
-							square_side + mlx->map.sq_x), \
+						my_mlx_pixel_put(&minimap, (mlx->map.x * \
+							mlx->map.square_side + mlx->map.sq_x), \
 							(mlx->map.y * mlx->map.square_side + \
 							mlx->map.sq_y), 0xFF1C596E);
 					}
