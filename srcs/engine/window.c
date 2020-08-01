@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/01 11:01:02 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/01 12:18:06 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	f_window_init(t_mlx *mlx, t_sdf *opts)
 	mlx->opts = opts;
 	mlx->img.img_ptr = mlx_new_image(mlx->mlx_ptr, mlx->x_win_size, \
 			mlx->y_win_size);
-	mlx->img.addr = mlx_get_data_addr(mlx->img.img_ptr, \
+	mlx->img.addr = (int *)mlx_get_data_addr(mlx->img.img_ptr, \
 			&mlx->img.bits_per_pix, &mlx->img.line_len, &mlx->img.endian);
 	return (0);
 }
@@ -44,7 +44,7 @@ void		my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = img->addr + (y * img->line_len + x * (img->bits_per_pix / 8));
+	dst = (char *)img->addr + (y * img->line_len + x * (img->bits_per_pix / 8));
 	*(unsigned int*)dst = color;
 }
 
@@ -77,7 +77,7 @@ void		f_minimap_init(t_mlx *mlx)
 {
 	mlx->map.map_width = mlx->opts->max_mapline_len;
 	mlx->map.map_height = mlx->opts->map_row_index + 1;
-	mlx->map.square_side = ((mlx->map.square_side = (mlx->x_win_size / 2 / \
+	mlx->map.square_side = ((mlx->map.square_side = (MINIMAP_SIZE / \
 		mlx->map.map_width)) < (mlx->y_win_size / mlx->map.map_height)) ? \
 		mlx->map.square_side : (mlx->y_win_size / mlx->map.map_height);
 	mlx->map.x = 0;
@@ -90,9 +90,9 @@ void		f_draw_minimap(t_mlx *mlx)
 {
 	t_img	minimap;
 
-	minimap.img_ptr = mlx_new_image(mlx->mlx_ptr, mlx->x_win_size / 2, \
+	minimap.img_ptr = mlx_new_image(mlx->mlx_ptr, MINIMAP_SIZE, \
 			mlx->y_win_size);
-	minimap.addr = mlx_get_data_addr(minimap.img_ptr, \
+	minimap.addr = (int *)mlx_get_data_addr(minimap.img_ptr, \
 			&minimap.bits_per_pix, &minimap.line_len, &minimap.endian);
 	f_minimap_init(mlx);
 	while (mlx->map.y < mlx->map.map_height)
@@ -111,18 +111,16 @@ void		f_draw_minimap(t_mlx *mlx)
 						(mlx->map.x == 0 && mlx->map.sq_x == 0) || \
 						(mlx->map.y == 0 && mlx->map.sq_y == 0))
 					{
-						my_mlx_pixel_put(&minimap, (mlx->map.x * \
-							mlx->map.square_side + mlx->map.sq_x), \
-							(mlx->map.y * mlx->map.square_side + \
-							mlx->map.sq_y), 0xFFFFFFFF);
+						minimap.addr[(mlx->map.y * mlx->map.square_side + \
+						mlx->map.sq_y) * MINIMAP_SIZE + mlx->map.x * \
+						mlx->map.square_side + mlx->map.sq_x] = 0xFFFFFFFF;
 					}
 					else if (mlx->opts->map_array[mlx->map.y][mlx->map.x] == \
 							'1')
 					{
-						my_mlx_pixel_put(&minimap, (mlx->map.x * \
-							mlx->map.square_side + mlx->map.sq_x), \
-							(mlx->map.y * mlx->map.square_side + \
-							mlx->map.sq_y), 0xFF1C596E);
+						minimap.addr[(mlx->map.y * mlx->map.square_side + \
+						mlx->map.sq_y) * MINIMAP_SIZE + mlx->map.x * \
+						mlx->map.square_side + mlx->map.sq_x] = 0xFF1C596E;
 					}
 					mlx->map.sq_x++;
 				}
