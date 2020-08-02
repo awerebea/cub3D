@@ -1,0 +1,9 @@
+.vscode/
+objs/
+*.dylib
+*.[oa]
+*.swiftdoc
+*.swiftmodule
+*.swp
+*.pdf
+cub3D

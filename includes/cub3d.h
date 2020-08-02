@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/01 13:43:43 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/02 12:30:37 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@
 # define MAX_X_WIN_SIZE 7680
 # define MAX_Y_WIN_SIZE 4320
 
-# define MINIMAP_SIZE mlx->x_win_size / 4
+# define MINIMAP_SIZE mlx->x_win_size / 1
 /* # define BLOCK_SIZE mlx->map.square_side */
 
-# define KEY_ESC 65307
-# define KEY_W 119
-# define KEY_A 97
-# define KEY_S 115
-# define KEY_D 100
-# define KEY_LEFT 65361
-# define KEY_RIGHT 65363
+# define KEY_ESC 53
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
 
 # define BITS_PER_PIXEL 32
 # define FOV 66
@@ -66,7 +66,7 @@ typedef	struct	s_sdf
 typedef struct	s_img
 {
 	void		*img_ptr;
-	int			*addr;
+	char		*addr;
 	int			bits_per_pix;
 	int			line_len;
 	int			endian;

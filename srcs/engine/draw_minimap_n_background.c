@@ -6,12 +6,20 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/01 13:55:36 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/02 12:35:06 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
+
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->line_len + x * (img->bits_per_pix / 8));
+	*(unsigned int*)dst = color;
+}
 
 void		f_draw_background(t_mlx *mlx)
 {
@@ -24,12 +32,12 @@ void		f_draw_background(t_mlx *mlx)
 		y = 0;
 		while (y <= (mlx->y_win_size / 2))
 		{
-			mlx->img.addr[y * mlx->x_win_size + x] = mlx->opts->ceiling_color;
+			my_mlx_pixel_put(&mlx->img, x, y, mlx->opts->ceiling_color);
 			y++;
 		}
 		while (y <= mlx->y_win_size)
 		{
-			mlx->img.addr[y * mlx->x_win_size + x] = mlx->opts->floor_color;
+			my_mlx_pixel_put(&mlx->img, x, y, mlx->opts->floor_color);
 			y++;
 		}
 		x++;
@@ -53,26 +61,29 @@ static void	f_minimap_init(t_mlx *mlx)
 
 static void	f_fill_minimap(t_mlx *mlx)
 {
-	if (mlx->map.sq_x == mlx->map.square_side - 1 || \
-		mlx->map.sq_y == mlx->map.square_side - 1 || \
-		(mlx->map.x == 0 && mlx->map.sq_x == 0) || \
-		(mlx->map.y == 0 && mlx->map.sq_y == 0))
-	{
-		mlx->img.addr[(mlx->map.y * mlx->map.square_side + \
-		mlx->map.sq_y) * mlx->x_win_size + mlx->map.x * \
-		mlx->map.square_side + mlx->map.sq_x] = 0xFFFFFFFF;
-	}
-	else if (mlx->opts->map_array[mlx->map.y][mlx->map.x] == \
-			'1')
-	{
-		mlx->img.addr[(mlx->map.y * mlx->map.square_side + \
-		mlx->map.sq_y) * mlx->x_win_size + mlx->map.x * \
-		mlx->map.square_side + mlx->map.sq_x] = 0xFF1C596E;
-	}
-	else
-		mlx->img.addr[(mlx->map.y * mlx->map.square_side + \
-		mlx->map.sq_y) * mlx->x_win_size + mlx->map.x * \
-		mlx->map.square_side + mlx->map.sq_x] = 0xFF000000;
+	/* if (mlx->map.sq_x == mlx->map.square_side - 1 || \                          */
+	/*     mlx->map.sq_y == mlx->map.square_side - 1 || \                          */
+	/*     (mlx->map.x == 0 && mlx->map.sq_x == 0) || \                            */
+	/*     (mlx->map.y == 0 && mlx->map.sq_y == 0))                                */
+	/* {                                                                           */
+	/*     my_mlx_pixel_put(&mlx->img, mlx->map.x * mlx->map.square_side + \       */
+	/*         mlx->map.sq_x, mlx->map.y * mlx->map.square_side + mlx->map.sq_y, \ */
+	/*         0xFFFFFFFF);                                                        */
+	/* }                                                                           */
+	/* else if (mlx->opts->map_array[mlx->map.y][mlx->map.x] == \                  */
+	/*         '1')                                                                */
+	/* {                                                                           */
+	/*     my_mlx_pixel_put(&mlx->img, mlx->map.x * mlx->map.square_side + \       */
+	/*         mlx->map.sq_x, mlx->map.y * mlx->map.square_side + mlx->map.sq_y, \ */
+	/*         0xFF1C596E);                                                        */
+	/* }                                                                           */
+	/* else                                                                        */
+	/*     my_mlx_pixel_put(&mlx->img, mlx->map.x * mlx->map.square_side + \       */
+	/*         mlx->map.sq_x, mlx->map.y * mlx->map.square_side + mlx->map.sq_y, \ */
+	/*         0xff000000);                                                        */
+		my_mlx_pixel_put(&mlx->img, mlx->map.x * mlx->map.square_side + \
+			mlx->map.sq_x, mlx->map.y * mlx->map.square_side + mlx->map.sq_y, \
+			0xffffffff);
 }
 
 void		f_draw_minimap(t_mlx *mlx)
