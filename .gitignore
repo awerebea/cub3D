@@ -6,4 +6,5 @@ objs/
 *.swiftmodule
 *.swp
 *.pdf
+*.DS_Store
 cub3D

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/02 13:09:33 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/02 15:20:19 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@
 # define MAX_X_WIN_SIZE 7680
 # define MAX_Y_WIN_SIZE 4320
 
-# define MINIMAP_SIZE mlx->x_win_size / 3
-/* # define BLOCK_SIZE mlx->map.square_side */
+# define MINIMAP_SIZE_DIVISOR 4
 
 # define KEY_ESC 53
 # define KEY_W 13
@@ -81,6 +80,7 @@ typedef struct	s_minimap
 	int			map_width;
 	int			map_height;
 	int			square_side;
+	int			map_size;
 }				t_minimap;
 
 typedef struct	s_mlx
@@ -90,8 +90,6 @@ typedef struct	s_mlx
 	int			x_win_size;
 	int			y_win_size;
 	t_sdf		*opts;
-	t_img		*img;
-	t_minimap	*map;
 }				t_mlx;
 
 int				f_check_args(int argc, char **argv, t_sdf *opts);
@@ -108,7 +106,7 @@ int				f_window(t_sdf *opts);
 void			f_print_err(int errcode, t_sdf *opts);
 void			f_error_mlx(int errcode);
 void			f_skip_spaces(char *line, int *i);
-void			f_draw_background(t_mlx *mlx);
-void			f_draw_minimap(t_mlx *mlx);
+void			f_draw_background(t_mlx *mlx, t_img *img);
+void			f_draw_minimap(t_mlx *mlx, t_img *img);
 
 #endif

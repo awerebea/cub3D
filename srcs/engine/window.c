@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/02 13:16:36 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/02 15:22:20 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int			f_close_n_exit(t_mlx *mlx, int window)
 
 static int	f_window_init(t_mlx *mlx, t_sdf *opts)
 {
-	t_img	img;
-
 	mlx->win_ptr = NULL;
 	if (!(mlx->mlx_ptr = mlx_init()))
 		return (400);
@@ -35,11 +33,20 @@ static int	f_window_init(t_mlx *mlx, t_sdf *opts)
 	if (mlx->y_win_size > opts->y_win_size)
 		mlx->y_win_size = opts->y_win_size;
 	mlx->opts = opts;
-	img.img_ptr = mlx_new_image(mlx->mlx_ptr, mlx->x_win_size, \
-			mlx->y_win_size);
-	img.addr = mlx_get_data_addr(img.img_ptr, \
-			&img.bits_per_pix, &img.line_len, &img.endian);
-	mlx->img = &img;
+	if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, mlx->x_win_size, \
+		mlx->y_win_size, "cub3D")))
+		return (401);
+	return (0);
+}
+
+static int	f_image_init(t_mlx *mlx, t_img *img)
+{
+	if (!(img->img_ptr = mlx_new_image(mlx->mlx_ptr, mlx->x_win_size, \
+			mlx->y_win_size)))
+		return (402);
+	if (!(img->addr = mlx_get_data_addr(img->img_ptr, \
+			&img->bits_per_pix, &img->line_len, &img->endian)))
+		return (403);
 	return (0);
 }
 
@@ -56,15 +63,15 @@ int			f_window(t_sdf *opts)
 {
 	int		errcode;
 	t_mlx	mlx;
+	t_img	img;
 
 	if ((errcode = f_window_init(&mlx, opts)))
 		return (errcode);
-	if (!(mlx.win_ptr = mlx_new_window(mlx.mlx_ptr, mlx.x_win_size, \
-		mlx.y_win_size, "cub3D")))
-		return (401);
-	f_draw_background(&mlx);
-	/* f_draw_minimap(&mlx); */
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img->img_ptr, 0, 0);
+	if ((errcode = f_image_init(&mlx, &img)))
+		return (errcode);
+	f_draw_background(&mlx, &img);
+	f_draw_minimap(&mlx, &img);
+	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, img.img_ptr, 0, 0);
 	mlx_key_hook(mlx.win_ptr, deal_key, &mlx);
 	mlx_hook(mlx.win_ptr, 17, 0, f_close_n_exit, &mlx);
 	mlx_loop(mlx.mlx_ptr);
