@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/02 20:11:46 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/02 23:03:33 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static void	f_minimap_init(t_mlx *mlx, t_minimap *map)
 			(mlx->y_win_size / map->map_height))
 		map->square_side = map->map_size / map->map_width;
 	else
-		map->square_side = mlx->y_win_size / map->map_height;
+		map->square_side = (mlx->y_win_size - mlx->x_win_size / 50) / \
+						map->map_height;
 	map->x = 0;
 	map->y = 0;
 	map->sq_x = 0;
@@ -65,13 +66,13 @@ static void	f_fill_minimap(t_mlx *mlx, t_img *img, t_minimap *map)
 	int			x;
 	int			y;
 
-	x = map->x * map->square_side + map->sq_x;
-	y = map->y * map->square_side + map->sq_y;
+	x = map->x * map->square_side + map->sq_x + mlx->x_win_size / 100;
+	y = map->y * map->square_side + map->sq_y + mlx->x_win_size / 100;
 	if (map->sq_x == map->square_side - 1 || \
 			map->sq_y == map->square_side - 1 || \
 			(map->x == 0 && map->sq_x == 0) || \
 			(map->y == 0 && map->sq_y == 0))
-		my_mlx_pixel_put(img, x, y, 0x00FFFFFF);
+		my_mlx_pixel_put(img, x, y, 0x006B6B6B);
 	else if (mlx->opts->map_array[map->y][map->x] == '1')
 		my_mlx_pixel_put(img, x, y, 0x001C596E);
 	else

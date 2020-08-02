@@ -7,5 +7,6 @@ objs/
 *.swp
 *.pdf
 *.DS_Store
+.fuse_hidden*
 Makefile.gen
 cub3D
