@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/02 12:30:37 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/02 13:09:33 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define MAX_X_WIN_SIZE 7680
 # define MAX_Y_WIN_SIZE 4320
 
-# define MINIMAP_SIZE mlx->x_win_size / 1
+# define MINIMAP_SIZE mlx->x_win_size / 3
 /* # define BLOCK_SIZE mlx->map.square_side */
 
 # define KEY_ESC 53
@@ -90,8 +90,8 @@ typedef struct	s_mlx
 	int			x_win_size;
 	int			y_win_size;
 	t_sdf		*opts;
-	t_img		img;
-	t_minimap	map;
+	t_img		*img;
+	t_minimap	*map;
 }				t_mlx;
 
 int				f_check_args(int argc, char **argv, t_sdf *opts);
