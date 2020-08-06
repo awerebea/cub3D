@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/06 15:17:34 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/06 17:17:07 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define MAX_X_WIN_SIZE 7680
 # define MAX_Y_WIN_SIZE 4320
 
-# define MINIMAP_SIZE_DIVISOR 2
+# define MINIMAP_SIZE_DIVISOR 3
 
 # define KEY_ESC 53
 # define KEY_W 13
@@ -33,7 +33,7 @@
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 
-# define FOV 66
+# define FOV_ANGLE 66
 
 typedef	struct	s_sdf
 {
@@ -87,7 +87,8 @@ typedef struct	s_player
 {
 	int			pos_x;
 	int			pos_y;
-	double		view_angle;
+	float		view_angle;
+	float		fov;
 }				t_player;
 
 typedef struct	s_mlx
@@ -97,7 +98,7 @@ typedef struct	s_mlx
 	int			x_win_size;
 	int			y_win_size;
 	t_sdf		*opts;
-	t_img		*img;
+	t_img		img;
 	t_minimap	map;
 	t_player	player;
 }				t_mlx;
@@ -117,8 +118,9 @@ void			f_print_err(int errcode, t_sdf *opts);
 void			f_error_mlx(int errcode);
 void			f_skip_spaces(char *line, int *i);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void			f_draw_background(t_mlx *mlx, t_img *img);
-void			f_draw_minimap(t_mlx *mlx, t_img *img);
 void			f_game(t_mlx *mlx);
+void			f_draw_background(t_mlx *mlx);
+void			f_draw_minimap(t_mlx *mlx);
+void			f_draw_player_minimap(t_mlx *mlx);
 
 #endif

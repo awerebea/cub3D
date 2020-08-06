@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/06 15:17:20 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/06 17:01:59 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			f_close_n_exit(t_mlx *mlx, int window)
 	exit(f_exit(0, mlx->opts));
 }
 
-static int	f_window_init(t_mlx *mlx, t_sdf *opts)
+static int	f_window_n_image_init(t_mlx *mlx, t_sdf *opts)
 {
 	mlx->win_ptr = NULL;
 	if (!(mlx->mlx_ptr = mlx_init()))
@@ -36,18 +36,12 @@ static int	f_window_init(t_mlx *mlx, t_sdf *opts)
 	if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, mlx->x_win_size, \
 		mlx->y_win_size, "cub3D")))
 		return (401);
-	return (0);
-}
-
-static int	f_image_init(t_mlx *mlx, t_img *img)
-{
-	if (!(img->img_ptr = mlx_new_image(mlx->mlx_ptr, mlx->x_win_size, \
+	if (!(mlx->img.img_ptr = mlx_new_image(mlx->mlx_ptr, mlx->x_win_size, \
 			mlx->y_win_size)))
 		return (402);
-	if (!(img->addr = mlx_get_data_addr(img->img_ptr, \
-			&img->bits_per_pix, &img->line_len, &img->endian)))
+	if (!(mlx->img.addr = mlx_get_data_addr(mlx->img.img_ptr, \
+			&mlx->img.bits_per_pix, &mlx->img.line_len, &mlx->img.endian)))
 		return (403);
-	mlx->img = img;
 	return (0);
 }
 
@@ -64,16 +58,12 @@ int			f_window(t_sdf *opts)
 {
 	int		errcode;
 	t_mlx	mlx;
-	t_img	img;
 
-	if ((errcode = f_window_init(&mlx, opts)))
+	if ((errcode = f_window_n_image_init(&mlx, opts)))
 		return (errcode);
-	if ((errcode = f_image_init(&mlx, &img)))
-		return (errcode);
-	f_draw_background(&mlx, &img);
-	f_draw_minimap(&mlx, &img);
+	f_draw_background(&mlx);
 	f_game(&mlx);
-	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, img.img_ptr, 0, 0);
+	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img.img_ptr, 0, 0);
 	mlx_key_hook(mlx.win_ptr, deal_key, &mlx);
 	mlx_hook(mlx.win_ptr, 17, 0, f_close_n_exit, &mlx);
 	mlx_loop(mlx.mlx_ptr);

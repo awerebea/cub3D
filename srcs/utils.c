@@ -6,11 +6,13 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 16:36:56 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/20 16:38:00 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/06 15:57:23 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
 #include "libft.h"
+#include "mlx.h"
 
 void			f_skip_spaces(char *line, int *i)
 {
@@ -38,4 +40,12 @@ int				f_cub3d_atoi(char *line, int *i)
 		(*i)++;
 	}
 	return ((int)result * (int)sign);
+}
+
+void		my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char		*dst;
+
+	dst = img->addr + (y * img->line_len + x * (img->bits_per_pix / 8));
+	*(unsigned int*)dst = color;
 }
