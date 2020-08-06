@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/02 23:07:30 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/06 09:52:17 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 
-# define BITS_PER_PIXEL 32
 # define FOV 66
 
 typedef	struct	s_sdf
