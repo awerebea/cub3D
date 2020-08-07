@@ -6,25 +6,23 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/06 17:16:19 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/07 10:36:10 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
 
-void	f_minimap_init(t_mlx *mlx)
+static void	f_minimap_init(t_mlx *mlx)
 {
+	mlx->map.square_side = SQUARE_SIDE;
 	mlx->map.edge_shift = mlx->x_win_size / 100;
-
 	mlx->map.map_width = mlx->opts->max_mapline_len;
 	mlx->map.map_height = mlx->opts->map_row_index + 1;
-	mlx->map.map_size = mlx->x_win_size / MINIMAP_SIZE_DIVISOR;
-	if ((mlx->map.map_size / mlx->map.map_width) < \
-			(mlx->y_win_size / mlx->map.map_height))
-		mlx->map.square_side = mlx->map.map_size / mlx->map.map_width;
-	else
-		mlx->map.square_side = (mlx->y_win_size - mlx->x_win_size / 50) / \
+	if ((mlx->map.scale = mlx->x_win_size * MINIMAP_MAX_WDTH_FACTOR / \
+						mlx->map.map_width) > mlx->y_win_size * \
+			MINIMAP_MAX_HGHT_FACTOR / mlx->map.map_height)
+		mlx->map.scale = (mlx->y_win_size * MINIMAP_MAX_HGHT_FACTOR) / \
 						mlx->map.map_height;
 	mlx->map.x = 0;
 	mlx->map.y = 0;
@@ -32,13 +30,13 @@ void	f_minimap_init(t_mlx *mlx)
 	mlx->map.sq_y = 0;
 }
 
-void		f_player_init(t_mlx *mlx)
+static void	f_player_init(t_mlx *mlx)
 {
 	mlx->player.fov = FOV_ANGLE * M_PI / 180;
-	mlx->player.pos_x = mlx->map.edge_shift + mlx->opts->spawn_point_x * \
-						mlx->map.square_side + mlx->map.square_side / 2;
-	mlx->player.pos_y = mlx->map.edge_shift + mlx->opts->spawn_point_y * \
-						mlx->map.square_side + mlx->map.square_side / 2;
+	mlx->player.pos_x = mlx->opts->spawn_point_x * mlx->map.square_side + \
+						mlx->map.square_side / 2;
+	mlx->player.pos_y = mlx->opts->spawn_point_y * mlx->map.square_side + \
+						mlx->map.square_side / 2;
 	if (mlx->opts->spawn_orientation == 'N')
 		mlx->player.view_angle = M_PI * 3 / 2;
 	else if (mlx->opts->spawn_orientation == 'S')

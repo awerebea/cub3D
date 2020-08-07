@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 16:36:56 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/06 15:57:23 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/07 10:37:12 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #include "libft.h"
 #include "mlx.h"
 
-void			f_skip_spaces(char *line, int *i)
+void		f_skip_spaces(char *line, int *i)
 {
 	while (ft_isspace(line[*i]))
 		(*i)++;
 }
 
-int				f_cub3d_atoi(char *line, int *i)
+int			f_cub3d_atoi(char *line, int *i)
 {
 	long long int	result;
 	int				sign;
