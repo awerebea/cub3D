@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/07 10:35:09 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/07 12:02:13 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@ int				f_view_sector(t_mlx *mlx, int x, int y)
 	if ((mlx->player.view_angle - mlx->player.fov / 2 < 0) && (((angle >= \
 		mlx->player.view_angle - mlx->player.fov / 2 + M_PI * 2) || \
 		(angle <= mlx->player.view_angle + mlx->player.fov / 2)) && \
-		(sqrt(delta_x * delta_x + delta_y * delta_y) <= mlx->map.scale)))
+		(sqrt(delta_x * delta_x + delta_y * delta_y) <= mlx->map.scale * VRAD)))
 		return (1);
 	if ((mlx->player.view_angle + mlx->player.fov / 2 >= M_PI * 2) && \
 		((angle >= mlx->player.view_angle - mlx->player.fov / 2) && (angle \
 		<= mlx->player.view_angle + mlx->player.fov / 2 - M_PI * 2) && \
-		(sqrt(delta_x * delta_x + delta_y * delta_y) <= mlx->map.scale)))
+		(sqrt(delta_x * delta_x + delta_y * delta_y) <= mlx->map.scale * VRAD)))
 		return (1);
 	if ((angle >= mlx->player.view_angle - mlx->player.fov / 2) && (angle <= \
-			mlx->player.view_angle + mlx->player.fov / 2) && \
-			(sqrt(delta_x * delta_x + delta_y * delta_y) <= mlx->map.scale))
+		mlx->player.view_angle + mlx->player.fov / 2) && \
+		(sqrt(delta_x * delta_x + delta_y * delta_y) <= mlx->map.scale * VRAD))
 		return (1);
 	return (0);
 }
