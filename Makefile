@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/06 17:11:37 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/08 10:27:35 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ FLS_4      = $(addprefix $(FLSDIR_4), \
 				draw_background \
 				draw_minimap \
 				game \
+				raycasting \
 				window)
 SRC        = $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4)
 

@@ -1,4 +1,4 @@
-R 1400 900
+R 160 120
 
 NO ./maps/test.cub
 SO ./maps/test.cub

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/07 10:36:10 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/08 10:30:50 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void		f_game(t_mlx *mlx)
 {
 	f_minimap_init(mlx);
 	f_player_init(mlx);
+	f_raycasting(mlx);
 	f_draw_minimap(mlx);
 	f_draw_player_minimap(mlx);
 	/* f_draw_map_view_sector(mlx); */

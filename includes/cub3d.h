@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/07 12:01:58 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/08 12:15:14 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 
-# define FOV_ANGLE 66
+# define FOV_ANGLE 66.849622
 
 typedef	struct	s_sdf
 {
@@ -106,6 +106,33 @@ typedef struct	s_mlx
 	t_player	player;
 }				t_mlx;
 
+typedef struct	s_game
+{
+	float		player_x;
+	float		player_y;
+	float		dir_x;
+	float		dir_y;
+	float		plane_x;
+	float		plane_y;
+	float		time_curr;
+	float		time_prev;
+	int			map_x;
+	int			map_y;
+	float		side_dist_x;
+	float		side_dist_y;
+	float		delta_dist_x;
+	float		delta_dist_y;
+	int			step_x;
+	int			step_y;
+	float		camera_x;
+	float		ray_dir_x;
+	float		ray_dir_y;
+	int			hit;
+	float		wall_dist;
+	int			wall_side;
+	t_mlx		*mlx;
+}				t_game;
+
 int				f_check_args(int argc, char **argv, t_sdf *opts);
 int				f_cub3d_atoi(char *line, int *i);
 int				f_exit(int errcode, t_sdf *opts);
@@ -125,5 +152,6 @@ void			f_game(t_mlx *mlx);
 void			f_draw_background(t_mlx *mlx);
 void			f_draw_minimap(t_mlx *mlx);
 void			f_draw_player_minimap(t_mlx *mlx);
+void			f_raycasting(t_mlx *mlx);
 
 #endif
