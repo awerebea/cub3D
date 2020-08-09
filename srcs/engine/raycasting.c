@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 09:36:10 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/09 19:24:10 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/09 21:44:16 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-void		f_fps_n_move_n_rotate_speed_calculation(t_mlx *mlx)
+void		f_fps_n_move_n_rot_speed_calculation(t_mlx *mlx)
 {
 	mlx->game.time_prev = mlx->game.time_curr;
 	mlx->game.time_curr = clock();
 	mlx->game.frame_time = (mlx->game.time_curr - mlx->game.time_prev) / 1000.0;
 	mlx->game.move_speed = mlx->game.frame_time * 0.02;
-	mlx->game.rotate_speed = mlx->game.frame_time * 0.02;
+	mlx->game.rot_speed = mlx->game.frame_time * 0.01;
 	
 	ft_printf("move speed: %f\nrotate speed:%f\n", mlx->game.move_speed, \
-			mlx->game.rotate_speed);
+			mlx->game.rot_speed);
 }
 
 void		f_draw_vert_line(t_mlx *mlx, int x)
@@ -76,7 +76,8 @@ void		f_check_wall_hit_n_wall_dist_calculation(t_mlx *mlx)
 			mlx->game.map_y += mlx->game.step_y;
 			mlx->game.wall_side = (mlx->game.ray_dir_y < 0) ? 0 : 1;
 		}
-		if (mlx->opts->map_array[mlx->game.map_y][mlx->game.map_x] != '0')
+		if (!ft_strchr("02NSWE", \
+					mlx->opts->map_array[mlx->game.map_y][mlx->game.map_x]))
 			mlx->game.hit = 1;
 	}
 	if (mlx->game.wall_side > 1)
@@ -150,5 +151,5 @@ void		f_raycasting(t_mlx *mlx)
 		f_draw_vert_line(mlx, x);
 		x++;
 	}
-	f_fps_n_move_n_rotate_speed_calculation(mlx);
+	f_fps_n_move_n_rot_speed_calculation(mlx);
 }

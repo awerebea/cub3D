@@ -6,12 +6,13 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/09 20:14:41 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/09 21:39:38 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
+#include "libft.h"
 #include "ft_printf.h"
 #include <math.h>
 
@@ -109,17 +110,47 @@ int			f_controls_handling(int key, t_mlx *mlx)
 		/* ft_printf("%d\n", mlx->x_win_size); */
 	if (key == KEY_W)
 	{
-		if (mlx->opts->map_array[(int)mlx->game.player_y][(int)(mlx->game.player_x + mlx->game.dir_x * mlx->game.move_speed)] == '0')
+		if (ft_strchr("02NSWE", mlx->opts->map_array[(int)mlx->game.player_y]\
+		[(int)(mlx->game.player_x + mlx->game.dir_x * mlx->game.move_speed)]))
 			mlx->game.player_x += mlx->game.dir_x * mlx->game.move_speed;
-		if (mlx->opts->map_array[(int)(mlx->game.player_y + mlx->game.dir_y * mlx->game.move_speed)][(int)mlx->game.player_x] == '0')
+		if (ft_strchr("02NSWE", mlx->opts->map_array[(int)(mlx->game.player_y \
+		+ mlx->game.dir_y * mlx->game.move_speed)][(int)mlx->game.player_x]))
 			mlx->game.player_y += mlx->game.dir_y * mlx->game.move_speed;
 	}
 	if (key == KEY_S)
 	{
-		if (mlx->opts->map_array[(int)mlx->game.player_y][(int)(mlx->game.player_x - mlx->game.dir_x * mlx->game.move_speed)] == '0')
+		if (ft_strchr("02NSWE", mlx->opts->map_array[(int)mlx->game.player_y]\
+		[(int)(mlx->game.player_x - mlx->game.dir_x * mlx->game.move_speed)]))
 			mlx->game.player_x -= mlx->game.dir_x * mlx->game.move_speed;
-		if (mlx->opts->map_array[(int)(mlx->game.player_y - mlx->game.dir_y * mlx->game.move_speed)][(int)mlx->game.player_x] == '0')
+		if (ft_strchr("02NSWE", mlx->opts->map_array[(int)(mlx->game.player_y \
+		- mlx->game.dir_y * mlx->game.move_speed)][(int)mlx->game.player_x]))
 			mlx->game.player_y -= mlx->game.dir_y * mlx->game.move_speed;
+	}
+	if (key == KEY_RIGHT)
+	{
+		mlx->game.old_dir_x = mlx->game.dir_x;
+		mlx->game.dir_x = mlx->game.dir_x * cos(mlx->game.rot_speed) - \
+							mlx->game.dir_y * sin(mlx->game.rot_speed);
+		mlx->game.dir_y = mlx->game.old_dir_x * sin(mlx->game.rot_speed) + \
+							mlx->game.dir_y * cos(mlx->game.rot_speed);
+		mlx->game.old_plane_x = mlx->game.plane_x;
+		mlx->game.plane_x = mlx->game.plane_x * cos(mlx->game.rot_speed) - \
+							mlx->game.plane_y * sin(mlx->game.rot_speed);
+		mlx->game.plane_y = mlx->game.old_plane_x * sin(mlx->game.rot_speed) \
+							+ mlx->game.plane_y * cos(mlx->game.rot_speed);
+	}
+	if (key == KEY_LEFT)
+	{
+		mlx->game.old_dir_x = mlx->game.dir_x;
+		mlx->game.dir_x = mlx->game.dir_x * cos(-mlx->game.rot_speed) - \
+							mlx->game.dir_y * sin(-mlx->game.rot_speed);
+		mlx->game.dir_y = mlx->game.old_dir_x * sin(-mlx->game.rot_speed) + \
+							mlx->game.dir_y * cos(-mlx->game.rot_speed);
+		mlx->game.old_plane_x = mlx->game.plane_x;
+		mlx->game.plane_x = mlx->game.plane_x * cos(-mlx->game.rot_speed) - \
+							mlx->game.plane_y * sin(-mlx->game.rot_speed);
+		mlx->game.plane_y = mlx->game.old_plane_x * sin(-mlx->game.rot_speed) \
+							+ mlx->game.plane_y * cos(-mlx->game.rot_speed);
 	}
 	else
 		ft_printf("%d\n", key);
