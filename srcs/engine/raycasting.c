@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 09:36:10 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/09 16:17:46 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/09 17:37:43 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,83 +114,31 @@ static void	f_step_n_side_dist_calculation(t_game *game)
 	}
 }
 
-static void	f_dir_n_plane_calculation(t_game *game)
-{
-	game->dir_x = 0;
-	game->dir_y = 0;
-	game->plane_x = 0;
-	game->plane_y = 0;
-	if (game->mlx->opts->spawn_orientation == 'N')
-	{
-		game->dir_y = -1;
-		game->plane_x = tan(M_PI * FOV_ANGLE / 360);
-	}
-	else if (game->mlx->opts->spawn_orientation == 'S')
-	{
-		game->dir_y = 1;
-		game->plane_x = -tan(M_PI * FOV_ANGLE / 360);
-	}
-	else if (game->mlx->opts->spawn_orientation == 'W')
-	{
-		game->dir_x = -1;
-		game->plane_y = -tan(M_PI * FOV_ANGLE / 360);
-	}
-	else if (game->mlx->opts->spawn_orientation == 'E')
-	{
-		game->dir_x = 1;
-		game->plane_y = tan(M_PI * FOV_ANGLE / 360);
-	}
-}
-
-void		f_game_init(t_mlx *mlx, t_game *game)
-{
-	game->player_x = (float)mlx->opts->spawn_point_x + 0.5;
-	game->player_y = (float)mlx->opts->spawn_point_y + 0.5;
-	game->mlx = mlx;
-	f_dir_n_plane_calculation(game);
-	game->time_curr = clock();
-	game->time_prev = 0;
-	/* game->hit = 0;         */
-	/* game->wall_dist = 0;   */
-	/* game->wall_side = 0;   */
-	/* game->step_x = 0;      */
-	/* game->step_y = 0;      */
-	/* game->camera_x = 0;    */
-	/* game->ray_dir_x = 0;   */
-	/* game->ray_dir_y = 0;   */
-	/* game->side_dist_x = 0; */
-	/* game->side_dist_y = 0; */
-	game->delta_dist_x = 0;
-	game->delta_dist_y = 0;
-}
-
-void		f_raycasting(t_mlx *mlx)
+void		f_raycasting(t_game *game)
 {
 	int			x;
-	t_game		game;
 
-	f_game_init(mlx, &game);
 	x = 0;
-	while (x < mlx->x_win_size)
+	while (x < game->mlx->x_win_size)
 	{
-		game.camera_x = 2 * x / (float)mlx->x_win_size - 1;
-		game.ray_dir_x = game.dir_x + game.plane_x * game.camera_x;
-		game.ray_dir_y = game.dir_y + game.plane_y * game.camera_x;
-		if (!game.ray_dir_y)
-			game.delta_dist_x = 0;
+		game->camera_x = 2 * x / (float)game->mlx->x_win_size - 1;
+		game->ray_dir_x = game->dir_x + game->plane_x * game->camera_x;
+		game->ray_dir_y = game->dir_y + game->plane_y * game->camera_x;
+		if (!game->ray_dir_y)
+			game->delta_dist_x = 0;
 		else
-			game.delta_dist_x = (!game.ray_dir_x) ? 1 : fabs(1 / game.ray_dir_x);
-		if (!game.ray_dir_x)
-			game.delta_dist_y = 0;
+			game->delta_dist_x = (!game->ray_dir_x) ? 1 : fabs(1 / game->ray_dir_x);
+		if (!game->ray_dir_x)
+			game->delta_dist_y = 0;
 		else
-			game.delta_dist_y = (!game.ray_dir_y) ? 1 : fabs(1 / game.ray_dir_y);
-		game.map_x = (int)game.player_x;
-		game.map_y = (int)game.player_y;
-		f_step_n_side_dist_calculation(&game);
-		f_check_wall_hit_n_wall_dist_calculation(&game);
-		f_vert_line_calculation(&game);
-		f_draw_vert_line(&game, x);
+			game->delta_dist_y = (!game->ray_dir_y) ? 1 : fabs(1 / game->ray_dir_y);
+		game->map_x = (int)game->player_x;
+		game->map_y = (int)game->player_y;
+		f_step_n_side_dist_calculation(game);
+		f_check_wall_hit_n_wall_dist_calculation(game);
+		f_vert_line_calculation(game);
+		f_draw_vert_line(game, x);
 		x++;
 	}
-	f_fps_n_move_n_rotate_speed_calculation(&game);
+	f_fps_n_move_n_rotate_speed_calculation(game);
 }

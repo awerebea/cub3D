@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/09 15:39:37 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/09 17:41:46 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ typedef struct	s_game
 int				f_check_args(int argc, char **argv, t_sdf *opts);
 int				f_cub3d_atoi(char *line, int *i);
 int				f_exit(int errcode, t_sdf *opts);
+int				f_close_n_exit(t_mlx *mlx, int window);
 int				f_map_array_preparing(t_sdf *opts);
 int				f_pars_ceiling_color(char *line, int i, t_sdf *opts);
 int				f_pars_desc_file(char *map_file, t_sdf *opts);
@@ -159,6 +160,6 @@ void			f_game(t_mlx *mlx);
 void			f_draw_background(t_mlx *mlx);
 void			f_draw_minimap(t_mlx *mlx);
 void			f_draw_player_minimap(t_mlx *mlx);
-void			f_raycasting(t_mlx *mlx);
+void			f_raycasting(t_game *game);
 
 #endif

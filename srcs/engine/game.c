@@ -6,11 +6,13 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/09 15:09:31 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/09 17:46:08 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "mlx.h"
+#include "ft_printf.h"
 #include <math.h>
 
 static void	f_minimap_init(t_mlx *mlx)
@@ -47,6 +49,69 @@ static void	f_player_init(t_mlx *mlx)
 		mlx->player.view_angle = 0.0;
 }
 
+void	f_dir_n_plane_calculation(t_game *game)
+{
+	game->dir_x = 0;
+	game->dir_y = 0;
+	game->plane_x = 0;
+	game->plane_y = 0;
+	if (game->mlx->opts->spawn_orientation == 'N')
+	{
+		game->dir_y = -1;
+		game->plane_x = tan(M_PI * FOV_ANGLE / 360);
+	}
+	else if (game->mlx->opts->spawn_orientation == 'S')
+	{
+		game->dir_y = 1;
+		game->plane_x = -tan(M_PI * FOV_ANGLE / 360);
+	}
+	else if (game->mlx->opts->spawn_orientation == 'W')
+	{
+		game->dir_x = -1;
+		game->plane_y = -tan(M_PI * FOV_ANGLE / 360);
+	}
+	else if (game->mlx->opts->spawn_orientation == 'E')
+	{
+		game->dir_x = 1;
+		game->plane_y = tan(M_PI * FOV_ANGLE / 360);
+	}
+}
+
+void		f_game_init(t_mlx *mlx, t_game *game)
+{
+	game->player_x = (float)mlx->opts->spawn_point_x + 0.5;
+	game->player_y = (float)mlx->opts->spawn_point_y + 0.5;
+	game->mlx = mlx;
+	f_dir_n_plane_calculation(game);
+	game->time_curr = clock();
+	game->time_prev = 0;
+	/* game->hit = 0;         */
+	/* game->wall_dist = 0;   */
+	/* game->wall_side = 0;   */
+	/* game->step_x = 0;      */
+	/* game->step_y = 0;      */
+	/* game->camera_x = 0;    */
+	/* game->ray_dir_x = 0;   */
+	/* game->ray_dir_y = 0;   */
+	/* game->side_dist_x = 0; */
+	/* game->side_dist_y = 0; */
+	game->delta_dist_x = 0;
+	game->delta_dist_y = 0;
+}
+
+int			f_controls_handling(int key, t_mlx *mlx)
+{
+	if (key == KEY_ESC)
+		f_close_n_exit(mlx, 1);
+	/* if (key == KEY_W)                                                                             */
+	/* {                                                                                             */
+	/*     if (worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) posX += dirX * moveSpeed; */
+	/* }                                                                                             */
+	else
+		ft_printf("%d\n", key);
+	return (0);
+}
+
 /* void		f_draw_map_view_sector(t_mlx *mlx)                             */
 /* {                                                                    */
 /*     int		i;                                                          */
@@ -65,10 +130,16 @@ static void	f_player_init(t_mlx *mlx)
 
 void		f_game(t_mlx *mlx)
 {
+	t_game		game;
+
+	f_game_init(mlx, &game);
 	f_minimap_init(mlx);
 	f_player_init(mlx);
-	f_raycasting(mlx);
+	f_raycasting(&game);
 	f_draw_minimap(mlx);
 	f_draw_player_minimap(mlx);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
+	mlx_key_hook(mlx->win_ptr, f_controls_handling, mlx);
+	mlx_hook(mlx->win_ptr, 17, 0, f_close_n_exit, mlx);
 	/* f_draw_map_view_sector(mlx); */
 }
