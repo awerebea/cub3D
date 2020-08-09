@@ -6,12 +6,27 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 09:36:10 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/09 12:58:33 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/09 16:17:46 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
+#include "libft.h"
+#include "ft_printf.h"
+
+void		f_fps_n_move_n_rotate_speed_calculation(t_game *game)
+{
+	game->time_prev = game->time_curr;
+	game->time_curr = clock();
+	game->frame_time = (game->time_curr - game->time_prev) / 1000.0;
+	/* ft_printf("%f\n", 1.0 / game->frame_time);               */
+	/* game->fps_text = ft_itoa((int)(1.0 / game->frame_time)); */
+	/* ft_printf("%s\n", game->fps_text);                       */
+	game->move_speed = game->frame_time * 0.5;
+	game->rotate_speed = game->frame_time * 0.2;
+	ft_printf("move speed: %f\nrotate speed:%f\n", game->move_speed, game->rotate_speed);
+}
 
 void		f_draw_vert_line(t_game *game, int x)
 {
@@ -37,10 +52,10 @@ void		f_draw_vert_line(t_game *game, int x)
 void		f_vert_line_calculation(t_game *game)
 {
 	game->line_height = (int)(game->mlx->y_win_size / game->wall_dist);
-	game->line_start = -game->line_height / 2 + game->mlx->y_win_size / 2;
+	game->line_start = game->mlx->y_win_size / 2 - game->line_height / 2;
 	if (game->line_start < 0)
 		game->line_start = 0;
-	game->line_end = game->line_height / 2 + game->mlx->y_win_size / 2;
+	game->line_end = game->mlx->y_win_size / 2 + game->line_height / 2;
 	if (game->line_end >= game->mlx->y_win_size)
 		game->line_end = game->mlx->y_win_size - 1;
 }
@@ -66,10 +81,10 @@ void		f_check_wall_hit_n_wall_dist_calculation(t_game *game)
 			game->hit = 1;
 	}
 	if (game->wall_side > 1)
-		game->wall_dist = (float)(game->map_x - game->player_x + (1 - game->step_x) \
+		game->wall_dist = (game->map_x - game->player_x + (1 - game->step_x) \
 				/ 2) / game->ray_dir_x;
 	else
-		game->wall_dist = (float)(game->map_y - game->player_y + (1 - game->step_y) \
+		game->wall_dist = (game->map_y - game->player_y + (1 - game->step_y) \
 				/ 2) / game->ray_dir_y;
 }
 
@@ -133,7 +148,7 @@ void		f_game_init(t_mlx *mlx, t_game *game)
 	game->player_y = (float)mlx->opts->spawn_point_y + 0.5;
 	game->mlx = mlx;
 	f_dir_n_plane_calculation(game);
-	game->time_curr = 0;
+	game->time_curr = clock();
 	game->time_prev = 0;
 	/* game->hit = 0;         */
 	/* game->wall_dist = 0;   */
@@ -177,4 +192,5 @@ void		f_raycasting(t_mlx *mlx)
 		f_draw_vert_line(&game, x);
 		x++;
 	}
+	f_fps_n_move_n_rotate_speed_calculation(&game);
 }

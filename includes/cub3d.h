@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/09 12:55:59 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/09 15:39:37 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@
 # define MINIMAP_MAX_WDTH_FACTOR 0.3
 # define MINIMAP_MAX_HGHT_FACTOR 0.5
 # define SQUARE_SIDE 64
-# define VRAD 5
+# define VRAD 1
 
-# define KEY_ESC 65307
-# define KEY_W 119
-# define KEY_A 97
-# define KEY_S 115
-# define KEY_D 100
-# define KEY_LEFT 65361
-# define KEY_RIGHT 65363
+# define KEY_ESC 53
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
 
 # define FOV_ANGLE 66
 
@@ -133,6 +133,10 @@ typedef struct	s_game
 	int			line_height;
 	int			line_start;
 	int			line_end;
+	float		frame_time;
+	char		*fps_text;
+	float		move_speed;
+	float		rotate_speed;
 	t_mlx		*mlx;
 }				t_game;
 

@@ -6,13 +6,14 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/09 11:32:41 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/09 16:18:13 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft.h"
 #include "mlx.h"
+#include "ft_printf.h"
 
 int			f_close_n_exit(t_mlx *mlx, int window)
 {
@@ -45,10 +46,14 @@ static int	f_window_n_image_init(t_mlx *mlx, t_sdf *opts)
 	return (0);
 }
 
-int			deal_key(int key, t_mlx *mlx)
+int			f_controls_handling(int key, t_mlx *mlx)
 {
 	if (key == KEY_ESC)
 		f_close_n_exit(mlx, 1);
+	/* if (key == KEY_W)                                                                             */
+	/* {                                                                                             */
+	/*     if (worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) posX += dirX * moveSpeed; */
+	/* }                                                                                             */
 	else
 		ft_putnbr_fd(key, 1);
 	return (0);
@@ -64,7 +69,9 @@ int			f_window(t_sdf *opts)
 	f_draw_background(&mlx);
 	f_game(&mlx);
 	mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img.img_ptr, 0, 0);
-	mlx_key_hook(mlx.win_ptr, deal_key, &mlx);
+	/* mlx_string_put(mlx.mlx_ptr, mlx.win_ptr, mlx.x_win_size - \           */
+	/*         mlx.map.edge_shift * 5, mlx.map.edge_shift, 0xFFFFFF, "FPS"); */
+	mlx_key_hook(mlx.win_ptr, f_controls_handling, &mlx);
 	mlx_hook(mlx.win_ptr, 17, 0, f_close_n_exit, &mlx);
 	mlx_loop(mlx.mlx_ptr);
 	return (0);
