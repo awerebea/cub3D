@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/09 17:41:46 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/09 18:25:42 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,18 +94,6 @@ typedef struct	s_player
 	float		fov;
 }				t_player;
 
-typedef struct	s_mlx
-{
-	void		*mlx_ptr;
-	void		*win_ptr;
-	int			x_win_size;
-	int			y_win_size;
-	t_sdf		*opts;
-	t_img		img;
-	t_minimap	map;
-	t_player	player;
-}				t_mlx;
-
 typedef struct	s_game
 {
 	float		player_x;
@@ -137,8 +125,20 @@ typedef struct	s_game
 	char		*fps_text;
 	float		move_speed;
 	float		rotate_speed;
-	t_mlx		*mlx;
 }				t_game;
+
+typedef struct	s_mlx
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	int			x_win_size;
+	int			y_win_size;
+	t_sdf		*opts;
+	t_img		img;
+	t_minimap	map;
+	t_player	player;
+	t_game		game;
+}				t_mlx;
 
 int				f_check_args(int argc, char **argv, t_sdf *opts);
 int				f_cub3d_atoi(char *line, int *i);
@@ -160,6 +160,6 @@ void			f_game(t_mlx *mlx);
 void			f_draw_background(t_mlx *mlx);
 void			f_draw_minimap(t_mlx *mlx);
 void			f_draw_player_minimap(t_mlx *mlx);
-void			f_raycasting(t_game *game);
+void			f_raycasting(t_mlx *mlx);
 
 #endif

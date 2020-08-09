@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 09:36:10 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/09 17:37:43 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/09 18:54:58 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,130 +15,140 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-void		f_fps_n_move_n_rotate_speed_calculation(t_game *game)
+void		f_fps_n_move_n_rotate_speed_calculation(t_mlx *mlx)
 {
-	game->time_prev = game->time_curr;
-	game->time_curr = clock();
-	game->frame_time = (game->time_curr - game->time_prev) / 1000.0;
-	/* ft_printf("%f\n", 1.0 / game->frame_time);               */
-	/* game->fps_text = ft_itoa((int)(1.0 / game->frame_time)); */
-	/* ft_printf("%s\n", game->fps_text);                       */
-	game->move_speed = game->frame_time * 0.5;
-	game->rotate_speed = game->frame_time * 0.2;
-	ft_printf("move speed: %f\nrotate speed:%f\n", game->move_speed, game->rotate_speed);
+	mlx->game.time_prev = mlx->game.time_curr;
+	mlx->game.time_curr = clock();
+	mlx->game.frame_time = (mlx->game.time_curr - mlx->game.time_prev) / 1000.0;
+	mlx->game.move_speed = mlx->game.frame_time * 0.5;
+	mlx->game.rotate_speed = mlx->game.frame_time * 0.2;
+	
+	ft_printf("move speed: %f\nrotate speed:%f\n", mlx->game.move_speed, \
+			mlx->game.rotate_speed);
 }
 
-void		f_draw_vert_line(t_game *game, int x)
+void		f_draw_vert_line(t_mlx *mlx, int x)
 {
 	int			color;
 	int			y;
 
-	y = game->line_start;
-	while (y <= game->line_end)
+	y = mlx->game.line_start;
+	while (y <= mlx->game.line_end)
 	{
-		if (game->wall_side == 0)
+		if (mlx->game.wall_side == 0)
 			color = 0x224A7B;
-		else if (game->wall_side == 1)
+		else if (mlx->game.wall_side == 1)
 			color = 0xFF6524;
-		else if (game->wall_side == 2)
+		else if (mlx->game.wall_side == 2)
 			color = 0xA7F192;
 		else
 			color = 0x888945;
-		my_mlx_pixel_put(&game->mlx->img, x, y, color);
+		my_mlx_pixel_put(&mlx->img, x, y, color);
 		y++;
 	}
 }
 
-void		f_vert_line_calculation(t_game *game)
+void		f_vert_line_calculation(t_mlx *mlx)
 {
-	game->line_height = (int)(game->mlx->y_win_size / game->wall_dist);
-	game->line_start = game->mlx->y_win_size / 2 - game->line_height / 2;
-	if (game->line_start < 0)
-		game->line_start = 0;
-	game->line_end = game->mlx->y_win_size / 2 + game->line_height / 2;
-	if (game->line_end >= game->mlx->y_win_size)
-		game->line_end = game->mlx->y_win_size - 1;
+	mlx->game.line_height = (int)(mlx->y_win_size / mlx->game.wall_dist);
+	mlx->game.line_start = mlx->y_win_size / 2 - mlx->game.line_height / 2;
+	if (mlx->game.line_start < 0)
+		mlx->game.line_start = 0;
+	mlx->game.line_end = mlx->y_win_size / 2 + mlx->game.line_height / 2;
+	if (mlx->game.line_end >= mlx->y_win_size)
+		mlx->game.line_end = mlx->y_win_size - 1;
 }
 
-void		f_check_wall_hit_n_wall_dist_calculation(t_game *game)
+void		f_check_wall_hit_n_wall_dist_calculation(t_mlx *mlx)
 {
-	game->hit = 0;
-	while (!game->hit)
+	mlx->game.hit = 0;
+	while (!mlx->game.hit)
 	{
-		if (game->side_dist_x < game->side_dist_y)
+		if (mlx->game.side_dist_x < mlx->game.side_dist_y)
 		{
-			game->side_dist_x += game->delta_dist_x;
-			game->map_x += game->step_x;
-			game->wall_side = (game->ray_dir_x < 0) ? 2 : 3;
+			mlx->game.side_dist_x += mlx->game.delta_dist_x;
+			mlx->game.map_x += mlx->game.step_x;
+			mlx->game.wall_side = (mlx->game.ray_dir_x < 0) ? 2 : 3;
 		}
 		else
 		{
-			game->side_dist_y += game->delta_dist_y;
-			game->map_y += game->step_y;
-			game->wall_side = (game->ray_dir_y < 0) ? 0 : 1;
+			mlx->game.side_dist_y += mlx->game.delta_dist_y;
+			mlx->game.map_y += mlx->game.step_y;
+			mlx->game.wall_side = (mlx->game.ray_dir_y < 0) ? 0 : 1;
 		}
-		if (game->mlx->opts->map_array[game->map_y][game->map_x] != '0')
-			game->hit = 1;
+		if (mlx->opts->map_array[mlx->game.map_y][mlx->game.map_x] != '0')
+			mlx->game.hit = 1;
 	}
-	if (game->wall_side > 1)
-		game->wall_dist = (game->map_x - game->player_x + (1 - game->step_x) \
-				/ 2) / game->ray_dir_x;
+	if (mlx->game.wall_side > 1)
+		mlx->game.wall_dist = (mlx->game.map_x - mlx->game.player_x + \
+				(1 - mlx->game.step_x) / 2) / mlx->game.ray_dir_x;
 	else
-		game->wall_dist = (game->map_y - game->player_y + (1 - game->step_y) \
-				/ 2) / game->ray_dir_y;
+		mlx->game.wall_dist = (mlx->game.map_y - mlx->game.player_y + \
+				(1 - mlx->game.step_y) / 2) / mlx->game.ray_dir_y;
 }
 
-static void	f_step_n_side_dist_calculation(t_game *game)
+static void	f_step_n_side_dist_calculation(t_mlx *mlx)
 {
-	if (game->ray_dir_x < 0)
+	if (mlx->game.ray_dir_x < 0)
 	{
-		game->step_x = -1;
-		game->side_dist_x = (game->player_x - game->map_x) * game->delta_dist_x;
+		mlx->game.step_x = -1;
+		mlx->game.side_dist_x = (mlx->game.player_x - mlx->game.map_x) * \
+			mlx->game.delta_dist_x;
 	}
 	else
 	{
-		game->step_x = 1;
-		game->side_dist_x = (1.0 + game->map_x - game->player_x) * \
-			game->delta_dist_x;
+		mlx->game.step_x = 1;
+		mlx->game.side_dist_x = (1.0 + mlx->game.map_x - mlx->game.player_x) * \
+			mlx->game.delta_dist_x;
 	}
-	if (game->ray_dir_y < 0)
+	if (mlx->game.ray_dir_y < 0)
 	{
-		game->step_y = -1;
-		game->side_dist_y = (game->player_y - game->map_y) * game->delta_dist_y;
+		mlx->game.step_y = -1;
+		mlx->game.side_dist_y = (mlx->game.player_y - mlx->game.map_y) * \
+			mlx->game.delta_dist_y;
 	}
 	else
 	{
-		game->step_y = 1;
-		game->side_dist_y = (1.0 + game->map_y - game->player_y) * \
-			game->delta_dist_y;
+		mlx->game.step_y = 1;
+		mlx->game.side_dist_y = (1.0 + mlx->game.map_y - mlx->game.player_y) * \
+			mlx->game.delta_dist_y;
 	}
 }
 
-void		f_raycasting(t_game *game)
+void		f_deltas_calculation(t_mlx *mlx)
+{
+		if (!mlx->game.ray_dir_y)
+			mlx->game.delta_dist_x = 0;
+		else
+			mlx->game.delta_dist_x = (!mlx->game.ray_dir_x) ? 1 : \
+										fabs(1 / mlx->game.ray_dir_x);
+		if (!mlx->game.ray_dir_x)
+			mlx->game.delta_dist_y = 0;
+		else
+			mlx->game.delta_dist_y = (!mlx->game.ray_dir_y) ? 1 : \
+										fabs(1 / mlx->game.ray_dir_y);
+}
+
+void		f_raycasting(t_mlx *mlx)
 {
 	int			x;
 
 	x = 0;
-	while (x < game->mlx->x_win_size)
+	while (x < mlx->x_win_size)
 	{
-		game->camera_x = 2 * x / (float)game->mlx->x_win_size - 1;
-		game->ray_dir_x = game->dir_x + game->plane_x * game->camera_x;
-		game->ray_dir_y = game->dir_y + game->plane_y * game->camera_x;
-		if (!game->ray_dir_y)
-			game->delta_dist_x = 0;
-		else
-			game->delta_dist_x = (!game->ray_dir_x) ? 1 : fabs(1 / game->ray_dir_x);
-		if (!game->ray_dir_x)
-			game->delta_dist_y = 0;
-		else
-			game->delta_dist_y = (!game->ray_dir_y) ? 1 : fabs(1 / game->ray_dir_y);
-		game->map_x = (int)game->player_x;
-		game->map_y = (int)game->player_y;
-		f_step_n_side_dist_calculation(game);
-		f_check_wall_hit_n_wall_dist_calculation(game);
-		f_vert_line_calculation(game);
-		f_draw_vert_line(game, x);
+		mlx->game.camera_x = 2 * x / (float)mlx->x_win_size - 1;
+		mlx->game.ray_dir_x = mlx->game.dir_x + mlx->game.plane_x * \
+								mlx->game.camera_x;
+		mlx->game.ray_dir_y = mlx->game.dir_y + mlx->game.plane_y * \
+								mlx->game.camera_x;
+		mlx->game.map_x = (int)mlx->game.player_x;
+		mlx->game.map_y = (int)mlx->game.player_y;
+		f_deltas_calculation(mlx);
+		f_step_n_side_dist_calculation(mlx);
+		f_check_wall_hit_n_wall_dist_calculation(mlx);
+		f_vert_line_calculation(mlx);
+		f_draw_vert_line(mlx, x);
 		x++;
 	}
-	f_fps_n_move_n_rotate_speed_calculation(game);
+	f_fps_n_move_n_rotate_speed_calculation(mlx);
 }
