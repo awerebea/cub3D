@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/09 18:29:32 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/09 19:26:19 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,27 @@ int			f_controls_handling(int key, t_mlx *mlx)
 	if (key == KEY_ESC)
 		f_close_n_exit(mlx, 1);
 		/* ft_printf("%d\n", mlx->x_win_size); */
-	/* if (key == KEY_W)                                                                             */
-	/* {                                                                                             */
-	/*     if (worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) posX += dirX * moveSpeed; */
-	/* }                                                                                             */
+	if (key == KEY_W)
+	{
+		if (mlx->opts->map_array[(int)mlx->game.player_y][(int)(mlx->game.player_x + mlx->game.dir_x * mlx->game.move_speed)] == '0')
+			mlx->game.player_x += mlx->game.dir_x * mlx->game.move_speed;
+		if (mlx->opts->map_array[(int)(mlx->game.player_y + mlx->game.dir_y * mlx->game.move_speed)][(int)mlx->game.player_x] == '0')
+			mlx->game.player_y += mlx->game.dir_y * mlx->game.move_speed;
+	}
+	if (key == KEY_S)
+	{
+		if (mlx->opts->map_array[(int)mlx->game.player_y][(int)(mlx->game.player_x - mlx->game.dir_x * mlx->game.move_speed)] == '0')
+			mlx->game.player_x -= mlx->game.dir_x * mlx->game.move_speed;
+		if (mlx->opts->map_array[(int)(mlx->game.player_y - mlx->game.dir_y * mlx->game.move_speed)][(int)mlx->game.player_x] == '0')
+			mlx->game.player_y -= mlx->game.dir_y * mlx->game.move_speed;
+	}
 	else
 		ft_printf("%d\n", key);
+	f_draw_background(mlx);
+	f_raycasting(mlx);
+	f_draw_minimap(mlx);
+	f_draw_player_minimap(mlx);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
 	return (0);
 }
 
@@ -133,6 +148,7 @@ void		f_game(t_mlx *mlx)
 	f_game_init(mlx);
 	f_minimap_init(mlx);
 	f_player_init(mlx);
+	f_draw_background(mlx);
 	f_raycasting(mlx);
 	f_draw_minimap(mlx);
 	f_draw_player_minimap(mlx);

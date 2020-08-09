@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/09 18:00:28 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/09 19:20:43 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int			f_window(t_sdf *opts)
 
 	if ((errcode = f_window_n_image_init(&mlx, opts)))
 		return (errcode);
-	f_draw_background(&mlx);
 	f_game(&mlx);
 	/* mlx_string_put(mlx.mlx_ptr, mlx.win_ptr, mlx.x_win_size - \           */
 	/*         mlx.map.edge_shift * 5, mlx.map.edge_shift, 0xFFFFFF, "FPS"); */
