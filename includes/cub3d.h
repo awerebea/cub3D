@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/08 12:15:14 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/09 12:55:59 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define MINIMAP_MAX_WDTH_FACTOR 0.3
 # define MINIMAP_MAX_HGHT_FACTOR 0.5
 # define SQUARE_SIDE 64
-# define VRAD 1
+# define VRAD 5
 
 # define KEY_ESC 65307
 # define KEY_W 119
@@ -36,7 +36,7 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 
-# define FOV_ANGLE 66.849622
+# define FOV_ANGLE 66
 
 typedef	struct	s_sdf
 {
@@ -130,6 +130,9 @@ typedef struct	s_game
 	int			hit;
 	float		wall_dist;
 	int			wall_side;
+	int			line_height;
+	int			line_start;
+	int			line_end;
 	t_mlx		*mlx;
 }				t_game;
 
