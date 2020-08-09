@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/09 18:25:42 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/09 20:15:12 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 # define MINIMAP_MAX_WDTH_FACTOR 0.3
 # define MINIMAP_MAX_HGHT_FACTOR 0.5
-# define SQUARE_SIDE 64
 # define VRAD 1
 
 # define KEY_ESC 53
@@ -82,7 +81,6 @@ typedef struct	s_minimap
 	int			map_width;
 	int			map_height;
 	int			square_side;
-	int			scale;
 	int			edge_shift;
 }				t_minimap;
 
@@ -159,6 +157,7 @@ void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void			f_game(t_mlx *mlx);
 void			f_draw_background(t_mlx *mlx);
 void			f_draw_minimap(t_mlx *mlx);
+void			f_player_pos_init(t_mlx *mlx);
 void			f_draw_player_minimap(t_mlx *mlx);
 void			f_raycasting(t_mlx *mlx);
 
