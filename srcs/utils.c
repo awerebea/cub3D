@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 16:36:56 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/07 10:37:12 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/11 00:19:43 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,11 @@ void		my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 	dst = img->addr + (y * img->line_len + x * (img->bits_per_pix / 8));
 	*(unsigned int*)dst = color;
+}
+
+int			f_add_shade(int color, float shade)
+{
+	return ((int)(f_get_r_from_int(color) * shade) << 16 | \
+			(int)(f_get_g_from_int(color) * shade) << 8 | \
+			(int)(f_get_b_from_int(color) * shade));
 }

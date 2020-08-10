@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 09:36:10 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/10 20:55:50 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/11 00:29:51 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,19 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-void		f_fps_n_move_n_rotate_speed_calculation(t_mlx *mlx)
-{
-	mlx->game.time_prev = mlx->game.time_curr;
-	/* mlx->game.time_curr = clock(); */
-	mlx->game.frame_time = (mlx->game.time_curr - mlx->game.time_prev) / 1000.0;
-	mlx->game.move_speed = mlx->game.frame_time * 0.02;
-	mlx->game.rot_speed = mlx->game.frame_time * 0.01;
-}
-
-int			f_add_shade(int color, float shade)
-{
-	return ((int)(f_get_r_from_int(color) * shade) << 16 | \
-			(int)(f_get_g_from_int(color) * shade) << 8 | \
-			(int)(f_get_b_from_int(color) * shade));
-}
-
-void		f_draw_vert_line(t_mlx *mlx, int x)
+static void	f_draw_vert_line(t_mlx *mlx, int x)
 {
 	int			color;
 	float		shade;
 	int			y;
 
+	mlx->game.line_height = (int)(mlx->y_win_size / mlx->game.wall_dist);
+	mlx->game.line_start = mlx->y_win_size / 2 - mlx->game.line_height / 2;
+	if (mlx->game.line_start < 0)
+		mlx->game.line_start = 0;
+	mlx->game.line_end = mlx->y_win_size / 2 + mlx->game.line_height / 2;
+	if (mlx->game.line_end >= mlx->y_win_size)
+		mlx->game.line_end = mlx->y_win_size - 1;
 	shade = pow(((float)mlx->game.line_end / (float)mlx->y_win_size), 1.2);
 	y = mlx->game.line_start;
 	while (y <= mlx->game.line_end)
@@ -49,23 +40,11 @@ void		f_draw_vert_line(t_mlx *mlx, int x)
 			color = 0xA7F192;
 		else
 			color = 0x888945;
-		my_mlx_pixel_put(&mlx->img, x, y, f_add_shade(color, shade));
-		y++;
+		my_mlx_pixel_put(&mlx->img, x, y++, f_add_shade(color, shade));
 	}
 }
 
-void		f_vert_line_calculation(t_mlx *mlx)
-{
-	mlx->game.line_height = (int)(mlx->y_win_size / mlx->game.wall_dist);
-	mlx->game.line_start = mlx->y_win_size / 2 - mlx->game.line_height / 2;
-	if (mlx->game.line_start < 0)
-		mlx->game.line_start = 0;
-	mlx->game.line_end = mlx->y_win_size / 2 + mlx->game.line_height / 2;
-	if (mlx->game.line_end >= mlx->y_win_size)
-		mlx->game.line_end = mlx->y_win_size - 1;
-}
-
-void		f_check_wall_hit_n_wall_dist_calculation(t_mlx *mlx)
+static void	f_check_wall_hit_n_wall_dist_calculation(t_mlx *mlx)
 {
 	mlx->game.hit = 0;
 	while (!mlx->game.hit)
@@ -122,18 +101,18 @@ static void	f_step_n_side_dist_calculation(t_mlx *mlx)
 	}
 }
 
-void		f_deltas_calculation(t_mlx *mlx)
+static void	f_delta_dist_calculation(t_mlx *mlx)
 {
-		if (!mlx->game.ray_dir_y)
-			mlx->game.delta_dist_x = 0;
-		else
-			mlx->game.delta_dist_x = (!mlx->game.ray_dir_x) ? 1 : \
-										fabs(1 / mlx->game.ray_dir_x);
-		if (!mlx->game.ray_dir_x)
-			mlx->game.delta_dist_y = 0;
-		else
-			mlx->game.delta_dist_y = (!mlx->game.ray_dir_y) ? 1 : \
-										fabs(1 / mlx->game.ray_dir_y);
+	if (!mlx->game.ray_dir_y)
+		mlx->game.delta_dist_x = 0;
+	else
+		mlx->game.delta_dist_x = (!mlx->game.ray_dir_x) ? 1 : \
+									fabs(1 / mlx->game.ray_dir_x);
+	if (!mlx->game.ray_dir_x)
+		mlx->game.delta_dist_y = 0;
+	else
+		mlx->game.delta_dist_y = (!mlx->game.ray_dir_y) ? 1 : \
+									fabs(1 / mlx->game.ray_dir_y);
 }
 
 void		f_raycasting(t_mlx *mlx)
@@ -150,14 +129,9 @@ void		f_raycasting(t_mlx *mlx)
 								mlx->game.camera_x;
 		mlx->game.map_x = (int)mlx->game.player_x;
 		mlx->game.map_y = (int)mlx->game.player_y;
-		f_deltas_calculation(mlx);
+		f_delta_dist_calculation(mlx);
 		f_step_n_side_dist_calculation(mlx);
 		f_check_wall_hit_n_wall_dist_calculation(mlx);
-		f_vert_line_calculation(mlx);
-		f_draw_vert_line(mlx, x);
-		x++;
+		f_draw_vert_line(mlx, x++);
 	}
-	/* f_fps_n_move_n_rotate_speed_calculation(mlx); */
-	mlx->game.move_speed = MOVE_SPEED;
-	mlx->game.rot_speed = ROTATE_SPEED * M_PI / 180;
 }

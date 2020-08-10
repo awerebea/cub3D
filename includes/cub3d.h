@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/10 23:59:51 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/11 00:31:53 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define MAX_X_WIN_SIZE 7680
 # define MAX_Y_WIN_SIZE 4320
 
-# define MINIMAP_MAX_WDTH_FACTOR 0.6
+# define MINIMAP_MAX_WDTH_FACTOR 0.3
 # define MINIMAP_MAX_HGHT_FACTOR 0.5
 # define VRAD 1
 
@@ -152,6 +152,7 @@ int				f_get_a_from_int(int argb);
 int				f_get_r_from_int(int argb);
 int				f_get_g_from_int(int argb);
 int				f_get_b_from_int(int argb);
+int				f_add_shade(int color, float shade);
 int				f_exit(int errcode, t_sdf *opts);
 int				f_close_n_exit(t_mlx *mlx, int window);
 int				f_map_array_preparing(t_sdf *opts);
@@ -172,5 +173,6 @@ void			f_draw_minimap(t_mlx *mlx);
 void			f_player_pos_init(t_mlx *mlx);
 void			f_draw_player_minimap(t_mlx *mlx);
 void			f_raycasting(t_mlx *mlx);
+int				f_controls_handling(int key, t_mlx *mlx);
 
 #endif

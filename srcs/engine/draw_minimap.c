@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/10 23:59:32 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/11 00:30:41 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static float	f_angle_calculation(float delta_x, float delta_y)
 	return (angle);
 }
 
-int				f_check_angle_range(t_mlx *mlx, float delta_x, float delta_y, \
+static int		f_check_angle_range(t_mlx *mlx, float delta_x, float delta_y, \
 										float angle)
 {
 	if (mlx->player.view_angle - mlx->player.fov / 2 < 0)
@@ -61,7 +61,7 @@ int				f_check_angle_range(t_mlx *mlx, float delta_x, float delta_y, \
 	return (0);
 }
 
-int				f_view_sector(t_mlx *mlx, int x, int y)
+static int		f_view_sector(t_mlx *mlx, int x, int y)
 {
 	float	delta_x;
 	float	delta_y;
@@ -80,15 +80,13 @@ static void		f_fill_minimap(t_mlx *mlx)
 
 	x = mlx->map.x * mlx->map.sq_side + mlx->map.sq_x + mlx->map.edge_shift;
 	y = mlx->map.y * mlx->map.sq_side + mlx->map.sq_y + mlx->map.edge_shift;
-	if ((mlx->map.sq_x == mlx->map.sq_side - 1 || \
-			mlx->map.sq_y == mlx->map.sq_side - 1 || \
-			(mlx->map.x == 0 && mlx->map.sq_x == 0) || \
-			(mlx->map.x > 0 && mlx->map.sq_x == 0 && \
-			mlx->opts->map_array[mlx->map.y][mlx->map.x - 1] == ' ') || \
-			(mlx->map.y == 0 && mlx->map.sq_y == 0) || \
-			(mlx->map.y > 0 && mlx->map.sq_y == 0 && \
-			mlx->opts->map_array[mlx->map.y - 1][mlx->map.x] == ' ')) && \
-			(mlx->opts->map_array[mlx->map.y][mlx->map.x] != ' '))
+	if ((mlx->map.sq_x == mlx->map.sq_side - 1 || mlx->map.sq_y == \
+		mlx->map.sq_side - 1 || (mlx->map.x == 0 && mlx->map.sq_x == 0) || \
+		(mlx->map.x > 0 && mlx->map.sq_x == 0 && \
+		mlx->opts->map_array[mlx->map.y][mlx->map.x - 1] == ' ') || \
+		(mlx->map.y == 0 && mlx->map.sq_y == 0) || (mlx->map.y > 0 && \
+		mlx->map.sq_y == 0 && mlx->opts->map_array[mlx->map.y - 1][mlx->map.x] \
+		== ' ')) && (mlx->opts->map_array[mlx->map.y][mlx->map.x] != ' '))
 		my_mlx_pixel_put(&mlx->img, x, y, 0x006B6B6B);
 	else if (mlx->opts->map_array[mlx->map.y][mlx->map.x] == '1')
 		my_mlx_pixel_put(&mlx->img, x, y, 0x001C596E);
@@ -100,7 +98,7 @@ static void		f_fill_minimap(t_mlx *mlx)
 		x < mlx->map.edge_shift + mlx->player.pos_x + mlx->map.sq_side / 6 && \
 		y > mlx->map.edge_shift + mlx->player.pos_y - mlx->map.sq_side / 6 && \
 		y < mlx->map.edge_shift + mlx->player.pos_y + mlx->map.sq_side / 6)
-			my_mlx_pixel_put(&mlx->img, x, y, 0xFF0000);
+		my_mlx_pixel_put(&mlx->img, x, y, 0xFF0000);
 }
 
 void			f_draw_minimap(t_mlx *mlx)
@@ -129,24 +127,5 @@ void			f_draw_minimap(t_mlx *mlx)
 			mlx->map.x++;
 		}
 		mlx->map.y++;
-	}
-}
-
-void			f_draw_player_minimap(t_mlx *mlx)
-{
-	int		x;
-	int		y;
-
-	x = mlx->map.edge_shift + mlx->player.pos_x - mlx->map.sq_side / 6;
-	while (x < mlx->map.edge_shift + mlx->player.pos_x + \
-			mlx->map.sq_side / 6)
-	{
-		y = mlx->map.edge_shift + mlx->player.pos_y - mlx->map.sq_side / 6;
-		while (y < mlx->map.edge_shift + mlx->player.pos_y + \
-				mlx->map.sq_side / 6)
-		{
-			y++;
-		}
-		x++;
 	}
 }

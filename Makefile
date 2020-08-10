@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/10 16:27:47 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/11 00:11:52 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ FLS_3      = $(addprefix $(FLSDIR_3), \
 				pars_options_2)
 FLSDIR_4   = engine/
 FLS_4      = $(addprefix $(FLSDIR_4), \
+				controls \
 				draw_background \
 				draw_minimap \
 				game \
