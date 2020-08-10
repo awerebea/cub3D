@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/10 17:50:09 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/10 23:59:51 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@
 # define MAX_X_WIN_SIZE 7680
 # define MAX_Y_WIN_SIZE 4320
 
-# define MINIMAP_MAX_WDTH_FACTOR 0.5
+# define MINIMAP_MAX_WDTH_FACTOR 0.6
 # define MINIMAP_MAX_HGHT_FACTOR 0.5
 # define VRAD 1
 
 # define MOVE_SPEED 0.2
 # define ROTATE_SPEED 5
 
-# define KEY_ESC 53
-# define KEY_W 13
-# define KEY_A  0
-# define KEY_S  1
-# define KEY_D  2
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
+# define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
 
 # define FOV_ANGLE 66
 
@@ -83,7 +83,7 @@ typedef struct	s_minimap
 	int			sq_y;
 	int			map_width;
 	int			map_height;
-	int			square_side;
+	int			sq_side;
 	int			edge_shift;
 }				t_minimap;
 

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/10 17:32:44 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/11 00:00:10 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ static void	f_minimap_init(t_mlx *mlx)
 	mlx->map.edge_shift = mlx->x_win_size / 100;
 	mlx->map.map_width = mlx->opts->max_mapline_len;
 	mlx->map.map_height = mlx->opts->map_row_index + 1;
-	if ((mlx->map.square_side = mlx->x_win_size * MINIMAP_MAX_WDTH_FACTOR / \
+	if ((mlx->map.sq_side = mlx->x_win_size * MINIMAP_MAX_WDTH_FACTOR / \
 						mlx->map.map_width) > mlx->y_win_size * \
 			MINIMAP_MAX_HGHT_FACTOR / mlx->map.map_height)
-		mlx->map.square_side = (mlx->y_win_size * MINIMAP_MAX_HGHT_FACTOR) / \
+		mlx->map.sq_side = (mlx->y_win_size * MINIMAP_MAX_HGHT_FACTOR) / \
 						mlx->map.map_height;
 }
 
 void	f_player_pos_init(t_mlx *mlx)
 {
 	mlx->player.fov = FOV_ANGLE * M_PI / 180;
-	mlx->player.pos_x = (int)(mlx->game.player_x * mlx->map.square_side);
-	mlx->player.pos_y = (int)(mlx->game.player_y * mlx->map.square_side);
+	mlx->player.pos_x = (int)(mlx->game.player_x * mlx->map.sq_side);
+	mlx->player.pos_y = (int)(mlx->game.player_y * mlx->map.sq_side);
 	if (!mlx->game.dir_x)
 		mlx->player.view_angle = (mlx->game.dir_y > 0) ? \
 									M_PI / 2 : M_PI * 3 / 2;
@@ -163,7 +163,7 @@ int			f_controls_handling(int key, t_mlx *mlx)
 	f_draw_background(mlx);
 	f_raycasting(mlx);
 	f_draw_minimap(mlx);
-	f_draw_player_minimap(mlx);
+	/* f_draw_player_minimap(mlx); */
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
 	return (0);
 }
@@ -175,9 +175,9 @@ void		f_game(t_mlx *mlx)
 	f_draw_background(mlx);
 	f_raycasting(mlx);
 	f_draw_minimap(mlx);
-	f_draw_player_minimap(mlx);
+	/* f_draw_player_minimap(mlx); */
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
-	/* mlx_key_hook(mlx->win_ptr, f_controls_handling, mlx); */
-	mlx_hook(mlx->win_ptr, 2, 0L, f_controls_handling, mlx);
+	mlx_key_hook(mlx->win_ptr, f_controls_handling, mlx);
+	/* mlx_hook(mlx->win_ptr, 2, 0L, f_controls_handling, mlx); */
 	mlx_hook(mlx->win_ptr, 17, 0L, f_close_n_exit, mlx);
 }

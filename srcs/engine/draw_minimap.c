@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/10 19:06:18 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/10 23:59:32 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,43 @@ static float	f_angle_calculation(float delta_x, float delta_y)
 	return (angle);
 }
 
+int				f_check_angle_range(t_mlx *mlx, float delta_x, float delta_y, \
+										float angle)
+{
+	if (mlx->player.view_angle - mlx->player.fov / 2 < 0)
+	{
+		if (!((angle >= mlx->player.view_angle + mlx->player.fov / 2) \
+			&& (angle <= mlx->player.view_angle - mlx->player.fov / 2 + \
+			M_PI * 2)) && (sqrt(pow(delta_x, 2) + pow(delta_y, 2)) <= \
+			mlx->map.sq_side * VRAD))
+			return (1);
+	}
+	if (mlx->player.view_angle + mlx->player.fov / 2 > M_PI * 2)
+	{
+		if (!((angle >= mlx->player.view_angle + mlx->player.fov / 2 - \
+			M_PI * 2) && (angle <= mlx->player.view_angle - \
+			mlx->player.fov / 2)) && (sqrt(pow(delta_x, 2) + pow(delta_y, 2)) \
+			<= mlx->map.sq_side * VRAD))
+			return (1);
+	}
+	if ((angle >= mlx->player.view_angle - mlx->player.fov / 2) && \
+		(angle <= mlx->player.view_angle + mlx->player.fov / 2) && \
+		(sqrt(pow(delta_x, 2) + pow(delta_y, 2)) <= mlx->map.sq_side * \
+		VRAD))
+		return (1);
+	return (0);
+}
+
 int				f_view_sector(t_mlx *mlx, int x, int y)
 {
 	float	delta_x;
 	float	delta_y;
 	float	angle;
-	float	visible_angle_from;
-	float	visible_angle_to;
 
 	delta_x = x - mlx->map.edge_shift - mlx->player.pos_x;
 	delta_y = y - mlx->map.edge_shift - mlx->player.pos_y;
 	angle = f_angle_calculation(delta_x, delta_y);
-	visible_angle_from = mlx->player.view_angle - mlx->player.fov / 2;
-	visible_angle_to = mlx->player.view_angle + mlx->player.fov / 2;
-	/* if (mlx->player.view_angle - mlx->player.fov / 2 < 0)                             */
-	/*     visible_angle_from = mlx->player.view_angle - mlx->player.fov / 2 + M_PI * 2; */
-	/* if (mlx->player.view_angle + mlx->player.fov / 2 > M_PI * 2)                      */
-	/*     visible_angle_to = mlx->player.view_angle + mlx->player.fov / 2 - M_PI * 2;   */
-	if ((angle >= visible_angle_from) && (angle <= visible_angle_to) && \
-		(sqrt(pow(delta_x, 2) + pow(delta_y, 2)) <= mlx->map.square_side * VRAD))
-		return (1);
-	return (0);
+	return (f_check_angle_range(mlx, delta_x, delta_y, angle));
 }
 
 static void		f_fill_minimap(t_mlx *mlx)
@@ -62,10 +78,10 @@ static void		f_fill_minimap(t_mlx *mlx)
 	int			x;
 	int			y;
 
-	x = mlx->map.x * mlx->map.square_side + mlx->map.sq_x + mlx->map.edge_shift;
-	y = mlx->map.y * mlx->map.square_side + mlx->map.sq_y + mlx->map.edge_shift;
-	if ((mlx->map.sq_x == mlx->map.square_side - 1 || \
-			mlx->map.sq_y == mlx->map.square_side - 1 || \
+	x = mlx->map.x * mlx->map.sq_side + mlx->map.sq_x + mlx->map.edge_shift;
+	y = mlx->map.y * mlx->map.sq_side + mlx->map.sq_y + mlx->map.edge_shift;
+	if ((mlx->map.sq_x == mlx->map.sq_side - 1 || \
+			mlx->map.sq_y == mlx->map.sq_side - 1 || \
 			(mlx->map.x == 0 && mlx->map.sq_x == 0) || \
 			(mlx->map.x > 0 && mlx->map.sq_x == 0 && \
 			mlx->opts->map_array[mlx->map.y][mlx->map.x - 1] == ' ') || \
@@ -80,6 +96,11 @@ static void		f_fill_minimap(t_mlx *mlx)
 		my_mlx_pixel_put(&mlx->img, x, y, 0x0000FFFF);
 	else if (ft_strchr("02NSWE", mlx->opts->map_array[mlx->map.y][mlx->map.x]))
 		my_mlx_pixel_put(&mlx->img, x, y, 0x00000000);
+	if (x > mlx->map.edge_shift + mlx->player.pos_x - mlx->map.sq_side / 6 && \
+		x < mlx->map.edge_shift + mlx->player.pos_x + mlx->map.sq_side / 6 && \
+		y > mlx->map.edge_shift + mlx->player.pos_y - mlx->map.sq_side / 6 && \
+		y < mlx->map.edge_shift + mlx->player.pos_y + mlx->map.sq_side / 6)
+			my_mlx_pixel_put(&mlx->img, x, y, 0xFF0000);
 }
 
 void			f_draw_minimap(t_mlx *mlx)
@@ -95,10 +116,10 @@ void			f_draw_minimap(t_mlx *mlx)
 		while (mlx->map.x < mlx->map.map_width)
 		{
 			mlx->map.sq_y = 0;
-			while (mlx->map.sq_y < mlx->map.square_side)
+			while (mlx->map.sq_y < mlx->map.sq_side)
 			{
 				mlx->map.sq_x = 0;
-				while (mlx->map.sq_x < mlx->map.square_side)
+				while (mlx->map.sq_x < mlx->map.sq_side)
 				{
 					f_fill_minimap(mlx);
 					mlx->map.sq_x++;
@@ -116,15 +137,14 @@ void			f_draw_player_minimap(t_mlx *mlx)
 	int		x;
 	int		y;
 
-	x = mlx->map.edge_shift + mlx->player.pos_x - mlx->map.square_side / 6;
+	x = mlx->map.edge_shift + mlx->player.pos_x - mlx->map.sq_side / 6;
 	while (x < mlx->map.edge_shift + mlx->player.pos_x + \
-			mlx->map.square_side / 6)
+			mlx->map.sq_side / 6)
 	{
-		y = mlx->map.edge_shift + mlx->player.pos_y - mlx->map.square_side / 6;
+		y = mlx->map.edge_shift + mlx->player.pos_y - mlx->map.sq_side / 6;
 		while (y < mlx->map.edge_shift + mlx->player.pos_y + \
-				mlx->map.square_side / 6)
+				mlx->map.sq_side / 6)
 		{
-			my_mlx_pixel_put(&mlx->img, x, y, 0xFF0000);
 			y++;
 		}
 		x++;

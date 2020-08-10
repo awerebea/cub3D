@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 09:36:10 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/10 16:02:05 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/10 20:55:50 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void		f_fps_n_move_n_rotate_speed_calculation(t_mlx *mlx)
 {
 	mlx->game.time_prev = mlx->game.time_curr;
-	mlx->game.time_curr = clock();
+	/* mlx->game.time_curr = clock(); */
 	mlx->game.frame_time = (mlx->game.time_curr - mlx->game.time_prev) / 1000.0;
 	mlx->game.move_speed = mlx->game.frame_time * 0.02;
 	mlx->game.rot_speed = mlx->game.frame_time * 0.01;
