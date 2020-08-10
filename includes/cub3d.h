@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/10 00:55:16 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/10 10:43:13 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,11 @@ typedef struct	s_mlx
 
 int				f_check_args(int argc, char **argv, t_sdf *opts);
 int				f_cub3d_atoi(char *line, int *i);
+int				f_get_int_from_argb(int a, int r, int g, int b);
+int				f_get_a_from_int(int argb);
+int				f_get_r_from_int(int argb);
+int				f_get_g_from_int(int argb);
+int				f_get_b_from_int(int argb);
 int				f_exit(int errcode, t_sdf *opts);
 int				f_close_n_exit(t_mlx *mlx, int window);
 int				f_map_array_preparing(t_sdf *opts);

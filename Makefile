@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/10 00:55:55 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/10 10:43:41 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ OBJDIR     = objs/
 
 FLSDIR_1   = ./
 FLS_1      = $(addprefix $(FLSDIR_1), \
+				colors \
 				main \
 				utils )
 FLSDIR_2   = error_handling/

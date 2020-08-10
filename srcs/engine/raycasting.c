@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 09:36:10 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/10 09:49:15 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/10 13:07:23 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,20 @@ void		f_fps_n_move_n_rotate_speed_calculation(t_mlx *mlx)
 			mlx->game.rot_speed);
 }
 
+int			f_add_shade(int color, float shade)
+{
+	return ((int)(f_get_r_from_int(color) * shade) << 16 | \
+			(int)(f_get_g_from_int(color) * shade) << 8 | \
+			(int)(f_get_b_from_int(color) * shade));
+}
+
 void		f_draw_vert_line(t_mlx *mlx, int x)
 {
 	int			color;
+	float		shade;
 	int			y;
 
+	shade = pow(((float)mlx->game.line_end / (float)mlx->y_win_size), 1.5);
 	y = mlx->game.line_start;
 	while (y <= mlx->game.line_end)
 	{
@@ -45,7 +54,7 @@ void		f_draw_vert_line(t_mlx *mlx, int x)
 			color = 0xA7F192;
 		else
 			color = 0x888945;
-		my_mlx_pixel_put(&mlx->img, x, y, color);
+		my_mlx_pixel_put(&mlx->img, x, y, f_add_shade(color, shade));
 		y++;
 	}
 }

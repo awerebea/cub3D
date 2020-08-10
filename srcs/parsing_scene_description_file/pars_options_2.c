@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 15:05:01 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/25 16:54:27 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/10 12:20:28 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-static int	f_check_color_string(char *line, int i, t_sdf *opts, int *rgb)
+static int	f_check_color_string(char *line, int i, int *rgb)
 {
 	int				errcode;
 	int				number;
@@ -40,7 +40,7 @@ static int	f_check_color_string(char *line, int i, t_sdf *opts, int *rgb)
 			errcode++;
 	}
 	if (errcode || !(number == 3 && comma == 2))
-		return (opts->err_string = ft_strdup("F")) ? 330 : 200;
+		return (330);
 	return (0);
 }
 
@@ -53,8 +53,8 @@ int			f_pars_floor_color(char *line, int i, t_sdf *opts)
 	if (opts->floor_color != -1)
 		return (opts->err_string = ft_strdup("F")) ? 301 : 200;
 	i++;
-	if ((errcode = f_check_color_string(line, i, opts, rgb)))
-		return (errcode);
+	if ((errcode = f_check_color_string(line, i, rgb)))
+		return (opts->err_string = ft_strdup("F")) ? errcode : 200;
 	if (rgb[0] > 255 || rgb[1] > 255 || rgb[2] > 255)
 		return (opts->err_string = ft_strdup("F")) ? 331 : 200;
 	opts->floor_color = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
@@ -70,8 +70,8 @@ int			f_pars_ceiling_color(char *line, int i, t_sdf *opts)
 	if (opts->ceiling_color != -1)
 		return (opts->err_string = ft_strdup("C")) ? 301 : 200;
 	i++;
-	if ((errcode = f_check_color_string(line, i, opts, rgb)))
-		return (errcode);
+	if ((errcode = f_check_color_string(line, i, rgb)))
+		return (opts->err_string = ft_strdup("C")) ? errcode : 200;
 	if (rgb[0] > 255 || rgb[1] > 255 || rgb[2] > 255)
 		return (opts->err_string = ft_strdup("C")) ? 331 : 200;
 	opts->ceiling_color = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
