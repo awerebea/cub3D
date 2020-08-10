@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/10 10:07:33 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/10 16:29:40 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,13 @@ int			f_controls_handling(int key, t_mlx *mlx)
 	}
 	else
 		ft_printf("%d\n", key);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->img.img_ptr);
+	if (!(mlx->img.img_ptr = mlx_new_image(mlx->mlx_ptr, mlx->x_win_size, \
+			mlx->y_win_size)))
+		return (402);
+	if (!(mlx->img.addr = mlx_get_data_addr(mlx->img.img_ptr, \
+			&mlx->img.bits_per_pix, &mlx->img.line_len, &mlx->img.endian)))
+		return (403);
 	f_draw_background(mlx);
 	f_raycasting(mlx);
 	f_draw_minimap(mlx);
@@ -170,6 +177,7 @@ void		f_game(t_mlx *mlx)
 	f_draw_minimap(mlx);
 	f_draw_player_minimap(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
-	mlx_key_hook(mlx->win_ptr, f_controls_handling, mlx);
-	mlx_hook(mlx->win_ptr, 17, 0, f_close_n_exit, mlx);
+	/* mlx_key_hook(mlx->win_ptr, f_controls_handling, mlx); */
+	mlx_hook(mlx->win_ptr, 2, 0L, f_controls_handling, mlx);
+	mlx_hook(mlx->win_ptr, 17, 0L, f_close_n_exit, mlx);
 }

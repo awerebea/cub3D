@@ -6,18 +6,18 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/10 10:43:41 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/10 16:27:47 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME       = cub3D
 LIBFT      = Libft/libft.a
-MLX_DIR    = minilibx/linux/
-MLX_NAME   = libmlx.a
+MLX_DIR    = minilibx/mac/
+MLX_NAME   = libmlx.dylib
 MLX        = $(addprefix $(MLX_DIR),$(MLX_NAME))
 CC         = gcc
 CFLAGS     = -Wall -Wextra -Werror
-LIBFLAGS   = -L Libft -lft -L $(MLX_DIR) -lmlx -L /usr/lib -lXext -lX11 -lm -lz -L /usr/lib -lXext -lX11 -lm -lz -L /usr/lib -lXext -lX11 -lm -lz
+LIBFLAGS   = -L Libft -lft -L $(MLX_DIR)  -lmlx
 OFLAGS     = -O2
 DBGFLAGS   = -g
 INCLUDES   = -I includes/ -I Libft/includes/ -I $(MLX_DIR)
@@ -110,7 +110,7 @@ mlx_re:
 mac:
 	sed -i '' '15 s/minilibx\/linux\//minilibx\/mac\//' Makefile
 	sed -i '' '16 s/libmlx.a/libmlx.dylib/' Makefile
-	sed -i '' '20 s/-lmlx -L\ \/usr\/lib\ -lXext\ -lX11\ -lm\ -lz/-lmlx/' \
+	sed -i '' '20 s/\ -lmlx -L\ \/usr\/lib\ -lXext\ -lX11\ -lm\ -lz/\ \ -lmlx/' \
 			Makefile
 	sed -i '' 's/KEY_ESC\ 65307/KEY_ESC\ 53/' includes/cub3d.h
 	sed -i '' 's/KEY_W\ 119/KEY_W\ 13/' includes/cub3d.h
@@ -123,7 +123,7 @@ mac:
 linux:
 	sed -i '15 s/minilibx\/mac\//minilibx\/linux\//' Makefile
 	sed -i '16 s/libmlx.dylib/libmlx.a/' Makefile
-	sed -i '20 s/-lmlx/-lmlx -L\ \/usr\/lib\ -lXext\ -lX11\ -lm\ -lz/' \
+	sed -i '20 s/\ \ -lmlx/\ -lmlx -L\ \/usr\/lib\ -lXext\ -lX11\ -lm\ -lz/' \
 			Makefile
 	sed -i 's/KEY_ESC\ 53/KEY_ESC\ 65307/' includes/cub3d.h
 	sed -i 's/KEY_W\ 13/KEY_W\ 119/' includes/cub3d.h

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 09:36:10 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/10 14:20:01 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/10 16:02:05 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,11 @@
 
 void		f_fps_n_move_n_rotate_speed_calculation(t_mlx *mlx)
 {
-	/* mlx->game.time_prev = mlx->game.time_curr;                                   */
-	/* mlx->game.time_curr = clock();                                               */
-	/* mlx->game.frame_time = (mlx->game.time_curr - mlx->game.time_prev) / 1000.0; */
-	/* mlx->game.move_speed = mlx->game.frame_time * 0.02; */
-	/* mlx->game.rot_speed = mlx->game.frame_time * 0.01;  */
-	mlx->game.move_speed = 0.2;
-	mlx->game.rot_speed = M_PI / 36;
-
-	ft_printf("move speed: %f\nrotate speed:%f\n", mlx->game.move_speed, \
-			mlx->game.rot_speed);
+	mlx->game.time_prev = mlx->game.time_curr;
+	mlx->game.time_curr = clock();
+	mlx->game.frame_time = (mlx->game.time_curr - mlx->game.time_prev) / 1000.0;
+	mlx->game.move_speed = mlx->game.frame_time * 0.02;
+	mlx->game.rot_speed = mlx->game.frame_time * 0.01;
 }
 
 int			f_add_shade(int color, float shade)
@@ -162,5 +157,7 @@ void		f_raycasting(t_mlx *mlx)
 		f_draw_vert_line(mlx, x);
 		x++;
 	}
-	f_fps_n_move_n_rotate_speed_calculation(mlx);
+	/* f_fps_n_move_n_rotate_speed_calculation(mlx); */
+	mlx->game.move_speed = MOVE_SPEED;
+	mlx->game.rot_speed = ROTATE_SPEED * M_PI / 180;
 }

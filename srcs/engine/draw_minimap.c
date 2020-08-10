@@ -6,13 +6,14 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/10 14:16:43 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/10 16:44:26 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
 #include "libft.h"
+#include <math.h>
 
 static float	f_angle_calculation(float delta_x, float delta_y)
 {
