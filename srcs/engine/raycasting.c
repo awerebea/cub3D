@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 09:36:10 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/10 13:07:23 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/10 14:20:01 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		f_draw_vert_line(t_mlx *mlx, int x)
 	float		shade;
 	int			y;
 
-	shade = pow(((float)mlx->game.line_end / (float)mlx->y_win_size), 1.5);
+	shade = pow(((float)mlx->game.line_end / (float)mlx->y_win_size), 1.2);
 	y = mlx->game.line_start;
 	while (y <= mlx->game.line_end)
 	{

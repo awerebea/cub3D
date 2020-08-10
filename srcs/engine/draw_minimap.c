@@ -6,12 +6,13 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/09 20:35:13 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/10 14:16:43 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
+#include "libft.h"
 
 static float	f_angle_calculation(float delta_x, float delta_y)
 {
@@ -65,16 +66,21 @@ static void		f_fill_minimap(t_mlx *mlx)
 
 	x = mlx->map.x * mlx->map.square_side + mlx->map.sq_x + mlx->map.edge_shift;
 	y = mlx->map.y * mlx->map.square_side + mlx->map.sq_y + mlx->map.edge_shift;
-	if (mlx->map.sq_x == mlx->map.square_side - 1 || \
+	if ((mlx->map.sq_x == mlx->map.square_side - 1 || \
 			mlx->map.sq_y == mlx->map.square_side - 1 || \
 			(mlx->map.x == 0 && mlx->map.sq_x == 0) || \
-			(mlx->map.y == 0 && mlx->map.sq_y == 0))
+			(mlx->map.x > 0 && mlx->map.sq_x == 0 && \
+			mlx->opts->map_array[mlx->map.y][mlx->map.x - 1] == ' ') || \
+			(mlx->map.y == 0 && mlx->map.sq_y == 0) || \
+			(mlx->map.y > 0 && mlx->map.sq_y == 0 && \
+			mlx->opts->map_array[mlx->map.y - 1][mlx->map.x] == ' ')) && \
+			(mlx->opts->map_array[mlx->map.y][mlx->map.x] != ' '))
 		my_mlx_pixel_put(&mlx->img, x, y, 0x006B6B6B);
 	else if (mlx->opts->map_array[mlx->map.y][mlx->map.x] == '1')
 		my_mlx_pixel_put(&mlx->img, x, y, 0x001C596E);
 	else if (f_view_sector(mlx, x, y))
 		my_mlx_pixel_put(&mlx->img, x, y, 0x0000FFFF);
-	else
+	else if (ft_strchr("02NSWE", mlx->opts->map_array[mlx->map.y][mlx->map.x]))
 		my_mlx_pixel_put(&mlx->img, x, y, 0x00000000);
 }
 
