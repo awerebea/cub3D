@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/10 16:01:54 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/10 17:50:09 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define MAX_X_WIN_SIZE 7680
 # define MAX_Y_WIN_SIZE 4320
 
-# define MINIMAP_MAX_WDTH_FACTOR 0.3
+# define MINIMAP_MAX_WDTH_FACTOR 0.5
 # define MINIMAP_MAX_HGHT_FACTOR 0.5
 # define VRAD 1
 

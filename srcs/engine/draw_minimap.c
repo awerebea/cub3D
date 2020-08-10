@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/10 16:44:26 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/10 19:06:18 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,19 @@ int				f_view_sector(t_mlx *mlx, int x, int y)
 	float	delta_x;
 	float	delta_y;
 	float	angle;
+	float	visible_angle_from;
+	float	visible_angle_to;
 
 	delta_x = x - mlx->map.edge_shift - mlx->player.pos_x;
 	delta_y = y - mlx->map.edge_shift - mlx->player.pos_y;
 	angle = f_angle_calculation(delta_x, delta_y);
-	if ((mlx->player.view_angle - mlx->player.fov / 2 < 0) && (((angle >= \
-		mlx->player.view_angle - mlx->player.fov / 2 + M_PI * 2) || \
-		(angle <= mlx->player.view_angle + mlx->player.fov / 2)) && \
-		(sqrt(pow(delta_x, 2) + pow(delta_y, 2)) <= mlx->map.square_side * VRAD)))
-		return (1);
-	if ((mlx->player.view_angle + mlx->player.fov / 2 >= M_PI * 2) && \
-		((angle >= mlx->player.view_angle - mlx->player.fov / 2) && (angle \
-		<= mlx->player.view_angle + mlx->player.fov / 2 - M_PI * 2) && \
-		(sqrt(pow(delta_x, 2) + pow(delta_y, 2)) <= mlx->map.square_side * VRAD)))
-		return (1);
-	if ((angle >= mlx->player.view_angle - mlx->player.fov / 2) && (angle <= \
-		mlx->player.view_angle + mlx->player.fov / 2) && \
+	visible_angle_from = mlx->player.view_angle - mlx->player.fov / 2;
+	visible_angle_to = mlx->player.view_angle + mlx->player.fov / 2;
+	/* if (mlx->player.view_angle - mlx->player.fov / 2 < 0)                             */
+	/*     visible_angle_from = mlx->player.view_angle - mlx->player.fov / 2 + M_PI * 2; */
+	/* if (mlx->player.view_angle + mlx->player.fov / 2 > M_PI * 2)                      */
+	/*     visible_angle_to = mlx->player.view_angle + mlx->player.fov / 2 - M_PI * 2;   */
+	if ((angle >= visible_angle_from) && (angle <= visible_angle_to) && \
 		(sqrt(pow(delta_x, 2) + pow(delta_y, 2)) <= mlx->map.square_side * VRAD))
 		return (1);
 	return (0);
@@ -91,6 +88,7 @@ void			f_draw_minimap(t_mlx *mlx)
 	mlx->map.y = 0;
 	mlx->map.sq_x = 0;
 	mlx->map.sq_y = 0;
+	f_player_pos_init(mlx);
 	while (mlx->map.y < mlx->map.map_height)
 	{
 		mlx->map.x = 0;
@@ -118,7 +116,6 @@ void			f_draw_player_minimap(t_mlx *mlx)
 	int		x;
 	int		y;
 
-	f_player_pos_init(mlx);
 	x = mlx->map.edge_shift + mlx->player.pos_x - mlx->map.square_side / 6;
 	while (x < mlx->map.edge_shift + mlx->player.pos_x + \
 			mlx->map.square_side / 6)
