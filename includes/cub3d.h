@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/11 16:19:50 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/11 22:29:26 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,12 @@ typedef struct	s_game
 	char		*fps_text;
 	float		move_speed;
 	float		rot_speed;
+
+	float		wall_x;
+	int			texture_x;
+	int			texture_y;
+	float		texture_pos;
+	float		texture_step;
 }				t_game;
 
 typedef struct	s_mlx
