@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/11 14:01:07 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/11 22:58:59 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,7 +108,7 @@ mlx_fclean:
 mlx_re:
 	make re		-C $(MLX_DIR)
 
-mac: libft_re
+mac: fclean libft_re
 	sed -i '' '15 s/minilibx\/linux\//minilibx\/mac\//' Makefile
 	sed -i '' '16 s/libmlx.a/libmlx.dylib/' Makefile
 	sed -i '' '20 s/\ -lmlx\ -lXext\ -lX11\ -lm/\ \ -lmlx/' \
@@ -121,7 +121,7 @@ mac: libft_re
 	sed -i '' 's/KEY_LEFT\ 65361/KEY_LEFT\ 123/' includes/cub3d.h
 	sed -i '' 's/KEY_RIGHT\ 65363/KEY_RIGHT\ 124/' includes/cub3d.h
 
-linux: libft_re
+linux: fclean libft_re
 	sed -i '15 s/minilibx\/mac\//minilibx\/linux\//' Makefile
 	sed -i '16 s/libmlx.dylib/libmlx.a/' Makefile
 	sed -i '20 s/\ \ -lmlx/\ -lmlx\ -lXext\ -lX11\ -lm/' \
