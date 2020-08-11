@@ -8,6 +8,7 @@ objs/
 *.pdf
 *.DS_Store
 .fuse_hidden*
+._*.png
 vgcore.*
 Makefile.gen
 cub3D

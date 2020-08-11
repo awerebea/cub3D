@@ -6,43 +6,13 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 09:36:10 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/11 00:29:51 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 02:40:43 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
 #include "libft.h"
-#include "ft_printf.h"
-
-static void	f_draw_vert_line(t_mlx *mlx, int x)
-{
-	int			color;
-	float		shade;
-	int			y;
-
-	mlx->game.line_height = (int)(mlx->y_win_size / mlx->game.wall_dist);
-	mlx->game.line_start = mlx->y_win_size / 2 - mlx->game.line_height / 2;
-	if (mlx->game.line_start < 0)
-		mlx->game.line_start = 0;
-	mlx->game.line_end = mlx->y_win_size / 2 + mlx->game.line_height / 2;
-	if (mlx->game.line_end >= mlx->y_win_size)
-		mlx->game.line_end = mlx->y_win_size - 1;
-	shade = pow(((float)mlx->game.line_end / (float)mlx->y_win_size), 1.2);
-	y = mlx->game.line_start;
-	while (y <= mlx->game.line_end)
-	{
-		if (mlx->game.wall_side == 0)
-			color = 0x224A7B;
-		else if (mlx->game.wall_side == 1)
-			color = 0xFF6524;
-		else if (mlx->game.wall_side == 2)
-			color = 0xA7F192;
-		else
-			color = 0x888945;
-		my_mlx_pixel_put(&mlx->img, x, y++, f_add_shade(color, shade));
-	}
-}
 
 static void	f_check_wall_hit_n_wall_dist_calculation(t_mlx *mlx)
 {
