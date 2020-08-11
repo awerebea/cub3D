@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/11 12:43:39 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/11 16:19:50 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@
 # define MOVE_SPEED 0.2
 # define ROTATE_SPEED 5
 
-# define KEY_ESC 53
-# define KEY_W 13
-# define KEY_A  0
-# define KEY_S  1
-# define KEY_D  2
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
+# define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
 
 # define FOV_ANGLE 66
 
@@ -69,6 +69,8 @@ typedef struct	s_img
 	int			bits_per_pix;
 	int			line_len;
 	int			endian;
+	int			width;
+	int			height;
 }				t_img;
 
 typedef struct	s_minimap
@@ -136,6 +138,11 @@ typedef struct	s_mlx
 	int			y_win_size;
 	t_sdf		*opts;
 	t_img		img;
+	t_img		north_tex;
+	t_img		south_tex;
+	t_img		west_tex;
+	t_img		east_tex;
+	t_img		sprite_tex;
 	t_minimap	map;
 	t_player	player;
 	t_game		game;
@@ -160,7 +167,7 @@ int				f_pars_sprite_texture(char *line, int i, t_sdf *opts);
 int				f_pars_wall_textures(char *line, int i, t_sdf *opts);
 int				f_window(t_sdf *opts);
 void			f_print_err(int errcode, t_sdf *opts);
-void			f_error_mlx(int errcode);
+void			f_error_mlx(int errcode, t_sdf *opts);
 void			f_skip_spaces(char *line, int *i);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void			f_game(t_mlx *mlx);

@@ -1,10 +1,10 @@
 R 1400 900
 
-NO ./maps/test.cub
-SO ./maps/test.cub
-WE ./maps/test.cub
-EA ./maps/test.cub
-S  ./maps/test.cub
+NO ./textures/xpm/colorstone.xpm
+SO ./textures/xpm/redbrick.xpm
+WE ./textures/xpm/mossy.xpm
+EA ./textures/xpm/greystone.xpm
+S  ./textures/xpm/barrel.xpm
 
 F	23,		64,		68
 C	100,	200,	240

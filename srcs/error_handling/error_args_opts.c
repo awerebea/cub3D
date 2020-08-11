@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/30 18:39:18 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/11 15:46:09 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ opts->err_string);
 
 static void	f_error_opts_3(int errcode, t_sdf *opts)
 {
-	(void)opts;
 	if (errcode == 342)
 		ft_printf("Error\ncode #342: the spawn point is found on the map more \
 than once.\n");
@@ -132,5 +131,5 @@ void		f_print_err(int errcode, t_sdf *opts)
 	else if (errcode < 400)
 		f_error_opts_3(errcode, opts);
 	else
-		f_error_mlx(errcode);
+		f_error_mlx(errcode, opts);
 }
