@@ -6,17 +6,13 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/11 00:31:53 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/11 12:43:39 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 
 # define CUB3D_H
-# include <math.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
 
 # define MIN_X_WIN_SIZE 160
 # define MIN_Y_WIN_SIZE 120

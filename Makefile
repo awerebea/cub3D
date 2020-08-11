@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/11 00:11:52 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/11 12:42:08 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ MLX_NAME   = libmlx.a
 MLX        = $(addprefix $(MLX_DIR),$(MLX_NAME))
 CC         = gcc
 CFLAGS     = -Wall -Wextra -Werror
-LIBFLAGS   = -L Libft -lft -L $(MLX_DIR) -lmlx -L /usr/lib -lXext -lX11 -lm -lz
+LIBFLAGS   = -L Libft -lft -L $(MLX_DIR) -lmlx -lXext -lX11 -lm
 OFLAGS     = -O2
 DBGFLAGS   = -g
 INCLUDES   = -I includes/ -I Libft/includes/ -I $(MLX_DIR)
@@ -111,7 +111,7 @@ mlx_re:
 mac:
 	sed -i '' '15 s/minilibx\/linux\//minilibx\/mac\//' Makefile
 	sed -i '' '16 s/libmlx.a/libmlx.dylib/' Makefile
-	sed -i '' '20 s/\ -lmlx -L\ \/usr\/lib\ -lXext\ -lX11\ -lm\ -lz/\ \ -lmlx/' \
+	sed -i '' '20 s/\ -lmlx\ -lXext\ -lX11\ -lm/\ \ -lmlx/' \
 			Makefile
 	sed -i '' 's/KEY_ESC\ 65307/KEY_ESC\ 53/' includes/cub3d.h
 	sed -i '' 's/KEY_W\ 119/KEY_W\ 13/' includes/cub3d.h
@@ -124,7 +124,7 @@ mac:
 linux:
 	sed -i '15 s/minilibx\/mac\//minilibx\/linux\//' Makefile
 	sed -i '16 s/libmlx.dylib/libmlx.a/' Makefile
-	sed -i '20 s/\ \ -lmlx/\ -lmlx -L\ \/usr\/lib\ -lXext\ -lX11\ -lm\ -lz/' \
+	sed -i '20 s/\ \ -lmlx/\ -lmlx\ -lXext\ -lX11\ -lm/' \
 			Makefile
 	sed -i 's/KEY_ESC\ 53/KEY_ESC\ 65307/' includes/cub3d.h
 	sed -i 's/KEY_W\ 13/KEY_W\ 119/' includes/cub3d.h
@@ -135,6 +135,9 @@ linux:
 	sed -i 's/KEY_RIGHT\ 124/KEY_RIGHT\ 65363/' includes/cub3d.h
 
 re:				fclean_all all
+
+test: debug
+	./$(NAME) maps/test.cub
 
 .PHONY:	all \
 		clean \
@@ -152,4 +155,5 @@ re:				fclean_all all
 		mlx_re \
 		mac \
 		linux \
-		re
+		re \
+		test

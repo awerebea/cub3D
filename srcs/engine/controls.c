@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 00:08:19 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/11 00:44:12 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/11 12:30:20 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "mlx.h"
 #include "libft.h"
 #include "ft_printf.h"
+#include <math.h>
 
 static void	f_keys_w_s(int key, t_mlx *mlx)
 {

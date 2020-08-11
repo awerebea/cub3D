@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/11 00:27:40 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/11 11:56:45 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void		f_game(t_mlx *mlx)
 	f_raycasting(mlx);
 	f_draw_minimap(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
-	mlx_key_hook(mlx->win_ptr, f_controls_handling, mlx);
-	/* mlx_hook(mlx->win_ptr, 2, 0L, f_controls_handling, mlx); */
-	mlx_hook(mlx->win_ptr, 17, 0L, f_close_n_exit, mlx);
+	mlx_hook(mlx->win_ptr, 2, 1L << 0, f_controls_handling, mlx);
+	mlx_hook(mlx->win_ptr, 17, 1L << 17, f_close_n_exit, mlx);
 }
