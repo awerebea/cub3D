@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 09:36:10 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/11 22:54:13 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/11 23:46:34 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,33 +36,29 @@ void		f_texture_vars_calculating(t_mlx *mlx)
 	mlx->game.wall_x -= floor(mlx->game.wall_x);
 	if (mlx->game.wall_side == 0)
 	{
-		mlx->game.texture_x = (mlx->game.dir_y < 0) ? \
-						mlx->north_tex.width - mlx->game.texture_x - 1 : \
-						(int)(mlx->game.wall_x * (float)(mlx->north_tex.width));
+		mlx->game.texture_x = (int)(mlx->game.wall_x * \
+				(float)(mlx->north_tex.width));
 		mlx->game.texture_step = 1.0 * mlx->north_tex.height / \
 									mlx->game.line_height;
 	}
 	else if (mlx->game.wall_side == 1)
 	{
-		mlx->game.texture_x = (mlx->game.dir_y < 0) ? \
-						mlx->south_tex.width - mlx->game.texture_x - 1 : \
-						(int)(mlx->game.wall_x * (float)(mlx->south_tex.width));
+		mlx->game.texture_x = (int)((float)(mlx->south_tex.width) - \
+				mlx->game.wall_x * (float)(mlx->south_tex.width) - 1);
 		mlx->game.texture_step = 1.0 * mlx->south_tex.height / \
 									mlx->game.line_height;
 	}
 	else if (mlx->game.wall_side == 2)
 	{
-		mlx->game.texture_x = (mlx->game.dir_x > 0) ? \
-						mlx->west_tex.width - mlx->game.texture_x - 1 : \
-						(int)(mlx->game.wall_x * (float)(mlx->west_tex.width));
+		mlx->game.texture_x = (int)((float)(mlx->west_tex.width) - \
+				mlx->game.wall_x * (float)(mlx->west_tex.width) - 1);
 		mlx->game.texture_step = 1.0 * mlx->west_tex.height / \
 									mlx->game.line_height;
 	}
-	else if (mlx->game.wall_side == 2)
+	else if (mlx->game.wall_side == 3)
 	{
-		mlx->game.texture_x = (mlx->game.dir_x > 0) ? \
-						mlx->east_tex.width - mlx->game.texture_x - 1 : \
-						(int)(mlx->game.wall_x * (float)(mlx->east_tex.width));
+		mlx->game.texture_x = (int)(mlx->game.wall_x * \
+				(float)(mlx->east_tex.width));
 		mlx->game.texture_step = 1.0 * mlx->east_tex.height / \
 									mlx->game.line_height;
 	}
@@ -83,7 +79,8 @@ static void	f_draw_vert_line(t_mlx *mlx, int x)
 	mlx->game.line_end = mlx->y_win_size / 2 + mlx->game.line_height / 2;
 	if (mlx->game.line_end >= mlx->y_win_size)
 		mlx->game.line_end = mlx->y_win_size - 1;
-	shade = pow(((float)mlx->game.line_end / (float)mlx->y_win_size), 1.2);
+	shade = pow(((float)mlx->game.line_end / (float)mlx->y_win_size), \
+			SHADE_FACTOR);
 	y = mlx->game.line_start;
 	f_texture_vars_calculating(mlx);
 	while (y <= mlx->game.line_end)
