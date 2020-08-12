@@ -6,11 +6,12 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:22:42 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/12 03:03:30 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 12:54:38 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <math.h>
 
 static void	f_tex_x_n_step_calculation(t_mlx *mlx, t_img tex_img, int mirror)
 {
@@ -73,9 +74,8 @@ void		f_draw_vert_line(t_mlx *mlx, int x)
 	int			y;
 
 	f_line_params_calculation(mlx);
-	shade = 1 / mlx->game.wall_dist * 5;
-	if (shade > 1)
-		shade = 1;
+	shade = 1 / (1 + 0.005 * mlx->game.wall_dist + 0.006 * \
+			pow(mlx->game.wall_dist, 2));
 	y = mlx->game.line_start;
 	f_tex_vars_calculating(mlx);
 	while (y <= mlx->game.line_end)

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/12 02:21:08 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 11:38:16 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,6 @@ typedef struct	s_game
 	float		plane_y;
 	float		old_plane_x;
 	float		old_plane_y;
-	float		time_curr;
-	float		time_prev;
 	int			map_x;
 	int			map_y;
 	float		side_dist_x;
@@ -124,8 +122,6 @@ typedef struct	s_game
 	int			line_height;
 	int			line_start;
 	int			line_end;
-	float		frame_time;
-	char		*fps_text;
 	float		move_speed;
 	float		rot_speed;
 
