@@ -1,9 +1,9 @@
 R 1400 900
 
-NO ./textures/xpm/colorstone.xpm
-SO ./textures/xpm/redbrick.xpm
-WE ./textures/xpm/mossy.xpm
-EA ./textures/xpm/greystone.xpm
+NO ./textures/xpm/wall_1_512x512.xpm
+SO ./textures/xpm/wall_2_512x512.xpm
+WE ./textures/xpm/wall_3_512x512.xpm
+EA ./textures/xpm/wall_4_512x512.xpm
 S  ./textures/xpm/barrel.xpm
 
 F	61,		43,		31
