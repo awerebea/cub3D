@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/12 22:27:58 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/13 02:07:00 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,8 @@ FLS_4      = $(addprefix $(FLSDIR_4), \
 				engine_tools \
 				game \
 				raycasting \
+				sprites_handling \
+				sprites_list_init \
 				window)
 SRC        = $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4)
 

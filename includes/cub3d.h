@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/12 20:47:03 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/13 02:45:02 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,16 @@ typedef struct	s_game
 	float		tex_step;
 }				t_game;
 
+typedef struct	s_sp
+{
+	int			id;
+	float		x;
+	float		y;
+	float		dist;
+	struct s_sp	*prev;
+	struct s_sp	*next;
+}				t_sp;
+
 typedef struct	s_mlx
 {
 	void		*mlx_ptr;
@@ -149,6 +159,7 @@ typedef struct	s_mlx
 	t_minimap	map;
 	t_player	player;
 	t_game		game;
+	t_sp		*sp_list;
 }				t_mlx;
 
 int				f_check_args(int argc, char **argv, t_sdf *opts);
@@ -182,5 +193,7 @@ void			f_raycasting(t_mlx *mlx);
 int				f_check_textures_for_valid(t_mlx *mlx);
 void			f_draw_vert_line(t_mlx *mlx, int x);
 int				f_controls_handling(int key, t_mlx *mlx);
+void			f_sprites_handling(t_mlx *mlx);
+void			f_fill_sprites_list(t_mlx *mlx);
 
 #endif

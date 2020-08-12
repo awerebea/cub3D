@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/12 15:23:49 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/13 02:42:26 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,12 @@ static int	f_textures_init_from_xmp(t_mlx *mlx)
 	return (f_get_data_addr_for_textures(mlx));
 }
 
-static int	f_window_n_images_init(t_mlx *mlx, t_sdf *opts)
+static int	f_mlx_n_window_n_images_init(t_mlx *mlx, t_sdf *opts)
 {
 	mlx->opts = opts;
 	mlx->win_ptr = NULL;
+	mlx->sp_list = NULL;
+	/* *mlx->sp_list = NULL; */
 	if (!(mlx->mlx_ptr = mlx_init()))
 		return (400);
 	mlx_get_screen_size(mlx->mlx_ptr, &mlx->x_win_size, &mlx->y_win_size);
@@ -83,7 +85,7 @@ void		f_window(t_sdf *opts)
 	t_mlx	mlx;
 
 	mlx.errcode = 0;
-	if ((mlx.errcode = f_window_n_images_init(&mlx, opts)))
+	if ((mlx.errcode = f_mlx_n_window_n_images_init(&mlx, opts)))
 		f_close_n_exit(&mlx);
 	f_game(&mlx);
 	mlx_loop(mlx.mlx_ptr);
