@@ -43,7 +43,7 @@ void	*mlx_init();
 ** Basic actions
 */
 
-void	*mlx_new_window(void *mlx_ptr, int size_x, int size_y, char const *title);
+void	*mlx_new_window(void *mlx_ptr, int size_x, int size_y, char *title);
 /*
 **  return void *0 if failed
 */
@@ -108,7 +108,7 @@ int	mlx_string_put(void *mlx_ptr, void *win_ptr, int x, int y, int color,
 		       char *string);
 void	*mlx_xpm_to_image(void *mlx_ptr, char **xpm_data,
 			  int *width, int *height);
-void	*mlx_xpm_file_to_image(void *mlx_ptr, char const *filename,
+void	*mlx_xpm_file_to_image(void *mlx_ptr, char *filename,
 			       int *width, int *height);
 int	mlx_destroy_window(void *mlx_ptr, void *win_ptr);
 
@@ -126,6 +126,10 @@ int	mlx_do_key_autorepeatoff(void *mlx_ptr);
 int	mlx_do_key_autorepeaton(void *mlx_ptr);
 int	mlx_do_sync(void *mlx_ptr);
 
-int mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey);
+int	mlx_mouse_move(void *mlx_ptr, void *win_ptr, int x, int y);
+int	mlx_mouse_hide(void *mlx_ptr, void *win_ptr);
+int	mlx_mouse_show(void *mlx_ptr, void *win_ptr);
+
+int	mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey);
 
 #endif /* MLX_H */

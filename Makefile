@@ -6,18 +6,18 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/12 02:49:29 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/12 10:43:29 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME       = cub3D
 LIBFT      = Libft/libft.a
-MLX_DIR    = minilibx/mac/
-MLX_NAME   = libmlx.dylib
+MLX_DIR    = minilibx/linux/
+MLX_NAME   = libmlx.a
 MLX        = $(addprefix $(MLX_DIR),$(MLX_NAME))
 CC         = gcc
 CFLAGS     = -Wall -Wextra -Werror
-LIBFLAGS   = -L Libft -lft -L $(MLX_DIR)  -lmlx
+LIBFLAGS   = -L Libft -lft -L $(MLX_DIR) -lmlx -lXext -lX11 -lm
 OFLAGS     = -O2
 DBGFLAGS   = -g
 INCLUDES   = -I includes/ -I Libft/includes/ -I $(MLX_DIR)
@@ -109,7 +109,7 @@ mlx_fclean:
 mlx_re:
 	make re		-C $(MLX_DIR)
 
-mac: fclean libft_re
+mac: fclean_all
 	sed -i '' '15 s/minilibx\/linux\//minilibx\/mac\//' Makefile
 	sed -i '' '16 s/libmlx.a/libmlx.dylib/' Makefile
 	sed -i '' '20 s/\ -lmlx\ -lXext\ -lX11\ -lm/\ \ -lmlx/' \
@@ -122,7 +122,7 @@ mac: fclean libft_re
 	sed -i '' 's/KEY_LEFT\ 65361/KEY_LEFT\ 123/' includes/cub3d.h
 	sed -i '' 's/KEY_RIGHT\ 65363/KEY_RIGHT\ 124/' includes/cub3d.h
 
-linux: fclean libft_re
+linux: fclean_all
 	sed -i '15 s/minilibx\/mac\//minilibx\/linux\//' Makefile
 	sed -i '16 s/libmlx.dylib/libmlx.a/' Makefile
 	sed -i '20 s/\ \ -lmlx/\ -lmlx\ -lXext\ -lX11\ -lm/' \
@@ -134,6 +134,8 @@ linux: fclean libft_re
 	sed -i 's/KEY_D\ \ 2/KEY_D\ 100/' includes/cub3d.h
 	sed -i 's/KEY_LEFT\ 123/KEY_LEFT\ 65361/' includes/cub3d.h
 	sed -i 's/KEY_RIGHT\ 124/KEY_RIGHT\ 65363/' includes/cub3d.h
+
+libs: $(LIBFT) $(MLX)
 
 re:				fclean_all all
 
@@ -156,5 +158,6 @@ test: debug
 		mlx_re \
 		mac \
 		linux \
+		libs \
 		re \
 		test
