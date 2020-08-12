@@ -6,18 +6,18 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/12 18:05:38 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/12 22:27:58 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME       = cub3D
 LIBFT      = Libft/libft.a
-MLX_DIR    = minilibx/mac/
-MLX_NAME   = libmlx.dylib
+MLX_DIR    = minilibx/linux/
+MLX_NAME   = libmlx.a
 MLX        = $(addprefix $(MLX_DIR),$(MLX_NAME))
 CC         = gcc
 CFLAGS     = -Wall -Wextra -Werror
-LIBFLAGS   = -L Libft -lft -L $(MLX_DIR)  -lmlx
+LIBFLAGS   = -L Libft -lft -L $(MLX_DIR) -lmlx -lXext -lX11 -lm
 OFLAGS     = -O2
 DBGFLAGS   = -g
 INCLUDES   = -I includes/ -I Libft/includes/ -I $(MLX_DIR)
@@ -33,7 +33,7 @@ FLSDIR_2   = error_handling/
 FLS_2      = $(addprefix $(FLSDIR_2), \
 				error_args_opts \
 				error_mlx)
-FLSDIR_3   = parsing_scene_description_file/
+FLSDIR_3   = pars_scene_desc_file/
 FLS_3      = $(addprefix $(FLSDIR_3), \
 				map_array_preparing \
 				pars_args \
@@ -110,7 +110,7 @@ mlx_fclean:
 mlx_re:
 	make re		-C $(MLX_DIR)
 
-mac: fclean
+mac: fclean libft_fclean
 	sed -i '' '15 s/minilibx\/linux\//minilibx\/mac\//' Makefile
 	sed -i '' '16 s/libmlx.a/libmlx.dylib/' Makefile
 	sed -i '' '20 s/\ -lmlx\ -lXext\ -lX11\ -lm/\ \ -lmlx/' \
@@ -123,7 +123,7 @@ mac: fclean
 	sed -i '' 's/KEY_LEFT\ 65361/KEY_LEFT\ 123/' includes/cub3d.h
 	sed -i '' 's/KEY_RIGHT\ 65363/KEY_RIGHT\ 124/' includes/cub3d.h
 
-linux: fclean
+linux: fclean libft_fclean
 	sed -i '15 s/minilibx\/mac\//minilibx\/linux\//' Makefile
 	sed -i '16 s/libmlx.dylib/libmlx.a/' Makefile
 	sed -i '20 s/\ \ -lmlx/\ -lmlx\ -lXext\ -lX11\ -lm/' \
