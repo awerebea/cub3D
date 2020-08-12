@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:22:42 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/12 12:54:38 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 15:02:18 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ static void	f_tex_vars_calculating(t_mlx *mlx)
 		mlx->game.wall_dist * mlx->game.ray_dir_x;
 	mlx->game.wall_x -= (int)(mlx->game.wall_x);
 	if (mlx->game.wall_side == 0)
-		f_tex_x_n_step_calculation(mlx, mlx->north_tex, 0);
+		f_tex_x_n_step_calculation(mlx, mlx->no_tex, 0);
 	else if (mlx->game.wall_side == 1)
-		f_tex_x_n_step_calculation(mlx, mlx->south_tex, 1);
+		f_tex_x_n_step_calculation(mlx, mlx->so_tex, 1);
 	else if (mlx->game.wall_side == 2)
-		f_tex_x_n_step_calculation(mlx, mlx->west_tex, 1);
+		f_tex_x_n_step_calculation(mlx, mlx->we_tex, 1);
 	else if (mlx->game.wall_side == 3)
-		f_tex_x_n_step_calculation(mlx, mlx->east_tex, 0);
+		f_tex_x_n_step_calculation(mlx, mlx->ea_tex, 0);
 	mlx->game.tex_pos = (mlx->game.line_start - mlx->y_win_size / 2 + \
 							mlx->game.line_height / 2) * mlx->game.tex_step;
 }
@@ -44,14 +44,12 @@ static void	f_tex_vars_calculating(t_mlx *mlx)
 static int	f_get_pix_color_n_tex_y_calculation(t_mlx *mlx, t_img tex_img)
 {
 	mlx->game.tex_y = (int)mlx->game.tex_pos & (tex_img.height - 1);
-	if (tex_img.width < 1 || tex_img.height < 1)
-		return (-1);
 	if (mlx->game.tex_x < 0)
 		mlx->game.tex_x *= -1; //what for???
 	if (mlx->game.tex_y < 0)
 		mlx->game.tex_y *= -1; //what for???
 	if (mlx->game.tex_x > tex_img.width || mlx->game.tex_y > tex_img.height)
-		return (-1);
+		return (-1); //what for???
 	return (*(int*)(tex_img.addr + ((mlx->game.tex_x + (mlx->game.tex_y * \
 							tex_img.width)) * (tex_img.bits_per_pix / 8))));
 }
@@ -81,13 +79,13 @@ void		f_draw_vert_line(t_mlx *mlx, int x)
 	while (y <= mlx->game.line_end)
 	{
 		if (mlx->game.wall_side == 0)
-			color = f_get_pix_color_n_tex_y_calculation(mlx, mlx->north_tex);
+			color = f_get_pix_color_n_tex_y_calculation(mlx, mlx->no_tex);
 		else if (mlx->game.wall_side == 1)
-			color = f_get_pix_color_n_tex_y_calculation(mlx, mlx->south_tex);
+			color = f_get_pix_color_n_tex_y_calculation(mlx, mlx->so_tex);
 		else if (mlx->game.wall_side == 2)
-			color = f_get_pix_color_n_tex_y_calculation(mlx, mlx->west_tex);
+			color = f_get_pix_color_n_tex_y_calculation(mlx, mlx->we_tex);
 		else if (mlx->game.wall_side == 3)
-			color = f_get_pix_color_n_tex_y_calculation(mlx, mlx->east_tex);
+			color = f_get_pix_color_n_tex_y_calculation(mlx, mlx->ea_tex);
 		mlx->game.tex_pos += mlx->game.tex_step;
 		my_mlx_pixel_put(&mlx->img, x, y++, f_add_shade(color, shade));
 	}

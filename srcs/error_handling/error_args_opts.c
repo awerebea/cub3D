@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/11 15:46:09 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 15:23:44 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ be a '.cub' map-file.\nThe second argument CAN be '--save', \
 in this case the 'cub3D' just takes screenshot of spawn scene and quits.\n");
 	else if (errcode == 101)
 		ft_printf("Error\ncode #101: '%s' - invalid map file or it's \
-path (open/close failed).\n", opts->err_string);
+path (open/close failed).\n", opts->err_str);
 	else if (errcode == 102)
 		ft_printf("Error\ncode #102: '%s' - invalid map file name or path.\n\
 DESCRIPTION: the first argument is always the path to the map file, and it \
 must have a name with at least one character and an extension '.cub'.\n", \
-opts->err_string);
+opts->err_str);
 	else if (errcode == 103)
 		ft_printf("Error\ncode #103: '%s' - wrong second argument.\n\
 DESCRIPTION: it can be only '--save', in this case the 'cub3D' just takes \
-screenshot of spawn scene and quits.\n", opts->err_string);
+screenshot of spawn scene and quits.\n", opts->err_str);
 	else if (errcode == 104)
 		ft_printf("Error\ncode #104: parsing the map file with \
 'get_next_line' function failed.\n");
@@ -51,10 +51,10 @@ identifier: 'R', 'NO', 'SO', 'WE', 'EA', 'S', 'F' or 'C' \
 	else if (errcode == 301)
 		ft_printf("Error\ncode #301: string with '%s' identifier occurs more \
 than once in the file.\nDESCRIPTION: each options string must be occured only \
-once.\n", opts->err_string);
+once.\n", opts->err_str);
 	else if (errcode == 302)
 		ft_printf("Error\ncode #302: invalid string while map parsing \
-detected:\n'%s'\n", opts->err_string);
+detected:\n'%s'\n", opts->err_str);
 	else if (errcode == 303)
 		ft_printf("Error\ncode #303: empty string after the map detected.\n\
 The map must be at the end of file (remove everything after the map).\n");
@@ -75,15 +75,15 @@ static void	f_error_opts_2(int errcode, t_sdf *opts)
 		ft_printf("Error\ncode #320: '%s' - invalid texture file or it's \
 path (open/close failed).\nCheck that the path to the texture does not start \
 with a space symbol and there are no space symbols in the string after \
-the texture name.\n", opts->err_string);
+the texture name.\n", opts->err_str);
 	else if (errcode == 330)
 		ft_printf("Error\ncode #330: invalid format of string with '%s' \
 identifier.\nExamples of valid string:\n'%s 128, 0, 255'\n'%s   25,196,64'\n", \
-opts->err_string, opts->err_string, opts->err_string);
+opts->err_str, opts->err_str, opts->err_str);
 	else if (errcode == 331)
 		ft_printf("Error\ncode #331: invalid RGB color code in string with \
 '%s' identifier.\nR,G,B colors must be in range [0,255]: 0, 255, 255\n", \
-opts->err_string);
+opts->err_str);
 	else if (errcode == 340)
 		ft_printf("Error\ncode #340: not all parameters were found before \
 starting the map.\nDESCRIPTION: all strings with identifiers: 'R', 'NO', 'SO', \
@@ -95,7 +95,7 @@ DESCRIPTION: The map must be composed of only 4 possible characters: \
 player's start position and spawning orientation. Also it CAN be the space \
 symbol (' '), BUT ONLY for free space outside of the walls area.\nAnd finally: \
 the map must be closed/surrounded by walls.\n", opts->map_row_index + 1, \
-opts->err_string);
+opts->err_str);
 }
 
 static void	f_error_opts_3(int errcode, t_sdf *opts)
@@ -113,11 +113,11 @@ description file.\n");
 		ft_printf("Error\ncode #345: invalid first map line: '%s'.\n\
 DESCRIPTION: in the first line of the map there can be no characters other \
 than 1 and a space (' ') (the map must be closed/surrounded by walls).\n", \
-opts->err_string);
+opts->err_str);
 	else if (errcode == 346)
 		ft_printf("Error\ncode #346: map column #%s is invalid.\nDESCRIPTION: \
 the map must be closed/surrounded by walls.\n", \
-opts->err_string);
+opts->err_str);
 }
 
 void		f_print_err(int errcode, t_sdf *opts)

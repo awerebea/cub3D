@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/21 15:05:01 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/10 12:20:28 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 15:19:19 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ int			f_pars_floor_color(char *line, int i, t_sdf *opts)
 
 	errcode = 0;
 	if (opts->floor_color != -1)
-		return (opts->err_string = ft_strdup("F")) ? 301 : 200;
+		return (opts->err_str = ft_strdup("F")) ? 301 : 200;
 	i++;
 	if ((errcode = f_check_color_string(line, i, rgb)))
-		return (opts->err_string = ft_strdup("F")) ? errcode : 200;
+		return (opts->err_str = ft_strdup("F")) ? errcode : 200;
 	if (rgb[0] > 255 || rgb[1] > 255 || rgb[2] > 255)
-		return (opts->err_string = ft_strdup("F")) ? 331 : 200;
+		return (opts->err_str = ft_strdup("F")) ? 331 : 200;
 	opts->floor_color = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
 	return (0);
 }
@@ -68,12 +68,12 @@ int			f_pars_ceiling_color(char *line, int i, t_sdf *opts)
 
 	errcode = 0;
 	if (opts->ceiling_color != -1)
-		return (opts->err_string = ft_strdup("C")) ? 301 : 200;
+		return (opts->err_str = ft_strdup("C")) ? 301 : 200;
 	i++;
 	if ((errcode = f_check_color_string(line, i, rgb)))
-		return (opts->err_string = ft_strdup("C")) ? errcode : 200;
+		return (opts->err_str = ft_strdup("C")) ? errcode : 200;
 	if (rgb[0] > 255 || rgb[1] > 255 || rgb[2] > 255)
-		return (opts->err_string = ft_strdup("C")) ? 331 : 200;
+		return (opts->err_str = ft_strdup("C")) ? 331 : 200;
 	opts->ceiling_color = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
 	return (0);
 }
@@ -83,20 +83,19 @@ int			f_pars_sprite_texture(char *line, int i, t_sdf *opts)
 	int				errcode;
 	int				fd;
 
-	if (opts->sprite_texture_path)
-		return (opts->err_string = ft_strdup("S")) ? 301 : 200;
+	if (opts->sp_tex)
+		return (opts->err_str = ft_strdup("S")) ? 301 : 200;
 	errcode = 0;
 	i += 3;
 	f_skip_spaces(line, &i);
-	if (!(opts->sprite_texture_path = ft_strdup(line + i)))
+	if (!(opts->sp_tex = ft_strdup(line + i)))
 		return (200);
-	if ((fd = open(opts->sprite_texture_path, O_RDONLY)) < 0)
+	if ((fd = open(opts->sp_tex, O_RDONLY)) < 0)
 	{
-		if (!(opts->err_string = ft_strdup(opts->sprite_texture_path)))
+		if (!(opts->err_str = ft_strdup(opts->sp_tex)))
 			return (200);
 		f_print_err(320, opts);
 		return (fd);
 	}
-	/* errcode = f_texture_check(opts, fd); */
 	return (close(fd) < 0) ? 320 : errcode;
 }

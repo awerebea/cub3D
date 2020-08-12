@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 12:38:55 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/27 17:01:14 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 15:23:50 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 
 static int		f_check_opts_completeness(t_sdf *opts)
 {
-	if (opts->x_win_size == -1 || opts->y_win_size == -1 || \
-		!opts->north_texture_path || !opts->south_texture_path || \
-		!opts->west_texture_path || !opts->east_texture_path || \
-		!opts->sprite_texture_path || opts->floor_color == -1 || \
+	if (opts->x_win_size == -1 || opts->y_win_size == -1 || !opts->no_tex \
+		|| !opts->so_tex || !opts->we_tex || !opts->ea_tex \
+		|| !opts->sp_tex || opts->floor_color == -1 || \
 		opts->ceiling_color == -1)
 		return (1);
 	opts->pars_map_started = 1;
@@ -30,13 +29,13 @@ static int		f_check_line(char *line, int i, t_sdf *opts)
 	while (line[++i])
 	{
 		if (!opts->map_row_index && !ft_strchr(" 1", line[i]))
-			return (opts->err_string = ft_strdup(line)) ? 345 : 200;
+			return (opts->err_str = ft_strdup(line)) ? 345 : 200;
 		if (opts->map_row_index && !ft_strchr(" 012NSWE", line[i]))
-			return (opts->err_string = ft_strdup(line)) ? 341 : 200;
+			return (opts->err_str = ft_strdup(line)) ? 341 : 200;
 		if (line[i] == ' ' && !(line[i - 1] == '1' || line[i - 1] == ' '))
-			return (opts->err_string = ft_strdup(line)) ? 341 : 200;
+			return (opts->err_str = ft_strdup(line)) ? 341 : 200;
 		if (ft_strchr("02NSWE", line[i]) && line[i + 1] == '\0')
-			return (opts->err_string = ft_strdup(line)) ? 341 : 200;
+			return (opts->err_str = ft_strdup(line)) ? 341 : 200;
 		if (ft_strchr("NSWE", line[i]) && !opts->spawn_orientation)
 		{
 			opts->spawn_orientation = line[i];
@@ -76,7 +75,7 @@ int				f_pars_map(char *line, t_sdf *opts)
 	while (line[i] != '1')
 	{
 		if (line[i] != ' ')
-			return (opts->err_string = ft_strdup(line)) ? 341 : 200;
+			return (opts->err_str = ft_strdup(line)) ? 341 : 200;
 		i++;
 	}
 	if (opts->prior_spaces_mapline < 0)

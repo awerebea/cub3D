@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/12 11:38:16 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 15:18:59 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ typedef	struct	s_sdf
 {
 	int			x_win_size;
 	int			y_win_size;
-	char		*north_texture_path;
-	char		*south_texture_path;
-	char		*west_texture_path;
-	char		*east_texture_path;
-	char		*sprite_texture_path;
+	char		*no_tex;
+	char		*so_tex;
+	char		*we_tex;
+	char		*ea_tex;
+	char		*sp_tex;
 	int			floor_color;
 	int			ceiling_color;
 	int			gnl_ret;
@@ -56,7 +56,7 @@ typedef	struct	s_sdf
 	int			max_mapline_len;
 	int			prior_spaces_mapline;
 	int			errcode;
-	char		*err_string;
+	char		*err_str;
 	int			map_row_index;
 	char		**map_array;
 	char		*map_line;
@@ -138,13 +138,14 @@ typedef struct	s_mlx
 	void		*win_ptr;
 	int			x_win_size;
 	int			y_win_size;
+	int			errcode;
 	t_sdf		*opts;
 	t_img		img;
-	t_img		north_tex;
-	t_img		south_tex;
-	t_img		west_tex;
-	t_img		east_tex;
-	t_img		sprite_tex;
+	t_img		no_tex;
+	t_img		so_tex;
+	t_img		we_tex;
+	t_img		ea_tex;
+	t_img		sp_tex;
 	t_minimap	map;
 	t_player	player;
 	t_game		game;
@@ -159,7 +160,7 @@ int				f_get_g_from_int(int argb);
 int				f_get_b_from_int(int argb);
 int				f_add_shade(int color, float shade);
 int				f_exit(int errcode, t_sdf *opts);
-int				f_close_n_exit(t_mlx *mlx, int window);
+int				f_close_n_exit(t_mlx *mlx);
 int				f_map_array_preparing(t_sdf *opts);
 int				f_pars_ceiling_color(char *line, int i, t_sdf *opts);
 int				f_pars_desc_file(char *map_file, t_sdf *opts);
@@ -167,7 +168,7 @@ int				f_pars_floor_color(char *line, int i, t_sdf *opts);
 int				f_pars_map(char *line, t_sdf *opts);
 int				f_pars_sprite_texture(char *line, int i, t_sdf *opts);
 int				f_pars_wall_textures(char *line, int i, t_sdf *opts);
-int				f_window(t_sdf *opts);
+void			f_window(t_sdf *opts);
 void			f_print_err(int errcode, t_sdf *opts);
 void			f_error_mlx(int errcode, t_sdf *opts);
 void			f_skip_spaces(char *line, int *i);
@@ -178,6 +179,7 @@ void			f_draw_minimap(t_mlx *mlx);
 void			f_player_pos_init(t_mlx *mlx);
 void			f_draw_player_minimap(t_mlx *mlx);
 void			f_raycasting(t_mlx *mlx);
+int				f_check_textures_for_valid(t_mlx *mlx);
 void			f_draw_vert_line(t_mlx *mlx, int x);
 int				f_controls_handling(int key, t_mlx *mlx);
 

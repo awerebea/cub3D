@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/07/30 16:27:03 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 15:23:50 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int		f_pars_resolution(char *line, int i, t_sdf *opts)
 
 	errcode = 0;
 	if (opts->x_win_size != -1)
-		return (opts->err_string = ft_strdup("R")) ? 301 : 200;
+		return (opts->err_str = ft_strdup("R")) ? 301 : 200;
 	i++;
 	opts->x_win_size = f_cub3d_atoi(line, &i);
 	if (ft_isspace(line[i]))
@@ -63,7 +63,7 @@ static int		f_pars_line(char *line, t_sdf *opts)
 	if (line[i] == '1')
 		return (f_pars_map(line, opts));
 	if (line[i] && opts->pars_map_started && opts->gnl_ret)
-		return (opts->err_string = ft_strdup(line)) ? 302 : 200;
+		return (opts->err_str = ft_strdup(line)) ? 302 : 200;
 	if (!line[i] && opts->pars_map_started && opts->gnl_ret)
 		return (303);
 	if (!opts->gnl_ret && !opts->spawn_orientation)
@@ -89,7 +89,7 @@ static int		f_map_array_check_columns(t_sdf *opts)
 				(row + 1 > opts->map_row_index || \
 				opts->map_array[row - 1][col] == ' ')))
 			{
-				return ((opts->err_string = \
+				return ((opts->err_str = \
 					ft_itoa(col + opts->prior_spaces_mapline + 1)) ? 346 : 200);
 			}
 			row++;
@@ -106,7 +106,7 @@ int				f_pars_desc_file(char *map_file, t_sdf *opts)
 
 	if ((fd = open(map_file, O_RDONLY)) < 0)
 	{
-		if (!(opts->err_string = ft_strdup(map_file)))
+		if (!(opts->err_str = ft_strdup(map_file)))
 			return (200);
 		f_print_err(101, opts);
 		return (fd);

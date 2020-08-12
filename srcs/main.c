@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/02 11:06:06 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 15:24:55 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@ static void		f_clean_map_array(t_sdf *opts)
 
 static void		f_clean_mem(t_sdf *opts)
 {
-	free((opts->north_texture_path) ? opts->north_texture_path : NULL);
-	opts->north_texture_path = NULL;
-	free((opts->south_texture_path) ? opts->south_texture_path : NULL);
-	opts->south_texture_path = NULL;
-	free((opts->west_texture_path) ? opts->west_texture_path : NULL);
-	opts->west_texture_path = NULL;
-	free((opts->east_texture_path) ? opts->east_texture_path : NULL);
-	opts->east_texture_path = NULL;
-	free((opts->sprite_texture_path) ? opts->sprite_texture_path : NULL);
-	opts->sprite_texture_path = NULL;
-	free((opts->err_string) ? opts->err_string : NULL);
-	opts->err_string = NULL;
+	free((opts->no_tex) ? opts->no_tex : NULL);
+	opts->no_tex = NULL;
+	free((opts->so_tex) ? opts->so_tex : NULL);
+	opts->so_tex = NULL;
+	free((opts->we_tex) ? opts->we_tex : NULL);
+	opts->we_tex = NULL;
+	free((opts->ea_tex) ? opts->ea_tex : NULL);
+	opts->ea_tex = NULL;
+	free((opts->sp_tex) ? opts->sp_tex : NULL);
+	opts->sp_tex = NULL;
+	free((opts->err_str) ? opts->err_str : NULL);
+	opts->err_str = NULL;
 	free((opts->map_line) ? opts->map_line : NULL);
 	opts->map_line = NULL;
 	if (opts->map_array)
@@ -54,11 +54,11 @@ static int		f_opts_init(t_sdf *opts)
 {
 	opts->x_win_size = -1;
 	opts->y_win_size = -1;
-	opts->north_texture_path = NULL;
-	opts->south_texture_path = NULL;
-	opts->west_texture_path = NULL;
-	opts->east_texture_path = NULL;
-	opts->sprite_texture_path = NULL;
+	opts->no_tex = NULL;
+	opts->so_tex = NULL;
+	opts->we_tex = NULL;
+	opts->ea_tex = NULL;
+	opts->sp_tex = NULL;
 	opts->floor_color = -1;
 	opts->ceiling_color = -1;
 	opts->gnl_ret = 1;
@@ -70,7 +70,7 @@ static int		f_opts_init(t_sdf *opts)
 	opts->max_mapline_len = 0;
 	opts->prior_spaces_mapline = -1;
 	opts->errcode = 0;
-	opts->err_string = NULL;
+	opts->err_str = NULL;
 	opts->map_row_index = -1;
 	opts->map_array = NULL;
 	if (!(opts->map_line = ft_strdup("")))
@@ -92,9 +92,6 @@ int				main(int argc, char **argv)
 {
 	int		errcode;
 	t_sdf	opts;
-	int		r;
-	int		g;
-	int		b;
 
 	if ((errcode = f_opts_init(&opts)))
 		return (errcode);
@@ -102,25 +99,6 @@ int				main(int argc, char **argv)
 		return (f_exit(errcode, &opts));
 	if ((errcode = f_pars_desc_file(argv[1], &opts)))
 		return (f_exit(errcode, &opts));
-	if ((errcode = f_window(&opts)))
-		return (f_exit(errcode, &opts));
-	ft_printf("Screenshot: %d\n", opts.screenshot);
-	r = (opts.ceiling_color & 0xFF0000) >> 16;
-	g = (opts.ceiling_color & 0xFF00) >> 8;
-	b = opts.ceiling_color & 0xFF;
-	ft_printf("Ceiling RGB: %3d, %3d, %3d\n", r, g, b);
-	ft_printf("Spawn X: %d, Y: %d orientation: %c\n", \
-			opts.spawn_point_x, opts.spawn_point_y, opts.spawn_orientation);
-	ft_printf("Map line:\n%s", opts.map_line);
-	ft_printf("Max mapline length: %d\n", opts.max_mapline_len);
-	ft_printf("Min prior spaces: %d\n", opts.prior_spaces_mapline);
-	int i = 0;
-	ft_printf("Map array:\n");
-	while (opts.map_array[i])
-	{
-		ft_printf("|");
-		ft_printf(opts.map_array[i++]);
-		ft_printf("|\n");
-	}
-	return (f_exit(errcode, &opts));
+	f_window(&opts);
+	return (0);
 }

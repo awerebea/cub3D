@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/12 10:43:29 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/12 13:44:31 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ FLS_4      = $(addprefix $(FLSDIR_4), \
 				draw_background \
 				draw_minimap \
 				draw_vert_line \
+				engine_tools \
 				game \
 				raycasting \
 				window)

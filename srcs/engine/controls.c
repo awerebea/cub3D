@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 00:08:19 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/11 12:30:20 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 14:52:00 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void	f_keys_d_right(int key, t_mlx *mlx)
 int			f_controls_handling(int key, t_mlx *mlx)
 {
 	if (key == KEY_ESC)
-		f_close_n_exit(mlx, 1);
+		f_close_n_exit(mlx);
 	else if (key == KEY_W || key == KEY_S)
 		f_keys_w_s(key, mlx);
 	else if (key == KEY_A || key == KEY_LEFT)
