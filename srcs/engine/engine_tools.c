@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 13:00:56 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/12 15:18:45 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 21:01:44 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 int			f_close_n_exit(t_mlx *mlx)
 {
+	if (mlx->game.wall_dist_arr)
+		free(mlx->game.wall_dist_arr);
 	if (mlx->win_ptr)
 		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
 	free(mlx->mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/12 15:33:31 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 20:47:03 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,13 +118,13 @@ typedef struct	s_game
 	float		ray_dir_y;
 	int			hit;
 	float		wall_dist;
+	float		*wall_dist_arr;
 	int			wall_side;
 	int			line_height;
 	int			line_start;
 	int			line_end;
 	float		move_speed;
 	float		rot_speed;
-
 	float		wall_x;
 	int			tex_x;
 	int			tex_y;

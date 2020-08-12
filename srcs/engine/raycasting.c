@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 09:36:10 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/12 02:40:43 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 21:10:12 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void		f_raycasting(t_mlx *mlx)
 		f_delta_dist_calculation(mlx);
 		f_step_n_side_dist_calculation(mlx);
 		f_check_wall_hit_n_wall_dist_calculation(mlx);
+		mlx->game.wall_dist_arr[x] = mlx->game.wall_dist;
 		f_draw_vert_line(mlx, x++);
 	}
 }
