@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:22:42 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/12 15:02:18 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 15:46:05 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 static void	f_tex_x_n_step_calculation(t_mlx *mlx, t_img tex_img, int mirror)
 {
 	if (!mirror)
-		mlx->game.tex_x = (int)(mlx->game.wall_x * (float)(tex_img.width));
+		mlx->game.tex_x = (unsigned int)(mlx->game.wall_x * \
+							(float)(tex_img.width));
 	else
-		mlx->game.tex_x = (int)((float)(tex_img.width) - mlx->game.wall_x \
-								* (float)(tex_img.width) - 1);
+		mlx->game.tex_x = (unsigned int)((float)(tex_img.width) - \
+							mlx->game.wall_x * (float)(tex_img.width) - 1);
 	mlx->game.tex_step = 1.0 * tex_img.height / mlx->game.line_height;
 }
 

@@ -6,12 +6,14 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 11:25:29 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/12 15:23:44 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 16:31:23 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "ft_printf.h"
+#include <string.h>
+#include <errno.h>
 
 static void	f_error_arguments(int errcode, t_sdf *opts)
 {
@@ -72,8 +74,8 @@ opts->x_win_size, opts->y_win_size);
 static void	f_error_opts_2(int errcode, t_sdf *opts)
 {
 	if (errcode == 320)
-		ft_printf("Error\ncode #320: '%s' - invalid texture file or it's \
-path (open/close failed).\nCheck that the path to the texture does not start \
+		ft_printf("Error\ncode #320: '%s' - invalid texture file path \
+(open/close failed).\nCheck that the path to the texture does not start \
 with a space symbol and there are no space symbols in the string after \
 the texture name.\n", opts->err_str);
 	else if (errcode == 330)
@@ -122,6 +124,8 @@ opts->err_str);
 
 void		f_print_err(int errcode, t_sdf *opts)
 {
+	if (errcode < 0)
+		ft_printf("%s\n", strerror(errno));
 	if (errcode < 300)
 		f_error_arguments(errcode, opts);
 	else if (errcode < 320)

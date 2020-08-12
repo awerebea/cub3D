@@ -6,49 +6,12 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/12 15:24:55 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 15:57:59 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft.h"
-#include "ft_printf.h"
-#include <string.h>
-#include <errno.h>
-
-static void		f_clean_map_array(t_sdf *opts)
-{
-	int		i;
-
-	i = 0;
-	while (opts->map_array[i])
-	{
-		free(opts->map_array[i]);
-		opts->map_array[i++] = NULL;
-	}
-	free(opts->map_array);
-	opts->map_array = NULL;
-}
-
-static void		f_clean_mem(t_sdf *opts)
-{
-	free((opts->no_tex) ? opts->no_tex : NULL);
-	opts->no_tex = NULL;
-	free((opts->so_tex) ? opts->so_tex : NULL);
-	opts->so_tex = NULL;
-	free((opts->we_tex) ? opts->we_tex : NULL);
-	opts->we_tex = NULL;
-	free((opts->ea_tex) ? opts->ea_tex : NULL);
-	opts->ea_tex = NULL;
-	free((opts->sp_tex) ? opts->sp_tex : NULL);
-	opts->sp_tex = NULL;
-	free((opts->err_str) ? opts->err_str : NULL);
-	opts->err_str = NULL;
-	free((opts->map_line) ? opts->map_line : NULL);
-	opts->map_line = NULL;
-	if (opts->map_array)
-		f_clean_map_array(opts);
-}
 
 static int		f_opts_init(t_sdf *opts)
 {
@@ -76,16 +39,6 @@ static int		f_opts_init(t_sdf *opts)
 	if (!(opts->map_line = ft_strdup("")))
 		return (200);
 	return (0);
-}
-
-int				f_exit(int errcode, t_sdf *opts)
-{
-	if (errcode > 0)
-		f_print_err(errcode, opts);
-	else if (errcode < 0)
-		ft_printf("%s\n", strerror(errno));
-	f_clean_mem(opts);
-	return (errcode);
 }
 
 int				main(int argc, char **argv)
