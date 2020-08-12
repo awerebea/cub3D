@@ -6,13 +6,11 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:22:42 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/12 02:44:30 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/12 03:03:30 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-/* #include "libft.h" */
-#include <math.h>
 
 static void	f_tex_x_n_step_calculation(t_mlx *mlx, t_img tex_img, int mirror)
 {
@@ -47,10 +45,11 @@ static int	f_get_pix_color_n_tex_y_calculation(t_mlx *mlx, t_img tex_img)
 	mlx->game.tex_y = (int)mlx->game.tex_pos & (tex_img.height - 1);
 	if (tex_img.width < 1 || tex_img.height < 1)
 		return (-1);
-	/* mlx->game.tex_x = abs(mlx->game.tex_x); */ //what for???
-	/* mlx->game.tex_y = abs(mlx->game.tex_y); */ //what for???
-	if (mlx->game.tex_x > tex_img.width || mlx->game.tex_y > tex_img.height || \
-			mlx->game.tex_x < 0 || mlx->game.tex_y < 0)
+	if (mlx->game.tex_x < 0)
+		mlx->game.tex_x *= -1; //what for???
+	if (mlx->game.tex_y < 0)
+		mlx->game.tex_y *= -1; //what for???
+	if (mlx->game.tex_x > tex_img.width || mlx->game.tex_y > tex_img.height)
 		return (-1);
 	return (*(int*)(tex_img.addr + ((mlx->game.tex_x + (mlx->game.tex_y * \
 							tex_img.width)) * (tex_img.bits_per_pix / 8))));
