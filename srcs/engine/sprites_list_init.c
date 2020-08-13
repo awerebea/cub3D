@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 02:04:25 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 17:56:23 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/13 21:16:15 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void		f_sprites_init(t_mlx *mlx)
 	int		k;
 	t_sp	*sp;
 
-	k = 1;
+	k = 0;
 	i = 1;
 	while (i < mlx->opts->map_row_index)
 	{
@@ -60,15 +60,15 @@ void		f_sprites_init(t_mlx *mlx)
 		{
 			if (mlx->opts->map_array[i][j] == '2')
 			{
-				sp = f_sprite_new(mlx, i, j, k);
+				sp = f_sprite_new(mlx, i, j, ++k);
 				if (mlx->sp_list)
 					f_sprite_add_front(mlx, sp);
 				else
 					mlx->sp_list = sp;
-				k++;
 			}
 			j++;
 		}
 		i++;
 	}
+	mlx->game.sp_count = k;
 }

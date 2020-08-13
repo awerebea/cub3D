@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 00:10:47 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 20:35:29 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/13 20:51:48 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ void		f_sprites_list_sort_by_dist_desc(t_mlx *mlx)
 		}
 		sp = mlx->sp_list;
 	}
-	/* if (sp->next)                     */
-	/*     f_sprites_swap_with_next(sp); */
 }
 
 void		f_sprites_dist_calculating(t_mlx *mlx)
