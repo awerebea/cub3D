@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 00:10:47 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 20:51:48 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/13 22:45:22 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,72 @@ void		f_sprites_dist_calculating(t_mlx *mlx)
 
 void		f_sprites_handling(t_mlx *mlx)
 {
+	t_sp	*sp;
+	int		x;
+	int		y;
+	int		tex_x;
+	int		tex_y;
+	int		d;
+	int		color;
+
 	f_sprites_dist_calculating(mlx);
 	f_sprites_list_sort_by_dist_desc(mlx);
+	sp = mlx->sp_list;
+	while (sp)
+	{
+		mlx->game.sp_dist_x = sp->x - mlx->game.player_x;
+		mlx->game.sp_dist_y = sp->y - mlx->game.player_y;
+		mlx->game.inv_factor = 1.0 / (mlx->game.plane_x * mlx->game.dir_y - \
+				mlx->game.plane_y *  mlx->game.dir_x);
+		mlx->game.transform_x = mlx->game.inv_factor * (mlx->game.dir_y * \
+				sp->x - mlx->game.dir_x * sp->y);
+		mlx->game.transform_y = mlx->game.inv_factor * (-mlx->game.plane_y * \
+				sp->x + mlx->game.plane_x * sp->y);
+		mlx->game.sp_scr_x = (int)((mlx->x_win_size / 2) * (1 + \
+				mlx->game.transform_x / mlx->game.transform_y));
+		if ((mlx->game.sp_height = (int)(mlx->y_win_size / \
+						mlx->game.transform_y)) < 0)
+			mlx->game.sp_height *= -1;
+		if ((mlx->game.sp_start_y = -mlx->game.sp_height / 2 + \
+					mlx->y_win_size / 2) < 0)
+			mlx->game.sp_start_y = 0;
+		if ((mlx->game.sp_end_y = mlx->game.sp_height / 2 + \
+					mlx->y_win_size / 2) < 0)
+			mlx->game.sp_end_y = mlx->y_win_size - 1;
+		if ((mlx->game.sp_width = (int)(mlx->y_win_size / \
+						mlx->game.transform_y)) < 0)
+			mlx->game.sp_width *= -1;
+		if ((mlx->game.sp_start_x = -mlx->game.sp_width / 2 + \
+					mlx->game.sp_scr_x) < 0)
+			mlx->game.sp_start_x = 0;
+		if ((mlx->game.sp_end_x = mlx->game.sp_width / 2 + \
+					mlx->game.sp_scr_x) < 0)
+			mlx->game.sp_end_x = mlx->x_win_size - 1;
+		x = mlx->game.sp_start_x;
+		while (x < mlx->game.sp_end_x)
+		{
+			tex_x = (int)(256 * (x - (-mlx->game.sp_width / 2 + \
+				mlx->game.sp_scr_x)) * mlx->sp_tex.width / mlx->game.sp_width);
+			if (mlx->game.transform_y > 0 && x > 0 && x < mlx->x_win_size && \
+					mlx->game.transform_y < mlx->game.wall_dist_arr[x])
+			{
+				y = mlx->game.sp_start_y;
+				while (y < mlx->game.sp_end_y)
+				{
+					d = y * 256 - mlx->y_win_size * 128 + mlx->game.sp_height \
+						* 128;
+					tex_y = ((d * mlx->sp_tex.height) / mlx->game.sp_height) \
+							/ 256;
+					/* color = *(int*)(mlx->sp_tex.addr + ((tex_x + (tex_y * \     */
+					/*     mlx->sp_tex.width)) * (mlx->sp_tex.bits_per_pix / 8))); */
+					color = 0x00155155;
+					if (color & 0x00FFFFFF)
+						my_mlx_pixel_put(&mlx->img, x, y, color);
+					y++;
+				}
+			}
+			x++;
+		}
+		sp = sp->next;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 21:10:35 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/13 22:05:02 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,18 @@ typedef struct	s_game
 	float		tex_pos;
 	float		tex_step;
 	int			sp_count;
+	float		sp_dist_x;
+	float		sp_dist_y;
+	float		inv_factor;
+	float		transform_x;
+	float		transform_y;
+	int			sp_scr_x;
+	int			sp_height;
+	int			sp_start_y;
+	int			sp_end_y;
+	int			sp_width;
+	int			sp_start_x;
+	int			sp_end_x;
 }				t_game;
 
 typedef struct	s_sp
