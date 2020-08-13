@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/13 02:07:00 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/13 14:19:24 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,15 +45,18 @@ FLSDIR_4   = engine/
 FLS_4      = $(addprefix $(FLSDIR_4), \
 				controls \
 				draw_background \
-				draw_minimap \
 				draw_vert_line \
 				engine_tools \
 				game \
+				game_init \
 				raycasting \
 				sprites_handling \
-				sprites_list_init \
-				window)
-SRC        = $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4)
+				sprites_list_init)
+FLSDIR_5   = bonus/
+FLS_5      = $(addprefix $(FLSDIR_5), \
+				draw_minimap \
+				minimap_init)
+SRC        = $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4) $(FLS_5)
 
 OBJ        = $(addprefix $(OBJDIR), $(SRC:=.o))
 DFLS       = $(SRC:=.d)
@@ -68,7 +71,7 @@ $(NAME):		$(LIBFT) $(MLX) $(OBJ)
 
 $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
 	mkdir -p	$(OBJDIR) $(addprefix $(OBJDIR), $(FLSDIR_1) $(FLSDIR_2) \
-				$(FLSDIR_3) $(FLSDIR_4))
+				$(FLSDIR_3) $(FLSDIR_4) $(FLSDIR_5))
 	$(CC)		$(FLAGS) $(INCLUDES) -c $< -o $@ -MMD
 
 include $(wildcard $(addprefix $(OBJDIR), $(DFLS)))
@@ -140,7 +143,7 @@ linux: fclean libft_fclean
 
 libs: $(LIBFT) $(MLX)
 
-re:				fclean_all all
+re:				fclean all
 
 test: debug
 	./$(NAME) maps/test.cub

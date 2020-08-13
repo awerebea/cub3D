@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 13:47:17 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/12 15:57:59 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/13 11:45:10 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ int				main(int argc, char **argv)
 		return (f_exit(errcode, &opts));
 	if ((errcode = f_pars_desc_file(argv[1], &opts)))
 		return (f_exit(errcode, &opts));
-	f_window(&opts);
+	f_game(&opts);
 	return (0);
 }

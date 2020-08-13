@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 02:45:02 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/13 14:11:22 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ typedef	struct	s_sdf
 	int			gnl_ret;
 	int			screenshot;
 	int			pars_map_started;
-	int			spawn_point_x;
-	int			spawn_point_y;
-	char		spawn_orientation;
 	int			max_mapline_len;
 	int			prior_spaces_mapline;
 	int			errcode;
 	char		*err_str;
-	int			map_row_index;
 	char		**map_array;
 	char		*map_line;
+	int			map_row_index;
+	int			spawn_point_x;
+	int			spawn_point_y;
+	char		spawn_orientation;
 }				t_sdf;
 
 typedef struct	s_img
@@ -118,8 +118,8 @@ typedef struct	s_game
 	float		ray_dir_y;
 	int			hit;
 	float		wall_dist;
-	float		*wall_dist_arr;
 	int			wall_side;
+	float		*wall_dist_arr;
 	int			line_height;
 	int			line_start;
 	int			line_end;
@@ -148,7 +148,6 @@ typedef struct	s_mlx
 	void		*win_ptr;
 	int			x_win_size;
 	int			y_win_size;
-	int			errcode;
 	t_sdf		*opts;
 	t_img		img;
 	t_img		no_tex;
@@ -160,18 +159,22 @@ typedef struct	s_mlx
 	t_player	player;
 	t_game		game;
 	t_sp		*sp_list;
+	int			errcode;
 }				t_mlx;
 
-int				f_check_args(int argc, char **argv, t_sdf *opts);
-int				f_cub3d_atoi(char *line, int *i);
-int				f_get_int_from_argb(int a, int r, int g, int b);
-int				f_get_a_from_int(int argb);
-int				f_get_r_from_int(int argb);
-int				f_get_g_from_int(int argb);
-int				f_get_b_from_int(int argb);
 int				f_add_shade(int color, float shade);
-int				f_exit(int errcode, t_sdf *opts);
+int				f_check_args(int argc, char **argv, t_sdf *opts);
+int				f_check_textures_for_valid(t_mlx *mlx);
 int				f_close_n_exit(t_mlx *mlx);
+int				f_cub3d_atoi(char *line, int *i);
+int				f_exit(int errcode, t_sdf *opts);
+int				f_get_a_from_int(int argb);
+int				f_get_b_from_int(int argb);
+int				f_get_g_from_int(int argb);
+int				f_get_int_from_argb(int a, int r, int g, int b);
+int				f_get_r_from_int(int argb);
+int				f_key_press(int key, t_mlx *mlx);
+int				f_key_release(int key, t_mlx *mlx);
 int				f_map_array_preparing(t_sdf *opts);
 int				f_pars_ceiling_color(char *line, int i, t_sdf *opts);
 int				f_pars_desc_file(char *map_file, t_sdf *opts);
@@ -179,21 +182,22 @@ int				f_pars_floor_color(char *line, int i, t_sdf *opts);
 int				f_pars_map(char *line, t_sdf *opts);
 int				f_pars_sprite_texture(char *line, int i, t_sdf *opts);
 int				f_pars_wall_textures(char *line, int i, t_sdf *opts);
-void			f_window(t_sdf *opts);
-void			f_print_err(int errcode, t_sdf *opts);
-void			f_error_mlx(int errcode, t_sdf *opts);
-void			f_skip_spaces(char *line, int *i);
-void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void			f_game(t_mlx *mlx);
 void			f_draw_background(t_mlx *mlx);
-void			f_draw_minimap(t_mlx *mlx);
-void			f_player_pos_init(t_mlx *mlx);
-void			f_draw_player_minimap(t_mlx *mlx);
-void			f_raycasting(t_mlx *mlx);
-int				f_check_textures_for_valid(t_mlx *mlx);
 void			f_draw_vert_line(t_mlx *mlx, int x);
-int				f_controls_handling(int key, t_mlx *mlx);
-void			f_sprites_handling(t_mlx *mlx);
+void			f_error_mlx(int errcode, t_sdf *opts);
 void			f_fill_sprites_list(t_mlx *mlx);
+void			f_game(t_sdf *opts);
+void			f_player_pos_init(t_mlx *mlx);
+void			f_print_err(int errcode, t_sdf *opts);
+void			f_raycasting(t_mlx *mlx);
+void			f_skip_spaces(char *line, int *i);
+void			f_sprites_handling(t_mlx *mlx);
+int				f_game_init(t_mlx *mlx);
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
+
+void			f_minimap_init(t_mlx *mlx);
+void			f_player_pos_init(t_mlx *mlx);
+void			f_draw_minimap(t_mlx *mlx);
+void			f_draw_player_minimap(t_mlx *mlx);
 
 #endif
