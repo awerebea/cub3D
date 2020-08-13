@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 02:04:25 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 02:50:45 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/13 17:56:23 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	f_sprite_add_front(t_mlx *mlx, t_sp *sp)
 	}
 }
 
-void		f_fill_sprites_list(t_mlx *mlx)
+void		f_sprites_init(t_mlx *mlx)
 {
 	int		i;
 	int		j;

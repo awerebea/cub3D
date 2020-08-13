@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 17:05:51 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/13 17:58:58 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,13 +199,13 @@ int				f_pars_wall_textures(char *line, int i, t_sdf *opts);
 void			f_draw_background(t_mlx *mlx);
 void			f_draw_vert_line(t_mlx *mlx, int x);
 void			f_error_mlx(int errcode, t_sdf *opts);
-void			f_fill_sprites_list(t_mlx *mlx);
 void			f_game(t_sdf *opts);
 void			f_player_pos_init(t_mlx *mlx);
 void			f_print_err(int errcode, t_sdf *opts);
 void			f_raycasting(t_mlx *mlx);
 void			f_skip_spaces(char *line, int *i);
 void			f_sprites_handling(t_mlx *mlx);
+void			f_sprites_init(t_mlx *mlx);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 void			f_minimap_init(t_mlx *mlx);
