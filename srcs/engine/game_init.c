@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 14:12:05 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/13 14:32:28 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,17 @@
 #include "libft.h"
 #include "ft_printf.h"
 #include <math.h>
+
+static void	f_key_flags_init(t_mlx *mlx)
+{
+	mlx->key_flags.esc = 0;
+	mlx->key_flags.w = 0;
+	mlx->key_flags.a = 0;
+	mlx->key_flags.s = 0;
+	mlx->key_flags.d = 0;
+	mlx->key_flags.left = 0;
+	mlx->key_flags.right = 0;
+}
 
 static void	f_dir_n_plane_calculation(t_mlx *mlx)
 {
@@ -56,5 +67,6 @@ int			f_game_init(t_mlx *mlx)
 	if (!(mlx->game.wall_dist_arr = (float*)malloc(sizeof(float) * \
 					mlx->x_win_size)))
 		return (mlx->errcode = 200);
+	f_key_flags_init(mlx);
 	return (0);
 }

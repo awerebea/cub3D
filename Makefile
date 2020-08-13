@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/13 14:19:24 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/13 14:53:08 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,12 +43,13 @@ FLS_3      = $(addprefix $(FLSDIR_3), \
 				pars_options_2)
 FLSDIR_4   = engine/
 FLS_4      = $(addprefix $(FLSDIR_4), \
-				controls \
 				draw_background \
 				draw_vert_line \
 				engine_tools \
 				game \
 				game_init \
+				key_press_n_release \
+				key_process \
 				raycasting \
 				sprites_handling \
 				sprites_list_init)
