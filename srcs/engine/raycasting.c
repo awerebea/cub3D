@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 09:36:10 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 17:59:32 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/13 18:12:07 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,5 @@ void		f_raycasting(t_mlx *mlx)
 		mlx->game.wall_dist_arr[x] = mlx->game.wall_dist;
 		f_draw_vert_line(mlx, x++);
 	}
-	/* f_sprites_handling(mlx); */
+	f_sprites_handling(mlx);
 }
