@@ -12,12 +12,12 @@
 
 NAME       = cub3D
 LIBFT      = Libft/libft.a
-MLX_DIR    = minilibx/linux/
-MLX_NAME   = libmlx.a
+MLX_DIR    = minilibx/mac/
+MLX_NAME   = libmlx.dylib
 MLX        = $(addprefix $(MLX_DIR),$(MLX_NAME))
 CC         = gcc
 CFLAGS     = -Wall -Wextra -Werror
-LIBFLAGS   = -L Libft -lft -L $(MLX_DIR) -lmlx -lXext -lX11 -lm
+LIBFLAGS   = -L Libft -lft -L $(MLX_DIR)  -lmlx
 OFLAGS     = -O2
 DBGFLAGS   = -g
 INCLUDES   = -I includes/ -I Libft/includes/ -I $(MLX_DIR)

@@ -6,17 +6,17 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 14:49:47 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 15:07:35 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/13 17:07:49 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "ft_printf.h"
 
-int			f_key_press(int key, t_mlx *mlx)
+int		f_key_press(int key, t_mlx *mlx)
 {
 	if (key == KEY_ESC)
-		mlx->key_flags.esc = 1;
+		f_close_n_exit(mlx);
 	else if (key == KEY_W)
 		mlx->key_flags.w = 1;
 	else if (key == KEY_A)
@@ -34,10 +34,8 @@ int			f_key_press(int key, t_mlx *mlx)
 	return (0);
 }
 
-int				f_key_release(int key, t_mlx *mlx)
+int		f_key_release(int key, t_mlx *mlx)
 {
-	if (key == KEY_ESC)
-		mlx->key_flags.esc = 0;
 	if (key == KEY_W)
 		mlx->key_flags.w = 0;
 	if (key == KEY_A)
