@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 00:10:47 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 22:45:22 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/15 12:42:29 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void		f_sprites_handling(t_mlx *mlx)
 	int		d;
 	int		color;
 
+	f_sprites_init(mlx);
 	f_sprites_dist_calculating(mlx);
 	f_sprites_list_sort_by_dist_desc(mlx);
 	sp = mlx->sp_list;
@@ -125,9 +126,9 @@ void		f_sprites_handling(t_mlx *mlx)
 						* 128;
 					tex_y = ((d * mlx->sp_tex.height) / mlx->game.sp_height) \
 							/ 256;
-					/* color = *(int*)(mlx->sp_tex.addr + ((tex_x + (tex_y * \     */
-					/*     mlx->sp_tex.width)) * (mlx->sp_tex.bits_per_pix / 8))); */
-					color = 0x00155155;
+					color = *(int*)(mlx->sp_tex.addr + ((tex_x + (tex_y * \
+						mlx->sp_tex.width)) * (mlx->sp_tex.bits_per_pix / 8)));
+					/* color = 0x00155155; */
 					if (color & 0x00FFFFFF)
 						my_mlx_pixel_put(&mlx->img, x, y, color);
 					y++;
