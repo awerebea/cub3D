@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/15 12:38:21 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/15 13:15:56 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ static int	f_mlx_n_window_n_images_init(t_mlx *mlx, t_sdf *opts)
 	mlx->opts = opts;
 	mlx->win_ptr = NULL;
 	mlx->sp_list = NULL;
-	/* mlx->sp_list->next = NULL; */
-	/* mlx->sp_list->prev = NULL; */
 	mlx->img.img_ptr = NULL;
 	if (!(mlx->mlx_ptr = mlx_init()))
 		return (400);
@@ -105,7 +103,7 @@ void		f_game(t_sdf *opts)
 	f_minimap_init(&mlx);
 	mlx_hook(mlx.win_ptr, 17, 1L << 17, f_close_n_exit, &mlx);
 	mlx_hook(mlx.win_ptr, 2, 1L << 0, f_key_press, &mlx);
-	mlx_hook(mlx.win_ptr, 3, 1L << 0, f_key_release, &mlx);
+	mlx_hook(mlx.win_ptr, 3, 1L << 1, f_key_release, &mlx);
 	mlx_loop_hook(mlx.mlx_ptr, f_key_process, &mlx);
 	mlx_loop(mlx.mlx_ptr);
 }
