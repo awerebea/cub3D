@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 17:05:51 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/15 20:28:03 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@
 
 # define MINIMAP_MAX_WDTH_FACTOR 0.3
 # define MINIMAP_MAX_HGHT_FACTOR 0.5
+# define MINIMAP_MAX_SQUARE_SIDE 20
 # define VRAD 1
+
+# define SP_SCALE_X 0.3
+# define SP_SCALE_Y 0.3
+# define SP_VERT_OFFSET 450
 
 # define KEY_ESC 65307
 # define KEY_W 119
@@ -130,6 +135,19 @@ typedef struct	s_game
 	int			tex_y;
 	float		tex_pos;
 	float		tex_step;
+	float		sp_dist_x;
+	float		sp_dist_y;
+	float		inv_factor;
+	float		transform_x;
+	float		transform_y;
+	int			sp_scr_x;
+	int			sp_vert_offset;
+	int			sp_height;
+	int			sp_start_y;
+	int			sp_end_y;
+	int			sp_width;
+	int			sp_start_x;
+	int			sp_end_x;
 }				t_game;
 
 typedef struct	s_sp
@@ -199,18 +217,18 @@ int				f_pars_wall_textures(char *line, int i, t_sdf *opts);
 void			f_draw_background(t_mlx *mlx);
 void			f_draw_vert_line(t_mlx *mlx, int x);
 void			f_error_mlx(int errcode, t_sdf *opts);
-void			f_fill_sprites_list(t_mlx *mlx);
 void			f_game(t_sdf *opts);
 void			f_player_pos_init(t_mlx *mlx);
 void			f_print_err(int errcode, t_sdf *opts);
 void			f_raycasting(t_mlx *mlx);
 void			f_skip_spaces(char *line, int *i);
-void			f_sprites_handling(t_mlx *mlx);
+int				f_sprites_handling(t_mlx *mlx);
+void			f_sprites_init(t_mlx *mlx);
+void			f_draw_sprite(t_mlx *mlx, t_sp *sp);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 void			f_minimap_init(t_mlx *mlx);
 void			f_player_pos_init(t_mlx *mlx);
 void			f_draw_minimap(t_mlx *mlx);
-void			f_draw_player_minimap(t_mlx *mlx);
 
 #endif

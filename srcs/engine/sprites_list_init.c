@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 02:04:25 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 02:50:45 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/15 13:47:03 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ static void	f_sprite_add_front(t_mlx *mlx, t_sp *sp)
 	}
 }
 
-void		f_fill_sprites_list(t_mlx *mlx)
+void		f_sprites_init(t_mlx *mlx)
 {
 	int		i;
 	int		j;
 	int		k;
 	t_sp	*sp;
 
-	k = 1;
+	k = 0;
 	i = 1;
 	while (i < mlx->opts->map_row_index)
 	{
@@ -60,12 +60,11 @@ void		f_fill_sprites_list(t_mlx *mlx)
 		{
 			if (mlx->opts->map_array[i][j] == '2')
 			{
-				sp = f_sprite_new(mlx, i, j, k);
+				sp = f_sprite_new(mlx, i, j, ++k);
 				if (mlx->sp_list)
 					f_sprite_add_front(mlx, sp);
 				else
 					mlx->sp_list = sp;
-				k++;
 			}
 			j++;
 		}
