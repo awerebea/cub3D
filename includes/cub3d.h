@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/15 20:42:36 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/16 01:32:57 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,50 +104,15 @@ typedef struct	s_game
 	float		player_y;
 	float		dir_x;
 	float		dir_y;
-	float		old_dir_x;
-	float		old_dir_y;
 	float		plane_x;
 	float		plane_y;
-	float		old_plane_x;
-	float		old_plane_y;
-	int			map_x;
-	int			map_y;
-	float		side_dist_x;
-	float		side_dist_y;
-	float		delta_dist_x;
-	float		delta_dist_y;
-	int			step_x;
-	int			step_y;
-	float		camera_x;
-	float		ray_dir_x;
-	float		ray_dir_y;
-	int			hit;
-	float		wall_dist;
-	int			wall_side;
-	float		*wall_dist_arr;
-	int			line_height;
-	int			line_start;
-	int			line_end;
 	float		move_speed;
 	float		rot_speed;
-	float		wall_x;
-	int			tex_x;
-	int			tex_y;
-	float		tex_pos;
-	float		tex_step;
-	float		sp_dist_x;
-	float		sp_dist_y;
-	float		inv_factor;
-	float		transform_x;
-	float		transform_y;
-	int			sp_scr_x;
-	int			sp_vert_offset;
-	int			sp_height;
-	int			sp_start_y;
-	int			sp_end_y;
-	int			sp_width;
-	int			sp_start_x;
-	int			sp_end_x;
+	float		*wall_dist_arr;
+	float		old_dir_x;
+	float		old_dir_y;
+	float		old_plane_x;
+	float		old_plane_y;
 }				t_game;
 
 typedef struct	s_sp
@@ -183,6 +148,8 @@ typedef struct	s_mlx
 	t_img		we_tex;
 	t_img		ea_tex;
 	t_img		sp_tex;
+	t_img		fl_tex;
+	t_img		ce_tex;
 	t_minimap	map;
 	t_player	player;
 	t_game		game;
@@ -215,7 +182,6 @@ int				f_pars_map(char *line, t_sdf *opts);
 int				f_pars_sprite_texture(char *line, int i, t_sdf *opts);
 int				f_pars_wall_textures(char *line, int i, t_sdf *opts);
 void			f_draw_background(t_mlx *mlx);
-void			f_draw_vert_line(t_mlx *mlx, int x);
 void			f_error_mlx(int errcode, t_sdf *opts);
 void			f_game(t_sdf *opts);
 void			f_player_pos_init(t_mlx *mlx);
@@ -227,6 +193,7 @@ void			f_sprites_init(t_mlx *mlx);
 void			f_draw_sprite(t_mlx *mlx, t_sp *sp);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
+void			draw_textured_background(t_mlx *mlx);
 void			f_minimap_init(t_mlx *mlx);
 void			f_player_pos_init(t_mlx *mlx);
 void			f_draw_minimap(t_mlx *mlx);

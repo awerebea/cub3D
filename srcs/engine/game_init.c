@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/15 14:04:40 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/16 00:47:22 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ int			f_game_init(t_mlx *mlx)
 	mlx->game.player_x = (float)mlx->opts->spawn_point_x + 0.5;
 	mlx->game.player_y = (float)mlx->opts->spawn_point_y + 0.5;
 	f_dir_n_plane_calculation(mlx);
-	mlx->game.delta_dist_x = 0;
-	mlx->game.delta_dist_y = 0;
 	mlx->game.move_speed = MOVE_SPEED;
 	mlx->game.rot_speed = ROTATE_SPEED * M_PI / 180;
 	if (!(mlx->game.wall_dist_arr = (float*)malloc(sizeof(float) * \

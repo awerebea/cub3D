@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/15 20:29:02 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/16 01:55:43 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 int			f_draw_all(t_mlx *mlx)
 {
 	mlx_do_sync(mlx->mlx_ptr);
-	f_draw_background(mlx);
+	/* f_draw_background(mlx); */
+	draw_textured_background(mlx);
 	f_raycasting(mlx);
 	f_draw_minimap(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
@@ -43,6 +44,12 @@ static int	f_get_data_addr_for_textures(t_mlx *mlx)
 	if (!(mlx->sp_tex.addr = mlx_get_data_addr(mlx->sp_tex.img_ptr, \
 		&mlx->sp_tex.bits_per_pix, &mlx->sp_tex.line_len, &mlx->sp_tex.endian)))
 		return (403);
+	if (!(mlx->fl_tex.addr = mlx_get_data_addr(mlx->fl_tex.img_ptr, \
+		&mlx->fl_tex.bits_per_pix, &mlx->fl_tex.line_len, &mlx->fl_tex.endian)))
+		return (403);
+	if (!(mlx->ce_tex.addr = mlx_get_data_addr(mlx->ce_tex.img_ptr, \
+		&mlx->ce_tex.bits_per_pix, &mlx->ce_tex.line_len, &mlx->ce_tex.endian)))
+		return (403);
 	return (0);
 }
 
@@ -63,6 +70,12 @@ static int	f_textures_init_from_xmp(t_mlx *mlx)
 	if (!(mlx->sp_tex.img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, \
 		mlx->opts->sp_tex, &mlx->sp_tex.width, &mlx->sp_tex.height)))
 		return (mlx->opts->err_str = ft_strdup("S")) ? 410 : 200;
+	if (!(mlx->fl_tex.img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, \
+		"textures/xpm/floor_512.xpm", &mlx->fl_tex.width, &mlx->fl_tex.height)))
+		return (mlx->opts->err_str = ft_strdup("FLOOR")) ? 410 : 200;
+	if (!(mlx->ce_tex.img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, \
+		"textures/xpm/ceiling_512.xpm", &mlx->ce_tex.width, &mlx->ce_tex.height)))
+		return (mlx->opts->err_str = ft_strdup("CEILING")) ? 410 : 200;
 	return (f_get_data_addr_for_textures(mlx));
 }
 

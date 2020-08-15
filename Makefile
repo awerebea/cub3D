@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/15 16:36:33 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/15 20:58:09 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ FLS_4      = $(addprefix $(FLSDIR_4), \
 FLSDIR_5   = bonus/
 FLS_5      = $(addprefix $(FLSDIR_5), \
 				draw_minimap \
+				draw_textured_background \
 				minimap_init)
 SRC        = $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4) $(FLS_5)
 
