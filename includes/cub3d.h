@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/15 16:35:10 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/15 17:51:28 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,5 @@ void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void			f_minimap_init(t_mlx *mlx);
 void			f_player_pos_init(t_mlx *mlx);
 void			f_draw_minimap(t_mlx *mlx);
-void			f_draw_player_minimap(t_mlx *mlx);
 
 #endif
