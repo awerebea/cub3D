@@ -6,18 +6,18 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/13 14:53:08 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/15 16:36:33 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME       = cub3D
 LIBFT      = Libft/libft.a
-MLX_DIR    = minilibx/mac/
-MLX_NAME   = libmlx.dylib
+MLX_DIR    = minilibx/linux/
+MLX_NAME   = libmlx.a
 MLX        = $(addprefix $(MLX_DIR),$(MLX_NAME))
 CC         = gcc
 CFLAGS     = -Wall -Wextra -Werror
-LIBFLAGS   = -L Libft -lft -L $(MLX_DIR)  -lmlx
+LIBFLAGS   = -L Libft -lft -L $(MLX_DIR) -lmlx -lXext -lX11 -lm
 OFLAGS     = -O2
 DBGFLAGS   = -g
 INCLUDES   = -I includes/ -I Libft/includes/ -I $(MLX_DIR)
@@ -44,6 +44,7 @@ FLS_3      = $(addprefix $(FLSDIR_3), \
 FLSDIR_4   = engine/
 FLS_4      = $(addprefix $(FLSDIR_4), \
 				draw_background \
+				draw_sprite \
 				draw_vert_line \
 				engine_tools \
 				game \

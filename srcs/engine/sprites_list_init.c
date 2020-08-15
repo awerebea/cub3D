@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 02:04:25 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 21:16:15 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/15 13:47:03 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,4 @@ void		f_sprites_init(t_mlx *mlx)
 		}
 		i++;
 	}
-	mlx->game.sp_count = k;
 }

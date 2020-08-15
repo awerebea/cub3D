@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 22:05:02 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/15 16:35:10 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,16 @@
 # define MINIMAP_MAX_HGHT_FACTOR 0.5
 # define VRAD 1
 
-# define KEY_ESC 53
-# define KEY_W 13
-# define KEY_A  0
-# define KEY_S  1
-# define KEY_D  2
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
+# define SP_SCALE_X 1.0
+# define SP_SCALE_Y 1.0
+
+# define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
 
 # define FOV_ANGLE 66
 # define MOVE_SPEED 0.2
@@ -130,7 +133,6 @@ typedef struct	s_game
 	int			tex_y;
 	float		tex_pos;
 	float		tex_step;
-	int			sp_count;
 	float		sp_dist_x;
 	float		sp_dist_y;
 	float		inv_factor;
@@ -217,8 +219,9 @@ void			f_player_pos_init(t_mlx *mlx);
 void			f_print_err(int errcode, t_sdf *opts);
 void			f_raycasting(t_mlx *mlx);
 void			f_skip_spaces(char *line, int *i);
-void			f_sprites_handling(t_mlx *mlx);
+int				f_sprites_handling(t_mlx *mlx);
 void			f_sprites_init(t_mlx *mlx);
+void			f_draw_sprite(t_mlx *mlx, t_sp *sp);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 void			f_minimap_init(t_mlx *mlx);

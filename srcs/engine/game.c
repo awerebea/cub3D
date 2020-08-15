@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/15 13:15:56 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/15 14:56:04 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void		f_game(t_sdf *opts)
 		f_close_n_exit(&mlx);
 	if (f_game_init(&mlx))
 		f_close_n_exit(&mlx);
+	f_sprites_init(&mlx);
 	f_minimap_init(&mlx);
 	mlx_hook(mlx.win_ptr, 17, 1L << 17, f_close_n_exit, &mlx);
 	mlx_hook(mlx.win_ptr, 2, 1L << 0, f_key_press, &mlx);
