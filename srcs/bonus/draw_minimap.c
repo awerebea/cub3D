@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/11 00:30:41 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/15 17:49:46 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,14 @@
 #include "libft.h"
 #include <math.h>
 
-static float	f_angle_calculation(float delta_x, float delta_y)
+static void		f_draw_sprite_point(t_mlx *mlx, int x, int y)
 {
-	float	angle;
-
-	if (delta_x < 0 && delta_y < 0)
-		angle = M_PI + atan(delta_y / delta_x);
-	else if (delta_x > 0 && delta_y < 0)
-		angle = 2 * M_PI - atan(-delta_y / delta_x);
-	else if (delta_x < 0 && delta_y >= 0)
-		angle = M_PI - atan(delta_y / -delta_x);
-	else if (delta_x > 0 && delta_y >= 0)
-		angle = atan(delta_y / delta_x);
-	else if (delta_x == 0 && delta_y < 0)
-		angle = M_PI * 3 / 2;
-	else
-		angle = M_PI / 2;
-	return (angle);
+	if (mlx->opts->map_array[mlx->map.y][mlx->map.x] == '2' && \
+		mlx->map.sq_x > mlx->map.sq_side / 3 - 1 && \
+		mlx->map.sq_x < mlx->map.sq_side - mlx->map.sq_side / 3 - 1 && \
+		mlx->map.sq_y > mlx->map.sq_side / 3 - 1 && \
+		mlx->map.sq_y < mlx->map.sq_side - mlx->map.sq_side / 3 - 1)
+		my_mlx_pixel_put(&mlx->img, x, y, 0xFFFF00);
 }
 
 static int		f_check_angle_range(t_mlx *mlx, float delta_x, float delta_y, \
@@ -69,7 +60,18 @@ static int		f_view_sector(t_mlx *mlx, int x, int y)
 
 	delta_x = x - mlx->map.edge_shift - mlx->player.pos_x;
 	delta_y = y - mlx->map.edge_shift - mlx->player.pos_y;
-	angle = f_angle_calculation(delta_x, delta_y);
+	if (delta_x < 0 && delta_y < 0)
+		angle = M_PI + atan(delta_y / delta_x);
+	else if (delta_x > 0 && delta_y < 0)
+		angle = 2 * M_PI - atan(-delta_y / delta_x);
+	else if (delta_x < 0 && delta_y >= 0)
+		angle = M_PI - atan(delta_y / -delta_x);
+	else if (delta_x > 0 && delta_y >= 0)
+		angle = atan(delta_y / delta_x);
+	else if (delta_x == 0 && delta_y < 0)
+		angle = M_PI * 3 / 2;
+	else
+		angle = M_PI / 2;
 	return (f_check_angle_range(mlx, delta_x, delta_y, angle));
 }
 
@@ -99,6 +101,7 @@ static void		f_fill_minimap(t_mlx *mlx)
 		y > mlx->map.edge_shift + mlx->player.pos_y - mlx->map.sq_side / 6 && \
 		y < mlx->map.edge_shift + mlx->player.pos_y + mlx->map.sq_side / 6)
 		my_mlx_pixel_put(&mlx->img, x, y, 0xFF0000);
+	f_draw_sprite_point(mlx, x, y);
 }
 
 void			f_draw_minimap(t_mlx *mlx)
