@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 14:02:47 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 14:16:58 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/15 19:37:20 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,6 @@ void	f_minimap_init(t_mlx *mlx)
 			MINIMAP_MAX_HGHT_FACTOR / mlx->map.map_height)
 		mlx->map.sq_side = (mlx->y_win_size * MINIMAP_MAX_HGHT_FACTOR) / \
 						mlx->map.map_height;
+	if (mlx->map.sq_side > MINIMAP_MAX_SQUARE_SIDE)
+		mlx->map.sq_side = MINIMAP_MAX_SQUARE_SIDE;
 }
