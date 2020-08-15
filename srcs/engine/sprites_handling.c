@@ -6,29 +6,29 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 00:10:47 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/15 17:08:38 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/15 20:23:45 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
 
-static void	f_sprites_swap_with_next(t_sp *sp)
+static void	f_swap_sprites_data(t_sp *a, t_sp *b)
 {
 	float	tmp_data;
 
-	tmp_data = (float)sp->next->id;
-	sp->next->id = sp->id;
-	sp->id = (int)tmp_data;
-	tmp_data = sp->next->x;
-	sp->next->x = sp->x;
-	sp->x = tmp_data;
-	tmp_data = sp->next->y;
-	sp->next->y = sp->y;
-	sp->y = tmp_data;
-	tmp_data = sp->next->dist;
-	sp->next->dist = sp->dist;
-	sp->dist = tmp_data;
+	tmp_data = (float)b->id;
+	b->id = a->id;
+	a->id = (int)tmp_data;
+	tmp_data = b->x;
+	b->x = a->x;
+	a->x = tmp_data;
+	tmp_data = b->y;
+	b->y = a->y;
+	a->y = tmp_data;
+	tmp_data = b->dist;
+	b->dist = a->dist;
+	a->dist = tmp_data;
 }
 
 static void	f_sprites_list_sort_by_dist_desc(t_mlx *mlx)
@@ -45,7 +45,7 @@ static void	f_sprites_list_sort_by_dist_desc(t_mlx *mlx)
 		{
 			if (sp->dist < sp->next->dist)
 			{
-				f_sprites_swap_with_next(sp);
+				f_swap_sprites_data(sp, sp->next);
 				swap_flag = 1;
 			}
 			sp = sp->next;
