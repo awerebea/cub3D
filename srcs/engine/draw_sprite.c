@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 16:29:32 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/15 17:10:44 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/15 19:14:51 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	f_sprite_vars_calc_start(t_mlx *mlx, t_sp *sp)
 			mlx->game.sp_dist_x + mlx->game.plane_x * mlx->game.sp_dist_y);
 	mlx->game.sp_scr_x = (int)((mlx->x_win_size / 2) * (1 + \
 			mlx->game.transform_x / mlx->game.transform_y));
+	mlx->game.sp_vert_offset = (int)(SP_VERT_OFFSET / mlx->game.transform_y);
 }
 
 static void	f_sprite_vars_calc_finish(t_mlx *mlx)
@@ -33,10 +34,10 @@ static void	f_sprite_vars_calc_finish(t_mlx *mlx)
 					mlx->game.transform_y) * SP_SCALE_Y)) < 0)
 		mlx->game.sp_height *= -1;
 	if ((mlx->game.sp_start_y = -mlx->game.sp_height / 2 + mlx->y_win_size \
-		/ 2) < 0)
+		/ 2 + mlx->game.sp_vert_offset) < 0)
 		mlx->game.sp_start_y = 0;
 	if ((mlx->game.sp_end_y = mlx->game.sp_height / 2 + mlx->y_win_size / \
-		2) >= mlx->y_win_size)
+		2 + mlx->game.sp_vert_offset) >= mlx->y_win_size)
 		mlx->game.sp_end_y = mlx->y_win_size - 1;
 	if ((mlx->game.sp_width = (int)((mlx->y_win_size / \
 					mlx->game.transform_y) * SP_SCALE_X)) < 0)
@@ -58,7 +59,8 @@ static void	f_draw_sprite_vert_line(t_mlx *mlx, int x, float shade)
 	y = mlx->game.sp_start_y;
 	while (y < mlx->game.sp_end_y)
 	{
-		d = y * 256 - mlx->y_win_size * 128 + mlx->game.sp_height * 128;
+		d = (y - mlx->game.sp_vert_offset) * 256 - \
+			mlx->y_win_size * 128 + mlx->game.sp_height * 128;
 		mlx->game.tex_y = ((d * mlx->sp_tex.height) / mlx->game.sp_height) \
 							/ 256;
 		color = *(int*)(mlx->sp_tex.addr + ((mlx->game.tex_x + \

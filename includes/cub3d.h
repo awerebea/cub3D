@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/15 17:51:28 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/15 19:27:40 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@
 # define MINIMAP_MAX_HGHT_FACTOR 0.5
 # define VRAD 1
 
-# define SP_SCALE_X 1.0
-# define SP_SCALE_Y 1.0
+# define SP_SCALE_X 0.3
+# define SP_SCALE_Y 0.3
+# define SP_VERT_OFFSET 450
 
 # define KEY_ESC 65307
 # define KEY_W 119
@@ -139,6 +140,7 @@ typedef struct	s_game
 	float		transform_x;
 	float		transform_y;
 	int			sp_scr_x;
+	int			sp_vert_offset;
 	int			sp_height;
 	int			sp_start_y;
 	int			sp_end_y;
