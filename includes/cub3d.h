@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/15 20:28:03 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/15 20:42:36 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 # define SP_SCALE_X 0.3
 # define SP_SCALE_Y 0.3
-# define SP_VERT_OFFSET 450
+# define SP_VERT_OFFSET 330
 
 # define KEY_ESC 65307
 # define KEY_W 119
