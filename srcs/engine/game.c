@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/16 01:55:43 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/16 02:36:47 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ static int	f_textures_init_from_xmp(t_mlx *mlx)
 		"textures/xpm/floor_512.xpm", &mlx->fl_tex.width, &mlx->fl_tex.height)))
 		return (mlx->opts->err_str = ft_strdup("FLOOR")) ? 410 : 200;
 	if (!(mlx->ce_tex.img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, \
-		"textures/xpm/ceiling_512.xpm", &mlx->ce_tex.width, &mlx->ce_tex.height)))
+		"textures/xpm/ceiling_512.xpm", &mlx->ce_tex.width, \
+		&mlx->ce_tex.height)))
 		return (mlx->opts->err_str = ft_strdup("CEILING")) ? 410 : 200;
 	return (f_get_data_addr_for_textures(mlx));
 }
