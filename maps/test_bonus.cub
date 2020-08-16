@@ -1,10 +1,10 @@
 R 1400 900
 
-NO ./textures/xpm/walls/256/brick_wall_texture.xpm
-SO ./textures/xpm/walls/256/wall_grey_rock.xpm
-WE ./textures/xpm/walls/256/wall_brown_tiles.xpm
-EA ./textures/xpm/walls/256/wall_white_rock.xpm
-S  ./textures/xpm/sprites/box_2.xpm
+NO ./textures/xpm/wall_1_512x512.xpm
+SO ./textures/xpm/wall_2_512x512.xpm
+WE ./textures/xpm/wall_3_512x512.xpm
+EA ./textures/xpm/wall_4_512x512.xpm
+S  ./textures/xpm/ball_545x545.xpm
 
 F	61,		43,		31
 C	00,		51,		102
@@ -12,7 +12,7 @@ C	00,		51,		102
         1111111111111111111111111
         1000000000110000000000001
         1011000011100000000000001
-        100100E000000020000000001
+        100100E000000000000000001
 111111111011000001110000000000001
 100000000011000001110111110111111
 11110111111111011100000010001

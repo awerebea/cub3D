@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 16:29:32 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/16 01:07:13 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/16 23:10:08 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	f_sprite_vars_calc_finish(t_mlx *mlx, t_sp_vars *sp_vars)
 			< 0)
 		sp_vars->start_x = 0;
 	if ((sp_vars->end_x = sp_vars->width / 2 + \
-				sp_vars->scr_x) < 0)
+				sp_vars->scr_x) >= mlx->x_win_size)
 		sp_vars->end_x = mlx->x_win_size - 1;
 }
 
