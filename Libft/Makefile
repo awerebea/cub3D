@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 21:56:47 by awerebea          #+#    #+#              #
-#    Updated: 2020/07/27 11:06:45 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/17 15:05:58 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,20 +80,8 @@ FLSDIR_7 = get_next_line/
 FLS_7    = $(addprefix $(FLSDIR_7), \
 			get_next_line \
 			get_next_line_utils)
-FLSDIR_8 = ft_printf/
-FLS_8    = $(addprefix $(FLSDIR_8), \
-			ft_printf \
-			ft_printf_libft \
-			ft_printf_parsing \
-			ft_printf_print_c_s \
-			ft_printf_print_d_i \
-			ft_printf_print_f_e \
-			ft_printf_print_p_u_x_o \
-			ft_printf_print_percent \
-			ft_printf_utils \
-			ft_printf_utils2)
 SRC      = $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4) \
-			$(FLS_5) $(FLS_6) $(FLS_7) $(FLS_8)
+			$(FLS_5) $(FLS_6) $(FLS_7)
 
 OBJ      = $(addprefix $(OBJDIR), $(SRC:=.o))
 DFLS     = $(SRC:=.d)
@@ -108,8 +96,7 @@ $(NAME):		$(OBJ)
 
 $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
 	mkdir -p	$(OBJDIR) $(addprefix $(OBJDIR), $(FLSDIR_1) $(FLSDIR_2) \
-				$(FLSDIR_3) $(FLSDIR_4) $(FLSDIR_5) $(FLSDIR_6) $(FLSDIR_7) \
-				$(FLSDIR_8))
+				$(FLSDIR_3) $(FLSDIR_4) $(FLSDIR_5) $(FLSDIR_6) $(FLSDIR_7))
 	$(CC)		$(FLAGS) $(INCLUDES) -c $< -o $@ -MMD
 
 debug:

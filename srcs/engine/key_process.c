@@ -6,14 +6,13 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 00:08:19 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 17:05:06 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/17 15:02:33 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
 #include "libft.h"
-#include "ft_printf.h"
 #include <math.h>
 
 static void	f_move(t_mlx *mlx, int dir)

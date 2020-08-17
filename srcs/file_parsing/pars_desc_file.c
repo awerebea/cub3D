@@ -6,14 +6,13 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/12 15:23:50 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/17 14:55:39 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft.h"
 #include "get_next_line.h"
-#include "ft_printf.h"
 #include <fcntl.h>
 
 static int		f_pars_resolution(char *line, int i, t_sdf *opts)
@@ -35,9 +34,7 @@ static int		f_pars_resolution(char *line, int i, t_sdf *opts)
 	if (opts->x_win_size <= 0 || opts->y_win_size <= 0)
 		errcode = 310;
 	else if (!errcode && (opts->x_win_size < MIN_X_WIN_SIZE || \
-			opts->x_win_size > MAX_X_WIN_SIZE || \
-			opts->y_win_size < MIN_Y_WIN_SIZE || \
-			opts->y_win_size > MAX_Y_WIN_SIZE))
+			opts->y_win_size < MIN_Y_WIN_SIZE))
 		errcode = 311;
 	return (errcode);
 }

@@ -6,14 +6,13 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/16 00:47:22 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/17 15:03:17 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
 #include "libft.h"
-#include "ft_printf.h"
 #include <math.h>
 
 static void	f_key_flags_init(t_mlx *mlx)

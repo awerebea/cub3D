@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/16 01:32:57 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/17 15:08:01 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 
 # define CUB3D_H
 
-# define MIN_X_WIN_SIZE 160
-# define MIN_Y_WIN_SIZE 120
-# define MAX_X_WIN_SIZE 7680
-# define MAX_Y_WIN_SIZE 4320
+# define MIN_X_WIN_SIZE 100
+# define MIN_Y_WIN_SIZE 100
 
 # define MINIMAP_MAX_WDTH_FACTOR 0.3
 # define MINIMAP_MAX_HGHT_FACTOR 0.5
 # define MINIMAP_MAX_SQUARE_SIDE 20
 # define VRAD 1
 
-# define SP_SCALE_X 0.3
-# define SP_SCALE_Y 0.3
-# define SP_VERT_OFFSET 330
+# define SP_SCALE_X 0.5
+# define SP_SCALE_Y 0.5
+# define SP_VERT_OFFSET 400
 
 # define KEY_ESC 65307
 # define KEY_W 119
@@ -186,6 +184,7 @@ void			f_error_mlx(int errcode, t_sdf *opts);
 void			f_game(t_sdf *opts);
 void			f_player_pos_init(t_mlx *mlx);
 void			f_print_err(int errcode, t_sdf *opts);
+void			f_print_err_2(int errcode, t_sdf *opts);
 void			f_raycasting(t_mlx *mlx);
 void			f_skip_spaces(char *line, int *i);
 int				f_sprites_handling(t_mlx *mlx);

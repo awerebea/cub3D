@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 21:02:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/16 23:30:42 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/17 12:02:01 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void		draw_textured_background(t_mlx *mlx)
 	{
 		relative_dist = (float)(mlx->y_win_size - y) / mlx->y_win_size;
 		f_fc_vars_calculation(mlx, &fc_vars, y);
-		shade = 1 / (1 + 1.0 * relative_dist + 6.5 * pow(relative_dist, 2));
+		shade = 1.0 / (1.0 + 0.75 * relative_dist + 6.0 * \
+				pow(relative_dist, 2));
 		f_draw_line_floor_n_ceiling(mlx, &fc_vars, y, shade);
 		y++;
 	}

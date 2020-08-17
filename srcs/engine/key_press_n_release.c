@@ -6,12 +6,12 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 14:49:47 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/13 17:07:49 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/17 15:01:58 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "ft_printf.h"
+#include "libft.h"
 
 int		f_key_press(int key, t_mlx *mlx)
 {
@@ -30,7 +30,10 @@ int		f_key_press(int key, t_mlx *mlx)
 	else if (key == KEY_RIGHT)
 		mlx->key_flags.right = 1;
 	else
-		ft_printf("%d\n", key);
+	{
+		ft_putnbr_fd(key, 1);
+		ft_putchar_fd('\n', 1);
+	}
 	return (0);
 }
 

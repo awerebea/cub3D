@@ -6,13 +6,12 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 16:36:56 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/12 16:40:17 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/17 14:54:57 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft.h"
-#include "ft_printf.h"
 
 int		f_exit(int errcode, t_sdf *opts)
 {
