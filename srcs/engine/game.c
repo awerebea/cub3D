@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 18:18:14 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/17 23:12:37 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int	f_mlx_n_window_n_images_init(t_mlx *mlx, t_sdf *opts)
 		return (402);
 	if (!(mlx->img.addr = mlx_get_data_addr(mlx->img.img_ptr, \
 			&mlx->img.bits_per_pix, &mlx->img.line_len, &mlx->img.endian)))
-		return (402);
+		return (403);
 	return (f_textures_init_from_xmp(mlx));
 }
 

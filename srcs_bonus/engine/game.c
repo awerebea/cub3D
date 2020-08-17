@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 18:48:19 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/18 00:00:59 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			f_draw_all(t_mlx *mlx)
 	return (0);
 }
 
-static int	f_get_data_addr_for_textures(t_mlx *mlx)
+int	f_get_data_addr_for_textures(t_mlx *mlx)
 {
 	if (!(mlx->no_tex.addr = mlx_get_data_addr(mlx->no_tex.img_ptr, \
 		&mlx->no_tex.bits_per_pix, &mlx->no_tex.line_len, &mlx->no_tex.endian)))
@@ -51,7 +51,7 @@ static int	f_get_data_addr_for_textures(t_mlx *mlx)
 	return (0);
 }
 
-static int	f_textures_init_from_xmp(t_mlx *mlx)
+int	f_textures_init_from_xmp(t_mlx *mlx)
 {
 	if (!(mlx->no_tex.img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, \
 		mlx->opts->no_tex, &mlx->no_tex.width, &mlx->no_tex.height)))
@@ -98,7 +98,7 @@ static int	f_mlx_n_window_n_images_init(t_mlx *mlx, t_sdf *opts)
 		return (402);
 	if (!(mlx->img.addr = mlx_get_data_addr(mlx->img.img_ptr, \
 			&mlx->img.bits_per_pix, &mlx->img.line_len, &mlx->img.endian)))
-		return (402);
+		return (403);
 	return (f_textures_init_from_xmp(mlx));
 }
 
@@ -107,6 +107,8 @@ void		f_game(t_sdf *opts)
 	t_mlx	mlx;
 
 	mlx.errcode = 0;
+	if (opts->screenshot)
+		f_screenshot(&mlx, opts);
 	if ((mlx.errcode = f_mlx_n_window_n_images_init(&mlx, opts)))
 		f_close_n_exit(&mlx);
 	if (f_game_init(&mlx))

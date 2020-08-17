@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/17 19:27:34 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/17 22:17:39 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,6 +111,7 @@ FLS_4_B    = $(addprefix $(FLSDIR_4_B), \
 				key_process \
 				minimap_init \
 				raycasting \
+				screenshot \
 				sprites_handling \
 				sprites_list_init)
 SRC_B      = $(FLS_1_B) $(FLS_2_B) $(FLS_3_B) $(FLS_4_B)

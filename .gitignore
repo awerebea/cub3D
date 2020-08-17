@@ -1,7 +1,8 @@
 .vscode/
 objs/
+objs_bonus/
 *.dylib
-*.[oa]
+*.[doa]
 *.swiftdoc
 *.swiftmodule
 *.swp

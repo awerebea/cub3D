@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 15:03:17 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/17 23:04:29 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int			f_game_init(t_mlx *mlx)
 	if (!(mlx->game.wall_dist_arr = (float*)malloc(sizeof(float) * \
 					mlx->x_win_size)))
 		return (mlx->errcode = 200);
-	f_key_flags_init(mlx);
+	if (!mlx->opts->screenshot)
+		f_key_flags_init(mlx);
 	return (0);
 }
