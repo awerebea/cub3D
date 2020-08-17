@@ -6,11 +6,11 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 16:29:32 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 20:24:26 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/17 18:28:18 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include "draw_sprites.h"
 #include <math.h>
 
@@ -51,7 +51,8 @@ static void	f_sprite_vars_calc_finish(t_mlx *mlx, t_sp_vars *sp_vars)
 		sp_vars->end_x = mlx->x_win_size - 1;
 }
 
-static void	f_draw_sprite_vert_line(t_mlx *mlx, t_sp_vars *sp_vars, int x)
+static void	f_draw_sprite_vert_line(t_mlx *mlx, t_sp_vars *sp_vars, int x, \
+																	float shade)
 {
 	int		y;
 	int		d;
@@ -68,7 +69,7 @@ static void	f_draw_sprite_vert_line(t_mlx *mlx, t_sp_vars *sp_vars, int x)
 				(sp_vars->tex_y * mlx->sp_tex.width)) * \
 				(mlx->sp_tex.bits_per_pix / 8)));
 		if (color & 0x00FFFFFF)
-			my_mlx_pixel_put(&mlx->img, x, y, color);
+			my_mlx_pixel_put(&mlx->img, x, y, f_add_shade(color, shade));
 		y++;
 	}
 }
@@ -76,8 +77,10 @@ static void	f_draw_sprite_vert_line(t_mlx *mlx, t_sp_vars *sp_vars, int x)
 void		f_draw_sprite(t_mlx *mlx, t_sp *sp)
 {
 	int			x;
+	float		shade;
 	t_sp_vars	sp_vars;
 
+	shade = 1 / (1 + 0.005 * sp->dist + 0.006 * pow(sp->dist, 2));
 	f_sprite_vars_calc_start(mlx, sp, &sp_vars);
 	f_sprite_vars_calc_finish(mlx, &sp_vars);
 	x = sp_vars.start_x;
@@ -88,7 +91,7 @@ void		f_draw_sprite(t_mlx *mlx, t_sp *sp)
 							sp_vars.width) / 256;
 		if (sp_vars.transform_y > 0 && x > 0 && x < mlx->x_win_size && \
 				sp_vars.transform_y < mlx->game.wall_dist_arr[x])
-			f_draw_sprite_vert_line(mlx, &sp_vars, x);
+			f_draw_sprite_vert_line(mlx, &sp_vars, x, shade);
 		x++;
 	}
 }

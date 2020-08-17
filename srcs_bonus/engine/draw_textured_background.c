@@ -6,11 +6,11 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 21:02:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 12:02:01 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/17 18:29:30 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include "draw_tex_background.h"
 #include <math.h>
 

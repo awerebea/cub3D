@@ -6,11 +6,11 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 13:00:56 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 20:25:19 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/17 18:28:31 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include "mlx.h"
 #include "libft.h"
 #include <stdlib.h>
@@ -34,6 +34,13 @@ int			f_close_n_exit(t_mlx *mlx)
 	}
 	free(mlx->mlx_ptr);
 	exit(f_exit(mlx->errcode, mlx->opts));
+}
+
+int			f_add_shade(int color, float shade)
+{
+	return ((int)(f_get_r_from_int(color) * shade) << 16 | \
+			(int)(f_get_g_from_int(color) * shade) << 8 | \
+			(int)(f_get_b_from_int(color) * shade));
 }
 
 static int	f_check_xpm_img(t_img tex_img)

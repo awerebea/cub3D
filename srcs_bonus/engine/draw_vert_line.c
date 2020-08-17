@@ -6,11 +6,11 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:22:42 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 20:23:27 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/17 18:28:25 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include "draw_walls.h"
 #include <math.h>
 
@@ -66,6 +66,7 @@ static int	f_get_pix_color_n_tex_y_calculation(t_mlx *mlx, t_wall_vars *w_vars)
 void		f_draw_vert_line(t_mlx *mlx, t_wall_vars *w_vars, int x)
 {
 	int			color;
+	float		shade;
 	int			y;
 
 	w_vars->line_height = (int)((mlx->y_win_size / w_vars->wall_dist) * 1.25);
@@ -75,12 +76,14 @@ void		f_draw_vert_line(t_mlx *mlx, t_wall_vars *w_vars, int x)
 	w_vars->line_end = mlx->y_win_size / 2 + w_vars->line_height / 2;
 	if (w_vars->line_end >= mlx->y_win_size)
 		w_vars->line_end = mlx->y_win_size - 1;
+	shade = 1 / (1 + 0.005 * w_vars->wall_dist + 0.006 * \
+			pow(w_vars->wall_dist, 2));
 	y = w_vars->line_start;
 	f_tex_vars_calculation(mlx, w_vars);
 	while (y <= w_vars->line_end)
 	{
 		color = f_get_pix_color_n_tex_y_calculation(mlx, w_vars);
 		w_vars->tex_pos += w_vars->tex_step;
-		my_mlx_pixel_put(&mlx->img, x, y++, color);
+		my_mlx_pixel_put(&mlx->img, x, y++, f_add_shade(color, shade));
 	}
 }

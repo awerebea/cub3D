@@ -12,3 +12,4 @@ objs/
 vgcore.*
 Makefile.gen
 cub3D
+cub3D_bonus

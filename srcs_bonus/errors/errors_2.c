@@ -6,11 +6,11 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 18:36:22 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 20:29:51 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/17 18:27:59 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include "libft.h"
 
 static void	f_errors_5(int errcode, t_sdf *opts)

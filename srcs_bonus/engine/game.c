@@ -6,11 +6,11 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 18:18:14 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/17 18:48:19 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include "libft.h"
 #include "mlx.h"
 #include <math.h>
@@ -18,8 +18,9 @@
 int			f_draw_all(t_mlx *mlx)
 {
 	mlx_do_sync(mlx->mlx_ptr);
-	f_draw_background(mlx);
+	draw_textured_background(mlx);
 	f_raycasting(mlx);
+	f_draw_minimap(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
 	return (0);
 }
@@ -41,6 +42,12 @@ static int	f_get_data_addr_for_textures(t_mlx *mlx)
 	if (!(mlx->sp_tex.addr = mlx_get_data_addr(mlx->sp_tex.img_ptr, \
 		&mlx->sp_tex.bits_per_pix, &mlx->sp_tex.line_len, &mlx->sp_tex.endian)))
 		return (403);
+	if (!(mlx->fl_tex.addr = mlx_get_data_addr(mlx->fl_tex.img_ptr, \
+		&mlx->fl_tex.bits_per_pix, &mlx->fl_tex.line_len, &mlx->fl_tex.endian)))
+		return (403);
+	if (!(mlx->ce_tex.addr = mlx_get_data_addr(mlx->ce_tex.img_ptr, \
+		&mlx->ce_tex.bits_per_pix, &mlx->ce_tex.line_len, &mlx->ce_tex.endian)))
+		return (403);
 	return (0);
 }
 
@@ -61,6 +68,12 @@ static int	f_textures_init_from_xmp(t_mlx *mlx)
 	if (!(mlx->sp_tex.img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, \
 		mlx->opts->sp_tex, &mlx->sp_tex.width, &mlx->sp_tex.height)))
 		return (mlx->opts->err_str = ft_strdup("S")) ? 410 : 200;
+	if (!(mlx->fl_tex.img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, \
+		mlx->opts->fl_tex, &mlx->fl_tex.width, &mlx->fl_tex.height)))
+		return (mlx->opts->err_str = ft_strdup("F")) ? 410 : 200;
+	if (!(mlx->ce_tex.img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, \
+		mlx->opts->ce_tex, &mlx->ce_tex.width, &mlx->ce_tex.height)))
+		return (mlx->opts->err_str = ft_strdup("C")) ? 410 : 200;
 	return (f_get_data_addr_for_textures(mlx));
 }
 
@@ -99,6 +112,7 @@ void		f_game(t_sdf *opts)
 	if (f_game_init(&mlx))
 		f_close_n_exit(&mlx);
 	f_sprites_init(&mlx);
+	f_minimap_init(&mlx);
 	mlx_hook(mlx.win_ptr, 17, 1L << 17, f_close_n_exit, &mlx);
 	mlx_hook(mlx.win_ptr, 2, 1L << 0, f_key_press, &mlx);
 	mlx_hook(mlx.win_ptr, 3, 1L << 1, f_key_release, &mlx);

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 20:26:50 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/17 19:28:51 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
+#ifndef CUB3D_BONUS_H
 
-# define CUB3D_H
+# define CUB3D_BONUS_H
 
 # define MIN_X_WIN_SIZE 100
 # define MIN_Y_WIN_SIZE 100
@@ -35,8 +35,8 @@
 # define KEY_RIGHT 65363
 
 # define FOV_ANGLE 66
-# define MOVE_SPEED 0.1
-# define ROTATE_SPEED 3
+# define MOVE_SPEED 0.2
+# define ROTATE_SPEED 5
 
 typedef	struct	s_sdf
 {
@@ -47,8 +47,8 @@ typedef	struct	s_sdf
 	char		*we_tex;
 	char		*ea_tex;
 	char		*sp_tex;
-	int			floor_color;
-	int			ceiling_color;
+	char		*fl_tex;
+	char		*ce_tex;
 	int			gnl_ret;
 	int			screenshot;
 	int			pars_map_started;
@@ -74,6 +74,26 @@ typedef struct	s_img
 	int			width;
 	int			height;
 }				t_img;
+
+typedef struct	s_minimap
+{
+	int			x;
+	int			y;
+	int			sq_x;
+	int			sq_y;
+	int			map_width;
+	int			map_height;
+	int			sq_side;
+	int			edge_shift;
+}				t_minimap;
+
+typedef struct	s_player
+{
+	int			pos_x;
+	int			pos_y;
+	float		view_angle;
+	float		fov;
+}				t_player;
 
 typedef struct	s_game
 {
@@ -125,12 +145,17 @@ typedef struct	s_mlx
 	t_img		we_tex;
 	t_img		ea_tex;
 	t_img		sp_tex;
+	t_img		fl_tex;
+	t_img		ce_tex;
+	t_minimap	map;
+	t_player	player;
 	t_game		game;
 	t_sp		*sp_list;
 	t_keys		key_flags;
 	int			errcode;
 }				t_mlx;
 
+int				f_add_shade(int color, float shade);
 int				f_check_args(int argc, char **argv, t_sdf *opts);
 int				f_check_textures_for_valid(t_mlx *mlx);
 int				f_close_n_exit(t_mlx *mlx);
@@ -147,17 +172,20 @@ int				f_key_press(int key, t_mlx *mlx);
 int				f_key_process(t_mlx *mlx);
 int				f_key_release(int key, t_mlx *mlx);
 int				f_map_array_preparing(t_sdf *opts);
-int				f_pars_ceiling_color(char *line, int i, t_sdf *opts);
+int				f_pars_ceiling_texture(char *line, int i, t_sdf *opts);
 int				f_pars_desc_file(char *map_file, t_sdf *opts);
-int				f_pars_floor_color(char *line, int i, t_sdf *opts);
+int				f_pars_floor_texture(char *line, int i, t_sdf *opts);
 int				f_pars_map(char *line, t_sdf *opts);
 int				f_pars_sprite_texture(char *line, int i, t_sdf *opts);
 int				f_pars_wall_textures(char *line, int i, t_sdf *opts);
 int				f_sprites_handling(t_mlx *mlx);
-void			f_draw_background(t_mlx *mlx);
+void			draw_textured_background(t_mlx *mlx);
+void			f_draw_minimap(t_mlx *mlx);
 void			f_draw_sprite(t_mlx *mlx, t_sp *sp);
 void			f_error_mlx(int errcode, t_sdf *opts);
 void			f_game(t_sdf *opts);
+void			f_minimap_init(t_mlx *mlx);
+void			f_player_pos_init(t_mlx *mlx);
 void			f_player_pos_init(t_mlx *mlx);
 void			f_print_err(int errcode, t_sdf *opts);
 void			f_print_err_2(int errcode, t_sdf *opts);
