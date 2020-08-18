@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 22:12:13 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/18 16:58:50 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/18 21:32:19 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ void		f_screenshot(t_mlx *mlx)
 	char	*file_header;
 	char	*info_header;
 
+	file_header = NULL;
+	info_header = NULL;
 	f_draw_textured_background(mlx);
 	f_raycasting(mlx);
 	f_draw_minimap(mlx);

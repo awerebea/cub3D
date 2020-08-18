@@ -6,12 +6,13 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:22:42 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 20:23:27 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/18 21:25:08 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "draw_walls.h"
+#include <stdlib.h>
 #include <math.h>
 
 static void	f_tex_x_n_step_calculation(t_mlx *mlx, t_wall_vars *w_vars, \
@@ -19,6 +20,7 @@ static void	f_tex_x_n_step_calculation(t_mlx *mlx, t_wall_vars *w_vars, \
 {
 	t_img	*tex_img;
 
+	tex_img = NULL;
 	if (w_vars->wall_side == 0)
 		tex_img = &mlx->no_tex;
 	else if (w_vars->wall_side == 1)
@@ -50,6 +52,7 @@ static int	f_get_pix_color_n_tex_y_calculation(t_mlx *mlx, t_wall_vars *w_vars)
 {
 	t_img	*tex_img;
 
+	tex_img = NULL;
 	if (w_vars->wall_side == 0)
 		tex_img = &mlx->no_tex;
 	else if (w_vars->wall_side == 1)
