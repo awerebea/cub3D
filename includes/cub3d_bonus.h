@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/18 00:00:51 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/18 15:31:42 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,6 @@
 # define FOV_ANGLE 66
 # define MOVE_SPEED 0.2
 # define ROTATE_SPEED 5
-
-# define BYTES_PER_PIXEL 3
-# define FILE_HEADER_SIZE 14
-# define INFO_HEADER_SIZE 40
 
 typedef	struct	s_sdf
 {
@@ -197,8 +193,6 @@ void			f_raycasting(t_mlx *mlx);
 void			f_skip_spaces(char *line, int *i);
 void			f_sprites_init(t_mlx *mlx);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void			f_screenshot(t_mlx *mlx, t_sdf *opts);
-int				f_textures_init_from_xmp(t_mlx *mlx);
-int				f_get_data_addr_for_textures(t_mlx *mlx);
+void			f_screenshot(t_mlx *mlx);
 
 #endif

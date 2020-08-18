@@ -1,6 +1,7 @@
 .vscode/
 objs/
 objs_bonus/
+*.bmp
 *.dylib
 *.[doa]
 *.swiftdoc
