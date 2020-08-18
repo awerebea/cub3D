@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/18 15:31:42 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/18 16:52:52 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,9 +179,9 @@ int				f_pars_map(char *line, t_sdf *opts);
 int				f_pars_sprite_texture(char *line, int i, t_sdf *opts);
 int				f_pars_wall_textures(char *line, int i, t_sdf *opts);
 int				f_sprites_handling(t_mlx *mlx);
-void			draw_textured_background(t_mlx *mlx);
 void			f_draw_minimap(t_mlx *mlx);
 void			f_draw_sprite(t_mlx *mlx, t_sp *sp);
+void			f_draw_textured_background(t_mlx *mlx);
 void			f_error_mlx(int errcode, t_sdf *opts);
 void			f_game(t_sdf *opts);
 void			f_minimap_init(t_mlx *mlx);
@@ -190,9 +190,9 @@ void			f_player_pos_init(t_mlx *mlx);
 void			f_print_err(int errcode, t_sdf *opts);
 void			f_print_err_2(int errcode, t_sdf *opts);
 void			f_raycasting(t_mlx *mlx);
+void			f_screenshot(t_mlx *mlx);
 void			f_skip_spaces(char *line, int *i);
 void			f_sprites_init(t_mlx *mlx);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void			f_screenshot(t_mlx *mlx);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 18:36:22 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 20:29:51 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/18 16:59:10 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,9 @@ reading ", 2);
 		ft_putstr_fd(opts->err_str, 2);
 		ft_putstr_fd(" texture.\n", 2);
 	}
+	else if (errcode == 500)
+		ft_putstr_fd("Error\ncode #500: close screenshot file failed.\n", \
+			2);
 }
 
 void		f_print_err_2(int errcode, t_sdf *opts)

@@ -6,11 +6,11 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 22:12:13 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/18 16:58:50 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/18 16:58:22 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "cub3d.h"
 #include "libft.h"
 #include "mlx.h"
 #include <fcntl.h>
@@ -110,9 +110,8 @@ void		f_screenshot(t_mlx *mlx)
 	char	*file_header;
 	char	*info_header;
 
-	f_draw_textured_background(mlx);
+	f_draw_background(mlx);
 	f_raycasting(mlx);
-	f_draw_minimap(mlx);
 	if (!(file_header = f_bmp_file_header_generate(mlx)) || \
 		!(info_header = f_bmp_info_header_generate(mlx)))
 	{

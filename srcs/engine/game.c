@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 23:12:37 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/18 16:49:21 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,12 @@ static int	f_mlx_n_window_n_images_init(t_mlx *mlx, t_sdf *opts)
 		mlx->x_win_size = opts->x_win_size;
 	if (mlx->y_win_size > opts->y_win_size)
 		mlx->y_win_size = opts->y_win_size;
-	if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, mlx->x_win_size, \
-		mlx->y_win_size, "cub3D")))
-		return (401);
+	if (!opts->screenshot)
+	{
+		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, mlx->x_win_size, \
+			mlx->y_win_size, "cub3D")))
+			return (401);
+	}
 	if (!(mlx->img.img_ptr = mlx_new_image(mlx->mlx_ptr, mlx->x_win_size, \
 			mlx->y_win_size)))
 		return (402);
@@ -99,6 +102,8 @@ void		f_game(t_sdf *opts)
 	if (f_game_init(&mlx))
 		f_close_n_exit(&mlx);
 	f_sprites_init(&mlx);
+	if (opts->screenshot)
+		f_screenshot(&mlx);
 	mlx_hook(mlx.win_ptr, 17, 1L << 17, f_close_n_exit, &mlx);
 	mlx_hook(mlx.win_ptr, 2, 1L << 0, f_key_press, &mlx);
 	mlx_hook(mlx.win_ptr, 3, 1L << 1, f_key_release, &mlx);

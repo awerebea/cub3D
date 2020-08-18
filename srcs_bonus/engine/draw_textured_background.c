@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 21:02:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 18:29:30 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/18 16:52:13 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	f_draw_line_floor_n_ceiling(t_mlx *mlx, t_fc_vars *fc_vars, int y, \
 	}
 }
 
-void		draw_textured_background(t_mlx *mlx)
+void		f_draw_textured_background(t_mlx *mlx)
 {
 	int			y;
 	float		shade;

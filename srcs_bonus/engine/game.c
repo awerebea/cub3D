@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/18 15:32:41 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/18 16:51:49 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 int			f_draw_all(t_mlx *mlx)
 {
 	mlx_do_sync(mlx->mlx_ptr);
-	draw_textured_background(mlx);
+	f_draw_textured_background(mlx);
 	f_raycasting(mlx);
 	f_draw_minimap(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
@@ -93,7 +93,7 @@ static int	f_mlx_n_window_n_images_init(t_mlx *mlx, t_sdf *opts)
 	if (!opts->screenshot)
 	{
 		if (!(mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, mlx->x_win_size, \
-			mlx->y_win_size, "cub3D")))
+			mlx->y_win_size, "cub3D_bonus")))
 			return (401);
 	}
 	if (!(mlx->img.img_ptr = mlx_new_image(mlx->mlx_ptr, mlx->x_win_size, \

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 20:26:50 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/18 16:47:05 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ void			f_player_pos_init(t_mlx *mlx);
 void			f_print_err(int errcode, t_sdf *opts);
 void			f_print_err_2(int errcode, t_sdf *opts);
 void			f_raycasting(t_mlx *mlx);
+void			f_screenshot(t_mlx *mlx);
 void			f_skip_spaces(char *line, int *i);
 void			f_sprites_init(t_mlx *mlx);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
