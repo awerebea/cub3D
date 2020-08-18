@@ -1,4 +1,5 @@
 .vscode/
+._README.md
 objs/
 objs_bonus/
 *.bmp
