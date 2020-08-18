@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/18 16:50:27 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/18 20:48:25 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -222,11 +222,11 @@ libs: $(LIBFT) $(MLX)
 
 re:				fclean all
 
-test: debug
-	./$(NAME) maps/test.cub
+run: all
+	./$(NAME) maps/map_256.cub
 
-test_bonus: debug_bonus
-	./$(NAME_B) maps/test_bonus.cub
+run_bonus: bonus
+	./$(NAME_B) maps/map_256_bonus.cub
 
 .PHONY:	all \
 		clean \
@@ -246,4 +246,5 @@ test_bonus: debug_bonus
 		linux \
 		libs \
 		re \
-		test
+		run \
+		run_bonus
