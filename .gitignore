@@ -8,7 +8,6 @@ objs_bonus/
 *.swiftdoc
 *.swiftmodule
 *.swp
-*.pdf
 *.DS_Store
 .fuse_hidden*
 ._*.png
