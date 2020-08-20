@@ -6,17 +6,15 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/20 15:09:22 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/20 20:32:55 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-** configured for macOS
-*/
 
 #ifndef CUB3D_BONUS_H
 
 # define CUB3D_BONUS_H
+
+# include "keys_mac.h"
 
 # define MIN_X_WIN_SIZE 100
 # define MIN_Y_WIN_SIZE 100
@@ -29,14 +27,6 @@
 # define SP_SCALE_X 0.8
 # define SP_SCALE_Y 0.8
 # define SP_VERT_OFFSET 380
-
-# define KEY_ESC 53
-# define KEY_W 13
-# define KEY_A  0
-# define KEY_S  1
-# define KEY_D  2
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
 
 # define FOV_ANGLE 66
 # define MOVE_SPEED 0.2

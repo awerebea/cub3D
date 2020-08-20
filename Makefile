@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/20 16:53:26 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/20 20:40:24 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ DBGFLAGS	= -g
 
 override FLAGS ?= $(CFLAGS)
 
-#-- configuring MLX library path and key-defines in header files depending on OS
-OS			= $(shell uname)
+#-- configuring MLX library path and 'key-define' header files depending on OS
+OS				= $(shell uname)
 ifeq ($(OS), Linux)
 	MLX_DIR		= minilibx/linux/
 	MLX_NAME	= libmlx.a
@@ -40,11 +40,11 @@ MLX			= $(addprefix $(MLX_DIR),$(MLX_NAME))
 INCLUDES	= -I includes/ -I Libft/includes/ -I $(MLX_DIR)
 LIBFLAGS	+= -L Libft -lft -L $(MLX_DIR)
 
-HEADERS		= $(shell grep 'configured for Linux' includes/cub3d.h)
+HEADERS		= $(shell grep 'include \"keys_linux.h\"' includes/cub3d.h)
 ifeq ($(HEADERS), )
-	OPTS += macOS
+	OPTS	+= macOS
 else
-	OPTS += Linux
+	OPTS	+= Linux
 endif
 
 ifeq ($(OPTS), Linux Linux)
@@ -58,28 +58,28 @@ else ifeq ($(OPTS), macOS macOS)
 endif
 
 #----------------------------- Mandatory part compling -------------------------
-SRCDIR     = srcs/
-OBJDIR     = objs/
+SRCDIR		= srcs/
+OBJDIR		= objs/
 
-FLSDIR_1   = ./
-FLS_1      = $(addprefix $(FLSDIR_1), \
+FLSDIR_1	= ./
+FLS_1		= $(addprefix $(FLSDIR_1), \
 				colors \
 				main \
 				utils )
-FLSDIR_2   = errors/
-FLS_2      = $(addprefix $(FLSDIR_2), \
+FLSDIR_2	= errors/
+FLS_2		= $(addprefix $(FLSDIR_2), \
 				errors_1 \
 				errors_2)
-FLSDIR_3   = file_parsing/
-FLS_3      = $(addprefix $(FLSDIR_3), \
+FLSDIR_3	= file_parsing/
+FLS_3		= $(addprefix $(FLSDIR_3), \
 				map_array_preparing \
 				pars_args \
 				pars_desc_file \
 				pars_map \
 				pars_options_1 \
 				pars_options_2)
-FLSDIR_4   = engine/
-FLS_4      = $(addprefix $(FLSDIR_4), \
+FLSDIR_4	= engine/
+FLS_4		= $(addprefix $(FLSDIR_4), \
 				draw_background \
 				draw_sprite \
 				draw_vert_line \
@@ -92,10 +92,10 @@ FLS_4      = $(addprefix $(FLSDIR_4), \
 				screenshot \
 				sprites_handling \
 				sprites_list_init)
-SRC        = $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4)
+SRC			= $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4)
 
-OBJ        = $(addprefix $(OBJDIR), $(SRC:=.o))
-DFLS       = $(SRC:=.d)
+OBJ			= $(addprefix $(OBJDIR), $(SRC:=.o))
+DFLS		= $(SRC:=.d)
 
 all:			$(NAME)
 
@@ -111,28 +111,28 @@ $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
 include $(wildcard $(addprefix $(OBJDIR), $(DFLS)))
 
 #------------------------------- Bonus part compling ---------------------------
-SRCDIR_B   = srcs_bonus/
-OBJDIR_B   = objs_bonus/
+SRCDIR_B	= srcs_bonus/
+OBJDIR_B	= objs_bonus/
 
-FLSDIR_1_B = ./
-FLS_1_B    = $(addprefix $(FLSDIR_1_B), \
+FLSDIR_1_B	= ./
+FLS_1_B		= $(addprefix $(FLSDIR_1_B), \
 				colors \
 				main \
 				utils )
-FLSDIR_2_B = errors/
-FLS_2_B    = $(addprefix $(FLSDIR_2_B), \
+FLSDIR_2_B	= errors/
+FLS_2_B		= $(addprefix $(FLSDIR_2_B), \
 				errors_1 \
 				errors_2)
-FLSDIR_3_B = file_parsing/
-FLS_3_B    = $(addprefix $(FLSDIR_3_B), \
+FLSDIR_3_B	= file_parsing/
+FLS_3_B		= $(addprefix $(FLSDIR_3_B), \
 				map_array_preparing \
 				pars_args \
 				pars_desc_file \
 				pars_map \
 				pars_options_1 \
 				pars_options_2)
-FLSDIR_4_B = engine/
-FLS_4_B    = $(addprefix $(FLSDIR_4_B), \
+FLSDIR_4_B	= engine/
+FLS_4_B		= $(addprefix $(FLSDIR_4_B), \
 				draw_minimap \
 				draw_sprite \
 				draw_textured_background \
@@ -147,10 +147,10 @@ FLS_4_B    = $(addprefix $(FLSDIR_4_B), \
 				screenshot \
 				sprites_handling \
 				sprites_list_init)
-SRC_B      = $(FLS_1_B) $(FLS_2_B) $(FLS_3_B) $(FLS_4_B)
+SRC_B		= $(FLS_1_B) $(FLS_2_B) $(FLS_3_B) $(FLS_4_B)
 
-OBJ_B      = $(addprefix $(OBJDIR_B), $(SRC_B:=.o))
-DFLS_B     = $(SRC_B:=.d)
+OBJ_B		= $(addprefix $(OBJDIR_B), $(SRC_B:=.o))
+DFLS_B		= $(SRC_B:=.d)
 
 bonus:			$(NAME_B)
 
@@ -175,50 +175,23 @@ clean_all: clean libft_clean mlx_clean
 fclean:			clean
 	rm -f		$(NAME)
 	rm -f		$(NAME_B)
+	rm -f		screenshot*.bmp
 
 fclean_all: fclean libft_fclean mlx_fclean
 
 HEADERS_MAC: fclean libft_fclean
 	make -C $(MLX_UNUSED) -f Makefile.mk fclean
-	sed -i '' '14 s/configured\ for\ Linux/configured\ for\ macOS/' \
+	sed -i '' '17 s/keys_linux/keys_mac/' \
 			includes/cub3d.h
-	sed -i '' '14 s/configured\ for\ Linux/configured\ for\ macOS/' \
+	sed -i '' '17 s/keys_linux/keys_mac/' \
 			includes/cub3d_bonus.h
-	sed -i '' 's/KEY_ESC\ 65307/KEY_ESC\ 53/' includes/cub3d.h
-	sed -i '' 's/KEY_W\ 119/KEY_W\ 13/' includes/cub3d.h
-	sed -i '' 's/KEY_A\ 97/KEY_A\ \ 0/' includes/cub3d.h
-	sed -i '' 's/KEY_S\ 115/KEY_S\ \ 1/' includes/cub3d.h
-	sed -i '' 's/KEY_D\ 100/KEY_D\ \ 2/' includes/cub3d.h
-	sed -i '' 's/KEY_LEFT\ 65361/KEY_LEFT\ 123/' includes/cub3d.h
-	sed -i '' 's/KEY_RIGHT\ 65363/KEY_RIGHT\ 124/' includes/cub3d.h
-	sed -i '' 's/KEY_ESC\ 65307/KEY_ESC\ 53/' includes/cub3d_bonus.h
-	sed -i '' 's/KEY_W\ 119/KEY_W\ 13/' includes/cub3d_bonus.h
-	sed -i '' 's/KEY_A\ 97/KEY_A\ \ 0/' includes/cub3d_bonus.h
-	sed -i '' 's/KEY_S\ 115/KEY_S\ \ 1/' includes/cub3d_bonus.h
-	sed -i '' 's/KEY_D\ 100/KEY_D\ \ 2/' includes/cub3d_bonus.h
-	sed -i '' 's/KEY_LEFT\ 65361/KEY_LEFT\ 123/' includes/cub3d_bonus.h
-	sed -i '' 's/KEY_RIGHT\ 65363/KEY_RIGHT\ 124/' includes/cub3d_bonus.h
 
 HEADERS_LINUX: fclean libft_fclean
 	make -C $(MLX_UNUSED) -f Makefile.mk fclean
-	sed -i '14 s/configured\ for\ macOS/configured\ for\ Linux/' \
+	sed -i '17 s/keys_mac/keys_linux/' \
 			includes/cub3d.h
-	sed -i '14 s/configured\ for\ macOS/configured\ for\ Linux/' \
+	sed -i '17 s/keys_mac/keys_linux/' \
 			includes/cub3d_bonus.h
-	sed -i 's/KEY_ESC\ 53/KEY_ESC\ 65307/' includes/cub3d.h
-	sed -i 's/KEY_W\ 13/KEY_W\ 119/' includes/cub3d.h
-	sed -i 's/KEY_A\ \ 0/KEY_A\ 97/' includes/cub3d.h
-	sed -i 's/KEY_S\ \ 1/KEY_S\ 115/' includes/cub3d.h
-	sed -i 's/KEY_D\ \ 2/KEY_D\ 100/' includes/cub3d.h
-	sed -i 's/KEY_LEFT\ 123/KEY_LEFT\ 65361/' includes/cub3d.h
-	sed -i 's/KEY_RIGHT\ 124/KEY_RIGHT\ 65363/' includes/cub3d.h
-	sed -i 's/KEY_ESC\ 53/KEY_ESC\ 65307/' includes/cub3d_bonus.h
-	sed -i 's/KEY_W\ 13/KEY_W\ 119/' includes/cub3d_bonus.h
-	sed -i 's/KEY_A\ \ 0/KEY_A\ 97/' includes/cub3d_bonus.h
-	sed -i 's/KEY_S\ \ 1/KEY_S\ 115/' includes/cub3d_bonus.h
-	sed -i 's/KEY_D\ \ 2/KEY_D\ 100/' includes/cub3d_bonus.h
-	sed -i 's/KEY_LEFT\ 123/KEY_LEFT\ 65361/' includes/cub3d_bonus.h
-	sed -i 's/KEY_RIGHT\ 124/KEY_RIGHT\ 65363/' includes/cub3d_bonus.h
 
 debug:
 	make FLAGS="$(CFLAGS) $(DBGFLAGS)" all
@@ -280,5 +253,7 @@ run_bonus: bonus
 		linux \
 		libs \
 		re \
+		HEADERS_MAC \
+		HEADERS_LINUX \
 		run \
 		run_bonus
