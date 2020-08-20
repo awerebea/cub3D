@@ -6,24 +6,56 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/18 21:27:25 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/20 16:53:26 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME       = cub3D
-NAME_B     = cub3D_bonus
-LIBFT      = Libft/libft.a
-MLX_DIR    = minilibx/mac/
-MLX_NAME   = libmlx.dylib
-MLX        = $(addprefix $(MLX_DIR),$(MLX_NAME))
-CC         = gcc
-CFLAGS     = -Wall -Wextra -Werror
-LIBFLAGS   = -L Libft -lft -L $(MLX_DIR)  -lmlx
-OFLAGS     = -O2
-DBGFLAGS   = -g
-INCLUDES   = -I includes/ -I Libft/includes/ -I $(MLX_DIR)
+NAME		= cub3D
+NAME_B		= cub3D_bonus
+LIBFT		= Libft/libft.a
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
+OFLAGS		= -O2
+DBGFLAGS	= -g
 
 override FLAGS ?= $(CFLAGS)
+
+#-- configuring MLX library path and key-defines in header files depending on OS
+OS			= $(shell uname)
+ifeq ($(OS), Linux)
+	MLX_DIR		= minilibx/linux/
+	MLX_NAME	= libmlx.a
+	LIBFLAGS	= -lmlx -lXext -lX11 -lm
+	OPTS		= Linux
+	MLX_UNUSED	= minilibx/mac/
+else
+	MLX_DIR		= minilibx/mac/
+	MLX_NAME	= libmlx.dylib
+	LIBFLAGS	= -lmlx
+	OPTS		= macOS
+	MLX_UNUSED	= minilibx/linux/
+endif
+
+MLX			= $(addprefix $(MLX_DIR),$(MLX_NAME))
+INCLUDES	= -I includes/ -I Libft/includes/ -I $(MLX_DIR)
+LIBFLAGS	+= -L Libft -lft -L $(MLX_DIR)
+
+HEADERS		= $(shell grep 'configured for Linux' includes/cub3d.h)
+ifeq ($(HEADERS), )
+	OPTS += macOS
+else
+	OPTS += Linux
+endif
+
+ifeq ($(OPTS), Linux Linux)
+	CONFIG_LIBS =
+else ifeq ($(OPTS), Linux macOS)
+	CONFIG_LIBS = HEADERS_LINUX
+else ifeq ($(OPTS), macOS Linux)
+	CONFIG_LIBS = HEADERS_MAC
+else ifeq ($(OPTS), macOS macOS)
+	CONFIG_LIBS =
+endif
 
 #----------------------------- Mandatory part compling -------------------------
 SRCDIR     = srcs/
@@ -67,7 +99,7 @@ DFLS       = $(SRC:=.d)
 
 all:			$(NAME)
 
-$(NAME):		$(LIBFT) $(MLX) $(OBJ)
+$(NAME):		$(CONFIG_LIBS) $(LIBFT) $(MLX) $(OBJ)
 	$(CC)		$(FLAGS) $(OBJ) $(INCLUDES) $(LIBFLAGS) -o $(NAME)
 	@echo '******* All done! *******'
 
@@ -122,7 +154,7 @@ DFLS_B     = $(SRC_B:=.d)
 
 bonus:			$(NAME_B)
 
-$(NAME_B):		$(LIBFT) $(MLX) $(OBJ_B)
+$(NAME_B):		$(CONFIG_LIBS) $(LIBFT) $(MLX) $(OBJ_B)
 	$(CC)		$(FLAGS) $(OBJ_B) $(INCLUDES) $(LIBFLAGS) -o $(NAME_B)
 	@echo '******* All done! *******'
 
@@ -145,6 +177,48 @@ fclean:			clean
 	rm -f		$(NAME_B)
 
 fclean_all: fclean libft_fclean mlx_fclean
+
+HEADERS_MAC: fclean libft_fclean
+	make -C $(MLX_UNUSED) -f Makefile.mk fclean
+	sed -i '' '14 s/configured\ for\ Linux/configured\ for\ macOS/' \
+			includes/cub3d.h
+	sed -i '' '14 s/configured\ for\ Linux/configured\ for\ macOS/' \
+			includes/cub3d_bonus.h
+	sed -i '' 's/KEY_ESC\ 65307/KEY_ESC\ 53/' includes/cub3d.h
+	sed -i '' 's/KEY_W\ 119/KEY_W\ 13/' includes/cub3d.h
+	sed -i '' 's/KEY_A\ 97/KEY_A\ \ 0/' includes/cub3d.h
+	sed -i '' 's/KEY_S\ 115/KEY_S\ \ 1/' includes/cub3d.h
+	sed -i '' 's/KEY_D\ 100/KEY_D\ \ 2/' includes/cub3d.h
+	sed -i '' 's/KEY_LEFT\ 65361/KEY_LEFT\ 123/' includes/cub3d.h
+	sed -i '' 's/KEY_RIGHT\ 65363/KEY_RIGHT\ 124/' includes/cub3d.h
+	sed -i '' 's/KEY_ESC\ 65307/KEY_ESC\ 53/' includes/cub3d_bonus.h
+	sed -i '' 's/KEY_W\ 119/KEY_W\ 13/' includes/cub3d_bonus.h
+	sed -i '' 's/KEY_A\ 97/KEY_A\ \ 0/' includes/cub3d_bonus.h
+	sed -i '' 's/KEY_S\ 115/KEY_S\ \ 1/' includes/cub3d_bonus.h
+	sed -i '' 's/KEY_D\ 100/KEY_D\ \ 2/' includes/cub3d_bonus.h
+	sed -i '' 's/KEY_LEFT\ 65361/KEY_LEFT\ 123/' includes/cub3d_bonus.h
+	sed -i '' 's/KEY_RIGHT\ 65363/KEY_RIGHT\ 124/' includes/cub3d_bonus.h
+
+HEADERS_LINUX: fclean libft_fclean
+	make -C $(MLX_UNUSED) -f Makefile.mk fclean
+	sed -i '14 s/configured\ for\ macOS/configured\ for\ Linux/' \
+			includes/cub3d.h
+	sed -i '14 s/configured\ for\ macOS/configured\ for\ Linux/' \
+			includes/cub3d_bonus.h
+	sed -i 's/KEY_ESC\ 53/KEY_ESC\ 65307/' includes/cub3d.h
+	sed -i 's/KEY_W\ 13/KEY_W\ 119/' includes/cub3d.h
+	sed -i 's/KEY_A\ \ 0/KEY_A\ 97/' includes/cub3d.h
+	sed -i 's/KEY_S\ \ 1/KEY_S\ 115/' includes/cub3d.h
+	sed -i 's/KEY_D\ \ 2/KEY_D\ 100/' includes/cub3d.h
+	sed -i 's/KEY_LEFT\ 123/KEY_LEFT\ 65361/' includes/cub3d.h
+	sed -i 's/KEY_RIGHT\ 124/KEY_RIGHT\ 65363/' includes/cub3d.h
+	sed -i 's/KEY_ESC\ 53/KEY_ESC\ 65307/' includes/cub3d_bonus.h
+	sed -i 's/KEY_W\ 13/KEY_W\ 119/' includes/cub3d_bonus.h
+	sed -i 's/KEY_A\ \ 0/KEY_A\ 97/' includes/cub3d_bonus.h
+	sed -i 's/KEY_S\ \ 1/KEY_S\ 115/' includes/cub3d_bonus.h
+	sed -i 's/KEY_D\ \ 2/KEY_D\ 100/' includes/cub3d_bonus.h
+	sed -i 's/KEY_LEFT\ 123/KEY_LEFT\ 65361/' includes/cub3d_bonus.h
+	sed -i 's/KEY_RIGHT\ 124/KEY_RIGHT\ 65363/' includes/cub3d_bonus.h
 
 debug:
 	make FLAGS="$(CFLAGS) $(DBGFLAGS)" all
@@ -177,46 +251,6 @@ mlx_fclean:
 
 mlx_re:
 	make re		-C $(MLX_DIR)
-
-mac: fclean libft_fclean
-	sed -i '' '16 s/minilibx\/linux\//minilibx\/mac\//' Makefile
-	sed -i '' '17 s/libmlx.a/libmlx.dylib/' Makefile
-	sed -i '' '21 s/\ -lmlx\ -lXext\ -lX11\ -lm/\ \ -lmlx/' \
-			Makefile
-	sed -i '' 's/KEY_ESC\ 65307/KEY_ESC\ 53/' includes/cub3d.h
-	sed -i '' 's/KEY_W\ 119/KEY_W\ 13/' includes/cub3d.h
-	sed -i '' 's/KEY_A\ 97/KEY_A\ \ 0/' includes/cub3d.h
-	sed -i '' 's/KEY_S\ 115/KEY_S\ \ 1/' includes/cub3d.h
-	sed -i '' 's/KEY_D\ 100/KEY_D\ \ 2/' includes/cub3d.h
-	sed -i '' 's/KEY_LEFT\ 65361/KEY_LEFT\ 123/' includes/cub3d.h
-	sed -i '' 's/KEY_RIGHT\ 65363/KEY_RIGHT\ 124/' includes/cub3d.h
-	sed -i '' 's/KEY_ESC\ 65307/KEY_ESC\ 53/' includes/cub3d_bonus.h
-	sed -i '' 's/KEY_W\ 119/KEY_W\ 13/' includes/cub3d_bonus.h
-	sed -i '' 's/KEY_A\ 97/KEY_A\ \ 0/' includes/cub3d_bonus.h
-	sed -i '' 's/KEY_S\ 115/KEY_S\ \ 1/' includes/cub3d_bonus.h
-	sed -i '' 's/KEY_D\ 100/KEY_D\ \ 2/' includes/cub3d_bonus.h
-	sed -i '' 's/KEY_LEFT\ 65361/KEY_LEFT\ 123/' includes/cub3d_bonus.h
-	sed -i '' 's/KEY_RIGHT\ 65363/KEY_RIGHT\ 124/' includes/cub3d_bonus.h
-
-linux: fclean libft_fclean
-	sed -i '16 s/minilibx\/mac\//minilibx\/linux\//' Makefile
-	sed -i '17 s/libmlx.dylib/libmlx.a/' Makefile
-	sed -i '21 s/\ \ -lmlx/\ -lmlx\ -lXext\ -lX11\ -lm/' \
-			Makefile
-	sed -i 's/KEY_ESC\ 53/KEY_ESC\ 65307/' includes/cub3d.h
-	sed -i 's/KEY_W\ 13/KEY_W\ 119/' includes/cub3d.h
-	sed -i 's/KEY_A\ \ 0/KEY_A\ 97/' includes/cub3d.h
-	sed -i 's/KEY_S\ \ 1/KEY_S\ 115/' includes/cub3d.h
-	sed -i 's/KEY_D\ \ 2/KEY_D\ 100/' includes/cub3d.h
-	sed -i 's/KEY_LEFT\ 123/KEY_LEFT\ 65361/' includes/cub3d.h
-	sed -i 's/KEY_RIGHT\ 124/KEY_RIGHT\ 65363/' includes/cub3d.h
-	sed -i 's/KEY_ESC\ 53/KEY_ESC\ 65307/' includes/cub3d_bonus.h
-	sed -i 's/KEY_W\ 13/KEY_W\ 119/' includes/cub3d_bonus.h
-	sed -i 's/KEY_A\ \ 0/KEY_A\ 97/' includes/cub3d_bonus.h
-	sed -i 's/KEY_S\ \ 1/KEY_S\ 115/' includes/cub3d_bonus.h
-	sed -i 's/KEY_D\ \ 2/KEY_D\ 100/' includes/cub3d_bonus.h
-	sed -i 's/KEY_LEFT\ 123/KEY_LEFT\ 65361/' includes/cub3d_bonus.h
-	sed -i 's/KEY_RIGHT\ 124/KEY_RIGHT\ 65363/' includes/cub3d_bonus.h
 
 libs: $(LIBFT) $(MLX)
 

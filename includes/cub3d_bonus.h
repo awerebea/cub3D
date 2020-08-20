@@ -6,9 +6,13 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/20 00:17:48 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/20 15:09:22 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+** configured for macOS
+*/
 
 #ifndef CUB3D_BONUS_H
 
