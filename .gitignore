@@ -1,5 +1,7 @@
 .vscode/
 .idea/
+CMakeLists.txt
+cmake-build-debug/
 ._README.md
 objs/
 objs_bonus/
