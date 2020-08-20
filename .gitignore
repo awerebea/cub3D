@@ -1,4 +1,5 @@
 .vscode/
+.idea/
 ._README.md
 objs/
 objs_bonus/
