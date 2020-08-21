@@ -2,6 +2,7 @@
 .idea/
 CMakeLists.txt
 cmake-build-debug/
+minilibx/linux/test/mlx-test/
 objs/
 objs_bonus/
 ._README.md
