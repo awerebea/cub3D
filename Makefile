@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/21 20:17:55 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/21 23:54:08 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,15 +27,18 @@ ifeq ($(OS), Linux)
 	MLX_NAME	= libmlx.a
 	LIBFLAGS	= -lmlx -lXext -lX11 -lm
 	KEYS_HEADER	= includes/keys_linux/
+	INCLUDES	= -I $(shell ./x11init.sh)
 else
 	MLX_DIR		= minilibx/mac/
 	MLX_NAME	= libmlx.dylib
 	LIBFLAGS	= -lmlx
 	KEYS_HEADER	= includes/keys_mac/
+	INCLUDES	=
 endif
 
+
 MLX			= $(addprefix $(MLX_DIR),$(MLX_NAME))
-INCLUDES	= -I includes/ -I Libft/includes/ -I $(MLX_DIR) -I $(KEYS_HEADER)
+INCLUDES	+= -I includes/ -I Libft/includes/ -I $(MLX_DIR) -I $(KEYS_HEADER)
 LIBFLAGS	+= -L Libft -lft -L $(MLX_DIR)
 
 #----------------------------- Mandatory part compling -------------------------
@@ -137,7 +140,7 @@ bonus:			$(NAME_B)
 
 $(NAME_B):		$(LIBFT) $(MLX) $(OBJ_B)
 	$(CC)		$(FLAGS) $(OBJ_B) $(INCLUDES) $(LIBFLAGS) -o $(NAME_B)
-	@echo '******* All done! *******'
+	@echo '******* Bonus done! *******'
 
 $(OBJ_B):			$(OBJDIR_B)%.o: $(SRCDIR_B)%.c
 	mkdir -p	$(OBJDIR_B) $(addprefix $(OBJDIR_B), $(FLSDIR_1_B) \
