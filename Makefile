@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/20 20:40:24 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/21 20:17:55 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,36 +26,17 @@ ifeq ($(OS), Linux)
 	MLX_DIR		= minilibx/linux/
 	MLX_NAME	= libmlx.a
 	LIBFLAGS	= -lmlx -lXext -lX11 -lm
-	OPTS		= Linux
-	MLX_UNUSED	= minilibx/mac/
+	KEYS_HEADER	= includes/keys_linux/
 else
 	MLX_DIR		= minilibx/mac/
 	MLX_NAME	= libmlx.dylib
 	LIBFLAGS	= -lmlx
-	OPTS		= macOS
-	MLX_UNUSED	= minilibx/linux/
+	KEYS_HEADER	= includes/keys_mac/
 endif
 
 MLX			= $(addprefix $(MLX_DIR),$(MLX_NAME))
-INCLUDES	= -I includes/ -I Libft/includes/ -I $(MLX_DIR)
+INCLUDES	= -I includes/ -I Libft/includes/ -I $(MLX_DIR) -I $(KEYS_HEADER)
 LIBFLAGS	+= -L Libft -lft -L $(MLX_DIR)
-
-HEADERS		= $(shell grep 'include \"keys_linux.h\"' includes/cub3d.h)
-ifeq ($(HEADERS), )
-	OPTS	+= macOS
-else
-	OPTS	+= Linux
-endif
-
-ifeq ($(OPTS), Linux Linux)
-	CONFIG_LIBS =
-else ifeq ($(OPTS), Linux macOS)
-	CONFIG_LIBS = HEADERS_LINUX
-else ifeq ($(OPTS), macOS Linux)
-	CONFIG_LIBS = HEADERS_MAC
-else ifeq ($(OPTS), macOS macOS)
-	CONFIG_LIBS =
-endif
 
 #----------------------------- Mandatory part compling -------------------------
 SRCDIR		= srcs/
@@ -99,7 +80,7 @@ DFLS		= $(SRC:=.d)
 
 all:			$(NAME)
 
-$(NAME):		$(CONFIG_LIBS) $(LIBFT) $(MLX) $(OBJ)
+$(NAME):		$(LIBFT) $(MLX) $(OBJ)
 	$(CC)		$(FLAGS) $(OBJ) $(INCLUDES) $(LIBFLAGS) -o $(NAME)
 	@echo '******* All done! *******'
 
@@ -154,7 +135,7 @@ DFLS_B		= $(SRC_B:=.d)
 
 bonus:			$(NAME_B)
 
-$(NAME_B):		$(CONFIG_LIBS) $(LIBFT) $(MLX) $(OBJ_B)
+$(NAME_B):		$(LIBFT) $(MLX) $(OBJ_B)
 	$(CC)		$(FLAGS) $(OBJ_B) $(INCLUDES) $(LIBFLAGS) -o $(NAME_B)
 	@echo '******* All done! *******'
 
@@ -178,20 +159,6 @@ fclean:			clean
 	rm -f		screenshot*.bmp
 
 fclean_all: fclean libft_fclean mlx_fclean
-
-HEADERS_MAC: fclean libft_fclean
-	make -C $(MLX_UNUSED) -f Makefile.mk fclean
-	sed -i '' '17 s/keys_linux/keys_mac/' \
-			includes/cub3d.h
-	sed -i '' '17 s/keys_linux/keys_mac/' \
-			includes/cub3d_bonus.h
-
-HEADERS_LINUX: fclean libft_fclean
-	make -C $(MLX_UNUSED) -f Makefile.mk fclean
-	sed -i '17 s/keys_mac/keys_linux/' \
-			includes/cub3d.h
-	sed -i '17 s/keys_mac/keys_linux/' \
-			includes/cub3d_bonus.h
 
 debug:
 	make FLAGS="$(CFLAGS) $(DBGFLAGS)" all
