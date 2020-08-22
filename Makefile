@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/21 23:54:08 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/22 12:58:39 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -195,6 +195,14 @@ mlx_fclean:
 mlx_re:
 	make re		-C $(MLX_DIR)
 
+mlx_gcc: mlx_fclean
+	@sed -i '18 s/clang/gcc/' minilibx/linux/Makefile.mk
+	@echo '******* minilibx compiler set to GCC *******'
+
+mlx_clang: mlx_fclean
+	@sed -i '18 s/gcc/clang/' minilibx/linux/Makefile.mk
+	@echo '******* minilibx compiler set to CLANG *******'
+
 libs: $(LIBFT) $(MLX)
 
 re:				fclean all
@@ -211,19 +219,17 @@ run_bonus: bonus
 		fclean \
 		fclean_all \
 		debug \
-		libft_force_make \
 		libft_clean \
 		libft_fclean \
+		libft_force_make \
 		libft_re \
-		mlx_force_make \
 		mlx_clean \
 		mlx_fclean \
+		mlx_force_make \
 		mlx_re \
-		mac \
-		linux \
+		mlx_gcc \
+		mlx_clang \
 		libs \
 		re \
-		HEADERS_MAC \
-		HEADERS_LINUX \
 		run \
 		run_bonus
