@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/24 16:40:34 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/24 17:55:26 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,8 +47,6 @@ FLSDIR_1	= ./
 FLSDIR_2	= errors/
 FLSDIR_3	= file_parsing/
 FLSDIR_4	= engine/
-
-override PROGRAM_TYPE ?= Mandatory
 
 ifeq ($(PROGRAM_TYPE), Bonus)
 	INCLUDES	+= -I includes/header_bonus/
@@ -136,13 +134,11 @@ bonus:
 #--------------------------------- Common rules --------------------------------
 clean:
 	rm -rf		$(OBJDIR)
-	rm -rf		$(OBJDIR_B)
 
 clean_all: clean libft_clean mlx_clean
 
 fclean:			clean
 	rm -f		$(NAME)
-	rm -f		$(NAME_B)
 	rm -f		screenshot*.bmp
 
 fclean_all: fclean libft_fclean mlx_fclean
