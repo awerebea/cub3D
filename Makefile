@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/24 16:36:25 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/24 16:40:34 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ ifeq ($(PROGRAM_TYPE), Bonus)
 					map_array_preparing \
 					pars_args \
 					pars_desc_file_bonus \
-					pars_map \
+					pars_map_bonus \
 					pars_options_1 \
 					pars_options_2_bonus)
 	FLS_4		= $(addprefix $(FLSDIR_4), \
