@@ -6,12 +6,11 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/22 12:58:39 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/24 16:36:25 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= cub3D
-NAME_B		= cub3D_bonus
 LIBFT		= Libft/libft.a
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
@@ -41,41 +40,78 @@ MLX			= $(addprefix $(MLX_DIR),$(MLX_NAME))
 INCLUDES	+= -I includes/ -I Libft/includes/ -I $(MLX_DIR) -I $(KEYS_HEADER)
 LIBFLAGS	+= -L Libft -lft -L $(MLX_DIR)
 
-#----------------------------- Mandatory part compling -------------------------
+#---------------------------------- cub3D compling -----------------------------
 SRCDIR		= srcs/
 OBJDIR		= objs/
-
 FLSDIR_1	= ./
-FLS_1		= $(addprefix $(FLSDIR_1), \
-				colors \
-				main \
-				utils )
 FLSDIR_2	= errors/
-FLS_2		= $(addprefix $(FLSDIR_2), \
-				errors_1 \
-				errors_2)
 FLSDIR_3	= file_parsing/
-FLS_3		= $(addprefix $(FLSDIR_3), \
-				map_array_preparing \
-				pars_args \
-				pars_desc_file \
-				pars_map \
-				pars_options_1 \
-				pars_options_2)
 FLSDIR_4	= engine/
-FLS_4		= $(addprefix $(FLSDIR_4), \
-				draw_background \
-				draw_sprite \
-				draw_vert_line \
-				engine_tools \
-				game \
-				game_init \
-				key_press_n_release \
-				key_process \
-				raycasting \
-				screenshot \
-				sprites_handling \
-				sprites_list_init)
+
+override PROGRAM_TYPE ?= Mandatory
+
+ifeq ($(PROGRAM_TYPE), Bonus)
+	INCLUDES	+= -I includes/header_bonus/
+	FLS_1		= $(addprefix $(FLSDIR_1), \
+					colors \
+					main_bonus \
+					utils_bonus )
+	FLS_2		= $(addprefix $(FLSDIR_2), \
+					errors_1 \
+					errors_2)
+	FLS_3		= $(addprefix $(FLSDIR_3), \
+					map_array_preparing \
+					pars_args \
+					pars_desc_file_bonus \
+					pars_map \
+					pars_options_1 \
+					pars_options_2_bonus)
+	FLS_4		= $(addprefix $(FLSDIR_4), \
+					draw_minimap_bonus \
+					draw_sprite \
+					draw_textured_background_bonus \
+					draw_vert_line \
+					engine_tools_bonus \
+					game_bonus \
+					game_init \
+					key_press_n_release \
+					key_process \
+					minimap_init_bonus \
+					raycasting \
+					screenshot_bonus \
+					sprites_handling \
+					sprites_list_init)
+else
+	INCLUDES	+= -I includes/header_mandatory/
+	FLS_1		= $(addprefix $(FLSDIR_1), \
+					colors \
+					main \
+					utils )
+	FLS_2		= $(addprefix $(FLSDIR_2), \
+					errors_1 \
+					errors_2)
+	FLS_3		= $(addprefix $(FLSDIR_3), \
+					map_array_preparing \
+					pars_args \
+					pars_desc_file \
+					pars_map \
+					pars_options_1 \
+					pars_options_2)
+	FLS_4		= $(addprefix $(FLSDIR_4), \
+					draw_background \
+					draw_sprite \
+					draw_vert_line \
+					engine_tools \
+					game \
+					game_init \
+					key_press_n_release \
+					key_process \
+					raycasting \
+					screenshot \
+					sprites_handling \
+					sprites_list_init)
+endif
+
 SRC			= $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4)
 
 OBJ			= $(addprefix $(OBJDIR), $(SRC:=.o))
@@ -94,60 +130,8 @@ $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
 
 include $(wildcard $(addprefix $(OBJDIR), $(DFLS)))
 
-#------------------------------- Bonus part compling ---------------------------
-SRCDIR_B	= srcs_bonus/
-OBJDIR_B	= objs_bonus/
-
-FLSDIR_1_B	= ./
-FLS_1_B		= $(addprefix $(FLSDIR_1_B), \
-				colors \
-				main \
-				utils )
-FLSDIR_2_B	= errors/
-FLS_2_B		= $(addprefix $(FLSDIR_2_B), \
-				errors_1 \
-				errors_2)
-FLSDIR_3_B	= file_parsing/
-FLS_3_B		= $(addprefix $(FLSDIR_3_B), \
-				map_array_preparing \
-				pars_args \
-				pars_desc_file \
-				pars_map \
-				pars_options_1 \
-				pars_options_2)
-FLSDIR_4_B	= engine/
-FLS_4_B		= $(addprefix $(FLSDIR_4_B), \
-				draw_minimap \
-				draw_sprite \
-				draw_textured_background \
-				draw_vert_line \
-				engine_tools \
-				game \
-				game_init \
-				key_press_n_release \
-				key_process \
-				minimap_init \
-				raycasting \
-				screenshot \
-				sprites_handling \
-				sprites_list_init)
-SRC_B		= $(FLS_1_B) $(FLS_2_B) $(FLS_3_B) $(FLS_4_B)
-
-OBJ_B		= $(addprefix $(OBJDIR_B), $(SRC_B:=.o))
-DFLS_B		= $(SRC_B:=.d)
-
-bonus:			$(NAME_B)
-
-$(NAME_B):		$(LIBFT) $(MLX) $(OBJ_B)
-	$(CC)		$(FLAGS) $(OBJ_B) $(INCLUDES) $(LIBFLAGS) -o $(NAME_B)
-	@echo '******* Bonus done! *******'
-
-$(OBJ_B):			$(OBJDIR_B)%.o: $(SRCDIR_B)%.c
-	mkdir -p	$(OBJDIR_B) $(addprefix $(OBJDIR_B), $(FLSDIR_1_B) \
-				$(FLSDIR_2_B) $(FLSDIR_3_B) $(FLSDIR_4_B))
-	$(CC)		$(FLAGS) $(INCLUDES) -c $< -o $@ -MMD
-
-include $(wildcard $(addprefix $(OBJDIR_B), $(DFLS_B)))
+bonus:
+	make PROGRAM_TYPE="Bonus" all
 
 #--------------------------------- Common rules --------------------------------
 clean:
@@ -211,7 +195,7 @@ run: all
 	./$(NAME) maps/map_256.cub
 
 run_bonus: bonus
-	./$(NAME_B) maps/map_256_bonus.cub
+	./$(NAME) maps/map_256_bonus.cub
 
 .PHONY:	all \
 		clean \

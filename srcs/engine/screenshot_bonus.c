@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   screenshot.c                                       :+:      :+:    :+:   */
+/*   screenshot_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 22:12:13 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/19 23:55:56 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/24 16:28:20 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "cub3d.h"
 #include "libft.h"
 #include "mlx.h"
 #include <fcntl.h>

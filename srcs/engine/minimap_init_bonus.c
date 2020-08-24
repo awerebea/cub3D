@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_init.c                                     :+:      :+:    :+:   */
+/*   minimap_init_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 14:02:47 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 18:29:36 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/24 16:28:08 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "cub3d.h"
 #include <math.h>
 
 void	f_player_pos_init(t_mlx *mlx)

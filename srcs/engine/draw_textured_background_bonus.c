@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_textured_background.c                         :+:      :+:    :+:   */
+/*   draw_textured_background_bonus.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 21:02:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/18 16:52:13 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/24 16:27:40 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "cub3d.h"
 #include "draw_tex_background.h"
 #include <math.h>
 

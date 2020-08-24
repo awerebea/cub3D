@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 13:00:56 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 20:25:19 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/24 16:10:22 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,6 @@ int			f_close_n_exit(t_mlx *mlx)
 	}
 	free(mlx->mlx_ptr);
 	exit(f_exit(mlx->errcode, mlx->opts));
-}
-
-static int	f_check_xpm_img(t_img tex_img)
-{
-	if (tex_img.width < 1 || tex_img.height < 1)
-		return (-1);
-	return (0);
-}
-
-int			f_check_textures_for_valid(t_mlx *mlx)
-{
-	if (f_check_xpm_img(mlx->no_tex))
-		return (mlx->opts->err_str = ft_strdup(mlx->opts->no_tex)) ? 411 : 200;
-	if (f_check_xpm_img(mlx->so_tex))
-		return (mlx->opts->err_str = ft_strdup(mlx->opts->so_tex)) ? 411 : 200;
-	if (f_check_xpm_img(mlx->we_tex))
-		return (mlx->opts->err_str = ft_strdup(mlx->opts->we_tex)) ? 411 : 200;
-	if (f_check_xpm_img(mlx->ea_tex))
-		return (mlx->opts->err_str = ft_strdup(mlx->opts->ea_tex)) ? 411 : 200;
-	if (f_check_xpm_img(mlx->sp_tex))
-		return (mlx->opts->err_str = ft_strdup(mlx->opts->sp_tex)) ? 411 : 200;
-	return (0);
 }
 
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color)
