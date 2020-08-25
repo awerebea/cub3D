@@ -6,12 +6,11 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:22:42 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/18 21:25:08 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/25 23:29:48 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "draw_walls.h"
 #include <stdlib.h>
 #include <math.h>
 

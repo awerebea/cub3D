@@ -6,12 +6,11 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 21:02:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/24 16:27:40 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/25 23:29:33 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "draw_tex_background.h"
 #include <math.h>
 
 static void	f_fc_vars_calculation(t_mlx *mlx, t_fc_vars *fc_vars, int y)

@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/25 22:33:21 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/25 22:59:12 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,10 +58,10 @@ FLSDIR_3	= file_parsing/
 FLSDIR_4	= engine/
 
 ifeq ($(PROGRAM_TYPE), Bonus)
-	INCLUDES	+= -I includes/header_bonus/
+	DEF_BONUS = -D BONUS
 	FLS_1		= $(addprefix $(FLSDIR_1), \
 					colors \
-					main_bonus \
+					main \
 					utils_bonus )
 	FLS_2		= $(addprefix $(FLSDIR_2), \
 					errors_1 \
@@ -90,7 +90,6 @@ ifeq ($(PROGRAM_TYPE), Bonus)
 					sprites_list_init)
 	FCLEAN_FLAG	= $(CHECK_OBJS_BONUS)
 else
-	INCLUDES	+= -I includes/header_mandatory/
 	FLS_1		= $(addprefix $(FLSDIR_1), \
 					colors \
 					main \
@@ -135,7 +134,7 @@ $(NAME):		$(FCLEAN_FLAG) $(LIBFT) $(MLX) $(OBJ)
 $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
 	mkdir -p	$(OBJDIR) $(addprefix $(OBJDIR), $(FLSDIR_1) $(FLSDIR_2) \
 				$(FLSDIR_3) $(FLSDIR_4))
-	$(CC)		$(FLAGS) $(INCLUDES) -c $< -o $@ -MMD
+	$(CC)		$(FLAGS) $(DEF_BONUS) $(INCLUDES) -c $< -o $@ -MMD
 
 include $(wildcard $(addprefix $(OBJDIR), $(DFLS)))
 
