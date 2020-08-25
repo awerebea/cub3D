@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/24 17:55:26 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/25 22:33:21 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,16 @@ MLX			= $(addprefix $(MLX_DIR),$(MLX_NAME))
 INCLUDES	+= -I includes/ -I Libft/includes/ -I $(MLX_DIR) -I $(KEYS_HEADER)
 LIBFLAGS	+= -L Libft -lft -L $(MLX_DIR)
 
-#---------------------------------- cub3D compling -----------------------------
+#---------------- check if fclean needed after last project building -----------
+CHECK_OBJS = $(shell find . -wholename "./objs/*_bonus.o")
+
+ifeq ($(CHECK_OBJS), )
+	CHECK_OBJS_BONUS = fclean
+else
+	CHECK_OBJS = fclean
+endif
+
+#--------------------------------- cub3D compiling -----------------------------
 SRCDIR		= srcs/
 OBJDIR		= objs/
 FLSDIR_1	= ./
@@ -79,6 +88,7 @@ ifeq ($(PROGRAM_TYPE), Bonus)
 					screenshot_bonus \
 					sprites_handling \
 					sprites_list_init)
+	FCLEAN_FLAG	= $(CHECK_OBJS_BONUS)
 else
 	INCLUDES	+= -I includes/header_mandatory/
 	FLS_1		= $(addprefix $(FLSDIR_1), \
@@ -108,6 +118,7 @@ else
 					screenshot \
 					sprites_handling \
 					sprites_list_init)
+	FCLEAN_FLAG	= $(CHECK_OBJS)
 endif
 
 SRC			= $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4)
@@ -117,7 +128,7 @@ DFLS		= $(SRC:=.d)
 
 all:			$(NAME)
 
-$(NAME):		$(LIBFT) $(MLX) $(OBJ)
+$(NAME):		$(FCLEAN_FLAG) $(LIBFT) $(MLX) $(OBJ)
 	$(CC)		$(FLAGS) $(OBJ) $(INCLUDES) $(LIBFLAGS) -o $(NAME)
 	@echo '******* All done! *******'
 
