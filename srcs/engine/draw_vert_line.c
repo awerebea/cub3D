@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:22:42 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/25 23:29:48 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 16:20:02 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,35 @@ static int	f_get_pix_color_n_tex_y_calculation(t_mlx *mlx, t_wall_vars *w_vars)
 							tex_img->width)) * (tex_img->bits_per_pix / 8))));
 }
 
+#ifdef BONUS
+
+void		f_draw_vert_line(t_mlx *mlx, t_wall_vars *w_vars, int x)
+{
+	int			color;
+	float		shade;
+	int			y;
+
+	w_vars->line_height = (int)((mlx->y_win_size / w_vars->wall_dist) * 1.25);
+	w_vars->line_start = mlx->y_win_size / 2 - w_vars->line_height / 2;
+	if (w_vars->line_start < 0)
+		w_vars->line_start = 0;
+	w_vars->line_end = mlx->y_win_size / 2 + w_vars->line_height / 2;
+	if (w_vars->line_end >= mlx->y_win_size)
+		w_vars->line_end = mlx->y_win_size - 1;
+	shade = 1 / (1 + 0.005 * w_vars->wall_dist + 0.006 * \
+			pow(w_vars->wall_dist, 2));
+	y = w_vars->line_start;
+	f_tex_vars_calculation(mlx, w_vars);
+	while (y <= w_vars->line_end)
+	{
+		color = f_get_pix_color_n_tex_y_calculation(mlx, w_vars);
+		w_vars->tex_pos += w_vars->tex_step;
+		my_mlx_pixel_put(&mlx->img, x, y++, f_add_shade(color, shade));
+	}
+}
+
+#else
+
 void		f_draw_vert_line(t_mlx *mlx, t_wall_vars *w_vars, int x)
 {
 	int			color;
@@ -86,3 +115,5 @@ void		f_draw_vert_line(t_mlx *mlx, t_wall_vars *w_vars, int x)
 		my_mlx_pixel_put(&mlx->img, x, y++, color);
 	}
 }
+
+#endif
