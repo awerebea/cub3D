@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 10:44:46 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 12:42:47 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ int				f_close_n_exit(t_mlx *mlx);
 int				f_exit(int errcode, t_sdf *opts);
 void			f_print_err(int errcode, t_sdf *opts);
 void			f_print_err_2(int errcode, t_sdf *opts);
+int				f_opts_init(t_sdf *opts);
+int				f_check_opts_completeness(t_sdf *opts);
 int				f_pars_desc_file(char *map_file, t_sdf *opts);
+int				f_pars_resolution(char *line, int i, t_sdf *opts);
+int				f_pars_line(char *line, t_sdf *opts);
 int				f_pars_map(char *line, t_sdf *opts);
 int				f_map_array_preparing(t_sdf *opts);
 int				f_pars_sprite_texture(char *line, int i, t_sdf *opts);
