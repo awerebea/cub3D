@@ -6,13 +6,14 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 16:49:44 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/27 02:18:08 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
 
 static void	f_key_flags_init(t_mlx *mlx)
 {
@@ -52,6 +53,28 @@ static void	f_dir_n_plane_calculation(t_mlx *mlx)
 	}
 }
 
+#ifdef BONUS
+
+int			f_game_init(t_mlx *mlx)
+{
+	mlx->game.player_x = (float)mlx->opts->spawn_point_x + 0.5;
+	mlx->game.player_y = (float)mlx->opts->spawn_point_y + 0.5;
+	f_dir_n_plane_calculation(mlx);
+	mlx->game.time = clock();
+	mlx->game.move_speed = MOVE_SPEED;
+	mlx->game.rot_speed = ROTATE_SPEED * M_PI / 180;
+	mlx->game.mouse_x = 0;
+	mlx->game.sens = MOUSE_SENSITIVITY;
+	if (!(mlx->game.wall_dist_arr = (float*)malloc(sizeof(float) * \
+					mlx->x_win_size)))
+		return (mlx->errcode = 200);
+	if (!mlx->opts->screenshot)
+		f_key_flags_init(mlx);
+	return (0);
+}
+
+#else
+
 int			f_game_init(t_mlx *mlx)
 {
 	mlx->game.player_x = (float)mlx->opts->spawn_point_x + 0.5;
@@ -66,3 +89,5 @@ int			f_game_init(t_mlx *mlx)
 		f_key_flags_init(mlx);
 	return (0);
 }
+
+#endif

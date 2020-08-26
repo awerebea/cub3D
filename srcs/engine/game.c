@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 22:49:35 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/27 02:30:14 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,30 @@
 
 #ifdef BONUS
 
-int			f_mouse_move(int x, int y, t_mlx *mlx)
+static int	f_mouse_move(int x, int y, t_mlx *mlx)
 {
-	static int	x_prev;
-	static int	dir;
+	int			dir;
 
-	y++;
-	if (x - x_prev > 0)
-		dir = 1;
-	else if (x - x_prev < 0)
-		dir = -1;
+	dir = (x - mlx->game.mouse_x > 0 && y) ? 1 : -1;
 	mlx->game.old_dir_x = mlx->game.dir_x;
-	mlx->game.dir_x = mlx->game.dir_x * cos(dir * mlx->game.rot_speed) - \
-						mlx->game.dir_y * sin(dir * mlx->game.rot_speed);
-	mlx->game.dir_y = mlx->game.old_dir_x * sin(dir * mlx->game.rot_speed) + \
-						mlx->game.dir_y * cos(dir * mlx->game.rot_speed);
+	mlx->game.dir_x = mlx->game.dir_x * cos(dir * mlx->game.rot_speed * \
+						mlx->game.sens) - mlx->game.dir_y * sin(dir * \
+						mlx->game.rot_speed * mlx->game.sens);
+	mlx->game.dir_y = mlx->game.old_dir_x * sin(dir * mlx->game.rot_speed * \
+						mlx->game.sens) + mlx->game.dir_y * cos(dir * \
+						mlx->game.rot_speed * mlx->game.sens);
 	mlx->game.old_plane_x = mlx->game.plane_x;
-	mlx->game.plane_x = mlx->game.plane_x * cos(dir * mlx->game.rot_speed) - \
-						mlx->game.plane_y * sin(dir * mlx->game.rot_speed);
-	mlx->game.plane_y = mlx->game.old_plane_x * sin(dir * mlx->game.rot_speed) \
-						+ mlx->game.plane_y * cos(dir * mlx->game.rot_speed);
-	x_prev = x;
+	mlx->game.plane_x = mlx->game.plane_x * cos(dir * mlx->game.rot_speed * \
+						mlx->game.sens) - mlx->game.plane_y * sin(dir * \
+						mlx->game.rot_speed * mlx->game.sens);
+	mlx->game.plane_y = mlx->game.old_plane_x * sin(dir * mlx->game.rot_speed \
+						* mlx->game.sens) + mlx->game.plane_y * cos(dir * \
+						mlx->game.rot_speed * mlx->game.sens);
+	if (x < (int)(mlx->x_win_size * 0.1) || x > (int)(mlx->x_win_size * 0.9) \
+		|| y < (int)(mlx->y_win_size * 0.1) || y > (int)(mlx->y_win_size * 0.9))
+		mlx_mouse_move(mlx->mlx_ptr, mlx->win_ptr, mlx->x_win_size / 2, \
+														mlx->y_win_size / 2);
+	mlx->game.mouse_x = x;
 	mlx_mouse_hide(mlx->mlx_ptr, mlx->win_ptr);
 	return (0);
 }

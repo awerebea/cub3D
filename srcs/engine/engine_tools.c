@@ -6,13 +6,16 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 13:00:56 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 16:46:32 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/27 01:42:28 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
 #include <stdlib.h>
+#include <math.h>
+#include <time.h>
+#include <stdio.h>
 
 #ifdef BONUS
 
@@ -29,6 +32,11 @@ int			f_draw_all(t_mlx *mlx)
 	f_draw_textured_background(mlx);
 	f_raycasting(mlx);
 	f_draw_minimap(mlx);
+	mlx->game.time_prev = mlx->game.time;
+	mlx->game.time = clock();
+	mlx->game.time_frame = (mlx->game.time - mlx->game.time_prev) / 1000000;
+	mlx->game.move_speed = mlx->game.time_frame * MOVE_SPEED;
+	mlx->game.rot_speed = mlx->game.time_frame * ROTATE_SPEED * M_PI / 180;
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
 	return (0);
 }

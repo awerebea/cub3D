@@ -6,13 +6,30 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 10:45:26 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/27 01:02:21 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_MANDATORY_PART_H
 
 # define CUB3D_MANDATORY_PART_H
+
+typedef struct	s_game
+{
+	float		player_x;
+	float		player_y;
+	float		dir_x;
+	float		dir_y;
+	float		plane_x;
+	float		plane_y;
+	float		move_speed;
+	float		rot_speed;
+	float		*wall_dist_arr;
+	float		old_dir_x;
+	float		old_dir_y;
+	float		old_plane_x;
+	float		old_plane_y;
+}				t_game;
 
 typedef	struct	s_sdf
 {
