@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/26 16:35:51 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/26 17:10:34 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ ifeq ($(OS), Linux)
 	MLX_DIR		= minilibx/linux/
 	MLX_NAME	= libmlx.a
 	LIBFLAGS	= -lmlx -lXext -lX11 -lm
-	INCLUDES	= -I $(shell ./x11init.sh)
+	INCLUDES	= -I $(shell ./x11_path_init.sh)
 else
 	MLX_DIR		= minilibx/mac/
 	MLX_NAME	= libmlx.dylib
@@ -43,9 +43,9 @@ LIBFLAGS	+= -L Libft -lft -L $(MLX_DIR)
 CHECK_OBJS = $(shell find . -wholename "./objs/*_bonus.o")
 
 ifeq ($(CHECK_OBJS), )
-	CHECK_OBJS_BONUS = fclean
+	CHECK_OBJS_BONUS = fclean_keep_bmp
 else
-	CHECK_OBJS = fclean
+	CHECK_OBJS = fclean_keep_bmp
 endif
 
 #--------------------------------- cub3D compiling -----------------------------
@@ -59,7 +59,6 @@ FLSDIR_4	= engine/
 FLS_1	= $(addprefix $(FLSDIR_1), \
 			colors \
 			main \
-			opts_init_n_exit \
 			utils )
 
 FLS_2	= $(addprefix $(FLSDIR_2), \
@@ -133,6 +132,9 @@ fclean:			clean
 	rm -f		$(NAME)
 	rm -f		screenshot*.bmp
 
+fclean_keep_bmp: clean
+	rm -f		$(NAME)
+
 fclean_all: fclean libft_fclean mlx_fclean
 
 debug:
@@ -185,11 +187,18 @@ run: all
 run_bonus: bonus
 	./$(NAME) maps/map_256_bonus.cub
 
+screenshot: all
+	./$(NAME) maps/map_256.cub --save
+
+screenshot_bonus: bonus
+	./$(NAME) maps/map_256_bonus.cub --save
+
 .PHONY:	all \
 		clean \
 		clean_all \
 		fclean \
 		fclean_all \
+		fclean_keep_bmp \
 		debug \
 		libft_clean \
 		libft_fclean \
@@ -204,4 +213,6 @@ run_bonus: bonus
 		libs \
 		re \
 		run \
-		run_bonus
+		run_bonus \
+		screenshot \
+		screenshot_bonus

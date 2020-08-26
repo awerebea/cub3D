@@ -6,13 +6,12 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 22:12:13 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 13:25:29 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 16:55:27 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft.h"
-#include "mlx.h"
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -59,6 +58,8 @@ static int	f_bmp_image_write(t_mlx *mlx, char *bitmap_file_header, \
 	write(fd, dib_header, 40);
 	write(fd, mlx->img.addr, mlx->x_win_size * mlx->y_win_size * \
 			mlx->img.bits_per_pix / 8);
+	ft_putstr_fd(filename, 1);
+	ft_putstr_fd(" saved\n", 1);
 	free(filename);
 	return (close(fd) < 0) ? 320 : 0;
 }

@@ -6,12 +6,11 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 14:49:47 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 11:08:05 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 16:50:10 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "libft.h"
 #include "cub3d_keys.h"
 
 int		f_key_press(int key, t_mlx *mlx)

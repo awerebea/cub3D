@@ -6,13 +6,12 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 13:00:56 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 16:14:43 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 16:46:32 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
-#include "libft.h"
 #include <stdlib.h>
 
 #ifdef BONUS

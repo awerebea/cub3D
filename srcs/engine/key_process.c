@@ -6,12 +6,11 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 00:08:19 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 20:22:26 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 16:50:43 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "mlx.h"
 #include "libft.h"
 #include <math.h>
 
