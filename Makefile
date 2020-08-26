@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/26 13:26:52 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/26 14:11:56 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,69 +56,53 @@ FLSDIR_2	= errors/
 FLSDIR_3	= file_parsing/
 FLSDIR_4	= engine/
 
-FLS_1_COMMON	= $(addprefix $(FLSDIR_1), \
-					colors \
-					main \
-					utils )
+FLS_1	= $(addprefix $(FLSDIR_1), \
+			colors \
+			main \
+			opts_init_n_exit \
+			utils )
 
-FLS_3_COMMON	= $(addprefix $(FLSDIR_3), \
-					map_array_preparing \
-					pars_args \
-					pars_desc_file \
-					pars_map \
-					pars_sprites_str \
-					pars_walls_str)
+FLS_2	= $(addprefix $(FLSDIR_2), \
+			errors_1 \
+			errors_2)
 
-FLS_4_COMMON	= $(addprefix $(FLSDIR_4), \
-					draw_sprite \
-					draw_vert_line \
-					engine_tools \
-					game_init \
-					key_press_n_release \
-					key_process \
-					raycasting \
-					screenshot \
-					sprites_handling \
-					sprites_list_init)
+FLS_3	= $(addprefix $(FLSDIR_3), \
+			map_array_preparing \
+			pars_args \
+			pars_desc_file \
+			pars_fl_ceil_str \
+			pars_line_n_check_opts_completeness \
+			pars_map \
+			pars_sprites_str \
+			pars_walls_str)
+
+FLS_4	= $(addprefix $(FLSDIR_4), \
+			draw_background \
+			draw_sprite \
+			draw_vert_line \
+			engine_tools \
+			game \
+			game_init \
+			key_press_n_release \
+			key_process \
+			raycasting \
+			screenshot \
+			sprites_handling \
+			sprites_list_init \
+			textures_init_from_xmp)
 
 ifeq ($(PROGRAM_TYPE), Bonus)
-	DEF_TYPE	= -D BONUS
-	FLS_1		= $(addprefix $(FLSDIR_1), \
-					exit_bonus \
-					opts_init_bonus)
-	FLS_2		= $(addprefix $(FLSDIR_2), \
-					errors_1 \
-					errors_2)
-	FLS_3		= $(addprefix $(FLSDIR_3), \
-					check_opts_completeness_bonus \
-					pars_fl_ceil_str_bonus \
-					pars_line_bonus)
-	FLS_4		= $(addprefix $(FLSDIR_4), \
-					add_shade_bonus \
-					draw_minimap_bonus \
-					draw_textured_background_bonus \
-					game_bonus \
-					minimap_init_bonus)
+	DEF_TYPE		= -D BONUS
+	FLS_4_BONUS	= $(addprefix $(FLSDIR_4), \
+						add_shade_bonus \
+						draw_minimap_bonus \
+						minimap_init_bonus)
 	FCLEAN_FLAG	= $(CHECK_OBJS_BONUS)
 else
-	FLS_1		= $(addprefix $(FLSDIR_1), \
-					exit \
-					opts_init)
-	FLS_2		= $(addprefix $(FLSDIR_2), \
-					errors_1 \
-					errors_2)
-	FLS_3		= $(addprefix $(FLSDIR_3), \
-					check_opts_completeness \
-					pars_fl_ceil_str \
-					pars_line)
-	FLS_4		= $(addprefix $(FLSDIR_4), \
-					draw_background \
-					game)
 	FCLEAN_FLAG	= $(CHECK_OBJS)
 endif
 
-SRC			= $(FLS_1_COMMON) $(FLS_3_COMMON) $(FLS_4_COMMON) \
-				$(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4)
+SRC			= $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4) $(FLS_4_BONUS)
 
 OBJ			= $(addprefix $(OBJDIR), $(SRC:=.o))
 DFLS		= $(SRC:=.d)

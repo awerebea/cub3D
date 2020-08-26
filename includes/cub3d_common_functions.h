@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 12:42:47 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 14:00:16 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int				f_key_press(int key, t_mlx *mlx);
 int				f_key_process(t_mlx *mlx);
 int				f_key_release(int key, t_mlx *mlx);
 void			f_raycasting(t_mlx *mlx);
+int				f_textures_init_from_xmp(t_mlx *mlx);
 int				f_sprites_handling(t_mlx *mlx);
 void			f_sprites_init(t_mlx *mlx);
 int				f_draw_all(t_mlx *mlx);

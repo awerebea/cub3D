@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 13:00:56 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/24 16:10:22 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 13:57:33 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,31 @@
 #include "mlx.h"
 #include "libft.h"
 #include <stdlib.h>
+
+#ifdef BONUS
+
+int			f_draw_all(t_mlx *mlx)
+{
+	mlx_do_sync(mlx->mlx_ptr);
+	f_draw_textured_background(mlx);
+	f_raycasting(mlx);
+	f_draw_minimap(mlx);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
+	return (0);
+}
+
+#else
+
+int			f_draw_all(t_mlx *mlx)
+{
+	mlx_do_sync(mlx->mlx_ptr);
+	f_draw_background(mlx);
+	f_raycasting(mlx);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
+	return (0);
+}
+
+#endif
 
 int			f_close_n_exit(t_mlx *mlx)
 {
