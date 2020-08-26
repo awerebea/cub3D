@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 12:41:04 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 13:27:50 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "get_next_line.h"
 #include <fcntl.h>
 
-int		f_pars_resolution(char *line, int i, t_sdf *opts)
+int				f_pars_resolution(char *line, int i, t_sdf *opts)
 {
 	int errcode;
 

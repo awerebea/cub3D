@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/26 12:53:06 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/26 13:26:52 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,18 @@ FLS_3_COMMON	= $(addprefix $(FLSDIR_3), \
 					pars_sprites_str \
 					pars_walls_str)
 
+FLS_4_COMMON	= $(addprefix $(FLSDIR_4), \
+					draw_sprite \
+					draw_vert_line \
+					engine_tools \
+					game_init \
+					key_press_n_release \
+					key_process \
+					raycasting \
+					screenshot \
+					sprites_handling \
+					sprites_list_init)
+
 ifeq ($(PROGRAM_TYPE), Bonus)
 	DEF_TYPE	= -D BONUS
 	FLS_1		= $(addprefix $(FLSDIR_1), \
@@ -82,20 +94,11 @@ ifeq ($(PROGRAM_TYPE), Bonus)
 					pars_fl_ceil_str_bonus \
 					pars_line_bonus)
 	FLS_4		= $(addprefix $(FLSDIR_4), \
+					add_shade_bonus \
 					draw_minimap_bonus \
-					draw_sprite \
 					draw_textured_background_bonus \
-					draw_vert_line \
-					engine_tools_bonus \
 					game_bonus \
-					game_init \
-					key_press_n_release \
-					key_process \
-					minimap_init_bonus \
-					raycasting \
-					screenshot_bonus \
-					sprites_handling \
-					sprites_list_init)
+					minimap_init_bonus)
 	FCLEAN_FLAG	= $(CHECK_OBJS_BONUS)
 else
 	FLS_1		= $(addprefix $(FLSDIR_1), \
@@ -110,21 +113,12 @@ else
 					pars_line)
 	FLS_4		= $(addprefix $(FLSDIR_4), \
 					draw_background \
-					draw_sprite \
-					draw_vert_line \
-					engine_tools \
-					game \
-					game_init \
-					key_press_n_release \
-					key_process \
-					raycasting \
-					screenshot \
-					sprites_handling \
-					sprites_list_init)
+					game)
 	FCLEAN_FLAG	= $(CHECK_OBJS)
 endif
 
-SRC			= $(FLS_1_COMMON) $(FLS_3_COMMON) $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4)
+SRC			= $(FLS_1_COMMON) $(FLS_3_COMMON) $(FLS_4_COMMON) \
+				$(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4)
 
 OBJ			= $(addprefix $(OBJDIR), $(SRC:=.o))
 DFLS		= $(SRC:=.d)
