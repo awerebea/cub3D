@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/26 10:38:36 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/26 11:14:49 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,22 +22,21 @@ override FLAGS ?= $(CFLAGS)
 #-- configuring MLX library path and 'key-define' header files depending on OS
 OS				= $(shell uname)
 ifeq ($(OS), Linux)
+	DEF_OS		= -D LINUX
 	MLX_DIR		= minilibx/linux/
 	MLX_NAME	= libmlx.a
 	LIBFLAGS	= -lmlx -lXext -lX11 -lm
-	KEYS_HEADER	= includes/keys_linux/
 	INCLUDES	= -I $(shell ./x11init.sh)
 else
 	MLX_DIR		= minilibx/mac/
 	MLX_NAME	= libmlx.dylib
 	LIBFLAGS	= -lmlx
-	KEYS_HEADER	= includes/keys_mac/
 	INCLUDES	=
 endif
 
 
 MLX			= $(addprefix $(MLX_DIR),$(MLX_NAME))
-INCLUDES	+= -I includes/ -I Libft/includes/ -I $(MLX_DIR) -I $(KEYS_HEADER)
+INCLUDES	+= -I includes/ -I Libft/includes/ -I $(MLX_DIR)
 LIBFLAGS	+= -L Libft -lft -L $(MLX_DIR)
 
 #---------------- check if fclean needed after last project building -----------
@@ -58,7 +57,7 @@ FLSDIR_3	= file_parsing/
 FLSDIR_4	= engine/
 
 ifeq ($(PROGRAM_TYPE), Bonus)
-	DEF_BONUS = -D BONUS
+	DEF_TYPE	= -D BONUS
 	FLS_1		= $(addprefix $(FLSDIR_1), \
 					colors \
 					main_bonus \
@@ -134,7 +133,7 @@ $(NAME):		$(FCLEAN_FLAG) $(LIBFT) $(MLX) $(OBJ)
 $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
 	mkdir -p	$(OBJDIR) $(addprefix $(OBJDIR), $(FLSDIR_1) $(FLSDIR_2) \
 				$(FLSDIR_3) $(FLSDIR_4))
-	$(CC)		$(FLAGS) $(DEF_BONUS) $(INCLUDES) -c $< -o $@ -MMD
+	$(CC)		$(DEF_OS) $(DEF_TYPE) $(FLAGS) $(INCLUDES) -c $< -o $@ -MMD
 
 include $(wildcard $(addprefix $(OBJDIR), $(DFLS)))
 
