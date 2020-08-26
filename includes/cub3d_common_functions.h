@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_functions.h                                 :+:      :+:    :+:   */
+/*   cub3d_common_functions.h                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/25 23:28:53 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 10:44:46 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMON_FUNCTIONS_H
+#ifndef CUB3D_COMMON_FUNCTIONS_H
 
-# define COMMON_FUNCTIONS_H
+# define CUB3D_COMMON_FUNCTIONS_H
 
 int				f_check_args(int argc, char **argv, t_sdf *opts);
 void			f_skip_spaces(char *line, int *i);

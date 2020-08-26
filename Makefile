@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/25 22:59:12 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/26 10:38:36 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ ifeq ($(PROGRAM_TYPE), Bonus)
 	DEF_BONUS = -D BONUS
 	FLS_1		= $(addprefix $(FLSDIR_1), \
 					colors \
-					main \
+					main_bonus \
 					utils_bonus )
 	FLS_2		= $(addprefix $(FLSDIR_2), \
 					errors_1 \

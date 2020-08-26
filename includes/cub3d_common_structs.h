@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_structs.h                                   :+:      :+:    :+:   */
+/*   cub3d_common_structs.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/25 23:28:27 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 10:45:00 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMON_STRUCTS_H
+#ifndef CUB3D_COMMON_STRUCTS_H
 
-# define COMMON_STRUCTS_H
+# define CUB3D_COMMON_STRUCTS_H
 
 typedef struct	s_img
 {

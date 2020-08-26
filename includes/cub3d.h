@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/25 23:25:12 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 10:43:51 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,22 @@
 
 # define FOV_ANGLE 66
 
-# include "common_structs.h"
+# include "cub3d_common_structs.h"
 
 # ifdef BONUS
 
-#  include "bonus_part.h"
+#  include "cub3d_bonus_part.h"
 #  define MOVE_SPEED 0.2
 #  define ROTATE_SPEED 5
 
 # else
 
-#  include "mandatory_part.h"
+#  include "cub3d_mandatory_part.h"
 #  define MOVE_SPEED 0.1
 #  define ROTATE_SPEED 3
 
 # endif
 
-# include "common_functions.h"
+# include "cub3d_common_functions.h"
 
 #endif
