@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 22:12:13 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/19 23:57:04 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 13:25:29 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,25 @@ static void	f_bmp_headers_generate(t_mlx *mlx, char *bitmap_file_header, \
 	dib_header[14] = (char)(mlx->img.bits_per_pix);
 }
 
+#ifdef BONUS
+
+void		f_screenshot(t_mlx *mlx)
+{
+	char	bitmap_file_header[14];
+	char	dib_header[40];
+
+	ft_bzero(bitmap_file_header, 14);
+	ft_bzero(dib_header, 40);
+	f_draw_textured_background(mlx);
+	f_raycasting(mlx);
+	f_draw_minimap(mlx);
+	f_bmp_headers_generate(mlx, bitmap_file_header, dib_header);
+	mlx->errcode = f_bmp_image_write(mlx, bitmap_file_header, dib_header);
+	f_close_n_exit(mlx);
+}
+
+#else
+
 void		f_screenshot(t_mlx *mlx)
 {
 	char	bitmap_file_header[14];
@@ -103,3 +122,5 @@ void		f_screenshot(t_mlx *mlx)
 	mlx->errcode = f_bmp_image_write(mlx, bitmap_file_header, dib_header);
 	f_close_n_exit(mlx);
 }
+
+#endif

@@ -6,12 +6,11 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 16:29:32 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 20:24:26 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/25 23:29:23 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "draw_sprites.h"
 #include <math.h>
 
 static void	f_sprite_vars_calc_start(t_mlx *mlx, t_sp *sp, t_sp_vars *sp_vars)

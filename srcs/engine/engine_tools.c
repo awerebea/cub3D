@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 13:00:56 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/17 20:25:19 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 13:57:33 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,31 @@
 #include "mlx.h"
 #include "libft.h"
 #include <stdlib.h>
+
+#ifdef BONUS
+
+int			f_draw_all(t_mlx *mlx)
+{
+	mlx_do_sync(mlx->mlx_ptr);
+	f_draw_textured_background(mlx);
+	f_raycasting(mlx);
+	f_draw_minimap(mlx);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
+	return (0);
+}
+
+#else
+
+int			f_draw_all(t_mlx *mlx)
+{
+	mlx_do_sync(mlx->mlx_ptr);
+	f_draw_background(mlx);
+	f_raycasting(mlx);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
+	return (0);
+}
+
+#endif
 
 int			f_close_n_exit(t_mlx *mlx)
 {
@@ -34,28 +59,6 @@ int			f_close_n_exit(t_mlx *mlx)
 	}
 	free(mlx->mlx_ptr);
 	exit(f_exit(mlx->errcode, mlx->opts));
-}
-
-static int	f_check_xpm_img(t_img tex_img)
-{
-	if (tex_img.width < 1 || tex_img.height < 1)
-		return (-1);
-	return (0);
-}
-
-int			f_check_textures_for_valid(t_mlx *mlx)
-{
-	if (f_check_xpm_img(mlx->no_tex))
-		return (mlx->opts->err_str = ft_strdup(mlx->opts->no_tex)) ? 411 : 200;
-	if (f_check_xpm_img(mlx->so_tex))
-		return (mlx->opts->err_str = ft_strdup(mlx->opts->so_tex)) ? 411 : 200;
-	if (f_check_xpm_img(mlx->we_tex))
-		return (mlx->opts->err_str = ft_strdup(mlx->opts->we_tex)) ? 411 : 200;
-	if (f_check_xpm_img(mlx->ea_tex))
-		return (mlx->opts->err_str = ft_strdup(mlx->opts->ea_tex)) ? 411 : 200;
-	if (f_check_xpm_img(mlx->sp_tex))
-		return (mlx->opts->err_str = ft_strdup(mlx->opts->sp_tex)) ? 411 : 200;
-	return (0);
 }
 
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color)

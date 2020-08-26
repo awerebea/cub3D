@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_tex_background.h                              :+:      :+:    :+:   */
+/*   add_shade_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/16 01:48:15 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/16 01:52:28 by awerebea         ###   ########.fr       */
+/*   Created: 2020/08/12 13:00:56 by awerebea          #+#    #+#             */
+/*   Updated: 2020/08/26 13:11:25 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DRAW_TEX_BACKGROUND_H
+#include "cub3d.h"
 
-# define DRAW_TEX_BACKGROUND_H
-
-typedef struct	s_fc_vars
+int			f_add_shade(int color, float shade)
 {
-	int		p;
-	int		cell_x;
-	int		cell_y;
-	int		tex_x;
-	int		tex_y;
-	float	ray_dir_x_0;
-	float	ray_dir_y_0;
-	float	ray_dir_x_1;
-	float	ray_dir_y_1;
-	float	row_distance;
-	float	floor_step_x;
-	float	floor_step_y;
-	float	floor_x;
-	float	floor_y;
-}				t_fc_vars;
-
-#endif
+	return ((int)(f_get_r_from_int(color) * shade) << 16 | \
+			(int)(f_get_g_from_int(color) * shade) << 8 | \
+			(int)(f_get_b_from_int(color) * shade));
+}
