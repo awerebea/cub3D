@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/26 16:15:16 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/26 16:35:51 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ FLS_3	= $(addprefix $(FLSDIR_3), \
 FLS_4	= $(addprefix $(FLSDIR_4), \
 			draw_background \
 			draw_sprite \
+			draw_sprite_vars_calc \
 			draw_vert_line \
 			engine_tools \
 			game \

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 14:00:16 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 16:41:45 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ int				f_sprites_handling(t_mlx *mlx);
 void			f_sprites_init(t_mlx *mlx);
 int				f_draw_all(t_mlx *mlx);
 void			f_draw_sprite(t_mlx *mlx, t_sp *sp);
+void			f_sprite_vars_calc_start(t_mlx *mlx, t_sp *sp, \
+														t_sp_vars *sp_vars);
+void			f_sprite_vars_calc_finish(t_mlx *mlx, t_sp_vars *sp_vars);
 void			f_draw_vert_line(t_mlx *mlx, t_wall_vars *w_vars, int x);
 void			f_screenshot(t_mlx *mlx);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
