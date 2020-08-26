@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 14:49:47 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 16:50:10 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 21:33:04 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ int		f_key_release(int key, t_mlx *mlx)
 {
 	if (key == KEY_W)
 		mlx->key_flags.w = 0;
-	if (key == KEY_A)
+	else if (key == KEY_A)
 		mlx->key_flags.a = 0;
-	if (key == KEY_S)
+	else if (key == KEY_S)
 		mlx->key_flags.s = 0;
-	if (key == KEY_D)
+	else if (key == KEY_D)
 		mlx->key_flags.d = 0;
-	if (key == KEY_LEFT)
+	else if (key == KEY_LEFT)
 		mlx->key_flags.left = 0;
-	if (key == KEY_RIGHT)
+	else if (key == KEY_RIGHT)
 		mlx->key_flags.right = 0;
 	return (0);
 }

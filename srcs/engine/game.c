@@ -6,15 +6,41 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 16:48:11 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/26 22:49:35 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
+#include <math.h>
 #include <stdlib.h>
 
 #ifdef BONUS
+
+int			f_mouse_move(int x, int y, t_mlx *mlx)
+{
+	static int	x_prev;
+	static int	dir;
+
+	y++;
+	if (x - x_prev > 0)
+		dir = 1;
+	else if (x - x_prev < 0)
+		dir = -1;
+	mlx->game.old_dir_x = mlx->game.dir_x;
+	mlx->game.dir_x = mlx->game.dir_x * cos(dir * mlx->game.rot_speed) - \
+						mlx->game.dir_y * sin(dir * mlx->game.rot_speed);
+	mlx->game.dir_y = mlx->game.old_dir_x * sin(dir * mlx->game.rot_speed) + \
+						mlx->game.dir_y * cos(dir * mlx->game.rot_speed);
+	mlx->game.old_plane_x = mlx->game.plane_x;
+	mlx->game.plane_x = mlx->game.plane_x * cos(dir * mlx->game.rot_speed) - \
+						mlx->game.plane_y * sin(dir * mlx->game.rot_speed);
+	mlx->game.plane_y = mlx->game.old_plane_x * sin(dir * mlx->game.rot_speed) \
+						+ mlx->game.plane_y * cos(dir * mlx->game.rot_speed);
+	x_prev = x;
+	mlx_mouse_hide(mlx->mlx_ptr, mlx->win_ptr);
+	return (0);
+}
 
 static int	f_mlx_n_window_n_images_init(t_mlx *mlx, t_sdf *opts)
 {
@@ -46,7 +72,7 @@ static int	f_mlx_n_window_n_images_init(t_mlx *mlx, t_sdf *opts)
 
 void		f_game(t_sdf *opts)
 {
-	t_mlx	mlx;
+	t_mlx		mlx;
 
 	mlx.errcode = 0;
 	if ((mlx.errcode = f_mlx_n_window_n_images_init(&mlx, opts)))
@@ -60,6 +86,7 @@ void		f_game(t_sdf *opts)
 	mlx_hook(mlx.win_ptr, 17, 1L << 17, f_close_n_exit, &mlx);
 	mlx_hook(mlx.win_ptr, 2, 1L << 0, f_key_press, &mlx);
 	mlx_hook(mlx.win_ptr, 3, 1L << 1, f_key_release, &mlx);
+	mlx_hook(mlx.win_ptr, 6, 1L << 6, f_mouse_move, &mlx);
 	mlx_loop_hook(mlx.mlx_ptr, f_key_process, &mlx);
 	mlx_loop(mlx.mlx_ptr);
 }
@@ -96,7 +123,7 @@ static int	f_mlx_n_window_n_images_init(t_mlx *mlx, t_sdf *opts)
 
 void		f_game(t_sdf *opts)
 {
-	t_mlx	mlx;
+	t_mlx		mlx;
 
 	mlx.errcode = 0;
 	if ((mlx.errcode = f_mlx_n_window_n_images_init(&mlx, opts)))
