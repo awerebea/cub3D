@@ -6,13 +6,24 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 12:43:40 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/27 13:12:19 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_PART_H
 
 # define CUB3D_BONUS_PART_H
+
+typedef struct	s_keys
+{
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			m;
+	int			left;
+	int			right;
+}				t_keys;
 
 typedef struct	s_game
 {
@@ -32,7 +43,7 @@ typedef struct	s_game
 	float		time;
 	float		time_prev;
 	float		time_frame;
-	float		mouse_sens;
+	float		sens;
 	float		delta_x;
 	int			mouse_x;
 }				t_game;
@@ -102,7 +113,7 @@ typedef struct	s_mlx
 	t_player	player;
 	t_game		game;
 	t_sp		*sp_list;
-	t_keys		key_flags;
+	t_keys		keys;
 	int			errcode;
 }				t_mlx;
 

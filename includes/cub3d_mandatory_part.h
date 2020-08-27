@@ -6,13 +6,23 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 01:02:21 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/27 13:12:40 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_MANDATORY_PART_H
 
 # define CUB3D_MANDATORY_PART_H
+
+typedef struct	s_keys
+{
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			left;
+	int			right;
+}				t_keys;
 
 typedef struct	s_game
 {
@@ -72,7 +82,7 @@ typedef struct	s_mlx
 	t_img		sp_tex;
 	t_game		game;
 	t_sp		*sp_list;
-	t_keys		key_flags;
+	t_keys		keys;
 	int			errcode;
 }				t_mlx;
 

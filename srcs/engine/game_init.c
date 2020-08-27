@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 12:35:13 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/27 13:11:12 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
-
-static void	f_key_flags_init(t_mlx *mlx)
-{
-	mlx->key_flags.w = 0;
-	mlx->key_flags.a = 0;
-	mlx->key_flags.s = 0;
-	mlx->key_flags.d = 0;
-	mlx->key_flags.left = 0;
-	mlx->key_flags.right = 0;
-}
 
 static void	f_dir_n_plane_calculation(t_mlx *mlx)
 {
@@ -55,6 +45,17 @@ static void	f_dir_n_plane_calculation(t_mlx *mlx)
 
 #ifdef BONUS
 
+static void	f_key_flags_init(t_mlx *mlx)
+{
+	mlx->keys.w = 0;
+	mlx->keys.a = 0;
+	mlx->keys.s = 0;
+	mlx->keys.d = 0;
+	mlx->keys.m = 1;
+	mlx->keys.left = 0;
+	mlx->keys.right = 0;
+}
+
 int			f_game_init(t_mlx *mlx)
 {
 	mlx->game.player_x = (float)mlx->opts->spawn_point_x + 0.5;
@@ -64,7 +65,7 @@ int			f_game_init(t_mlx *mlx)
 	mlx->game.move_speed = MOVE_SPEED;
 	mlx->game.rot_speed = ROTATE_SPEED * M_PI / 180;
 	mlx->game.mouse_x = mlx->x_win_size / 2;
-	mlx->game.mouse_sens = MOUSE_SENSITIVITY;
+	mlx->game.sens = MOUSE_SENSITIVITY;
 	if (!(mlx->game.wall_dist_arr = (float*)malloc(sizeof(float) * \
 					mlx->x_win_size)))
 		return (mlx->errcode = 200);
@@ -74,6 +75,16 @@ int			f_game_init(t_mlx *mlx)
 }
 
 #else
+
+static void	f_key_flags_init(t_mlx *mlx)
+{
+	mlx->keys.w = 0;
+	mlx->keys.a = 0;
+	mlx->keys.s = 0;
+	mlx->keys.d = 0;
+	mlx->keys.left = 0;
+	mlx->keys.right = 0;
+}
 
 int			f_game_init(t_mlx *mlx)
 {

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 20:07:40 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 11:07:13 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/27 13:00:07 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #  define KEY_A XK_a
 #  define KEY_S XK_s
 #  define KEY_D XK_d
+#  define KEY_M XK_m
 #  define KEY_LEFT XK_Left
 #  define KEY_RIGHT XK_Right
 
@@ -32,9 +33,10 @@
 
 #  define KEY_ESC 53
 #  define KEY_W 13
-#  define KEY_A  0
-#  define KEY_S  1
-#  define KEY_D  2
+#  define KEY_A 0
+#  define KEY_S 1
+#  define KEY_D 2
+#  define KEY_M 2
 #  define KEY_LEFT 123
 #  define KEY_RIGHT 124
 
