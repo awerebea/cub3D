@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 02:18:46 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/27 11:01:32 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct	s_game
 	float		time_prev;
 	float		time_frame;
 	int			mouse_x;
+	int			relaunch;
 	float		sens;
 	float		*wall_dist_arr;
 	float		old_dir_x;

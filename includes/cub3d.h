@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 02:31:07 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/27 10:53:41 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 #  include "cub3d_bonus_part.h"
 #  define MOVE_SPEED 4
 #  define ROTATE_SPEED 120
-#  define MOUSE_SENSITIVITY 0.2
+#  define MOUSE_SENSITIVITY 0.002
 
 # else
 
