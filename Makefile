@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/26 17:10:34 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/27 15:03:47 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,8 @@ ifeq ($(PROGRAM_TYPE), Bonus)
 	DEF_TYPE		= -D BONUS
 	FLS_4_BONUS	= $(addprefix $(FLSDIR_4), \
 						draw_minimap_bonus \
-						minimap_init_bonus)
+						minimap_init_bonus \
+						mouse_move_bonus)
 	FCLEAN_FLAG	= $(CHECK_OBJS_BONUS)
 else
 	FCLEAN_FLAG	= $(CHECK_OBJS)
