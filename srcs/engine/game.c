@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 16:28:26 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 11:24:03 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/27 12:47:05 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,30 @@
 
 static int	f_mouse_move(int x, int y, t_mlx *mlx)
 {
-	float		delta_x;
-
-	if (y)
-	{
-		;
-	}
-	delta_x = (float)((x - mlx->game.mouse_x) * mlx->game.sens);
-	if (delta_x)
+	mlx->game.delta_x = (float)((x - mlx->game.mouse_x) * mlx->game.mouse_sens \
+			/ 1000);
+	if (mlx->game.mouse_x)
 	{
 		mlx->game.old_dir_x = mlx->game.dir_x;
-		mlx->game.dir_x = mlx->game.dir_x * cos(delta_x) - \
-							mlx->game.dir_y * sin(delta_x);
-		mlx->game.dir_y = mlx->game.old_dir_x * sin(delta_x) + \
-							mlx->game.dir_y * cos(delta_x);
+		mlx->game.dir_x = mlx->game.dir_x * cos(mlx->game.delta_x) - \
+							mlx->game.dir_y * sin(mlx->game.delta_x);
+		mlx->game.dir_y = mlx->game.old_dir_x * sin(mlx->game.delta_x) + \
+							mlx->game.dir_y * cos(mlx->game.delta_x);
 		mlx->game.old_plane_x = mlx->game.plane_x;
-		mlx->game.plane_x = mlx->game.plane_x * cos(delta_x) - \
-							mlx->game.plane_y * sin(delta_x);
-		mlx->game.plane_y = mlx->game.old_plane_x * sin(delta_x) + \
-							mlx->game.plane_y * cos(delta_x);
-		if (x < (int)(mlx->x_win_size * 0.1) || x > (int)(mlx->x_win_size * 0.9) \
-			|| y < (int)(mlx->y_win_size * 0.1) || y > (int)(mlx->y_win_size * 0.9))
-		{
-			mlx->game.mouse_x = mlx->x_win_size / 2;
-			y = mlx->y_win_size / 2;
-			mlx_mouse_move(mlx->mlx_ptr, mlx->win_ptr, mlx->x_win_size / 2, \
-															mlx->y_win_size / 2);
-		}
+		mlx->game.plane_x = mlx->game.plane_x * cos(mlx->game.delta_x) - \
+							mlx->game.plane_y * sin(mlx->game.delta_x);
+		mlx->game.plane_y = mlx->game.old_plane_x * sin(mlx->game.delta_x) + \
+							mlx->game.plane_y * cos(mlx->game.delta_x);
 	}
 	mlx->game.mouse_x = x;
-	/* mlx_mouse_hide(mlx->mlx_ptr, mlx->win_ptr); */
+	if (x < (int)(mlx->x_win_size * 0.2) || x > (int)(mlx->x_win_size * 0.8) \
+		|| y < (int)(mlx->y_win_size * 0.2) || y > (int)(mlx->y_win_size * 0.8))
+	{
+		mlx->game.mouse_x = 0;
+		mlx_mouse_move(mlx->mlx_ptr, mlx->win_ptr, mlx->x_win_size / 2, \
+														mlx->y_win_size / 2);
+	}
+	mlx_mouse_hide(mlx->mlx_ptr, mlx->win_ptr);
 	return (0);
 }
 

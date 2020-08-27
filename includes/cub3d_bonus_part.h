@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 11:01:32 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/27 12:43:40 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ typedef struct	s_game
 	float		dir_y;
 	float		plane_x;
 	float		plane_y;
-	float		move_speed;
-	float		rot_speed;
-	float		time;
-	float		time_prev;
-	float		time_frame;
-	int			mouse_x;
-	int			relaunch;
-	float		sens;
 	float		*wall_dist_arr;
 	float		old_dir_x;
 	float		old_dir_y;
 	float		old_plane_x;
 	float		old_plane_y;
+	float		move_speed;
+	float		rot_speed;
+	float		time;
+	float		time_prev;
+	float		time_frame;
+	float		mouse_sens;
+	float		delta_x;
+	int			mouse_x;
 }				t_game;
 
 typedef	struct	s_sdf
