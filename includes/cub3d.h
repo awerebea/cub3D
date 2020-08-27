@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 02:31:07 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/27 12:31:53 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define MIN_X_WIN_SIZE 100
 # define MIN_Y_WIN_SIZE 100
 
-# define MINIMAP_MAX_WDTH_FACTOR 0.3
+# define MINIMAP_MAX_WDTH_FACTOR 0.33
 # define MINIMAP_MAX_HGHT_FACTOR 0.5
 # define MINIMAP_MAX_SQUARE_SIDE 20
 # define VRAD 1
@@ -35,7 +35,7 @@
 #  include "cub3d_bonus_part.h"
 #  define MOVE_SPEED 4
 #  define ROTATE_SPEED 120
-#  define MOUSE_SENSITIVITY 0.2
+#  define MOUSE_SENSITIVITY 1.2
 
 # else
 

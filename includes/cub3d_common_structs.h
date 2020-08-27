@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 01:02:00 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/27 12:55:51 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,6 @@ typedef struct	s_sp
 	struct s_sp	*prev;
 	struct s_sp	*next;
 }				t_sp;
-
-typedef struct	s_keys
-{
-	int			w;
-	int			a;
-	int			s;
-	int			d;
-	int			left;
-	int			right;
-}				t_keys;
 
 typedef struct	s_sp_vars
 {

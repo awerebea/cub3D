@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 00:08:19 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 02:00:53 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/27 13:13:17 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,17 @@ static void	f_rotate(t_mlx *mlx, int dir)
 
 int			f_key_process(t_mlx *mlx)
 {
-	if (mlx->key_flags.w && !mlx->key_flags.s)
+	if (mlx->keys.w && !mlx->keys.s)
 		f_move(mlx, 1);
-	if (mlx->key_flags.s && !mlx->key_flags.w)
+	if (mlx->keys.s && !mlx->keys.w)
 		f_move(mlx, -1);
-	if (mlx->key_flags.a && !mlx->key_flags.d)
+	if (mlx->keys.a && !mlx->keys.d)
 		f_strafe(mlx, -1);
-	if (mlx->key_flags.d && !mlx->key_flags.a)
+	if (mlx->keys.d && !mlx->keys.a)
 		f_strafe(mlx, 1);
-	if (mlx->key_flags.left && !mlx->key_flags.right)
+	if (mlx->keys.left && !mlx->keys.right)
 		f_rotate(mlx, -1);
-	if (mlx->key_flags.right && !mlx->key_flags.left)
+	if (mlx->keys.right && !mlx->keys.left)
 		f_rotate(mlx, 1);
 	return (f_draw_all(mlx));
 }
