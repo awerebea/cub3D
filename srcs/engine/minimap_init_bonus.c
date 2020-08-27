@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 14:02:47 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/24 16:28:08 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/28 00:43:23 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,6 @@ void	f_minimap_init(t_mlx *mlx)
 						mlx->map.map_height;
 	if (mlx->map.sq_side > MINIMAP_MAX_SQUARE_SIDE)
 		mlx->map.sq_side = MINIMAP_MAX_SQUARE_SIDE;
+	if (mlx->map.sq_side < MINIMAP_MIN_SQUARE_SIDE)
+		mlx->map.sq_side = 0;
 }

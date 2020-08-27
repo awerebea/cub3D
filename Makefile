@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/27 15:03:47 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/28 01:29:23 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,6 +114,7 @@ $(NAME):		$(FCLEAN_FLAG) $(LIBFT) $(MLX) $(OBJ)
 	@echo '******* All done! *******'
 
 $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
+	chmod		+x ./x11_path_init.sh
 	mkdir -p	$(OBJDIR) $(addprefix $(OBJDIR), $(FLSDIR_1) $(FLSDIR_2) \
 				$(FLSDIR_3) $(FLSDIR_4))
 	$(CC)		$(DEF_OS) $(DEF_TYPE) $(FLAGS) $(INCLUDES) -c $< -o $@ -MMD
@@ -159,6 +160,7 @@ libft_re:
 
 $(MLX): mlx_force_make
 	@echo '******* Making minilibx *******'
+	@chmod		+x $(MLX_DIR)configure
 	@make		-C $(MLX_DIR) --no-print-directory
 
 mlx_clean:

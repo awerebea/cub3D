@@ -6,13 +6,19 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 14:59:41 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/28 00:43:03 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_PART_H
 
 # define CUB3D_BONUS_PART_H
+
+# define MINIMAP_MAX_WDTH_FACTOR 0.40
+# define MINIMAP_MAX_HGHT_FACTOR 0.40
+# define MINIMAP_MAX_SQUARE_SIDE 12
+# define MINIMAP_MIN_SQUARE_SIDE 5
+# define VRAD 1
 
 typedef struct	s_keys
 {
