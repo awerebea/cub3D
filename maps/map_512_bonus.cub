@@ -1,13 +1,13 @@
 R 1536 864
 
-NO ./textures/xpm/walls/512/brick_wall_texture.xpm
-SO ./textures/xpm/walls/512/wall_grey_rock.xpm
-WE ./textures/xpm/walls/512/wall_brown_tiles.xpm
-EA ./textures/xpm/walls/512/wall_white_rock.xpm
-S  ./textures/xpm/sprites/box_2.xpm
+NO ./textures/xpm/walls/512/wall_green_tiles.xpm
+SO ./textures/xpm/walls/512/wall_small_tiles_texture.xpm
+WE ./textures/xpm/walls/512/wall_white_tiles_texture.xpm
+EA ./textures/xpm/walls/512/old_wall_texture.xpm
+S  ./textures/xpm/sprites/ball.xpm
 
-F	./textures/xpm/floor_ceiling/512/floor_wood.xpm
-C	./textures/xpm/floor_ceiling/512/ceiling_grey.xpm
+F	./textures/xpm/floor_ceiling/512/old_stone_floor_texture.xpm
+C	./textures/xpm/floor_ceiling/512/wood_texture.xpm
 
         1111111111111111111111111
         1000000000110000000000001
