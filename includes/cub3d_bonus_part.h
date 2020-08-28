@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/28 13:03:09 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/28 23:12:13 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,16 @@ void			f_minimap_init(t_mlx *mlx);
 int				f_check_curr_square(t_mlx *mlx);
 void			f_player_pos_init(t_mlx *mlx);
 void			f_draw_minimap(t_mlx *mlx);
+int				f_draw_minimap_contour(t_mlx *mlx, int x, int y);
+void			f_draw_first_row(t_mlx *mlx);
+void			f_draw_middle_row(t_mlx *mlx);
+void			f_draw_last_row(t_mlx *mlx);
+void			f_draw_first_square(t_mlx *mlx);
+void			f_draw_middle_square(t_mlx *mlx);
+void			f_draw_last_square(t_mlx *mlx);
+void			f_draw_sprite_point(t_mlx *mlx, int x, int y);
+void			f_draw_player_point(t_mlx *mlx, int x, int y);
+void			f_draw_view_sector(t_mlx *mlx, int x, int y);
 int				f_add_shade(int color, float shade);
 int				f_mouse_move(int x, int y, t_mlx *mlx);
 
