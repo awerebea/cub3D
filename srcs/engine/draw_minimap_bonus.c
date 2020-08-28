@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/28 19:04:20 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/28 19:20:13 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ void			f_draw_minimap(t_mlx *mlx)
 		mlx->map.x++;
 	}
 	mlx->map.y++;
-	while (mlx->map.y < mlx->map.map_height - 1)
+	while (mlx->map.y < mlx->map.map_end_y / mlx->map.sq_side)
 	{
 		mlx->map.x = mlx->map.map_start_x / mlx->map.sq_side;
 		while (mlx->map.x <= mlx->map.map_end_x / mlx->map.sq_side)
@@ -274,7 +274,7 @@ void			f_draw_minimap(t_mlx *mlx)
 	while (mlx->map.x <= mlx->map.map_end_x / mlx->map.sq_side)
 	{
 		mlx->map.sq_y = 0;
-		while (mlx->map.sq_y < sq_y_end)
+		while (mlx->map.sq_y < mlx->map.map_end_y % mlx->map.sq_side)
 		{
 			if (mlx->map.x == mlx->map.map_start_x / mlx->map.sq_side)
 			{
