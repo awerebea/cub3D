@@ -12,6 +12,7 @@ objs_bonus/
 *.swiftdoc
 *.swiftmodule
 *.swp
+*.swo
 *.DS_Store
 .fuse_hidden*
 ._*.png
