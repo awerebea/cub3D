@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/28 15:14:46 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/28 17:24:32 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,26 +77,78 @@ static int		f_view_sector(t_mlx *mlx, int x, int y)
 
 void				f_map_visible_square_init(t_mlx *mlx)
 {
-	mlx->map.map_start_x = mlx->player.pos_x - mlx->x_win_size * \
-			MINIMAP_MAX_WDTH_FACTOR / 2;
-	if (mlx->map.map_start_x < 0)
+	int			offset_x_l;
+	int			offset_x_r;
+	int			sq_vis_x;
+	int			sq_vis_y;
+	int			offset_y_u;
+	int			offset_y_d;
+
+	offset_x_l = 0;
+	offset_x_r = 0;
+	offset_y_u = 0;
+	offset_y_d = 0;
+
+	sq_vis_x = mlx->x_win_size * MINIMAP_MAX_WDTH_FACTOR / mlx->map.sq_side;
+	sq_vis_y = mlx->y_win_size * MINIMAP_MAX_HGHT_FACTOR / mlx->map.sq_side;
+	if (sq_vis_x < mlx->map.map_width)
+	{
+		mlx->map.map_start_x = mlx->player.pos_x - mlx->x_win_size * \
+				MINIMAP_MAX_WDTH_FACTOR / 2;
+		mlx->map.map_end_x = mlx->player.pos_x + mlx->x_win_size * \
+				MINIMAP_MAX_WDTH_FACTOR / 2;
+		if (mlx->map.map_start_x < 0)
+		{
+			offset_x_l -= mlx->map.map_start_x;
+			mlx->map.map_start_x = 0;
+			mlx->map.map_end_x += offset_x_l;
+			if (mlx->map.map_end_x > mlx->x_win_size * MINIMAP_MAX_WDTH_FACTOR)
+				mlx->map.map_end_x = mlx->x_win_size * MINIMAP_MAX_WDTH_FACTOR;
+		}
+		else if (mlx->map.map_end_x > mlx->map.map_width * mlx->map.sq_side)
+		{
+			offset_x_r = mlx->map.map_width * mlx->map.sq_side - \
+							mlx->map.map_end_x;
+			mlx->map.map_end_x = mlx->map.map_width * mlx->map.sq_side;
+			mlx->map.map_start_x += offset_x_r;
+			if (mlx->map.map_start_x < 0)
+				mlx->map.map_start_x = 0;
+		}
+	}
+	else
+	{
 		mlx->map.map_start_x = 0;
-	mlx->map.map_end_x = mlx->player.pos_x + mlx->x_win_size * \
-			MINIMAP_MAX_WDTH_FACTOR / 2;
-	if (mlx->map.map_end_x > mlx->map.map_width * mlx->map.sq_side)
 		mlx->map.map_end_x = mlx->map.map_width * mlx->map.sq_side;
-	if (mlx->map.map_end_x > mlx->x_win_size * MINIMAP_MAX_WDTH_FACTOR)
-		mlx->map.map_end_x = mlx->x_win_size * MINIMAP_MAX_WDTH_FACTOR;
-	mlx->map.map_start_y = mlx->player.pos_y - mlx->y_win_size * \
-			MINIMAP_MAX_HGHT_FACTOR / 2;
-	if (mlx->map.map_start_y < 0)
+	}
+	if (sq_vis_y < mlx->map.map_height)
+	{
+		mlx->map.map_start_y = mlx->player.pos_y - mlx->y_win_size * \
+				MINIMAP_MAX_HGHT_FACTOR / 2;
+		mlx->map.map_end_y = mlx->player.pos_y + mlx->y_win_size * \
+				MINIMAP_MAX_HGHT_FACTOR / 2;
+		if (mlx->map.map_start_y < 0)
+		{
+			offset_y_u -= mlx->map.map_start_y;
+			mlx->map.map_start_y = 0;
+			mlx->map.map_end_y += offset_y_u;
+			if (mlx->map.map_end_y > mlx->y_win_size * MINIMAP_MAX_HGHT_FACTOR)
+				mlx->map.map_end_y = mlx->y_win_size * MINIMAP_MAX_HGHT_FACTOR;
+		}
+		else if (mlx->map.map_end_y > mlx->map.map_height * mlx->map.sq_side)
+		{
+			offset_y_d = mlx->map.map_height * mlx->map.sq_side - \
+							mlx->map.map_end_y;
+			mlx->map.map_end_y = mlx->map.map_height * mlx->map.sq_side;
+			mlx->map.map_start_y += offset_y_d;
+			if (mlx->map.map_start_y < 0)
+				mlx->map.map_start_y = 0;
+		}
+	}
+	else
+	{
 		mlx->map.map_start_y = 0;
-	mlx->map.map_end_y = mlx->player.pos_y + mlx->y_win_size * \
-			MINIMAP_MAX_HGHT_FACTOR / 2;
-	if (mlx->map.map_end_y > mlx->map.map_height * mlx->map.sq_side)
 		mlx->map.map_end_y = mlx->map.map_height * mlx->map.sq_side;
-	if (mlx->map.map_end_y > mlx->y_win_size * MINIMAP_MAX_HGHT_FACTOR)
-		mlx->map.map_end_y = mlx->y_win_size * MINIMAP_MAX_HGHT_FACTOR;
+	}
 }
 
 static void		f_fill_minimap(t_mlx *mlx)

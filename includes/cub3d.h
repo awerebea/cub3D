@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/28 11:27:30 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/28 17:26:16 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@
 
 #  define MINIMAP_MAX_WDTH_FACTOR 0.40
 #  define MINIMAP_MAX_HGHT_FACTOR 0.40
-#  define MINIMAP_MAX_SQUARE_SIDE 12
-#  define MINIMAP_MIN_SQUARE_SIDE 5
+#  define MINIMAP_SQUARE_SIDE 9
 #  define VRAD 1
 
 # else
