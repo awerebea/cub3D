@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/28 23:30:35 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/28 23:54:28 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -196,7 +196,7 @@ run: all
 	./$(NAME) maps/map_256.cub
 
 run_bonus: bonus
-	./$(NAME) maps/map_256_minimap.cub
+	./$(NAME) maps/map_256_bonus.cub
 
 screenshot: all
 	./$(NAME) maps/map_256.cub --save
