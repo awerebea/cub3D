@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_minimap_bonus.c                               :+:      :+:    :+:   */
+/*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/28 23:13:23 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/28 23:42:59 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ static void		f_map_start_n_end_x_init_assist(t_mlx *mlx)
 
 static void		f_map_start_n_end_x_init(t_mlx *mlx)
 {
-	int			offset;
-
-	offset = 0;
 	if (mlx->x_win_size * MINIMAP_MAX_WDTH_FACTOR / mlx->map.sq_side < \
 			mlx->map.map_width)
 		f_map_start_n_end_x_init_assist(mlx);
