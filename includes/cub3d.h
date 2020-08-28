@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/28 17:26:16 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/28 19:04:56 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 #  define ROTATE_SPEED 120
 #  define MOUSE_SENSITIVITY 1.2
 
-#  define MINIMAP_MAX_WDTH_FACTOR 0.40
-#  define MINIMAP_MAX_HGHT_FACTOR 0.40
+#  define MINIMAP_MAX_WDTH_FACTOR 0.20
+#  define MINIMAP_MAX_HGHT_FACTOR 0.20
 #  define MINIMAP_SQUARE_SIDE 9
 #  define VRAD 1
 

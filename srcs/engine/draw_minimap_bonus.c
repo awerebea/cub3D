@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/28 17:24:32 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/28 19:04:20 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,18 +184,15 @@ static void		f_fill_minimap(t_mlx *mlx)
 
 void			f_draw_minimap(t_mlx *mlx)
 {
-	int sq_x_end;
 	int sq_y_end;
 
 	f_player_pos_init(mlx);
 	f_map_visible_square_init(mlx);
 	sq_y_end = ((mlx->map.map_end_y % mlx->map.sq_side) == 0) ? \
 					mlx->map.sq_side : mlx->map.map_end_y % mlx->map.sq_side;
-	sq_x_end = ((mlx->map.map_end_x % mlx->map.sq_side) == 0) ? \
-					mlx->map.sq_side : mlx->map.map_end_x % mlx->map.sq_side;
 	mlx->map.x = mlx->map.map_start_x / mlx->map.sq_side;
 	mlx->map.y = mlx->map.map_start_y / mlx->map.sq_side;
-	while (mlx->map.x < mlx->map.map_end_x / mlx->map.sq_side)
+	while (mlx->map.x <= mlx->map.map_end_x / mlx->map.sq_side)
 	{
 		mlx->map.sq_y = mlx->map.map_start_y % mlx->map.sq_side;
 		while (mlx->map.sq_y < mlx->map.sq_side)
@@ -212,7 +209,7 @@ void			f_draw_minimap(t_mlx *mlx)
 			else if (mlx->map.x == mlx->map.map_end_x / mlx->map.sq_side)
 			{
 				mlx->map.sq_x = 0;
-				while (mlx->map.sq_x < sq_x_end)
+				while (mlx->map.sq_x < mlx->map.map_end_x % mlx->map.sq_side)
 				{
 					f_fill_minimap(mlx);
 					mlx->map.sq_x++;
@@ -235,7 +232,7 @@ void			f_draw_minimap(t_mlx *mlx)
 	while (mlx->map.y < mlx->map.map_height - 1)
 	{
 		mlx->map.x = mlx->map.map_start_x / mlx->map.sq_side;
-		while (mlx->map.x < mlx->map.map_end_x / mlx->map.sq_side)
+		while (mlx->map.x <= mlx->map.map_end_x / mlx->map.sq_side)
 		{
 			mlx->map.sq_y = 0;
 			while (mlx->map.sq_y < mlx->map.sq_side)
@@ -252,7 +249,7 @@ void			f_draw_minimap(t_mlx *mlx)
 				else if (mlx->map.x == mlx->map.map_end_x / mlx->map.sq_side)
 				{
 					mlx->map.sq_x = 0;
-					while (mlx->map.sq_x < sq_x_end)
+					while (mlx->map.sq_x < mlx->map.map_end_x % mlx->map.sq_side)
 					{
 						f_fill_minimap(mlx);
 						mlx->map.sq_x++;
@@ -274,7 +271,7 @@ void			f_draw_minimap(t_mlx *mlx)
 		mlx->map.y++;
 	}
 	mlx->map.x = mlx->map.map_start_x / mlx->map.sq_side;
-	while (mlx->map.x < mlx->map.map_end_x / mlx->map.sq_side)
+	while (mlx->map.x <= mlx->map.map_end_x / mlx->map.sq_side)
 	{
 		mlx->map.sq_y = 0;
 		while (mlx->map.sq_y < sq_y_end)
@@ -291,7 +288,7 @@ void			f_draw_minimap(t_mlx *mlx)
 			else if (mlx->map.x == mlx->map.map_end_x / mlx->map.sq_side)
 			{
 				mlx->map.sq_x = 0;
-				while (mlx->map.sq_x < sq_x_end)
+				while (mlx->map.sq_x < mlx->map.map_end_x % mlx->map.sq_side)
 				{
 					f_fill_minimap(mlx);
 					mlx->map.sq_x++;
