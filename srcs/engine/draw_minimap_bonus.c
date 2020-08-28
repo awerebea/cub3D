@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/28 22:28:29 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/28 22:44:19 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,52 +254,58 @@ static void		f_fill_minimap(t_mlx *mlx)
 	f_draw_minimap_contour (mlx, x, y);
 }
 
-void			f_draw_minimap(t_mlx *mlx)
+void			f_draw_first_square(t_mlx *mlx)
 {
-	f_player_pos_init(mlx);
-	f_map_start_n_end_x_init(mlx);
-	f_map_start_n_end_y_init(mlx);
-	mlx->player.pos_x -= mlx->map.map_start_x;
-	mlx->player.pos_y -= mlx->map.map_start_y;
-	mlx->map.x = mlx->map.map_start_x / mlx->map.sq_side;
-	mlx->map.y = mlx->map.map_start_y / mlx->map.sq_side;
+	mlx->map.sq_x = mlx->map.map_start_x % mlx->map.sq_side;
+	while (mlx->map.sq_x < mlx->map.sq_side)
+	{
+		f_fill_minimap(mlx);
+		mlx->map.sq_x++;
+	}
+}
+
+void			f_draw_middle_square(t_mlx *mlx)
+{
+	mlx->map.sq_x = 0;
+	while (mlx->map.sq_x < mlx->map.sq_side)
+	{
+		f_fill_minimap(mlx);
+		mlx->map.sq_x++;
+	}
+}
+
+void			f_draw_last_square(t_mlx *mlx)
+{
+	mlx->map.sq_x = 0;
+	while (mlx->map.sq_x < mlx->map.map_end_x % mlx->map.sq_side)
+	{
+		f_fill_minimap(mlx);
+		mlx->map.sq_x++;
+	}
+}
+
+void			f_draw_first_row(t_mlx *mlx)
+{
 	while (mlx->map.x <= mlx->map.map_end_x / mlx->map.sq_side)
 	{
 		mlx->map.sq_y = mlx->map.map_start_y % mlx->map.sq_side;
 		while (mlx->map.sq_y < mlx->map.sq_side)
 		{
 			if (mlx->map.x == mlx->map.map_start_x / mlx->map.sq_side)
-			{
-				mlx->map.sq_x = mlx->map.map_start_x % mlx->map.sq_side;
-				while (mlx->map.sq_x < mlx->map.sq_side)
-				{
-					f_fill_minimap(mlx);
-					mlx->map.sq_x++;
-				}
-			}
+				f_draw_first_square(mlx);
 			else if (mlx->map.x == mlx->map.map_end_x / mlx->map.sq_side)
-			{
-				mlx->map.sq_x = 0;
-				while (mlx->map.sq_x < mlx->map.map_end_x % mlx->map.sq_side)
-				{
-					f_fill_minimap(mlx);
-					mlx->map.sq_x++;
-				}
-			}
+				f_draw_last_square(mlx);
 			else
-			{
-				mlx->map.sq_x = 0;
-				while (mlx->map.sq_x < mlx->map.sq_side)
-				{
-					f_fill_minimap(mlx);
-					mlx->map.sq_x++;
-				}
-			}
+				f_draw_middle_square(mlx);
 			mlx->map.sq_y++;
 		}
 		mlx->map.x++;
 	}
 	mlx->map.y++;
+}
+
+void			f_draw_middle_row(t_mlx *mlx)
+{
 	while (mlx->map.y < mlx->map.map_end_y / mlx->map.sq_side)
 	{
 		mlx->map.x = mlx->map.map_start_x / mlx->map.sq_side;
@@ -309,32 +315,11 @@ void			f_draw_minimap(t_mlx *mlx)
 			while (mlx->map.sq_y < mlx->map.sq_side)
 			{
 				if (mlx->map.x == mlx->map.map_start_x / mlx->map.sq_side)
-				{
-					mlx->map.sq_x = mlx->map.map_start_x % mlx->map.sq_side;
-					while (mlx->map.sq_x < mlx->map.sq_side)
-					{
-						f_fill_minimap(mlx);
-						mlx->map.sq_x++;
-					}
-				}
+					f_draw_first_square(mlx);
 				else if (mlx->map.x == mlx->map.map_end_x / mlx->map.sq_side)
-				{
-					mlx->map.sq_x = 0;
-					while (mlx->map.sq_x < mlx->map.map_end_x % mlx->map.sq_side)
-					{
-						f_fill_minimap(mlx);
-						mlx->map.sq_x++;
-					}
-				}
+					f_draw_last_square(mlx);
 				else
-				{
-					mlx->map.sq_x = 0;
-					while (mlx->map.sq_x < mlx->map.sq_side)
-					{
-						f_fill_minimap(mlx);
-						mlx->map.sq_x++;
-					}
-				}
+					f_draw_middle_square(mlx);
 				mlx->map.sq_y++;
 			}
 			mlx->map.x++;
@@ -342,40 +327,37 @@ void			f_draw_minimap(t_mlx *mlx)
 		mlx->map.y++;
 	}
 	mlx->map.x = mlx->map.map_start_x / mlx->map.sq_side;
+}
+
+void			f_draw_last_row(t_mlx *mlx)
+{
 	while (mlx->map.x <= mlx->map.map_end_x / mlx->map.sq_side)
 	{
 		mlx->map.sq_y = 0;
 		while (mlx->map.sq_y < mlx->map.map_end_y % mlx->map.sq_side)
 		{
 			if (mlx->map.x == mlx->map.map_start_x / mlx->map.sq_side)
-			{
-				mlx->map.sq_x = mlx->map.map_start_x % mlx->map.sq_side;
-				while (mlx->map.sq_x < mlx->map.sq_side)
-				{
-					f_fill_minimap(mlx);
-					mlx->map.sq_x++;
-				}
-			}
+				f_draw_first_square(mlx);
 			else if (mlx->map.x == mlx->map.map_end_x / mlx->map.sq_side)
-			{
-				mlx->map.sq_x = 0;
-				while (mlx->map.sq_x < mlx->map.map_end_x % mlx->map.sq_side)
-				{
-					f_fill_minimap(mlx);
-					mlx->map.sq_x++;
-				}
-			}
+				f_draw_last_square(mlx);
 			else
-			{
-				mlx->map.sq_x = 0;
-				while (mlx->map.sq_x < mlx->map.sq_side)
-				{
-					f_fill_minimap(mlx);
-					mlx->map.sq_x++;
-				}
-			}
+				f_draw_middle_square(mlx);
 			mlx->map.sq_y++;
 		}
 		mlx->map.x++;
 	}
+}
+
+void			f_draw_minimap(t_mlx *mlx)
+{
+	f_player_pos_init(mlx);
+	f_map_start_n_end_x_init(mlx);
+	f_map_start_n_end_y_init(mlx);
+	mlx->player.pos_x -= mlx->map.map_start_x;
+	mlx->player.pos_y -= mlx->map.map_start_y;
+	mlx->map.x = mlx->map.map_start_x / mlx->map.sq_side;
+	mlx->map.y = mlx->map.map_start_y / mlx->map.sq_side;
+	f_draw_first_row(mlx);
+	f_draw_middle_row(mlx);
+	f_draw_last_row(mlx);
 }
