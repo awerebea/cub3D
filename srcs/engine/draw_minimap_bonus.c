@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/28 19:20:13 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/28 19:56:21 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,8 @@ void			f_draw_minimap(t_mlx *mlx)
 
 	f_player_pos_init(mlx);
 	f_map_visible_square_init(mlx);
+	mlx->player.pos_x -= mlx->map.map_start_x;
+	mlx->player.pos_y -= mlx->map.map_start_y;
 	sq_y_end = ((mlx->map.map_end_y % mlx->map.sq_side) == 0) ? \
 					mlx->map.sq_side : mlx->map.map_end_y % mlx->map.sq_side;
 	mlx->map.x = mlx->map.map_start_x / mlx->map.sq_side;
