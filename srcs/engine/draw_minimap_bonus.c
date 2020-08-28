@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/28 19:56:21 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/28 21:20:03 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,41 @@ static void		f_fill_minimap(t_mlx *mlx)
 		y > mlx->map.edge_shift + mlx->player.pos_y - mlx->map.sq_side / 6 && \
 		y < mlx->map.edge_shift + mlx->player.pos_y + mlx->map.sq_side / 6)
 		my_mlx_pixel_put(&mlx->img, x, y, 0xFF0000);
+	if ((x == mlx->map.edge_shift || x == mlx->map.edge_shift + \
+		mlx->x_win_size * MINIMAP_MAX_WDTH_FACTOR || \
+		y == mlx->map.edge_shift || y == mlx->map.edge_shift + \
+		mlx->y_win_size * MINIMAP_MAX_HGHT_FACTOR) && \
+			mlx->opts->map_array[mlx->map.y][mlx->map.x] != ' ')
+		my_mlx_pixel_put(&mlx->img, x, y, 0xFFFFFF);
+	else if (mlx->map.x == mlx->map.map_end_x / mlx->map.sq_side && \
+			mlx->map.sq_x == mlx->map.map_end_x % mlx->map.sq_side - 1 && \
+			mlx->opts->map_array[mlx->map.y][mlx->map.x] != ' ')
+		my_mlx_pixel_put(&mlx->img, x, y, 0xFFFFFF);
+	else if (mlx->map.y == mlx->map.map_end_y / mlx->map.sq_side && \
+			mlx->map.sq_y == mlx->map.map_end_y % mlx->map.sq_side - 1 && \
+			mlx->opts->map_array[mlx->map.y][mlx->map.x] != ' ')
+		my_mlx_pixel_put(&mlx->img, x, y, 0xFFFFFF);
+	else if (((mlx->map.x > 0 && mlx->map.sq_x == 0 && \
+		mlx->opts->map_array[mlx->map.y][mlx->map.x - 1] == ' ') || \
+		(mlx->map.y > 0 && mlx->map.sq_y == 0 && \
+		mlx->opts->map_array[mlx->map.y - 1][mlx->map.x] \
+		== ' ')) && (mlx->opts->map_array[mlx->map.y][mlx->map.x] != ' '))
+		my_mlx_pixel_put(&mlx->img, x, y, 0xFFFFFF);
+	else if ((mlx->map.x < mlx->map.map_width - 1 && mlx->map.sq_x == \
+			mlx->map.sq_side - 1 && \
+			mlx->opts->map_array[mlx->map.y][mlx->map.x] != ' ' && \
+			mlx->opts->map_array[mlx->map.y][mlx->map.x + 1] == ' '))
+		my_mlx_pixel_put(&mlx->img, x, y, 0xFFFFFF);
+	else if ((mlx->map.y < mlx->map.map_height - 1 && mlx->map.sq_y == \
+			mlx->map.sq_side - 1 && \
+			mlx->opts->map_array[mlx->map.y][mlx->map.x] != ' ' && \
+			mlx->opts->map_array[mlx->map.y + 1][mlx->map.x] == ' '))
+		my_mlx_pixel_put(&mlx->img, x, y, 0xFFFFFF);
+	else if (((mlx->map.x == mlx->map.map_width - 1 && mlx->map.sq_x == \
+		mlx->map.sq_side - 1) || (mlx->map.y == mlx->map.map_height - 1 && \
+		mlx->map.sq_y == mlx->map.sq_side - 1)) && \
+		mlx->opts->map_array[mlx->map.y][mlx->map.x] != ' ')
+		my_mlx_pixel_put(&mlx->img, x, y, 0xFFFFFF);
 	f_draw_sprite_point(mlx, x, y);
 }
 
