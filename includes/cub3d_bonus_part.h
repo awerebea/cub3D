@@ -6,19 +6,13 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/28 00:43:03 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/28 13:03:09 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_PART_H
 
 # define CUB3D_BONUS_PART_H
-
-# define MINIMAP_MAX_WDTH_FACTOR 0.40
-# define MINIMAP_MAX_HGHT_FACTOR 0.40
-# define MINIMAP_MAX_SQUARE_SIDE 12
-# define MINIMAP_MIN_SQUARE_SIDE 5
-# define VRAD 1
 
 typedef struct	s_keys
 {
@@ -90,6 +84,10 @@ typedef struct	s_minimap
 	int			map_height;
 	int			sq_side;
 	int			edge_shift;
+	int			map_start_x;
+	int			map_start_y;
+	int			map_end_x;
+	int			map_end_y;
 }				t_minimap;
 
 typedef struct	s_player
@@ -145,6 +143,7 @@ int				f_pars_floor_texture(char *line, int i, t_sdf *opts);
 int				f_pars_ceiling_texture(char *line, int i, t_sdf *opts);
 void			f_draw_textured_background(t_mlx *mlx);
 void			f_minimap_init(t_mlx *mlx);
+int				f_check_curr_square(t_mlx *mlx);
 void			f_player_pos_init(t_mlx *mlx);
 void			f_draw_minimap(t_mlx *mlx);
 int				f_add_shade(int color, float shade);

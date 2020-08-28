@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/28 01:29:23 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/28 14:03:14 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ ifeq ($(OS), Linux)
 	MLX_NAME	= libmlx.a
 	LIBFLAGS	= -lmlx -lXext -lX11 -lm
 	INCLUDES	= -I $(shell ./x11_path_init.sh)
+	MLX_CONF	= mlx_configure
 else
 	MLX_DIR		= minilibx/mac/
 	MLX_NAME	= libmlx.dylib
@@ -158,10 +159,12 @@ libft_fclean:
 libft_re:
 	make re		-C Libft/
 
-$(MLX): mlx_force_make
+$(MLX): $(MLX_CONF) mlx_force_make
 	@echo '******* Making minilibx *******'
-	@chmod		+x $(MLX_DIR)configure
 	@make		-C $(MLX_DIR) --no-print-directory
+
+mlx_configure:
+	@chmod		+x $(MLX_DIR)configure
 
 mlx_clean:
 	make clean	-C $(MLX_DIR)
@@ -188,7 +191,7 @@ run: all
 	./$(NAME) maps/map_256.cub
 
 run_bonus: bonus
-	./$(NAME) maps/map_256_bonus.cub
+	./$(NAME) maps/map_256_minimap.cub
 
 screenshot: all
 	./$(NAME) maps/map_256.cub --save
