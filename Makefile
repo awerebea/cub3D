@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/28 01:29:23 by awerebea         ###   ########.fr        #
+#    Updated: 2020/08/28 23:54:28 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ ifeq ($(OS), Linux)
 	MLX_NAME	= libmlx.a
 	LIBFLAGS	= -lmlx -lXext -lX11 -lm
 	INCLUDES	= -I $(shell ./x11_path_init.sh)
+	MLX_CONF	= mlx_configure
 else
 	MLX_DIR		= minilibx/mac/
 	MLX_NAME	= libmlx.dylib
@@ -40,7 +41,7 @@ INCLUDES	+= -I includes/ -I Libft/includes/ -I $(MLX_DIR)
 LIBFLAGS	+= -L Libft -lft -L $(MLX_DIR)
 
 #---------------- check if fclean needed after last project building -----------
-CHECK_OBJS = $(shell find . -wholename "./objs/*_bonus.o")
+CHECK_OBJS = $(shell find . -wholename "./objs/bonus/*.o")
 
 ifeq ($(CHECK_OBJS), )
 	CHECK_OBJS_BONUS = fclean_keep_bmp
@@ -93,16 +94,21 @@ FLS_4	= $(addprefix $(FLSDIR_4), \
 
 ifeq ($(PROGRAM_TYPE), Bonus)
 	DEF_TYPE		= -D BONUS
-	FLS_4_BONUS	= $(addprefix $(FLSDIR_4), \
-						draw_minimap_bonus \
-						minimap_init_bonus \
-						mouse_move_bonus)
+	FLSDIR_BONUS	= bonus/
+	FLS_BONUS	= $(addprefix $(FLSDIR_BONUS), \
+						draw_minimap \
+						draw_minimap_addons \
+						draw_minimap_contour \
+						draw_minimap_rows \
+						draw_minimap_squares \
+						minimap_init \
+						mouse_move)
 	FCLEAN_FLAG	= $(CHECK_OBJS_BONUS)
 else
 	FCLEAN_FLAG	= $(CHECK_OBJS)
 endif
 
-SRC			= $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4) $(FLS_4_BONUS)
+SRC			= $(FLS_1) $(FLS_2) $(FLS_3) $(FLS_4) $(FLS_BONUS)
 
 OBJ			= $(addprefix $(OBJDIR), $(SRC:=.o))
 DFLS		= $(SRC:=.d)
@@ -116,7 +122,7 @@ $(NAME):		$(FCLEAN_FLAG) $(LIBFT) $(MLX) $(OBJ)
 $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
 	chmod		+x ./x11_path_init.sh
 	mkdir -p	$(OBJDIR) $(addprefix $(OBJDIR), $(FLSDIR_1) $(FLSDIR_2) \
-				$(FLSDIR_3) $(FLSDIR_4))
+				$(FLSDIR_3) $(FLSDIR_4) $(FLSDIR_BONUS))
 	$(CC)		$(DEF_OS) $(DEF_TYPE) $(FLAGS) $(INCLUDES) -c $< -o $@ -MMD
 
 include $(wildcard $(addprefix $(OBJDIR), $(DFLS)))
@@ -158,10 +164,12 @@ libft_fclean:
 libft_re:
 	make re		-C Libft/
 
-$(MLX): mlx_force_make
+$(MLX): $(MLX_CONF) mlx_force_make
 	@echo '******* Making minilibx *******'
-	@chmod		+x $(MLX_DIR)configure
 	@make		-C $(MLX_DIR) --no-print-directory
+
+mlx_configure:
+	@chmod		+x $(MLX_DIR)configure
 
 mlx_clean:
 	make clean	-C $(MLX_DIR)
