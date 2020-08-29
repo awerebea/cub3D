@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_minimap_addons_bonus.c                        :+:      :+:    :+:   */
+/*   draw_minimap_addons.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/28 23:15:03 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/29 21:46:23 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int		f_check_angle_range(t_mlx *mlx, float delta_x, float delta_y, \
 	return (0);
 }
 
-void			f_draw_view_sector(t_mlx *mlx, int x, int y)
+int				f_check_view_sector(t_mlx *mlx, int x, int y)
 {
 	float	delta_x;
 	float	delta_y;
@@ -79,6 +79,5 @@ void			f_draw_view_sector(t_mlx *mlx, int x, int y)
 		angle = M_PI * 3 / 2;
 	else
 		angle = M_PI / 2;
-	if (f_check_angle_range(mlx, delta_x, delta_y, angle))
-		my_mlx_pixel_put(&mlx->img, x, y, 0x0000FFFF);
+	return (f_check_angle_range(mlx, delta_x, delta_y, angle));
 }

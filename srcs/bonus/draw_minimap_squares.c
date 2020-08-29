@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_minimap_squares_bonus.c                       :+:      :+:    :+:   */
+/*   draw_minimap_squares.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/28 23:20:29 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/29 21:44:55 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ static void		f_fill_minimap(t_mlx *mlx)
 		my_mlx_pixel_put(&mlx->img, x, y, 0x006B6B6B);
 	else if (mlx->opts->map_array[mlx->map.y][mlx->map.x] == '1')
 		my_mlx_pixel_put(&mlx->img, x, y, 0x001C596E);
+	else if (f_check_view_sector(mlx, x, y))
+		my_mlx_pixel_put(&mlx->img, x, y, 0x0000FFFF);
 	else if (ft_strchr("02NSWE", mlx->opts->map_array[mlx->map.y][mlx->map.x]))
 		my_mlx_pixel_put(&mlx->img, x, y, 0x00000000);
-	f_draw_view_sector(mlx, x, y);
 	f_draw_player_point(mlx, x, y);
 	f_draw_sprite_point(mlx, x, y);
 	f_draw_minimap_contour(mlx, x, y);
