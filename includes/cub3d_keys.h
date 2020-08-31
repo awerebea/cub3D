@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 20:07:40 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/31 12:25:22 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 13:16:46 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@
 #  define KEY_M 46
 #  define KEY_LEFT 123
 #  define KEY_RIGHT 124
-#  define KEY_KP_MINUS 125
-#  define KEY_KP_PLUS 126
+#  define KEY_KP_MINUS 78
+#  define KEY_KP_PLUS 69
 
 # endif
 
