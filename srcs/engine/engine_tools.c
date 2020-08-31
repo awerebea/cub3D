@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 13:00:56 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/28 23:52:45 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/09/01 01:05:14 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,29 @@ int			f_add_shade(int color, float shade)
 
 int			f_draw_all(t_mlx *mlx)
 {
-	mlx_do_sync(mlx->mlx_ptr);
-	f_draw_textured_background(mlx);
-	f_raycasting(mlx);
-	f_draw_minimap(mlx);
 	mlx->game.time_prev = mlx->game.time;
 	mlx->game.time = clock();
 	mlx->game.time_frame = (mlx->game.time - mlx->game.time_prev) / 1000000;
 	mlx->game.move_speed = mlx->game.time_frame * MOVE_SPEED;
 	mlx->game.rot_speed = mlx->game.time_frame * ROTATE_SPEED * M_PI / 180;
+	if (mlx->keys.shift_l)
+		mlx->game.vert_pos_factor = 0.25;
+	else if (mlx->game.jump_in_progress)
+	{
+		mlx->game.time_jump_curr = (mlx->game.time - \
+									mlx->game.time_jump_start) / 1000000;
+		if (mlx->game.time_jump_curr > JUMP_TIME)
+			mlx->game.jump_in_progress = 0;
+		if (mlx->game.time_jump_curr > JUMP_TIME / 2.0)
+			mlx->game.time_jump_curr = JUMP_TIME - mlx->game.time_jump_curr;
+		mlx->game.vert_pos_factor = 0.5 + 0.4 * (1 - ((JUMP_TIME / 2.0 - \
+								mlx->game.time_jump_curr) / (JUMP_TIME / 2.0)));
+	}
+	else
+		mlx->game.vert_pos_factor = 0.5;
+	f_draw_textured_background(mlx);
+	f_raycasting(mlx);
+	f_draw_minimap(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
 	return (0);
 }
@@ -44,7 +58,6 @@ int			f_draw_all(t_mlx *mlx)
 
 int			f_draw_all(t_mlx *mlx)
 {
-	mlx_do_sync(mlx->mlx_ptr);
 	f_draw_background(mlx);
 	f_raycasting(mlx);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);

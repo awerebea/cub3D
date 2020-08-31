@@ -6,16 +6,26 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 14:49:47 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 13:13:01 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 23:40:15 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "cub3d_keys.h"
+#include <time.h>
 
 #ifdef BONUS
 
-int		f_key_press(int key, t_mlx *mlx)
+static	void	f_jump_init(t_mlx *mlx)
+{
+	if (!mlx->game.jump_in_progress)
+	{
+		mlx->game.jump_in_progress = 1;
+		mlx->game.time_jump_start = clock();
+	}
+}
+
+int				f_key_press(int key, t_mlx *mlx)
 {
 	if (key == KEY_ESC)
 		f_close_n_exit(mlx);
@@ -33,10 +43,18 @@ int		f_key_press(int key, t_mlx *mlx)
 		mlx->keys.left = 1;
 	else if (key == KEY_RIGHT)
 		mlx->keys.right = 1;
+	else if (key == KEY_SHIFT_L && !mlx->game.jump_in_progress)
+		mlx->keys.shift_l = 1;
+	else if (key == KEY_SPACE && !mlx->keys.shift_l)
+		f_jump_init(mlx);
+	else if (key == KEY_KP_MINUS)
+		mlx->map.sq_side -= (mlx->map.sq_side > 5) ? 2 : 0;
+	else if (key == KEY_KP_PLUS)
+		mlx->map.sq_side += (mlx->map.sq_side < 23) ? 2 : 0;
 	return (0);
 }
 
-int		f_key_release(int key, t_mlx *mlx)
+int				f_key_release(int key, t_mlx *mlx)
 {
 	if (key == KEY_W)
 		mlx->keys.w = 0;
@@ -50,12 +68,14 @@ int		f_key_release(int key, t_mlx *mlx)
 		mlx->keys.left = 0;
 	else if (key == KEY_RIGHT)
 		mlx->keys.right = 0;
+	else if (key == KEY_SHIFT_L)
+		mlx->keys.shift_l = 0;
 	return (0);
 }
 
 #else
 
-int		f_key_press(int key, t_mlx *mlx)
+int				f_key_press(int key, t_mlx *mlx)
 {
 	if (key == KEY_ESC)
 		f_close_n_exit(mlx);
@@ -74,7 +94,7 @@ int		f_key_press(int key, t_mlx *mlx)
 	return (0);
 }
 
-int		f_key_release(int key, t_mlx *mlx)
+int				f_key_release(int key, t_mlx *mlx)
 {
 	if (key == KEY_W)
 		mlx->keys.w = 0;

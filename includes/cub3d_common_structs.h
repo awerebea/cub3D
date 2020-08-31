@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 12:55:51 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/09/01 00:25:08 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct	s_wall_vars
 	int			tex_y;
 	float		tex_pos;
 	float		tex_step;
+	int			tex_mirror;
 }				t_wall_vars;
 
 #endif

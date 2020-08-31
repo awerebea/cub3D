@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_init_bonus.c                               :+:      :+:    :+:   */
+/*   minimap_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 14:02:47 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/28 16:41:12 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 10:54:19 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,13 @@ void	f_player_pos_init(t_mlx *mlx)
 
 void	f_minimap_init(t_mlx *mlx)
 {
-	mlx->map.edge_shift = mlx->x_win_size / 100;
+	mlx->map.edge_shift = mlx->x_win_size / 150;
 	mlx->map.map_width = mlx->opts->max_mapline_len;
 	mlx->map.map_height = mlx->opts->map_row_index + 1;
 	mlx->map.sq_side = MINIMAP_SQUARE_SIDE;
+	if (mlx->x_win_size * MINIMAP_MAX_WDTH_FACTOR < \
+			mlx->y_win_size * MINIMAP_MAX_HGHT_FACTOR)
+		mlx->map.map_radius = mlx->x_win_size * MINIMAP_MAX_WDTH_FACTOR / 2;
+	else
+		mlx->map.map_radius = mlx->y_win_size * MINIMAP_MAX_HGHT_FACTOR / 2;
 }

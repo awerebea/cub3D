@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 09:36:10 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/25 23:30:35 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/09/01 00:26:36 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void		f_raycasting(t_mlx *mlx)
 	int			x;
 	t_wall_vars w_vars;
 
+	w_vars.tex_mirror = 0;
 	x = 0;
 	while (x < mlx->x_win_size)
 	{

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/29 21:44:33 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/09/01 00:25:23 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct	s_keys
 	int			m;
 	int			left;
 	int			right;
+	int			shift_l;
 }				t_keys;
 
 typedef struct	s_game
@@ -46,6 +47,10 @@ typedef struct	s_game
 	float		sens;
 	float		delta_x;
 	int			mouse_x;
+	int			jump_in_progress;
+	float		time_jump_start;
+	float		time_jump_curr;
+	float		vert_pos_factor;
 }				t_game;
 
 typedef	struct	s_sdf
@@ -88,6 +93,7 @@ typedef struct	s_minimap
 	int			map_start_y;
 	int			map_end_x;
 	int			map_end_y;
+	int			map_radius;
 }				t_minimap;
 
 typedef struct	s_player
@@ -133,10 +139,10 @@ typedef struct	s_fc_vars
 	float	ray_dir_x_1;
 	float	ray_dir_y_1;
 	float	row_distance;
-	float	floor_step_x;
-	float	floor_step_y;
-	float	floor_x;
-	float	floor_y;
+	float	step_x;
+	float	step_y;
+	float	x;
+	float	y;
 }				t_fc_vars;
 
 int				f_pars_floor_texture(char *line, int i, t_sdf *opts);
@@ -146,7 +152,7 @@ void			f_minimap_init(t_mlx *mlx);
 int				f_check_curr_square(t_mlx *mlx);
 void			f_player_pos_init(t_mlx *mlx);
 void			f_draw_minimap(t_mlx *mlx);
-int				f_draw_minimap_contour(t_mlx *mlx, int x, int y);
+void			f_draw_minimap_contour(t_mlx *mlx, int x, int y);
 void			f_draw_first_row(t_mlx *mlx);
 void			f_draw_middle_row(t_mlx *mlx);
 void			f_draw_last_row(t_mlx *mlx);

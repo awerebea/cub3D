@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 13:11:12 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 19:41:23 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	f_key_flags_init(t_mlx *mlx)
 	mlx->keys.s = 0;
 	mlx->keys.d = 0;
 	mlx->keys.m = 1;
+	mlx->keys.shift_l = 0;
 	mlx->keys.left = 0;
 	mlx->keys.right = 0;
 }
@@ -62,10 +63,12 @@ int			f_game_init(t_mlx *mlx)
 	mlx->game.player_y = (float)mlx->opts->spawn_point_y + 0.5;
 	f_dir_n_plane_calculation(mlx);
 	mlx->game.time = clock();
+	mlx->game.time_jump_start = 0;
 	mlx->game.move_speed = MOVE_SPEED;
 	mlx->game.rot_speed = ROTATE_SPEED * M_PI / 180;
 	mlx->game.mouse_x = mlx->x_win_size / 2;
 	mlx->game.sens = MOUSE_SENSITIVITY;
+	mlx->game.jump_in_progress = 0;
 	if (!(mlx->game.wall_dist_arr = (float*)malloc(sizeof(float) * \
 					mlx->x_win_size)))
 		return (mlx->errcode = 200);
