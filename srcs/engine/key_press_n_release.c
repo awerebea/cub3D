@@ -6,14 +6,24 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 14:49:47 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/31 14:26:45 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 19:37:08 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "cub3d_keys.h"
+#include <time.h>
 
 #ifdef BONUS
+
+static	void	f_jump_init(t_mlx *mlx)
+{
+	if (!mlx->game.jump_in_progress)
+	{
+		mlx->game.jump_in_progress = 1;
+		mlx->game.time_jump_start = clock();
+	}
+}
 
 int		f_key_press(int key, t_mlx *mlx)
 {
@@ -33,8 +43,10 @@ int		f_key_press(int key, t_mlx *mlx)
 		mlx->keys.left = 1;
 	else if (key == KEY_RIGHT)
 		mlx->keys.right = 1;
-	else if (key == KEY_SHIFT_L)
+	else if (key == KEY_SHIFT_L && !mlx->game.jump_in_progress)
 		mlx->keys.shift_l = 1;
+	else if (key == KEY_SPACE && !mlx->keys.shift_l)
+		f_jump_init(mlx);
 	else if (key == KEY_KP_MINUS)
 		mlx->map.sq_side -= (mlx->map.sq_side > 5) ? 2 : 0;
 	else if (key == KEY_KP_PLUS)

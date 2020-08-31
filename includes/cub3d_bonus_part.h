@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/31 16:53:35 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 19:42:28 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ typedef struct	s_game
 	float		sens;
 	float		delta_x;
 	int			mouse_x;
+	int			jump_in_progress;
+	float		time_jump_start;
+	float		vert_pos_factor;
 }				t_game;
 
 typedef	struct	s_sdf

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 17:08:08 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/31 17:04:53 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 19:52:23 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,7 @@ void		f_draw_textured_background(t_mlx *mlx)
 	t_fc_vars	floor_vars;
 	t_fc_vars	ceil_vars;
 
-	y_horizon = (mlx->keys.shift_l) ? \
-					mlx->y_win_size / 3 + 1 : mlx->y_win_size / 2 + 1;
+	y_horizon = mlx->y_win_size * mlx->game.vert_pos_factor + 1;
 	y = y_horizon;
 	while (y < mlx->y_win_size)
 	{

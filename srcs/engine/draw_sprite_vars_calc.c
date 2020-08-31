@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 16:29:32 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/31 15:37:15 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 20:03:28 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,12 @@ void	f_sprite_vars_calc_finish(t_mlx *mlx, t_sp_vars *sp_vars)
 	if ((sp_vars->height = (int)((mlx->y_win_size / \
 					sp_vars->transform_y) * SP_SCALE_Y)) < 0)
 		sp_vars->height *= -1;
-	if ((sp_vars->start_y = (mlx->keys.shift_l) ? -sp_vars->height / 2 + \
-		mlx->y_win_size / 3 + sp_vars->vert_offset : -sp_vars->height / 2 + \
-		mlx->y_win_size / 2 + sp_vars->vert_offset) < 0)
+	if ((sp_vars->start_y = -sp_vars->height / 2 + mlx->y_win_size * \
+						mlx->game.vert_pos_factor + sp_vars->vert_offset) < 0)
 		sp_vars->start_y = 0;
-	if ((sp_vars->end_y = (mlx->keys.shift_l) ? sp_vars->height / 2 + \
-		mlx->y_win_size / 3 + sp_vars->vert_offset : sp_vars->height / 2 + \
-		mlx->y_win_size / 2 + sp_vars->vert_offset) >= mlx->y_win_size)
+	if ((sp_vars->end_y = sp_vars->height / 2 + mlx->y_win_size * \
+						mlx->game.vert_pos_factor + sp_vars->vert_offset) >= \
+						mlx->y_win_size)
 		sp_vars->end_y = mlx->y_win_size - 1;
 	if ((sp_vars->width = (int)((mlx->y_win_size / \
 					sp_vars->transform_y) * SP_SCALE_X)) < 0)
