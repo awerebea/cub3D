@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 14:49:47 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/31 19:37:08 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 23:40:15 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static	void	f_jump_init(t_mlx *mlx)
 	}
 }
 
-int		f_key_press(int key, t_mlx *mlx)
+int				f_key_press(int key, t_mlx *mlx)
 {
 	if (key == KEY_ESC)
 		f_close_n_exit(mlx);
@@ -54,7 +54,7 @@ int		f_key_press(int key, t_mlx *mlx)
 	return (0);
 }
 
-int		f_key_release(int key, t_mlx *mlx)
+int				f_key_release(int key, t_mlx *mlx)
 {
 	if (key == KEY_W)
 		mlx->keys.w = 0;
@@ -75,7 +75,7 @@ int		f_key_release(int key, t_mlx *mlx)
 
 #else
 
-int		f_key_press(int key, t_mlx *mlx)
+int				f_key_press(int key, t_mlx *mlx)
 {
 	if (key == KEY_ESC)
 		f_close_n_exit(mlx);
@@ -94,7 +94,7 @@ int		f_key_press(int key, t_mlx *mlx)
 	return (0);
 }
 
-int		f_key_release(int key, t_mlx *mlx)
+int				f_key_release(int key, t_mlx *mlx)
 {
 	if (key == KEY_W)
 		mlx->keys.w = 0;
