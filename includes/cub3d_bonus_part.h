@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/29 21:44:33 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 10:24:01 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct	s_minimap
 	int			map_start_y;
 	int			map_end_x;
 	int			map_end_y;
+	int			map_radius;
 }				t_minimap;
 
 typedef struct	s_player

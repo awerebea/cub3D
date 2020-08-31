@@ -6,42 +6,58 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/31 10:08:09 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 10:55:17 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft.h"
+#include <math.h>
+
+int				f_check_pix_visibility(t_mlx *mlx, int x, int y)
+{
+	int			pix_radius;
+
+	pix_radius = sqrt(pow(x - mlx->map.edge_shift - mlx->player.pos_x, 2) + \
+					pow(y - mlx->map.edge_shift - mlx->player.pos_y, 2));
+	if (pix_radius == mlx->map.map_radius - 1)
+		return (2);
+	else if (pix_radius < mlx->map.map_radius)
+		return (1);
+	return (0);
+}
 
 static void		f_fill_minimap(t_mlx *mlx)
 {
 	int			x;
 	int			y;
 
+	x = mlx->map.x * mlx->map.sq_side + mlx->map.sq_x + mlx->map.edge_shift - \
+		mlx->map.map_start_x;
+	y = mlx->map.y * mlx->map.sq_side + mlx->map.sq_y + mlx->map.edge_shift - \
+	mlx->map.map_start_y;
+	if (f_check_pix_visibility(mlx, x, y) == 2)
+		my_mlx_pixel_put(&mlx->img, x, y, 0xFFFFFF);
 	if (mlx->map.x >= 0 && mlx->map.y >= 0  && mlx->map.x < mlx->map.map_width \
-			&& mlx->map.y < mlx->map.map_height)
+			&& mlx->map.y < mlx->map.map_height && f_check_pix_visibility(mlx, x, y) == 1)
 	{
-		x = mlx->map.x * mlx->map.sq_side + mlx->map.sq_x + mlx->map.edge_shift - \
-			mlx->map.map_start_x;
-		y = mlx->map.y * mlx->map.sq_side + mlx->map.sq_y + mlx->map.edge_shift - \
-		mlx->map.map_start_y;
-		if ((mlx->map.sq_x == mlx->map.sq_side - 1 || mlx->map.sq_y == \
-			mlx->map.sq_side - 1 || (mlx->map.x == 0 && mlx->map.sq_x == 0) || \
-			(mlx->map.x > 0 && mlx->map.sq_x == 0 && \
-			mlx->opts->map_array[mlx->map.y][mlx->map.x - 1] == ' ') || \
-			(mlx->map.y == 0 && mlx->map.sq_y == 0) || (mlx->map.y > 0 && \
-			mlx->map.sq_y == 0 && mlx->opts->map_array[mlx->map.y - 1][mlx->map.x] \
-			== ' ')) && (mlx->opts->map_array[mlx->map.y][mlx->map.x] != ' '))
-			my_mlx_pixel_put(&mlx->img, x, y, 0x006B6B6B);
-		else if (mlx->opts->map_array[mlx->map.y][mlx->map.x] == '1')
-			my_mlx_pixel_put(&mlx->img, x, y, 0x001C596E);
-		else if (f_check_view_sector(mlx, x, y))
-			my_mlx_pixel_put(&mlx->img, x, y, 0x0000FFFF);
-		else if (ft_strchr("02NSWE", mlx->opts->map_array[mlx->map.y][mlx->map.x]))
-			my_mlx_pixel_put(&mlx->img, x, y, 0x00000000);
-		f_draw_player_point(mlx, x, y);
-		f_draw_sprite_point(mlx, x, y);
-		/* f_draw_minimap_contour(mlx, x, y); */
+			if ((mlx->map.sq_x == mlx->map.sq_side - 1 || mlx->map.sq_y == \
+				mlx->map.sq_side - 1 || (mlx->map.x == 0 && mlx->map.sq_x == 0) || \
+				(mlx->map.x > 0 && mlx->map.sq_x == 0 && \
+				mlx->opts->map_array[mlx->map.y][mlx->map.x - 1] == ' ') || \
+				(mlx->map.y == 0 && mlx->map.sq_y == 0) || (mlx->map.y > 0 && \
+				mlx->map.sq_y == 0 && mlx->opts->map_array[mlx->map.y - 1][mlx->map.x] \
+				== ' ')) && (mlx->opts->map_array[mlx->map.y][mlx->map.x] != ' '))
+				my_mlx_pixel_put(&mlx->img, x, y, 0x006B6B6B);
+			else if (mlx->opts->map_array[mlx->map.y][mlx->map.x] == '1')
+				my_mlx_pixel_put(&mlx->img, x, y, 0x001C596E);
+			else if (f_check_view_sector(mlx, x, y))
+				my_mlx_pixel_put(&mlx->img, x, y, 0x0000FFFF);
+			else if (ft_strchr("02NSWE", mlx->opts->map_array[mlx->map.y][mlx->map.x]))
+				my_mlx_pixel_put(&mlx->img, x, y, 0x00000000);
+			f_draw_player_point(mlx, x, y);
+			f_draw_sprite_point(mlx, x, y);
+			f_draw_minimap_contour(mlx, x, y);
 	}
 }
 
