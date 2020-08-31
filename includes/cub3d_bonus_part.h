@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/31 10:24:01 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 11:55:15 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void			f_minimap_init(t_mlx *mlx);
 int				f_check_curr_square(t_mlx *mlx);
 void			f_player_pos_init(t_mlx *mlx);
 void			f_draw_minimap(t_mlx *mlx);
-int				f_draw_minimap_contour(t_mlx *mlx, int x, int y);
+void			f_draw_minimap_contour(t_mlx *mlx, int x, int y);
 void			f_draw_first_row(t_mlx *mlx);
 void			f_draw_middle_row(t_mlx *mlx);
 void			f_draw_last_row(t_mlx *mlx);
