@@ -7,7 +7,7 @@ EA ./textures/xpm/walls/256/wall_white_rock.xpm
 S  ./textures/xpm/sprites/box_2.xpm
 
 F	./textures/xpm/floor_ceiling/256/floor_wood.xpm
-C	./textures/xpm/floor_ceiling/256/floor_wood.xpm
+C	./textures/xpm/floor_ceiling/256/ceiling_grey.xpm
 
                                          11111111111111111
        11111111111111111              11110000000000110201
