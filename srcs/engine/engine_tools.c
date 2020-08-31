@@ -6,11 +6,12 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 13:00:56 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/28 23:52:45 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 11:01:24 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "libft.h"
 #include "mlx.h"
 #include <stdlib.h>
 #include <math.h>
@@ -37,6 +38,9 @@ int			f_draw_all(t_mlx *mlx)
 	mlx->game.move_speed = mlx->game.time_frame * MOVE_SPEED;
 	mlx->game.rot_speed = mlx->game.time_frame * ROTATE_SPEED * M_PI / 180;
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.img_ptr, 0, 0);
+	ft_putstr_fd("FPS: ", 1);
+	ft_putnbr_fd((int)(1 / mlx->game.time_frame), 1);
+	ft_putchar_fd('\n', 1);
 	return (0);
 }
 
