@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/31 10:03:09 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 10:08:09 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void		f_fill_minimap(t_mlx *mlx)
 			my_mlx_pixel_put(&mlx->img, x, y, 0x00000000);
 		f_draw_player_point(mlx, x, y);
 		f_draw_sprite_point(mlx, x, y);
-		f_draw_minimap_contour(mlx, x, y);
+		/* f_draw_minimap_contour(mlx, x, y); */
 	}
 }
 
