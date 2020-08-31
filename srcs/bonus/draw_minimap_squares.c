@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:40:00 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/31 12:17:14 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 12:27:29 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ static void		f_fill_minimap(t_mlx *mlx)
 		mlx->map.map_start_y;
 	pix_radius = sqrt(pow(x - mlx->map.edge_shift - mlx->player.pos_x, 2) + \
 					pow(y - mlx->map.edge_shift - mlx->player.pos_y, 2));
-	if (pix_radius == mlx->map.map_radius - 1)
-		my_mlx_pixel_put(&mlx->img, x, y, 0xFFFFFF);
 	if (mlx->map.x >= 0 && mlx->map.y >= 0 && mlx->map.x < mlx->map.map_width \
 			&& mlx->map.y < mlx->map.map_height && \
 			pix_radius < mlx->map.map_radius)
 		f_draw_inner_map_pix(mlx, x, y);
 	else if (pix_radius < mlx->map.map_radius)
 		my_mlx_pixel_put(&mlx->img, x, y, 0x000000);
+	if (pix_radius == mlx->map.map_radius - 1)
+		my_mlx_pixel_put(&mlx->img, x, y, 0xFFFFFF);
 }
 
 void			f_draw_first_square(t_mlx *mlx)

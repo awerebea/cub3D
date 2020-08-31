@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 20:07:40 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 14:37:58 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 12:25:22 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 #  define KEY_M XK_m
 #  define KEY_LEFT XK_Left
 #  define KEY_RIGHT XK_Right
+#  define KEY_KP_MINUS XK_KP_Subtract
+#  define KEY_KP_PLUS XK_KP_Add
 
 # else
 
@@ -39,6 +41,8 @@
 #  define KEY_M 46
 #  define KEY_LEFT 123
 #  define KEY_RIGHT 124
+#  define KEY_KP_MINUS 125
+#  define KEY_KP_PLUS 126
 
 # endif
 

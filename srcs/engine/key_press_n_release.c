@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/13 14:49:47 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 13:13:01 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 12:28:48 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int		f_key_press(int key, t_mlx *mlx)
 		mlx->keys.left = 1;
 	else if (key == KEY_RIGHT)
 		mlx->keys.right = 1;
+	else if (key == KEY_KP_MINUS)
+		mlx->map.sq_side -= (mlx->map.sq_side > 5) ? 2 : 0;
+	else if (key == KEY_KP_PLUS)
+		mlx->map.sq_side += (mlx->map.sq_side < 23) ? 2 : 0;
 	return (0);
 }
 
