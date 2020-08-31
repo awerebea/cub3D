@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/15 16:29:32 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 16:32:53 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 15:31:22 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ static void	f_draw_sprite_vert_line(t_mlx *mlx, t_sp_vars *sp_vars, int x, \
 	y = sp_vars->start_y;
 	while (y < sp_vars->end_y)
 	{
-		d = (y - sp_vars->vert_offset) * 256 - \
+		d = (mlx->keys.shift_l) ? (y - sp_vars->vert_offset) * 256 - \
+			mlx->y_win_size / 1.5 * 128 + sp_vars->height * 128 : \
+			(y - sp_vars->vert_offset) * 256 - \
 			mlx->y_win_size * 128 + sp_vars->height * 128;
 		sp_vars->tex_y = ((d * mlx->sp_tex.height) / sp_vars->height) \
 							/ 256;
