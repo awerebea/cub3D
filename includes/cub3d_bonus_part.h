@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 23:11:21 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/31 13:20:46 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 14:44:13 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct	s_keys
 	int			m;
 	int			left;
 	int			right;
+	int			shift_l;
 }				t_keys;
 
 typedef struct	s_game
@@ -143,6 +144,7 @@ typedef struct	s_fc_vars
 	float	ceil_step_y;
 	float	ceil_x;
 	float	ceil_y;
+	int		y_horizon;
 }				t_fc_vars;
 
 int				f_pars_floor_texture(char *line, int i, t_sdf *opts);

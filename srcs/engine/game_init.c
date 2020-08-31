@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/27 13:11:12 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 14:25:44 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	f_key_flags_init(t_mlx *mlx)
 	mlx->keys.s = 0;
 	mlx->keys.d = 0;
 	mlx->keys.m = 1;
+	mlx->keys.shift_l = 0;
 	mlx->keys.left = 0;
 	mlx->keys.right = 0;
 }
