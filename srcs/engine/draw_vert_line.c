@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 16:22:42 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/31 14:32:36 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/08/31 19:17:13 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,6 @@ static void	f_tex_x_n_step_calculation(t_mlx *mlx, t_wall_vars *w_vars, \
 	w_vars->tex_step = 1.0 * tex_img->height / w_vars->line_height;
 }
 
-static void	f_tex_vars_calculation(t_mlx *mlx, t_wall_vars *w_vars)
-{
-	w_vars->wall_x = (w_vars->wall_side > 1) ? mlx->game.player_y + \
-		w_vars->wall_dist * w_vars->ray_dir_y : mlx->game.player_x + \
-		w_vars->wall_dist * w_vars->ray_dir_x;
-	w_vars->wall_x -= (int)(w_vars->wall_x);
-	f_tex_x_n_step_calculation(mlx, w_vars, 0);
-	w_vars->tex_pos = (mlx->keys.shift_l) ? \
-						(w_vars->line_start - mlx->y_win_size / 3 + \
-							w_vars->line_height / 2) * w_vars->tex_step : \
-						(w_vars->line_start - mlx->y_win_size / 2 + \
-							w_vars->line_height / 2) * w_vars->tex_step;
-}
-
 static int	f_get_pix_color_n_tex_y_calculation(t_mlx *mlx, t_wall_vars *w_vars)
 {
 	t_img	*tex_img;
@@ -69,6 +55,19 @@ static int	f_get_pix_color_n_tex_y_calculation(t_mlx *mlx, t_wall_vars *w_vars)
 }
 
 #ifdef BONUS
+
+static void	f_tex_vars_calculation(t_mlx *mlx, t_wall_vars *w_vars)
+{
+	w_vars->wall_x = (w_vars->wall_side > 1) ? mlx->game.player_y + \
+		w_vars->wall_dist * w_vars->ray_dir_y : mlx->game.player_x + \
+		w_vars->wall_dist * w_vars->ray_dir_x;
+	w_vars->wall_x -= (int)(w_vars->wall_x);
+	f_tex_x_n_step_calculation(mlx, w_vars, 0);
+	w_vars->tex_pos = (mlx->keys.shift_l) ? \
+		(w_vars->line_start - mlx->y_win_size / 3 + w_vars->line_height / 2) * \
+		w_vars->tex_step : (w_vars->line_start - mlx->y_win_size / 2 + \
+							w_vars->line_height / 2) * w_vars->tex_step;
+}
 
 void		f_draw_vert_line(t_mlx *mlx, t_wall_vars *w_vars, int x)
 {
@@ -100,6 +99,17 @@ void		f_draw_vert_line(t_mlx *mlx, t_wall_vars *w_vars, int x)
 }
 
 #else
+
+static void	f_tex_vars_calculation(t_mlx *mlx, t_wall_vars *w_vars)
+{
+	w_vars->wall_x = (w_vars->wall_side > 1) ? mlx->game.player_y + \
+		w_vars->wall_dist * w_vars->ray_dir_y : mlx->game.player_x + \
+		w_vars->wall_dist * w_vars->ray_dir_x;
+	w_vars->wall_x -= (int)(w_vars->wall_x);
+	f_tex_x_n_step_calculation(mlx, w_vars, 0);
+	w_vars->tex_pos = (w_vars->line_start - mlx->y_win_size / 2 + \
+							w_vars->line_height / 2) * w_vars->tex_step;
+}
 
 void		f_draw_vert_line(t_mlx *mlx, t_wall_vars *w_vars, int x)
 {
