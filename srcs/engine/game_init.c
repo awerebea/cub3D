@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 13:22:58 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/31 19:41:23 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/09/01 09:29:43 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int			f_game_init(t_mlx *mlx)
 	mlx->game.mouse_x = mlx->x_win_size / 2;
 	mlx->game.sens = MOUSE_SENSITIVITY;
 	mlx->game.jump_in_progress = 0;
+	mlx->game.vert_pos_factor = 0.5;
 	if (!(mlx->game.wall_dist_arr = (float*)malloc(sizeof(float) * \
 					mlx->x_win_size)))
 		return (mlx->errcode = 200);
