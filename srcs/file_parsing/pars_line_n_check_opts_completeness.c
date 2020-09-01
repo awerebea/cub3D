@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 12:38:55 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 13:50:13 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/09/01 16:06:45 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ int		f_pars_line(char *line, t_sdf *opts)
 		return (opts->err_str = ft_strdup(line)) ? 302 : 200;
 	if (!line[i] && opts->pars_map_started && opts->gnl_ret)
 		return (303);
-	if (!opts->gnl_ret && !opts->spawn_orientation)
-		return (opts->pars_map_started) ? 343 : 344;
 	return (!line[i]) ? 0 : 300;
 }
 

@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 23:22:57 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 13:27:50 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/09/01 16:21:02 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ static int		f_map_array_check_columns(t_sdf *opts)
 	return (0);
 }
 
-int				f_pars_desc_file(char *map_file, t_sdf *opts)
+static int		f_open_file(char *map_file, t_sdf *opts)
 {
-	char	*line;
 	int		fd;
 
 	if ((fd = open(map_file, O_RDONLY)) < 0)
@@ -77,8 +76,17 @@ int				f_pars_desc_file(char *map_file, t_sdf *opts)
 		if (!(opts->err_str = ft_strdup(map_file)))
 			return (200);
 		f_print_err(101, opts);
-		return (fd);
 	}
+	return (fd);
+}
+
+int				f_pars_desc_file(char *map_file, t_sdf *opts)
+{
+	char	*line;
+	int		fd;
+
+	if ((fd = f_open_file(map_file, opts)) < 0)
+		return (fd);
 	while (opts->gnl_ret > 0)
 	{
 		if ((opts->gnl_ret = get_next_line(fd, &line)) < 0)
@@ -92,6 +100,8 @@ int				f_pars_desc_file(char *map_file, t_sdf *opts)
 	}
 	if (opts->errcode)
 		return (opts->errcode);
+	if (!opts->spawn_orientation)
+		return (opts->pars_map_started) ? 343 : 344;
 	return ((opts->errcode = f_map_array_preparing(opts)) ? \
 			opts->errcode : f_map_array_check_columns(opts));
 }
