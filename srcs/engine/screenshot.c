@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 22:12:13 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/26 16:55:27 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/09/01 10:02:18 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,19 @@ static int	f_bmp_image_write(t_mlx *mlx, char *bitmap_file_header, \
 {
 	int		fd;
 	char	*filename;
+	int		i;
+	int		win_width;
 
+	i = 0;
+	win_width = mlx->img.bits_per_pix / 8 * mlx->x_win_size;
 	if (!(filename = f_get_filename(mlx)))
 		return (mlx->errcode);
 	if ((fd = open(filename, O_RDWR | O_CREAT, 664)) < 0)
 		return (fd);
 	write(fd, bitmap_file_header, 14);
 	write(fd, dib_header, 40);
-	write(fd, mlx->img.addr, mlx->x_win_size * mlx->y_win_size * \
-			mlx->img.bits_per_pix / 8);
+	while (i < mlx->y_win_size)
+		write(fd, mlx->img.addr + i++ * mlx->img.line_len, win_width);
 	ft_putstr_fd(filename, 1);
 	ft_putstr_fd(" saved\n", 1);
 	free(filename);
