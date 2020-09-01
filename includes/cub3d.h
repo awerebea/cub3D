@@ -6,7 +6,7 @@
 /*   By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/18 14:12:20 by awerebea          #+#    #+#             */
-/*   Updated: 2020/08/31 23:13:24 by awerebea         ###   ########.fr       */
+/*   Updated: 2020/09/01 09:23:42 by awerebea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 # define MIN_X_WIN_SIZE 100
 # define MIN_Y_WIN_SIZE 100
 
-# define SP_SCALE_X 0.8
-# define SP_SCALE_Y 0.8
-# define SP_VERT_OFFSET 380
+# define SPRITE_SCALE 0.8
 
 # define FOV_ANGLE 66
 
