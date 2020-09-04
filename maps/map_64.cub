@@ -4,7 +4,7 @@ NO ./textures/xpm/walls/64/colorstone.xpm
 SO ./textures/xpm/walls/64/greystone.xpm
 WE ./textures/xpm/walls/64/mossy.xpm
 EA ./textures/xpm/walls/64/redbrick.xpm
-S  ./textures/xpm/sprites/pillar.xpm
+S  ./textures/xpm/sprites/barrel.xpm
 
 F	61,		43,		31
 C	00,		51,		102

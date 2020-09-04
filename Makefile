@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/08/28 23:54:28 by awerebea         ###   ########.fr        #
+#    Updated: 2020/09/04 10:59:18 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,7 +128,7 @@ $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
 include $(wildcard $(addprefix $(OBJDIR), $(DFLS)))
 
 bonus:
-	make PROGRAM_TYPE="Bonus" all
+	@make PROGRAM_TYPE="Bonus" all --no-print-directory
 
 #--------------------------------- Common rules --------------------------------
 clean:
