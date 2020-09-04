@@ -4,10 +4,10 @@ NO ./textures/xpm/walls/256/brick_wall_texture.xpm
 SO ./textures/xpm/walls/256/wall_grey_rock.xpm
 WE ./textures/xpm/walls/256/wall_brown_tiles.xpm
 EA ./textures/xpm/walls/256/wall_white_rock.xpm
-S  ./textures/xpm/sprites/box_2.xpm
+S  ./textures/xpm/sprites/r2d2.xpm
 
-F	./textures/xpm/floor_ceiling/256/floor_wood.xpm
-C	./textures/xpm/floor_ceiling/256/ceiling_grey.xpm
+F	61,		43,		31
+C	00,		51,		102
 
                                          11111111111111111
        11111111111111111              11110000000000110201

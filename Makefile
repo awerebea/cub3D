@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/09/04 11:20:04 by awerebea         ###   ########.fr        #
+#    Updated: 2020/09/04 16:57:50 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -194,16 +194,16 @@ libs: $(LIBFT) $(MLX)
 re:				fclean all
 
 run: all
-	./$(NAME) maps/map_256.cub
+	./$(NAME) maps/default.cub
 
 run_bonus: bonus
-	./$(NAME) maps/map_256_bonus.cub
+	./$(NAME) maps/default_bonus.cub
 
 screenshot: all
-	./$(NAME) maps/map_256.cub --save
+	./$(NAME) maps/default.cub --save
 
 screenshot_bonus: bonus
-	./$(NAME) maps/map_256_bonus.cub --save
+	./$(NAME) maps/default_bonus.cub --save
 
 .PHONY:	all \
 		clean \
