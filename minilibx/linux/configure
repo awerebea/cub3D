@@ -64,13 +64,12 @@ else
     conf_ht=$HOSTTYPE
 fi
 
-if [ -z "$conf_ht" ]; then
-    conf_docp=""
-else
-    conf_docp="do_cp"
-    echo "lib_$conf_ht generation"
-fi
-
+# if [ -z "$conf_ht" ]; then
+#     conf_docp=""
+# else
+#     conf_docp="do_cp"
+#     echo "lib_$conf_ht generation"
+# fi
 
 /bin/echo "INC=$conf_inc" > Makefile.gen
 /bin/echo "HT=$conf_ht" >> Makefile.gen
@@ -99,6 +98,6 @@ if [ -n "$1" -a "$1" = "fclean" ] ; then
     exit
 fi
 
-echo "Now make it."
+# echo "Now make it."
 make -f Makefile.gen all
 (cd test ; make -f Makefile.gen all )

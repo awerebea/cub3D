@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/09/04 10:59:18 by awerebea         ###   ########.fr        #
+#    Updated: 2020/09/04 11:20:04 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -116,8 +116,9 @@ DFLS		= $(SRC:=.d)
 all:			$(NAME)
 
 $(NAME):		$(FCLEAN_FLAG) $(LIBFT) $(MLX) $(OBJ)
+	@echo '------------ Making cub3D ------------'
 	$(CC)		$(FLAGS) $(OBJ) $(INCLUDES) $(LIBFLAGS) -o $(NAME)
-	@echo '******* All done! *******'
+	@echo '------------- All done! --------------'
 
 $(OBJ):			$(OBJDIR)%.o: $(SRCDIR)%.c
 	chmod		+x ./x11_path_init.sh
@@ -152,7 +153,7 @@ debug_bonus:
 	make FLAGS="$(CFLAGS) $(DBGFLAGS)" bonus
 
 $(LIBFT): libft_force_make
-	@echo '******* Making libft *******'
+	@echo '------------ Making libft ------------'
 	@make		-C Libft/ --no-print-directory
 
 libft_clean:
@@ -165,7 +166,7 @@ libft_re:
 	make re		-C Libft/
 
 $(MLX): $(MLX_CONF) mlx_force_make
-	@echo '******* Making minilibx *******'
+	@echo '----------- Making minilibx ----------'
 	@make		-C $(MLX_DIR) --no-print-directory
 
 mlx_configure:
