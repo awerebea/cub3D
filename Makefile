@@ -6,7 +6,7 @@
 #    By: awerebea <awerebea@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/19 12:14:06 by awerebea          #+#    #+#              #
-#    Updated: 2020/09/04 16:57:50 by awerebea         ###   ########.fr        #
+#    Updated: 2020/09/20 00:54:24 by awerebea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -212,6 +212,7 @@ screenshot_bonus: bonus
 		fclean_all \
 		fclean_keep_bmp \
 		debug \
+		debug_bonus \
 		libft_clean \
 		libft_fclean \
 		libft_force_make \
